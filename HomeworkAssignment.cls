@@ -19,9 +19,11 @@
 %
 \fancyhf{}
 % clear all six fields
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{.7pt}
 \renewcommand{\footrulewidth}{0pt}
 \fancyfoot[RE,LO]{\thepage}
+\fancyhead[L]{\@tutorium }
+\fancyhead[R]{\@date }
 }
 \fancypagestyle{followingpage}{
 %
@@ -41,18 +43,19 @@
 \def\@kurs{Kein Kurs}
 \newcommand{\kurs}[1]{\def\@kurs{#1}}
 
+\def\@tutorium{}
+\newcommand{\tutorium}[1]{\def\@tutorium{#1}}
+
 \def\@abgabe{\today}
 
 \newcommand{\abgabe}[1]{\def\@abgabe{#1}}
 
 \renewcommand{\maketitle} {
 \begin{centering}
-\Huge{\textbf{\@kurs}}\\
-\vspace{.5cm}
+\huge{\textbf{\@kurs}}
 {\hrule height 2pt}
-\vspace{.5cm}
+\vspace{.25cm}
 \large
-Datum: \@date\\
 Abgabe: \@abgabe\\
 \vspace{.5cm}
 \hrule
