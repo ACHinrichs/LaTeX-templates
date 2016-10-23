@@ -67,8 +67,8 @@ Abgabe: \@abgabe\\
 
 \newcounter{aufgaben}
 \setcounter{aufgaben}{1}
-\newcommand{\newexercise}{\section*{Aufgabe \arabic{aufgaben}} \addtocounter{aufgaben}{1}}
-\newcommand{\exercise}[1]{\section*{#1}}
+\newcommand{\newproblem}{\section*{Aufgabe \arabic{aufgaben}} \addtocounter{aufgaben}{1}}
+\newcommand{\problem}[1]{\section*{#1}}
 \newcommand{\solution}{\subsection*{L\"osung}}
 \newcommand{\proof}{\subsection*{Beweis}}
 
