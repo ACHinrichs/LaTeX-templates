@@ -1,0 +1,264 @@
+\documentclass[a4paper,twoside]{HomeworkAssignment}
+\usepackage[ngerman]{babel}
+\usepackage{tikz}
+\usetikzlibrary{%
+  arrows,%
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows%
+}
+\usepackage{amsmath}
+\usepackage[autostyle,german = guillemets]{csquotes}
+
+\author{Autor Eins 1701\\ Autor Zwei 74656}
+\date{\today}
+\abgabe{\today}
+\tutorium{\"Ubungsgruppe 42}
+\kurs{Programmierung}
+\begin{document}
+
+
+\tikzset{
+  nonterminal/.style={
+    % The shape:
+    rectangle,
+    % The size:
+    minimum size=6mm,
+    % The border:
+    very thick,
+    draw=red!50!black!50,         % 50% red and 50% black,
+                                  % and that mixed with 50% white
+    % The filling:
+    top color=white,              % a shading that is white at the top...
+    bottom color=red!50!black!20, % and something else at the bottom
+    % Font
+    font=\itshape
+  },
+  terminal/.style={
+    % The shape:
+    rounded rectangle,
+    minimum size=6mm,
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily},
+  skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}}
+}
+
+{
+  \tikzset{terminal/.append style={text height=1.5ex,text depth=.25ex}}
+  \tikzset{nonterminal/.append style={text height=1.5ex,text depth=.25ex}}
+}
+
+
+\maketitle
+\newproblem
+\newsubproblem
+\newsubsubproblem
+\begin{align*}
+  &&S_2 \\
+  S_2 \rightarrow & A.S_2 & A.S_2\\
+  A   \rightarrow & B & B.S_2\\
+  B   \rightarrow & p & p.S_2\\
+  S_2 \rightarrow & A.S_2 & p.A.S_2\\
+  A   \rightarrow & B & p.B.S_2\\
+  B   \rightarrow & q & p.q.S_2\\
+  S_2 \rightarrow & A. & p.q.A.\\
+  A   \rightarrow & B:-B & p.q.B:-B.\\
+  B   \rightarrow & r & p.q.r:-B.\\
+  B   \rightarrow & q & p.q.r:-q.\\  
+\end{align*}
+Der Ausdruck wird akzeptiert.  
+
+\begin{align*}
+\mathcal{W}(p.q.r:-q) = & \mathcal{W}(p.q.)\cup\{r\}\\
+= & \mathcal{W}(p.)\cup{q}\cup\{r\}\\
+= & \{p\}\cup\{q\}\cup\{r\}\\
+= & \{p,q,r\}\\
+\end{align*}
+
+\newsubsubproblem
+
+\begin{align*}
+         &&S_2\\
+S_2 \rightarrow & A.S_2 & A.S_2\\ 
+A   \rightarrow & B:-B & B:-B.S_2\\
+B   \rightarrow & q & q:-B-S_2\\
+B   \rightarrow & p & q:-p.S_2\\
+S_2 \rightarrow & A. & q:-p.A.\\
+A   \rightarrow & B:-B & q:-p.B:-B.\\
+B   \rightarrow & p & q:-p.p:-B.\\
+B   \rightarrow & q & q:-p.p:-q.\\
+\end{align*}
+Der Ausdruck wird akzeptiert.
+
+\begin{align*}
+\mathcal{W}(q:-p.p:-q.) & = \mathcal{W}(q:-p.)\\
+& = \emptyset 
+\end{align*}
+
+\newsubsubproblem
+
+\begin{align*}
+&&S_2\\
+S_2 \rightarrow & A.S_2 & A.S_2\\
+A   \rightarrow & B:-B & B:-B.S_2\\
+B   \rightarrow & q & q:-B.S_2\\
+B   \rightarrow & p & q:-p.S_2\\
+S_2 \rightarrow & A. & q:-p.A.\\
+A   \rightarrow & B & q:-p.B.\\
+B   \rightarrow & p & q:-p.p.\\
+\end{align*}
+Der Ausdruck wird Akzeptiert.
+
+\begin{align*}
+\mathcal{W}(q:-p.p.) & = \mathcal{W}(q:-p.) \cup \{ p \}\\
+& = \emptyset \cup \{ p \}\\
+& = \{ p \}\\
+\end{align*}
+
+\newsubsubproblem
+
+Der Ausdruck wird nicht Akzeptiert, da \enquote{t} kein Symbol des Alphabetes ist.
+\newsubproblem
+
+Sei $\mathcal{S}$ eine Sprache und $\mathcal{P}$ ein Programm.
+
+Zu zeigen:\\
+
+\begin{align*}
+&&\mathcal{P} \text{ ist semantisch korrekt bzgl. } \mathcal{S} \Rightarrow & \mathcal{P} \text{ ist syntaktisch korrekt}\\
+\Leftrightarrow&&\mathcal{P} \text{ ist syntaktisch Falsch} \Rightarrow & \mathcal{P} \text{ ist semantisch falsch} & \text{(entspricht Def.)}\\
+&&&&qed
+\end{align*}
+\subsection*{c)}
+Seien $\mathcal{A}_1$ und $\mathcal{A}_2$ zwei Ausdrücke in einer Sprache und es gelte:
+\begin{align*}
+&&  \mathcal{W}(\mathcal{A}_1) \neq \mathcal{W}(\mathcal{A}_2) & \Rightarrow \mathcal{A}_1 \neq \mathcal{A}_2\\
+\text{dann gilt auch: }&& \mathcal{A}_1 = \mathcal{A}_2 &  \Rightarrow \mathcal{W}(\mathcal{A}_1) = \mathcal{W}(\mathcal{A}_2) \\
+&&&&qed 
+\end{align*}
+
+\newproblem
+
+\newsubproblem
+$G = (\{S,A,B\},\{a,b\},P,S\}$ mit den Produktionsregeln $P$:
+\begin{align*}
+  S \rightarrow & A \\
+  S \rightarrow & B \\
+  A \rightarrow & aAb\\
+  A \rightarrow & AA\\
+  A \rightarrow & a\\
+  B \rightarrow & \varepsilon\\
+  B \rightarrow & Bb\\
+\end{align*}
+
+\newsubproblem
+
+\begin{align*}
+S_1& = ( \{ b \} | S_2)\\
+S_2& = [ [S_2] a [S_2] b [S_2] ]\\  
+\end{align*}
+
+\newpage
+\newsubproblem
+
+\begin{figure}[h]
+
+\begin{tikzpicture}[
+    >=latex,thick,
+    /pgf/every decoration/.style={/tikz/sharp corners},
+    fuzzy/.style={decorate,
+        decoration={random steps,segment length=0.5mm,amplitude=0.15pt}},
+    minimum size=6mm,line join=round,line cap=round,
+    terminal/.style={rectangle,draw,fill=white,fuzzy,rounded corners=3mm},
+    nonterminal/.style={rectangle,draw,fill=white,fuzzy},,
+    node distance=4mm,
+  ]
+
+    \ttfamily
+    \begin{scope}[start chain,
+            every node/.style={on chain},
+            terminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            nonterminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            support/.style={coordinate,join=by fuzzy}
+        ]
+
+        \node [support]             (start)        {};
+        \node [support,xshift=5mm]  (after start2)   {};
+        \node [support,xshift=5mm]  (after start)   {};
+        \node [terminal,xshift=5mm]  (b)      {b};
+        \node [support,xshift=5mm]  (before end)   {};
+        \node [support,xshift=5mm]  (before end2)   {};
+        \node [coordinate,join=by ->] (end)        {};
+    \end{scope}
+    \node (s2)  [nonterminal,above=of b] {$S_2$};
+    \node (support) [below=of b] {};
+
+    \begin{scope}[->,decoration={post length=4pt},rounded corners=2mm,
+            every path/.style=fuzzy]
+        \draw (after start2)    |- (s2);
+        \draw (s2) -| (before end2);
+        \draw (before end)  -- +(0,-.7) -| (after start);
+    \end{scope}
+\end{tikzpicture}
+\caption{Regel $S_1$}
+\end{figure}
+
+\begin{figure}[h]
+
+\begin{tikzpicture}[
+    >=latex,thick,
+    /pgf/every decoration/.style={/tikz/sharp corners},
+    fuzzy/.style={decorate,
+        decoration={random steps,segment length=0.5mm,amplitude=0.15pt}},
+    minimum size=6mm,line join=round,line cap=round,
+    terminal/.style={rectangle,draw,fill=white,fuzzy,rounded corners=3mm},
+    nonterminal/.style={rectangle,draw,fill=white,fuzzy},,
+    node distance=4mm,
+  ]
+
+    \ttfamily
+    \begin{scope}[start chain,
+            every node/.style={on chain},
+            terminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            nonterminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            support/.style={coordinate,join=by fuzzy}
+        ]
+
+        \node [support]             (start)        {};
+        \node [support,xshift=5mm]  (after start)  {};
+        \node [support,xshift=5mm]  (line S2_1)    {};
+        \node [support,xshift=5mm]  (before a)    {};
+        \node [terminal,xshift=5mm] (a)            {a};
+        \node [support,xshift=5mm]  (after a)      {};
+        \node [support,xshift=5mm]  (line S2_2)    {};
+        \node [support,xshift=5mm]  (before b)    {};
+        \node [terminal,xshift=5mm] (b)            {b};
+        \node [support,xshift=5mm]  (before end)   {};
+        \node [coordinate,join=by ->] (end)        {};
+    \end{scope}
+    \node (s2_1)  [nonterminal,above=of line S2_1] {$S_2$};
+    \node (s2_2)  [nonterminal,above=of line S2_2] {$S_2$};
+
+    \begin{scope}[->,decoration={post length=4pt},rounded corners=2mm,
+            every path/.style=fuzzy]
+        \draw (after start)    |- (s2_1);
+        \draw (s2_1) -| (before a);
+        \draw (after a)    |- (s2_2);
+        \draw (s2_2) -| (before b);
+        \draw (before end)  -- +(0,-.7) -| (after start);
+    \end{scope}
+\end{tikzpicture}
+\caption{Regel $S_2$}
+\end{figure}
+\end{document}

@@ -68,12 +68,41 @@ Abgabe: \@abgabe\\
 \end{centering}
 }
 
-\newcounter{aufgaben}
-\setcounter{aufgaben}{1}
-\newcommand{\newproblem}{\section*{Aufgabe \arabic{aufgaben}} \addtocounter{aufgaben}{1}}
-\newcommand{\problem}[1]{\section*{#1}}
-\newcommand{\solution}{\subsection*{L\"osung}}
-\newcommand{\proof}{\subsection*{Beweis}}
+\newcounter{problem}
+\setcounter{problem}{1}
+\newcounter{subproblem}[problem]
+\setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem]
+\setcounter{subsubproblem}{0}
+\newcommand{\problem}[1]{
+\LARGE 
+\vspace*{1em} 
+\pagebreak[2] 
+\noindent \textbf{#1} 
+\nopagebreak \vspace{1ex} 
+\nopagebreak \newline 
+\normalsize}
+\newcommand{\newproblem}{\problem{Aufgabe \arabic{problem}} \stepcounter{problem}}
+\newcommand{\subproblem}[1]{
+\pagebreak[2]
+\large 
+\break
+%\vspace*{1em}
+\noindent \textbf{#1}
+ \newline
+%\nopagebreak[4]
+%\nopagebreak[4]
+%\nopagebreak[4]
+ \normalsize}
+\newcommand{\newsubproblem}{\subproblem{Aufgabe \stepcounter{subproblem} \arabic{problem}.\alph{subproblem}}}
+\newcommand{\subsubproblem}[1]{
+\vspace*{1em}
+\textbf{#1}
+\nopagebreak
+\vspace{1ex}}
+\newcommand{\newsubsubproblem}{ \stepcounter{subsubproblem} \subsubproblem{(\roman{subsubproblem})}}
+\newcommand{\solution}{\ \newline \textbff{L\"osung}}
+\newcommand{\proof}{\ \newline \textbff{L\"osung}}
 
 \endinput
 %ToDo: Besipieldokument erstellen und ausgabe ansehehn
