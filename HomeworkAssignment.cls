@@ -14,6 +14,7 @@
 
 \LoadClass{article}
 
+\RequirePackage{suffix}
 \RequirePackage{fancyhdr}
 \fancypagestyle{firstpage}{
 %
@@ -74,35 +75,48 @@ Abgabe: \@abgabe\\
 \setcounter{subproblem}{0}
 \newcounter{subsubproblem}[subproblem]
 \setcounter{subsubproblem}{0}
-\newcommand{\problem}[1]{
-\LARGE 
-\vspace*{1em} 
-\pagebreak[2] 
-\noindent \textbf{#1} 
-\nopagebreak \vspace{1ex} 
-\nopagebreak \newline 
-\normalsize}
+
+\newcommand{\problem}[1]{\@startsection{problem}%Name
+					{1}%Level
+					{\z@}%indent
+					{-2em \@plus -1em \@minus -1em}%beforeskip
+					{1ex \@plus .5ex}%afterskip
+					{\normalfont\Large\bfseries}%style
+					*{#1}}
 \newcommand{\newproblem}{\problem{Aufgabe \arabic{problem}} \stepcounter{problem}}
-\newcommand{\subproblem}[1]{
-\pagebreak[2]
-\large 
-\break
-%\vspace*{1em}
-\noindent \textbf{#1}
- \newline
-%\nopagebreak[4]
-%\nopagebreak[4]
-%\nopagebreak[4]
- \normalsize}
+
+\newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
+					{2}%Level
+					{\z@}%indent
+					{-1em \@plus -.5em \@minus -.5em}%beforeskip
+					{.5ex \@plus .5ex}%afterskip
+					{\normalfont\large\bfseries}%style
+					*{#1}}
 \newcommand{\newsubproblem}{\subproblem{Aufgabe \stepcounter{subproblem} \arabic{problem}.\alph{subproblem}}}
-\newcommand{\subsubproblem}[1]{
-\vspace*{1em}
-\textbf{#1}
-\nopagebreak
-\vspace{1ex}}
+
+\newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
+					{3}%Level
+					{\z@}%indent
+					{-.5em}%beforeskip
+					{.5em}%afterskip
+					{\normalfont\bfseries}%style
+					*{#1}}
 \newcommand{\newsubsubproblem}{ \stepcounter{subsubproblem} \subsubproblem{(\roman{subsubproblem})}}
-\newcommand{\solution}{\ \newline \textbff{L\"osung}}
-\newcommand{\proof}{\ \newline \textbff{L\"osung}}
+
+\newcommand{\solution}{\@startsection{solution}%Name
+					{4}%Level
+					{\parindent}%indent
+					{-.1em}%beforeskip
+					{\z@}%afterskip
+					{\normalfont\bfseries}%style
+					*{L\"osung:~~}}
+\newcommand{\proof}{\@startsection{proof}%Name
+					{4}%Level
+					{\parindent}%indent
+					{-.1em}%beforeskip
+					{\z@}%afterskip
+					{\normalfont\bfseries}%style
+					*{Beweis:~~}}
 
 \endinput
 %ToDo: Besipieldokument erstellen und ausgabe ansehehn
