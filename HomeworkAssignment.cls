@@ -70,7 +70,7 @@ Abgabe: \@abgabe\\
 }
 
 \newcounter{problem}
-\setcounter{problem}{1}
+\setcounter{problem}{0}
 \newcounter{subproblem}[problem]
 \setcounter{subproblem}{0}
 \newcounter{subsubproblem}[subproblem]
@@ -83,7 +83,7 @@ Abgabe: \@abgabe\\
 					{1ex \@plus .5ex}%afterskip
 					{\normalfont\Large\bfseries}%style
 					*{#1}}
-\newcommand{\newproblem}{\problem{Aufgabe \arabic{problem}} \stepcounter{problem}}
+\newcommand{\newproblem}{\stepcounter{problem} \problem{Aufgabe \arabic{problem}}}
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
 					{2}%Level
