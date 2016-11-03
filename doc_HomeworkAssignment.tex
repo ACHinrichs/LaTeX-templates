@@ -1,6 +1,6 @@
 \documentclass[a4papr]{article}
 \usepackage[ngerman]{babel}
-\usepackage{csquotes}
+\usepackage[german=guillemets]{csquotes}
 
 \title{Dokumentation zu HomeworkAssignment.cls}
 \author{A. C. Hinrichs}
@@ -9,16 +9,42 @@
 \maketitle
 \section{Befehle}
 \begin{itemize}
- \item[\texttt{author\{\#1\}}]		Setzt den Autor des Dokumentes. Wie bei \textit{article}
- \item[\texttt{date\{\#1\}}]		Setzt das Datum des Dokumentes. Standard ist \texttt{\\today}
- \item[\texttt{abgabe\{\#1\}}]		Setzt das Abgabedatum. Erscheint auf der Titelseite oben Links.
- \item[\texttt{tutorium\{\#1\}}]	Setzt das Turtoriom bzw. die Kleingruppen\"ubung.	
- \item[\texttt{kurs\{\#1\}}]		Setzt das Fach der Hausaufgabe.	
- \item[\texttt{problem\{\#1\}}] 	Startet eine neue Aufgabe mit \#1 als \"Uberschrift.  Die Aufgabe wird nicht nummeriert
- \item[\texttt{newproblem\{?1\}}] 		Startet eine neue Aufgabe. Die \"Uberschrift ist \enquote{Aufgabe \texttt{\#Aufgaben}} mit \texttt{\#Aufgaben} als fortlaufenden Counter \"uber alle Aufgaben.  Das optionale Argument \texttt{?1} ist die Nummer der Aufgabe, wird es \"ubergeben, so wird der Counter auf \texttt{?1} gesetzt.  
- \item[\texttt{subproblem\{\#1\}}] 	Startet eine neue Teilaufgabe mit \#1 als \"Uberschrift.  Die Teilufgabe wird nicht nummeriert
- \item[\texttt{newsubproblem\{?1\}}] 		Startet eine neue Aufgabe. Die \"Uberschrift ist \enquote{Aufgabe \texttt{\#Aufgaben}.\texttt{\#Teilaufgaben}} mit \texttt{\#Teilaufgaben} als Buchstaben.  Das optionale Argument \texttt{?1} ist die Nummer der Teilaufgabe als Zahl.  
- \item[\texttt{subsubproblem\{\#1\}}] 	Startet eine neue Unterunteraufgabe mit \#1 als \"Uberschrift.  Die Teilufgabe wird nicht nummeriert
- \item[\texttt{newsubsubproblem\{?1\}}] 	Startet eine neue Unterunteraufgabe. Die \"Uberschrift ist \enquote{\texttt{\#Unteraufgabe}} mit \texttt{\#Unteraufgabe} als kleine R\"omische Nummer.  Das optionale Argument \texttt{?1} ist die nummer der Teilaufgabe als Zahl.
+\item[\texttt{author\{\#1\}}] Setzt den Autor des Dokumentes. Wie bei
+  \textit{article}
+\item[\texttt{date\{\#1\}}] Setzt das Datum des Dokumentes. Standard
+  ist \texttt{\\today}
+\item[\texttt{abgabe\{\#1\}}] Setzt das Abgabedatum. Erscheint auf der
+  Titelseite oben Links.
+\item[\texttt{tutorium\{\#1\}}] Setzt das Turtoriom bzw. die
+  Kleingruppen\"ubung.
+\item[\texttt{kurs\{\#1\}}] Setzt das Fach der Hausaufgabe.
+\item[\texttt{problem\{\#1\}}] Startet eine neue Aufgabe mit \#1 als
+  \"Uberschrift.  Die Aufgabe wird nicht nummeriert
+\item[\texttt{newproblem\{?1\}}] Startet eine neue Aufgabe. Die
+  \"Uberschrift ist \enquote{Aufgabe \texttt{\#Aufgaben}} mit
+  \texttt{\#Aufgaben} als fortlaufenden Counter \"uber alle Aufgaben.
+  Das optionale Argument \texttt{?1} ist die Nummer der Aufgabe, wird
+  es \"ubergeben, so wird der Counter auf \texttt{?1} gesetzt.
+\item[\texttt{subproblem\{\#1\}}] Startet eine neue Teilaufgabe mit
+  \#1 als \"Uberschrift.  Die Teilufgabe wird nicht nummeriert
+\item[\texttt{newsubproblem\{?1\}}] Startet eine neue Aufgabe. Die
+  \"Uberschrift ist \enquote{Aufgabe
+    \texttt{\#Aufgaben}.\texttt{\#Teilaufgaben}} mit
+  \texttt{\#Teilaufgaben} als Buchstaben.  Das optionale Argument
+  \texttt{?1} ist die Nummer der Teilaufgabe als Zahl.
+\item[\texttt{subsubproblem\{\#1\}}] Startet eine neue
+  Unterunteraufgabe mit \#1 als \"Uberschrift.  Die Teilufgabe wird
+  nicht nummeriert
+\item[\texttt{newsubsubproblem\{?1\}}] Startet eine neue
+  Unterunteraufgabe. Die \"Uberschrift ist
+  \enquote{\texttt{\#Unteraufgabe}} mit \texttt{\#Unteraufgabe} als
+  kleine R\"omische Nummer.  Das optionale Argument \texttt{?1} ist
+  die nummer der Teilaufgabe als Zahl.
+\item[\texttt{solution\{?1\}}] Markiert den Anfang einer L\"osung.
+  Wird ein argument \"ubergeben, so erzeugt dieses kommando
+  \enquote{L\"osung \texttt{?1}:} ansonsten nur \enquote{L\"osung:}.
+\item[\texttt{proof\{?1\}}] Markiert den Anfang eines Beweises.  Wird
+  ein argument \"ubergeben, so erzeugt dieses kommando \enquote{Beweis
+    \texttt{?1}:} ansonsten nur \enquote{Beweis:}.
 \end{itemize}
 \end{document}
