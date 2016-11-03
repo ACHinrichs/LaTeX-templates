@@ -119,20 +119,28 @@ Abgabe: \@abgabe\\
              \subproblem{\roman{subsubproblem})}
 }
 
-\newcommand{\solution}{\@startsection{solution}%Name
+\newcommand{\solution}[1][]{\@startsection{solution}%Name
 					{4}%Level
 					{\parindent}%indent
 					{-.1em}%beforeskip
 					{\z@}%afterskip
 					{\normalfont\bfseries}%style
-					*{L\"osung:~~}}
-\newcommand{\proof}{\@startsection{proof}%Name
+					*{L\"osung\ifthenelse{\equal{#1}{}}
+                                          {}
+                                          { #1}:~~
+                                        }
+                                      }
+\newcommand{\proof}[1][]{\@startsection{proof}%Name
 					{4}%Level
 					{\parindent}%indent
 					{-.1em}%beforeskip
 					{\z@}%afterskip
 					{\normalfont\bfseries}%style
-					*{Beweis:~~}}
+					*{Beweis\ifthenelse{\equal{#1} {} }
+                                          {}
+                                          { #1}:~~
+                                        }
+                                      }
 
 \endinput
 %ToDo: Besipieldokument erstellen und ausgabe ansehehn
