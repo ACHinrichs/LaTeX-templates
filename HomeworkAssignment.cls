@@ -4,7 +4,7 @@
 % --- Class structure: identification part
 % ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{HomeworkAssignment}[2016/10/23]
+\ProvidesClass{HomeworkAssignment}[2016/11/03]
 
 \DeclareOption*{\InputIfFileExists{\CurrentOption.min}{}{
 %
