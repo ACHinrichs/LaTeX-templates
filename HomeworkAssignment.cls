@@ -16,6 +16,7 @@
 
 \RequirePackage{suffix}
 \RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
 \fancypagestyle{firstpage}{
 %
 \fancyhf{}
@@ -83,8 +84,12 @@ Abgabe: \@abgabe\\
 					{1ex \@plus .5ex}%afterskip
 					{\normalfont\Large\bfseries}%style
 					*{#1}}
-\newcommand{\newproblem}{\stepcounter{problem} \problem{Aufgabe \arabic{problem}}}
-
+\newcommand{\newproblem}[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}}
+             { }
+             {\setcounter{problem}{3}}
+             \problem{Aufgabe \arabic{problem}}
+}
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
 					{2}%Level
 					{\z@}%indent
