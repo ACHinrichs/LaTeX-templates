@@ -97,12 +97,11 @@ Abgabe: \@abgabe\\
 					{.5ex \@plus .5ex}%afterskip
 					{\normalfont\large\bfseries}%style
 					*{#1}}
-
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}}
              { }
-             {\setcounter{subproblem}{#1}
-             \subproblem{Aufgabe \arabic{problem}}
+             {\setcounter{subproblem}{#1}}
+             \subproblem{Aufgabe \arabic{problem}.\alph{subproblem}}
 }
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
@@ -112,7 +111,13 @@ Abgabe: \@abgabe\\
 					{.5em}%afterskip
 					{\normalfont\bfseries}%style
 					*{#1}}
-\newcommand{\newsubsubproblem}{ \stepcounter{subsubproblem} \subsubproblem{(\roman{subsubproblem})}}
+
+\newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}}
+             { }
+             {\setcounter{subsubproblem}{#1}}
+             \subproblem{\roman{subsubproblem})}
+}
 
 \newcommand{\solution}{\@startsection{solution}%Name
 					{4}%Level
