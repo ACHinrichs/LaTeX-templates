@@ -4,11 +4,10 @@
 % --- Class structure: identification part
 % ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{HomeworkAssignment}[2016/11/03]
+\ProvidesClass{HomeworkAssignment}[2016/11/09]
 
-\DeclareOption*{\InputIfFileExists{\CurrentOption.min}{}{
-%
-\PassOptionsToClass{\CurrentOption}{article}}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+
 
 \ProcessOptions \relax
 
@@ -18,27 +17,30 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \fancypagestyle{firstpage}{
-%
-\fancyhf{}
-% clear all six fields
-\renewcommand{\headrulewidth}{.7pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancyfoot[RE,LO]{\thepage}
-\fancyhead[L]{\@tutorium }
-\fancyhead[R]{\@date }
+  %
+  \fancyhf{}
+  % clear all six fields
+  \renewcommand{\headrulewidth}{.7pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[L]{\@tutorium }
+  \fancyhead[R]{\@date }
 }
 \fancypagestyle{followingpage}{
-%
-\fancyhf{}
-% clear all six fields
-\fancyhead[RE,LO]{\@author}
-\fancyhead[LE,RO]{\@kurs\\ Abgabe: \@abgabe}
-\fancyfoot[RE,LO]{\thepage}
-\renewcommand{\headrulewidth}{0.7pt}
-\renewcommand{\footrulewidth}{0pt}
+  %
+  \fancyhf{}
+  % clear all six fields
+  \fancyhead[RE,LO]{\@author}
+  \fancyhead[LE,RO]{\@kurs\\ Abgabe: \@abgabe}
+  \fancyfoot[RE,LO]{\thepage}
+  \renewcommand{\headrulewidth}{0.7pt}
+  \renewcommand{\footrulewidth}{0pt}
 }
 \pagestyle{followingpage}
-\AtBeginDocument{\thispagestyle{firstpage}}
+\AtBeginDocument{
+  \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt} 
+}
 
 %\LoadClass[10pt,a4paper]{article}
 
@@ -53,21 +55,21 @@
 \newcommand{\abgabe}[1]{\def\@abgabe{#1}}
 
 \renewcommand{\maketitle} {
-\begin{centering}
-\huge{\textbf{\@kurs}}
-{\hrule height 2pt}
-\vspace{.25cm}
-\large
-Abgabe: \@abgabe\\
-\vspace{.5cm}
-\hrule
-\vspace{.25cm}
-\normalsize{\@author}\\
-\vspace{.25cm}
-\hrule
-\vspace{.25cm}
-\normalsize
-\end{centering}
+  \begin{centering}
+    \huge{\textbf{\@kurs}}
+         {\hrule height 2pt}
+         \vspace{.25cm}
+         \large
+         Abgabe: \@abgabe\\
+         \vspace{.5cm}
+         \hrule
+         \vspace{.25cm}
+         \normalsize{\@author}\\
+         \vspace{.25cm}
+         \hrule
+         \vspace{.25cm}
+         \normalsize
+  \end{centering}
 }
 
 \newcounter{problem}
@@ -143,4 +145,3 @@ Abgabe: \@abgabe\\
                                       }
 
 \endinput
-%ToDo: Besipieldokument erstellen und ausgabe ansehehn
