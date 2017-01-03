@@ -1,57 +1,23 @@
-%%
-%% This is file `HomeworkAssignment.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% HomeworkAssignment.dtx  (with options: `class')
-%% Copyright (c) 2016 by Adrian C. Hinrichs
-%% 
-%% This FIle may be distributed and/or modified under the condition of the below
-%% license.
-%% 
-%% 
-%% MIT License
-%% 
-%% 
-%% 
-%% Copyright (c) 2016
-%% 
-%% 
-%% 
-%% Permission is hereby granted, free of charge, to any person obtaining a copy
-%% of this software and associated documentation files (the "Software"), to deal
-%% in the Software without restriction, including without limitation the rights
-%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%% copies of the Software, and to permit persons to whom the Software is
-%% furnished to do so, subject to the following conditions:
-%% 
-%% The above copyright notice and this permission notice shall be included in all
-%% copies or substantial portions of the Software.
-%% 
-%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-%% SOFTWARE.
-
-\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesCLass{HomeworkAssignment}
-             [2016/12/01 v1.3 HomeworkAssignment]
+% Assignment.sty
+%  LaTeX-Template for Assignments, specifically for Computer Science studies.
+% Based uppon this Guide: http://tutex.tug.org/pracjourn/2005-4/hefferon/hefferon.pdf by Jim Hefferon
+% --- Class structure: identification part
+% ---
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{HomeworkAssignment}[2016/12/14]
+\ProvidesClass{HomeworkAssignment}[2016/11/09]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+
+
 \ProcessOptions \relax
+
 \LoadClass{article}
+
 \RequirePackage{suffix}
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
-
+ 
 \fancypagestyle{firstpage}{
-  %
   \fancyhf{}
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
@@ -73,8 +39,11 @@
 \pagestyle{followingpage}
 \AtBeginDocument{
   \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt}
+  \setlength{\headheight}{25pt} 
 }
+
+%\LoadClass[10pt,a4paper]{article}
+
 \def\@kurs{Kein Kurs}
 \newcommand{\kurs}[1]{\def\@kurs{#1}}
 
@@ -102,19 +71,21 @@
          \normalsize
   \end{centering}
 }
+
 \newcounter{problem}
 \setcounter{problem}{0}
 \newcounter{subproblem}[problem]
 \setcounter{subproblem}{0}
 \newcounter{subsubproblem}[subproblem]
 \setcounter{subsubproblem}{0}
+ 
 \newcommand{\problem}[1]{\@startsection{problem}%Name
-{1}%Level
-{\z@}%indent
-{-2em \@plus -1em \@minus -1em}%beforeskip
-{1ex \@plus .5ex}%afterskip
-{\normalfont\Large\bfseries}%style
-*{#1}}
+					{1}%Level
+					{\z@}%indent
+					{-2em \@plus -1em \@minus -1em}%beforeskip
+					{1ex \@plus .5ex}%afterskip
+					{\normalfont\Large\bfseries}%style
+					*{#1}}
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}}
              { }
@@ -122,12 +93,12 @@
              \problem{Aufgabe \arabic{problem}}
 }
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
-{2}%Level
-{\z@}%indent
-{-1em \@plus -.5em \@minus -.5em}%beforeskip
-{.5ex \@plus .5ex}%afterskip
-{\normalfont\large\bfseries}%style
-*{#1}}
+					{2}%Level
+					{\z@}%indent
+					{-1em \@plus -.5em \@minus -.5em}%beforeskip
+					{.5ex \@plus .5ex}%afterskip
+					{\normalfont\large\bfseries}%style
+					*{#1}}
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}}
              { }
@@ -136,12 +107,12 @@
 }
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
-{3}%Level
-{\z@}%indent
-{-.5em}%beforeskip
-{.5em}%afterskip
-{\normalfont\bfseries}%style
-*{#1}}
+					{3}%Level
+					{\z@}%indent
+					{-.5em}%beforeskip
+					{.5em}%afterskip
+					{\normalfont\bfseries}%style
+					*{#1}}
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}}
@@ -151,27 +122,27 @@
 }
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
-{4}%Level
-{\parindent}%indent
-{-.1em}%beforeskip
-{\z@}%afterskip
-{\normalfont\bfseries}%style
-*{L\"osung\ifthenelse{\equal{#1}{}}
+					{4}%Level
+					{\parindent}%indent
+					{-.1em}%beforeskip
+					{\z@}%afterskip
+					{\normalfont\bfseries}%style
+					*{L\"osung\ifthenelse{\equal{#1}{}}
                                           {}
                                           { #1}:~~
                                         }
                                       }
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
-{4}%Level
-{\parindent}%indent
-{-.1em}%beforeskip
-{\z@}%afterskip
-{\normalfont\bfseries}%style
-*{Beweis\ifthenelse{\equal{#1} {} }
+					{4}%Level
+					{\parindent}%indent
+					{-.1em}%beforeskip
+					{\z@}%afterskip
+					{\normalfont\bfseries}%style
+					*{Beweis\ifthenelse{\equal{#1} {} }
                                           {}
                                           { #1}:~~
                                         }
                                       }
+                                      
+                                      
 \endinput
-%%
-%% End of file `HomeworkAssignment.cls'.

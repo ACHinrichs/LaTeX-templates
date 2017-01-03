@@ -1,0 +1,285 @@
+% \iffalse meta-comment
+%
+% Copyright (c) 2016 by Adrian C. Hinrichs
+%
+% This FIle may be distributed and/or modified under the condition of the below
+% license.
+%
+%
+% MIT License
+%
+%
+%
+% Copyright (c) 2016 
+%
+%
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% \fi
+
+% \iffalse
+%<*driver>
+\ProvidesFile{HomeworkAssignment.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<class>\ProvidesCLass{HomeworkAssignment}
+%<*class>
+             [2016/12/01 v1.3 HomeworkAssignment]
+%</class>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\usepackage[autostyle,german = guillemets]{csquotes}
+\begin{document}
+\DocInput{HomeworkAssignment.dtx}
+\end{document}
+%</driver> 
+% \fi
+% 
+% \CheckSum{0}
+% 
+% \CharacterTable {Upper-case
+% \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z Lower-case
+% \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z Digits
+% \0\1\2\3\4\5\6\7\8\9 Exclamation \!  Double quote \" Hash (number)
+% \# Dollar \$ Percent \% Ampersand \& Acute accent \' Left paren
+% \( Right paren \) Asterisk \* Plus \+ Comma \, Minus \- Point \.
+% Solidus \/ Colon \: Semicolon \; Less than \< Equals \= Greater than
+% \> Question mark \?
+% Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
+% brace \{ Vertical bar \| Right brace \} Tilde \~}
+% 
+% \changes{v1.0}{2016/10/23}{Intial} \changes{v1.1}{2016/11/02}{...}
+% \changes{v1.2}{2016/11/03}{...}  \changes{v1.3}{2016/12/01}{Provide
+% the Class as .dtx file and more}
+% 
+% 
+% \GetFileInfo{HomeworkAssignment.cls} \filedate \fileversion
+% \fileinfo
+% 
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+% \title{The \textsf{HomeworkAssignment} class\thanks{This document
+% corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
+% \filedate.}}
+% \author{Adrian C Hinrichs \\
+% \texttt{adrian.hinrichs@rwth-aachen.de}}
+% 
+% \maketitle
+% 
+% \section{Abstract}
+% This class provides a relative simple docuemnt--type for homework,
+% mainly created for assignments at the University THis calss is
+% inherited from \texttt{article}, it is not perfect, but I am trying
+% my verry best.
+% 
+% \section{Commands}
+% \subsection{Document Informations\label{DOC_INFO_CMDS}}
+% \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
+% the document.  Takes the subject as argument.  Standard Value is \enquote{Kein Kurs}\\
+% |\kurs| is deprecated.\\ \
+%
+% \DescribeMacro{\tutorial}\DescribeMacro{\tutorium} Sets the tutorial
+% of the author.  Takes it as an argument. Stamdard Value is empty, so
+% that this command can be omitted.\\ |\tutorium| is deprecated.\\ \
+%
+% \DescribeMacro{\deadline} \DescribeMacro{\abgabe} Sets the deadline
+% of the document.  Takes it as an argument.  Standard value is
+% |\today|.\\ |\abgabe| is deprecated\\ \
+% \subsubsection{Inherited from \texttt{article}}
+% \DescribeMacro{\author} Sets the author of the document.\\
+% \DescribeMacro{\date} Sets the date of the document.\\
+% \subsection{Sectioning\label{SECTIONING_CMDS}}
+% \subsubsection{\enquote*{plain}
+% Sectioning\label{PLAIN_SECTIONING_CMDS}}
+% \subsubsection{\enquote*{better}
+% Sectioning\label{BETTER_SECTIONING_CMDS}}
+% \section{Pagestyle}
+% \subsection{Headers\label{HEADERS}}
+%
+% \section{Implementation}
+% The following part is verry boring, but i have not found a solution
+% to create a \texttt{.cls}--file without including the implemetation
+% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
+% and sets the Version
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesClass{HomeworkAssignment}[2016/12/14]
+%    \end{macrocode}
+% Loads the \texttt{article}, which is the base-class.
+%    \begin{macrocode}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions \relax \LoadClass{article}
+%    \end{macrocode}
+%
+% Loads required Packages
+%    \begin{macrocode}
+\RequirePackage{suffix} \RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
+%    \end{macrocode}
+% Sets the page-headers.\\
+% All headers are cleread before they get any Text --- just to be sure.  \\
+% The headers look like specified above (\ref{HEADERS}). Also inserts
+% the Titlepage.
+%    \begin{macrocode}
+
+\fancypagestyle{firstpage}{
+  %
+  \fancyhf{}
+  % clear all six fields
+  \renewcommand{\headrulewidth}{.7pt}
+  \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[L]{\@tutorium } \fancyhead[R]{\@date } }
+\fancypagestyle{followingpage}{
+  % 
+  \fancyhf{}
+  % clear all six fields
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\@kurs\\ Abgabe:
+    \@abgabe} \fancyfoot[RE,LO]{\thepage}
+  \renewcommand{\headrulewidth}{0.7pt}
+  \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+\AtBeginDocument{ \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt} }
+%    \end{macrocode}
+% \subsection{Commands}
+% \begin{macro}{\subject}
+%   Defines |\kurs|. |\subject| equals |\kurs|, except that |\kurs|
+%   emits a warning.
+%    \begin{macrocode}
+\def\hwa@kurs{Kein Kurs} \newcommand{\kurs}[1]{ \ClassWarning{You used
+    the \kurs-command, which is deprecated. Please use \subject}
+  \def\hwa@kurs{#1} } \newcommand{\subject}[1]{\def\hwa@kurs{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\tutorial}
+%   Defines |\tutorial|. |\tutorium| equals |\tutorial|, except that
+%   |\tutorium| emits a warning.
+%    \begin{macrocode}
+\def\hwa@tutorium{} \newcommand{\tutorium}[1]{\def\hwa@tutorium{#1}}
+\newcommand{\tutorum}[1]{\ClassWarning{You used the \tutorium-command,
+    which is deprecated. Please use \tutorial} \def\hwa@tutorium{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\deadline}
+%   Defines |\deadline|. |\abgabe| equals |\deadline|, except that
+%   |\abgabe| emits a warning.
+%    \begin{macrocode}
+\def\hwa@abgabe{\today}
+
+\newcommand{\abgabe}[1]{\ClassWarning{You used the \abgabe-command,
+    which is deprecated. Please use \deadline}\def\hwa@abgabe{#1}}
+\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\maketitle}
+%   Overrides maketitle.
+%    \begin{macrocode}
+
+\renewcommand{\maketitle} {
+  \begin{centering}
+    \huge{\textbf{\hwa@kurs}} {\hrule height 2pt} \vspace{.25cm}
+    \large
+    Abgabe: \hwa@abgabe\\
+    \vspace{.5cm} \hrule \vspace{.25cm}
+    \normalsize{\@author}\\
+    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+  \end{centering}
+}
+%    \end{macrocode}
+% \end{macro}
+% Defines and initialize all counters.
+%    \begin{macrocode}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+%    \end{macrocode}
+%
+% Defines \enquote*{plain} sectioning-commands.  See
+% \ref{SECTIONING-CMDS} for more informations.
+%    \begin{macrocode}
+\newcommand{\problem}[1]{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large\bfseries}%style
+  *{#1}}
+
+\newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
+  {2}%Level
+  {\z@}%indent
+  {-1em \@plus -.5em \@minus -.5em}%beforeskip
+  {.5ex \@plus .5ex}%afterskip
+  {\normalfont\large\bfseries}%style
+  *{#1}}
+
+\newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
+  {3}%Level
+  {\z@}%indent
+  {-.5em}%beforeskip
+  {.5em}%afterskip
+  {\normalfont\bfseries}%style
+  *{#1}}
+
+\newcommand{\solution}[1][]{\@startsection{solution}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+
+\newcommand{\proof}[1][]{\@startsection{proof}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+%    \end{macrocode}
+%
+% Defines \enquote*{better} sectioning commands. See
+% \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
+% informations.
+%    \begin{macrocode}
+\newcommand{\newproblem}[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
+  \problem{Aufgabe \arabic{problem}} }
+
+\newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
+  \subproblem{Aufgabe \arabic{problem}.\alph{subproblem}} }
+
+\newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
+  \subproblem{\roman{subsubproblem})} }
+
+%    \end{macrocode}
+%
+% \textit{The End}
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
