@@ -5,11 +5,18 @@
 \newcommand{\@styleColor}{green}
 \newcommand{\@titleColor}{white}
 \newcommand{\@titleScale}{4}
+\newcommand{\@textScale}{3}
+\newcommand{\@authorScale}{2}
+\newcommand{\@typeText}{Typetext}
+\newcommand{\@topText}{Toptext}
 
 \newcommand{\titleScale}[1]{\renewcommand{\@titleScale}{#1}}
+\newcommand{\textScale}[1]{\renewcommand{\@textScale}{#1}}
+\newcommand{\authorScale}[1]{\renewcommand{\@authorScale}{#1}}
 \newcommand{\styleColor}[1]{\renewcommand{\@styleColor}{#1}}
 \newcommand{\titleColor}[1]{\renewcommand{\@titleColor}{#1}}
-
+\newcommand{\topText}[1]{\renewcommand{\@typeText}{#1}}
+\newcommand{\typeText}[1]{\renewcommand{\@typeText}{#1}}
 
 \renewcommand{\maketitle}{
   \thispagestyle{empty}
@@ -33,9 +40,10 @@
       % \end{tikzpicture}};  
       
       \draw[\@styleColor,fill] ($(NW)!0.1!(N)$) rectangle ($(SE)!0.1!(S)!0.985!(NE)!0.1!(N)$);
-      \node at ($(E)$) [execute at begin node=\setlength{\baselineskip}{2.5em},rectangle,fill=\@styleColor,text width=.1875\paperwidth,anchor=north east,scale=\@titleScale,align=left,text=\@titleColor] {\Huge{\@title}};
-
-      
+      \node at ($(E)!0.5!(W)$) [execute at begin node=\setlength{\baselineskip}{2.5em},rectangle,fill=\@styleColor,text width=.1875\paperwidth,anchor=north,scale=\@titleScale,align=left,text=\@titleColor] {\Huge{\@title}};
+      \node at ($(N)!0.015!(S)$) [scale=\@textScale,anchor=north] {\textit{\@topText}};
+      \node at ($(E)!0.09375!(W)$) [scale=\@textScale,anchor=south east,align=right] {\textit{\@typeText}};
+      \node at ($(SE)!0.01!(NW)$) [scale=\@authorScale,anchor=south east,align=right] {\textit{\@author}};
     \end{tikzpicture}
   \end{titlepage}
   \newpage
