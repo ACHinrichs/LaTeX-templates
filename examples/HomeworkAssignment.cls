@@ -39,8 +39,8 @@
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}
-[2017/04/29 v1.4 HomeworkAssignment]
 \LoadClassWithOptions{article}
+[2014/09/29 v1.4h Standard LaTeX document class]
 
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{

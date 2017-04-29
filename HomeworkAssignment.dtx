@@ -39,9 +39,9 @@
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<class>\ProvidesClass{HomeworkAssignment}
+%<class>\LoadClassWithOptions{article}
 %<*class>
-[2017/04/29 v1.4 HomeworkAssignment]
-\LoadClassWithOptions{article}
+[2014/09/29 v1.4h Standard LaTeX document class]
 %</class>
 %
 %<*driver>
@@ -71,26 +71,49 @@
 % brace \{ Vertical bar \| Right brace \} Tilde \~}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-% 
+% \GetFileInfo{HomeworkAssignment.cls}
+%
+% \renewcommand{\fileversion}{v1.5}
+% \renewcommand{\filedate}{$2017\backslash 04\backslash 29$}
+%
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
 % corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
 % \filedate.}}
 % \author{Adrian C Hinrichs \\
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
-% \GetFileInfo{HomeworkAssignment.cls}
 % 
-% \maketitle 
+% \maketitle
 % 
 % \section{Abstract}
 % This class provides a relative simple docuemnt--type for homework,
 % mainly created for assignments at the University This class is
 % inherited from \texttt{article}, it is not perfect, but I am trying
 % my verry best.
-% 
+% \section{Options}
+% \DescribeMacro{problemstyle=<1>} \DescribeMacro{subproblemstyle=<1>}
+% \DescribeMacro{subsubproblemstyle=<1>} These options allow the
+% customizatuion of the displayed numbers.  For Example, if
+% \texttt{problemstyle=Roman, subproblemstyle=arabic,
+% subsubproblemstyle=roman} is passed, The first subsubproblem of the
+% first subproblem
+% of the first problem would be labled as \textbf{i)} of \textbf{Problem I.1}.\\
+% Available options are \texttt{arabic}, \texttt{Alph}, \texttt{alph},
+% \texttt{Roman}, and \texttt{roman}. Standard values are:
+% \texttt{problemstyle=arabic, subproblemstyle=alph,
+% subsubproblemstyle=roman}.
+% \subsection{Inherited options}
+% Because the class is inherited by Abstract, every Option that can be
+% passed to article, will be passed to article.
+% \subsection{\LaTeX Warning: Unused global option(s)}
+% Because the Options are handled via \texttt{kvoptions} and passed
+% directly to \texttt{article}, \LaTeX raises this warning. IMHO, the
+% Options are used and this warning can be ignored. Nevertheless I am
+% working on it.
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
-% the document.  Takes the subject as argument.  Standard Value is \enquote{Kein Kurs}\\
+% the document.  Takes the subject as argument.  Standard Value is
+% \enquote{Kein Kurs}\\
 % |\kurs| is deprecated.\\ \
 %
 % \DescribeMacro{\tutorial}\DescribeMacro{\tutorium} Sets the tutorial
@@ -104,11 +127,30 @@
 % \DescribeMacro{\author} Sets the author of the document.\\
 % \DescribeMacro{\date} Sets the date of the document.\\
 % \subsection{Sectioning\label{SECTIONING_CMDS}}
+% Because the class is designed for Assignments, the
+% sectioning-commands are different from Article
 % \subsubsection{\enquote*{plain}
 % Sectioning\label{PLAIN_SECTIONING_CMDS}}
-
+% \DescribeMacro{\problem} \DescribeMacro{\subproblem}
+% \DescribeMacro{\subsubproblem} These commands work like theyr
+% counterpart in article, except that there will be no number, nor
+% will they increase a counter.  Nevertheless, hey will be shown
+% in the table of contents.\\
+%
+% \DescribeMacro{\solution} \DescribeMacro{\proof} They work like
+% Paragraph, but do not take an argument, instead they print out
+% \enquote{L\"osung} and \enquote{Beweis} respective.  They are not
+% mentioned in the table of contents.
 % \subsubsection{\enquote*{better}
 % Sectioning\label{BETTER_SECTIONING_CMDS}}
+% The following commands are an augmented version of the
+% \enquote{plain} commands.\
+%
+% \DescribeMacro{\newproblem} \DescribeMacro{\newsubproblem}
+% \DescribeMacro{newsubsubproblem} These commands require no argument,
+% and automatically create a numbered title.  The optional Argument is
+% the new value for the coresponding counter.
+%
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % \pagebreak
@@ -118,7 +160,8 @@
 % \begin{quote}
 %   \url{https://github.com/ACHinrichs/LaTeX-templates}
 % \end{quote}
-% Please refer to that site for any bug report or development information.
+% Please refer to that site for any bug report or development
+% information.
 %
 % \section{Changelog}
 % \begin{description}
@@ -127,6 +170,8 @@
 % \item[v1.2 - 2016/11/03] ...
 % \item[v1.3 - 2016/12/01] Provide the Class as .dtx file and more
 % \item[v1.4 - 2017/04/29] ``Minor'' bugfixes
+% \item[v1.5 - 2017/04/29] Problems are displayed in the table of
+%   contents. Type of numeration is now configurable.
 % 
 % \end{description}
 % \pagebreak
@@ -134,18 +179,13 @@
 % The following part is verry boring, but I have not found a solution
 % to create a \texttt{.cls}--file without including the implemetation
 % into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
-% and sets the Version
-% Loads the \texttt{article}, which is the base-class.
+% and sets the Version Loads the \texttt{article}, which is the
+% base-class.
 %    \begin{macrocode}
-\RequirePackage{kvoptions}
-\SetupKeyvalOptions{
-  family=hwa,
-  prefix=hwa@
-}
-\DeclareStringOption[arabic]{problemsty}
+\RequirePackage{kvoptions} \SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ } \DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
-\DeclareStringOption[roman]{subsubproblemsty}
-\ProcessKeyvalOptions*
+\DeclareStringOption[roman]{subsubproblemsty} \ProcessKeyvalOptions*
 %    \end{macrocode}
 %
 % Loads required Packages
@@ -179,44 +219,49 @@
 %    \end{macrocode}
 % \subsection{Internal commands}
 % \subsubsection{Counter--Commands}
-% These are used to output the Exercise numbers in the desired style
+% \begin{macro}{Counter--Commands}
+%   These are used to output the Exercise numbers in the desired style
+%    \begin{macrocode}
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \subsubsection{Counter--Style Parser}
-% This takes a style-input (#1), one of the three previous defined commands (#2) and the coresponding counter (#3) to redefine #1, so that it corresponds to #2.  See \ref{RE-DEF-COUNTER-CMDS-IMPLM} for example usement
+% \begin{macro}{Counter--Style Parser}
+%   This takes a style-input (\#1), one of the three previous defined
+%   commands (\#2) and the coresponding counter (\#3) to redefine \#1,
+%   so that it corresponds to \#2.  See
+%   \ref{RE-DEF-COUNTER-CMDS-IMPLM} for example usement.
 %
+%    \begin{macrocode}
 \newcommand{\hwa@parseCounterStyle}[3]{
-  \ifthenelse{\equal{#1}{arabic}}{
-    \renewcommand{#2}{\arabic{#3}}
-  }{
-    \ifthenelse{\equal{#1}{roman}}{    
-      \renewcommand{#2}{\roman{#3}}
-    }{
-      \ifthenelse{\equal{#1}{alph}}{    
-        \renewcommand{#2}{\alph{#3}}
-      }{
-        \ifthenelse{\equal{#1}{Alph}}{    
-          \renewcommand{#2}{\Alph{#3}}
-        }{
-          \ifthenelse{\equal{#1}{Roman}}{    
-            \renewcommand{#2}{\Roman{#3}}
-          }{
-            \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
-          }
-        }
-      }
-    }
-  }
-}
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{HomeworkAssignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
+%    \end{macrocode}
+% \end{macro}
 %
-% \subsubsection{Counter--Commands II\label{RE-DEF-COUNTER-CMDS-IMPLM}}
-% Redefines the three counter-commands
 %
+% \subsubsection{Counter--Commands
+% II\label{RE-DEF-COUNTER-CMDS-IMPLM}}
+% \begin{macro}{Counter--Style ParserCommands II}
+%   Redefines the three counter-commands
+%
+%    \begin{macrocode}
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{problem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Commands}
 % \begin{macro}{\subject}
 %   Defines |\kurs|. |\subject| equals |\kurs|
@@ -269,7 +314,7 @@
 %    \end{macrocode}
 %
 % Defines \enquote*{plain} sectioning-commands.  See
-% \ref{SECTIONING-CMDS} for more informations.
+% \ref{SECTIONING_CMDS} for more informations.
 %    \begin{macrocode}
 \newcommand{\problem}[1]{\@startsection{problem}%Name
   {1}%Level
@@ -277,9 +322,7 @@
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{section}{#1}
-}
+  *{#1} \addcontentsline{toc}{section}{#1} }
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
@@ -287,9 +330,7 @@
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
   {\normalfont\large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{subsection}{#1}
-}
+  *{#1} \addcontentsline{toc}{subsection}{#1} }
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
   {3}%Level
@@ -297,8 +338,7 @@
   {-.5em}%beforeskip
   {.5em}%afterskip
   {\normalfont\bfseries}%style
-  *{#1}
-}
+  *{#1} }
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
   {4}%Level
@@ -306,8 +346,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ }
-}
+  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
 
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
   {4}%Level
@@ -315,8 +354,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ }
-}
+  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 %    \end{macrocode}
 %
 % Defines \enquote*{better} sectioning commands. See
