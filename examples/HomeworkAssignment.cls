@@ -41,10 +41,14 @@
 \ProvidesClass{HomeworkAssignment}
              [2017/04/29 v1.4 HomeworkAssignment]
 \RequirePackage{kvoptions}
-\DeclareStringOption[alph]{subproblemSty}
-\DeclareStringOption[roman]{subsubproblemSty}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-\ProcessOptions \relax \LoadClass{article}
+\SetupKeyvalOptions{
+  family=hwa,
+  prefix=hwa@
+}
+\DeclareStringOption[alph]{subproblemsty}
+\DeclareStringOption[roman]{subsubproblemsty}
+\ProcessKeyvalOptions*
+\relax \LoadClass{article}
 \RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 
@@ -65,6 +69,48 @@
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
 \AtBeginDocument{ \thispagestyle{firstpage}
   \setlength{\headheight}{25pt} }
+\newcommand{\hwa@problemno}{\arabic{problem}}
+\newcommand{\hwa@subproblemno}{\alph{subproblem}}
+\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+\ifthenelse{\equal{\hwa@problemsty}{arabic}}{
+  \renewcommand{\hwa@problemno}{\arabic{problem}}
+}{
+  \ifthenelse{\equal{\hwa@problemsty}{roman}}{
+    \renewcommand{\hwa@problemno}{\roman{problem}}
+  }{
+    \ifthenelse{\equal{\hwa@problemsty}{alph}}{
+      \renewcommand{\hwa@problemno}{\alph{problem}}
+    }{
+      \ClassError{HomeworkAssignment}{Invalid Value \hwa@problemsty for option problemSty}{Possible Values are alph, arabic, or roman. Standard is arabic}
+    }
+  }
+}
+\ifthenelse{\equal{\hwa@subproblemsty}{arabic}}{
+  \renewcommand{\hwa@subproblemno}{\arabic{subproblem}}
+}{
+  \ifthenelse{\equal{\hwa@subproblemsty}{roman}}{
+    \renewcommand{\hwa@subproblemno}{\roman{subproblem}}
+  }{
+    \ifthenelse{\equal{\hwa@subproblemsty}{alph}}{
+      \renewcommand{\hwa@subproblemno}{\alph{subproblem}}
+    }{
+      \ClassError{HomeworkAssignment}{Invalid Value \hwa@subproblemsty for option subproblemsty}{Possible Values are alph, arabic, or roman. Standard is alph}
+    }
+  }
+}
+\ifthenelse{\equal{\hwa@subsubproblemsty}{arabic}}{
+  \renewcommand{\hwa@subsubproblemno}{\arabic{subsubproblem}}
+}{
+  \ifthenelse{\equal{\hwa@subsubproblemsty}{roman}}{
+    \renewcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+  }{
+    \ifthenelse{\equal{\hwa@subsubproblemsty}{alph}}{
+      \renewcommand{\hwa@subsubproblemno}{\alph{subsubproblem}}
+    }{
+      \ClassError{HomeworkAssignment}{Invalid Value \hwa@subsubproblemsty for option subsubproblemsty}{Possible Values are alph, arabic, or roman. Standard is roman}
+    }
+  }
+}
 \newcommand{\hwa@kurs}{Kein Kurs}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
@@ -88,6 +134,7 @@
 \newcounter{problem} \setcounter{problem}{0}
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
 \newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+
 \newcommand{\problem}[1]{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
@@ -136,15 +183,15 @@
 }
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{Aufgabe \arabic{problem}} }
+  \problem{Aufgabe \hwa@problemno} }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{Aufgabe \arabic{problem}.\alph{subproblem}} }
+  \subproblem{Aufgabe \hwa@problemno{}.\hwa@subproblemno} }
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \subsubproblem{\roman{subsubproblem})} }
+  \subsubproblem{\hwa@subsubproblemno)} }
 
 \endinput
 %%
