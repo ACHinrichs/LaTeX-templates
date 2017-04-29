@@ -7,7 +7,7 @@
 %% HomeworkAssignment.dtx  (with options: `class')
 %% Copyright (c) 2016 by Adrian C. Hinrichs
 %% 
-%% This FIle may be distributed and/or modified under the condition of the below
+%% This File may be distributed and/or modified under the condition of the below
 %% license.
 %% 
 %% 
@@ -38,16 +38,13 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesCLass{HomeworkAssignment}
+\ProvidesClass{HomeworkAssignment}
              [2016/12/01 v1.3 HomeworkAssignment]
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{HomeworkAssignment}[2016/12/14]
+
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-\ProcessOptions \relax
-\LoadClass{article}
-\RequirePackage{suffix}
-\RequirePackage{fancyhdr}
+\ProcessOptions \relax \LoadClass{article}
+\RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 
 \fancypagestyle{firstpage}{
@@ -55,123 +52,94 @@
   \fancyhf{}
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
-  \renewcommand{\footrulewidth}{0pt}
-  \fancyfoot[RE,LO]{\thepage}
-  \fancyhead[L]{\@tutorium }
-  \fancyhead[R]{\@date }
-}
+  \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[L]{\@tutorium } \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   %
   \fancyhf{}
   % clear all six fields
-  \fancyhead[RE,LO]{\@author}
-  \fancyhead[LE,RO]{\@kurs\\ Abgabe: \@abgabe}
-  \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\@kurs\\ Abgabe:
+    \@abgabe} \fancyfoot[RE,LO]{\thepage}
   \renewcommand{\headrulewidth}{0.7pt}
-  \renewcommand{\footrulewidth}{0pt}
-}
-\pagestyle{followingpage}
-\AtBeginDocument{
-  \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt}
-}
-\def\@kurs{Kein Kurs}
-\newcommand{\kurs}[1]{\def\@kurs{#1}}
+  \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+\AtBeginDocument{ \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt} }
+\def\hwa@kurs{Kein Kurs} \newcommand{\kurs}[1]{ \ClassWarning{You used
+    the \kurs-command, which is deprecated. Please use \subject}
+  \def\hwa@kurs{#1} } \newcommand{\subject}[1]{\def\hwa@kurs{#1}}
+\def\hwa@tutorium{} \newcommand{\tutorium}[1]{\def\hwa@tutorium{#1}}
+\newcommand{\tutorum}[1]{\ClassWarning{You used the \tutorium-command,
+    which is deprecated. Please use \tutorial} \def\hwa@tutorium{#1}}
+\def\hwa@abgabe{\today}
 
-\def\@tutorium{}
-\newcommand{\tutorium}[1]{\def\@tutorium{#1}}
-
-\def\@abgabe{\today}
-
-\newcommand{\abgabe}[1]{\def\@abgabe{#1}}
+\newcommand{\abgabe}[1]{\ClassWarning{You used the \abgabe-command,
+    which is deprecated. Please use \deadline}\def\hwa@abgabe{#1}}
+\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
 
 \renewcommand{\maketitle} {
   \begin{centering}
-    \huge{\textbf{\@kurs}}
-         {\hrule height 2pt}
-         \vspace{.25cm}
-         \large
-         Abgabe: \@abgabe\\
-         \vspace{.5cm}
-         \hrule
-         \vspace{.25cm}
-         \normalsize{\@author}\\
-         \vspace{.25cm}
-         \hrule
-         \vspace{.25cm}
-         \normalsize
+    \huge{\textbf{\hwa@kurs}} {\hrule height 2pt} \vspace{.25cm}
+    \large
+    Abgabe: \hwa@abgabe\\
+    \vspace{.5cm} \hrule \vspace{.25cm}
+    \normalsize{\@author}\\
+    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
   \end{centering}
 }
-\newcounter{problem}
-\setcounter{problem}{0}
-\newcounter{subproblem}[problem]
-\setcounter{subproblem}{0}
-\newcounter{subsubproblem}[subproblem]
-\setcounter{subsubproblem}{0}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 \newcommand{\problem}[1]{\@startsection{problem}%Name
-{1}%Level
-{\z@}%indent
-{-2em \@plus -1em \@minus -1em}%beforeskip
-{1ex \@plus .5ex}%afterskip
-{\normalfont\Large\bfseries}%style
-*{#1}}
-\newcommand{\newproblem}[1][]{\stepcounter{problem}
-  \ifthenelse{\equal{#1}{}}
-             { }
-             {\setcounter{problem}{#1}}
-             \problem{Aufgabe \arabic{problem}}
-}
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large\bfseries}%style
+  *{#1}}
+
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
-{2}%Level
-{\z@}%indent
-{-1em \@plus -.5em \@minus -.5em}%beforeskip
-{.5ex \@plus .5ex}%afterskip
-{\normalfont\large\bfseries}%style
-*{#1}}
-\newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
-  \ifthenelse{\equal{#1}{}}
-             { }
-             {\setcounter{subproblem}{#1}}
-             \subproblem{Aufgabe \arabic{problem}.\alph{subproblem}}
-}
+  {2}%Level
+  {\z@}%indent
+  {-1em \@plus -.5em \@minus -.5em}%beforeskip
+  {.5ex \@plus .5ex}%afterskip
+  {\normalfont\large\bfseries}%style
+  *{#1}}
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
-{3}%Level
-{\z@}%indent
-{-.5em}%beforeskip
-{.5em}%afterskip
-{\normalfont\bfseries}%style
-*{#1}}
-
-\newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
-  \ifthenelse{\equal{#1}{}}
-             { }
-             {\setcounter{subsubproblem}{#1}}
-             \subproblem{\roman{subsubproblem})}
-}
+  {3}%Level
+  {\z@}%indent
+  {-.5em}%beforeskip
+  {.5em}%afterskip
+  {\normalfont\bfseries}%style
+  *{#1}}
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
-{4}%Level
-{\parindent}%indent
-{-.1em}%beforeskip
-{\z@}%afterskip
-{\normalfont\bfseries}%style
-*{L\"osung\ifthenelse{\equal{#1}{}}
-                                          {}
-                                          { #1}:~~
-                                        }
-                                      }
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
-{4}%Level
-{\parindent}%indent
-{-.1em}%beforeskip
-{\z@}%afterskip
-{\normalfont\bfseries}%style
-*{Beweis\ifthenelse{\equal{#1} {} }
-                                          {}
-                                          { #1}:~~
-                                        }
-                                      }
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\newproblem}[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
+  \problem{Aufgabe \arabic{problem}} }
+
+\newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
+  \subproblem{Aufgabe \arabic{problem}.\alph{subproblem}} }
+
+\newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
+  \subproblem{\roman{subsubproblem})} }
+
 \endinput
 %%
 %% End of file `HomeworkAssignment.cls'.
