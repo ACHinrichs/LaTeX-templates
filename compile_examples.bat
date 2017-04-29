@@ -1,2 +1,0 @@
-pdflatex eg_assignment.tex
-pdflatex eg_assignment_2.tex
