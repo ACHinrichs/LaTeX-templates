@@ -5,7 +5,7 @@
 %% The original source files were:
 %%
 %% HomeworkAssignment.dtx  (with options: `class')
-%% Copyright (c) 2016 by Adrian C. Hinrichs
+%% Copyright (c) 2017 by Adrian C. Hinrichs
 %% 
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
@@ -15,7 +15,7 @@
 %% 
 %% 
 %% 
-%% Copyright (c) 2016
+%% Copyright (c) 2017
 %% 
 %% 
 %% 
@@ -39,8 +39,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}
-             [2016/12/01 v1.3 HomeworkAssignment]
-
+             [2017/04/29 v1.4 HomeworkAssignment]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax \LoadClass{article}
@@ -53,28 +52,26 @@
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
   \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
-  \fancyhead[L]{\@tutorium } \fancyhead[R]{\@date } }
+  \fancyhead[L]{\hwa@tutorium } \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   %
   \fancyhf{}
   % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\@kurs\\ Abgabe:
-    \@abgabe} \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ Abgabe:
+    \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
 \AtBeginDocument{ \thispagestyle{firstpage}
   \setlength{\headheight}{25pt} }
-\def\hwa@kurs{Kein Kurs} \newcommand{\kurs}[1]{ \ClassWarning{You used
-    the \kurs-command, which is deprecated. Please use \subject}
-  \def\hwa@kurs{#1} } \newcommand{\subject}[1]{\def\hwa@kurs{#1}}
-\def\hwa@tutorium{} \newcommand{\tutorium}[1]{\def\hwa@tutorium{#1}}
-\newcommand{\tutorum}[1]{\ClassWarning{You used the \tutorium-command,
-    which is deprecated. Please use \tutorial} \def\hwa@tutorium{#1}}
-\def\hwa@abgabe{\today}
-
-\newcommand{\abgabe}[1]{\ClassWarning{You used the \abgabe-command,
-    which is deprecated. Please use \deadline}\def\hwa@abgabe{#1}}
+\newcommand{\hwa@kurs}{Kein Kurs}
+\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
+\newcommand{\kurs}[1]{\subject{#1}}
+\newcommand{\hwa@tutorium}{}
+\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
+\newcommand{\tutorium}[1]{\tutorial{#1}}
+\newcommand{\hwa@abgabe}{\today}
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+\newcommand{\abgabe}[1]{\deadline{#1}}
 
 \renewcommand{\maketitle} {
   \begin{centering}

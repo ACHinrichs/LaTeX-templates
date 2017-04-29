@@ -10,7 +10,7 @@
 %
 %
 %
-% Copyright (c) 2016 
+% Copyright (c) 2017
 %
 %
 %
@@ -40,7 +40,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<class>\ProvidesClass{HomeworkAssignment}
 %<*class>
-             [2016/12/01 v1.3 HomeworkAssignment]
+             [2017/04/29 v1.4 HomeworkAssignment]
 %</class>
 %
 %<*driver>
@@ -68,15 +68,7 @@
 % Commercial at \@     Left bracket  \[     Backslash     \\
 %   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
 % brace \{ Vertical bar \| Right brace \} Tilde \~}
-% 
-% \changes{v1.0}{2016/10/23}{Intial} \changes{v1.1}{2016/11/02}{...}
-% \changes{v1.2}{2016/11/03}{...}  \changes{v1.3}{2016/12/01}{Provide
-% the Class as .dtx file and more}
-% 
-% 
-% \GetFileInfo{HomeworkAssignment.cls} \filedate \fileversion
-% \fileinfo
-% 
+%
 % \DoNotIndex{\newcommand,\newenvironment}
 % 
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
@@ -84,12 +76,13 @@
 % \filedate.}}
 % \author{Adrian C Hinrichs \\
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
+% \GetFileInfo{HomeworkAssignment.cls}
 % 
-% \maketitle
+% \maketitle 
 % 
 % \section{Abstract}
 % This class provides a relative simple docuemnt--type for homework,
-% mainly created for assignments at the University THis calss is
+% mainly created for assignments at the University This class is
 % inherited from \texttt{article}, it is not perfect, but I am trying
 % my verry best.
 % 
@@ -116,16 +109,30 @@
 % Sectioning\label{BETTER_SECTIONING_CMDS}}
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
+% \pagebreak
+% \section{Development and support}
 %
+% The package is developed at \emph{github}:
+% \begin{quote}
+%   \url{https://github.com/ACHinrichs/LaTeX-templates}
+% \end{quote}
+% Please refer to that site for any bug report or development information.
+%
+% \section{Changelog}
+% \begin{description}
+% \item[v1.0 - 2016/10/23] Intial
+% \item[v1.1 - 2016/11/02] ...
+% \item[v1.2 - 2016/11/03] ...
+% \item[v1.3 - 2016/12/01] Provide the Class as .dtx file and more
+% \item[v1.4 - 2017/04/29] ``Minor'' bugfixes
+% 
+% \end{description}
+% \pagebreak
 % \section{Implementation}
 % The following part is verry boring, but i have not found a solution
 % to create a \texttt{.cls}--file without including the implemetation
 % into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
 % and sets the Version
-%    \begin{macrocode}
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{HomeworkAssignment}[2016/12/14]
-%    \end{macrocode}
 % Loads the \texttt{article}, which is the base-class.
 %    \begin{macrocode}
 
@@ -150,13 +157,13 @@
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
   \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
-  \fancyhead[L]{\@tutorium } \fancyhead[R]{\@date } }
+  \fancyhead[L]{\hwa@tutorium } \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   % 
   \fancyhf{}
   % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\@kurs\\ Abgabe:
-    \@abgabe} \fancyfoot[RE,LO]{\thepage}
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ Abgabe:
+    \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
 \AtBeginDocument{ \thispagestyle{firstpage}
@@ -164,34 +171,29 @@
 %    \end{macrocode}
 % \subsection{Commands}
 % \begin{macro}{\subject}
-%   Defines |\kurs|. |\subject| equals |\kurs|, except that |\kurs|
-%   emits a warning.
+%   Defines |\kurs|. |\subject| equals |\kurs|
 %    \begin{macrocode}
-\def\hwa@kurs{Kein Kurs} \newcommand{\kurs}[1]{ \ClassWarning{You used
-    the \kurs-command, which is deprecated. Please use \subject}
-  \def\hwa@kurs{#1} } \newcommand{\subject}[1]{\def\hwa@kurs{#1}}
+\newcommand{\hwa@kurs}{Kein Kurs}
+\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
+\newcommand{\kurs}[1]{\subject{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\tutorial}
-%   Defines |\tutorial|. |\tutorium| equals |\tutorial|, except that
-%   |\tutorium| emits a warning.
+%   Defines |\tutorial|. |\tutorium| equals |\tutorial|
 %    \begin{macrocode}
-\def\hwa@tutorium{} \newcommand{\tutorium}[1]{\def\hwa@tutorium{#1}}
-\newcommand{\tutorum}[1]{\ClassWarning{You used the \tutorium-command,
-    which is deprecated. Please use \tutorial} \def\hwa@tutorium{#1}}
+\newcommand{\hwa@tutorium}{}
+\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
+\newcommand{\tutorium}[1]{\tutorial{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\deadline}
-%   Defines |\deadline|. |\abgabe| equals |\deadline|, except that
-%   |\abgabe| emits a warning.
+%   Defines |\deadline|. |\abgabe| equals |\deadline|
 %    \begin{macrocode}
-\def\hwa@abgabe{\today}
-
-\newcommand{\abgabe}[1]{\ClassWarning{You used the \abgabe-command,
-    which is deprecated. Please use \deadline}\def\hwa@abgabe{#1}}
+\newcommand{\hwa@abgabe}{\today}
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+\newcommand{\abgabe}[1]{\deadline{#1}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\maketitle}
