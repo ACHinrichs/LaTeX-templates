@@ -135,7 +135,9 @@
 % and sets the Version
 % Loads the \texttt{article}, which is the base-class.
 %    \begin{macrocode}
-
+\RequirePackage{kvoptions}
+\DeclareStringOption[alph]{subproblemSty}
+\DeclareStringOption[roman]{subsubproblemSty}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions \relax \LoadClass{article}
 %    \end{macrocode}
@@ -228,7 +230,9 @@
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1}}
+  *{#1}
+  \addcontentsline{toc}{section}{#1}
+}
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
@@ -236,7 +240,9 @@
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
   {\normalfont\large\bfseries}%style
-  *{#1}}
+  *{#1}
+  \addcontentsline{toc}{subsection}{#1}
+}
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
   {3}%Level
@@ -244,7 +250,8 @@
   {-.5em}%beforeskip
   {.5em}%afterskip
   {\normalfont\bfseries}%style
-  *{#1}}
+  *{#1}
+}
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
   {4}%Level
@@ -252,7 +259,8 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ }
+}
 
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
   {4}%Level
@@ -260,7 +268,8 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ }
+}
 %    \end{macrocode}
 %
 % Defines \enquote*{better} sectioning commands. See
@@ -277,7 +286,7 @@
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \subproblem{\roman{subsubproblem})} }
+  \subsubproblem{\roman{subsubproblem})} }
 
 %    \end{macrocode}
 %
