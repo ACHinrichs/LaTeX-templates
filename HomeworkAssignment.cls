@@ -45,6 +45,7 @@
   family=hwa,
   prefix=hwa@
 }
+\DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \ProcessKeyvalOptions*
@@ -72,19 +73,22 @@
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
-\ifthenelse{\equal{\hwa@problemsty}{arabic}}{
-  \renewcommand{\hwa@problemno}{\arabic{problem}}
-}{
-  \ifthenelse{\equal{\hwa@problemsty}{roman}}{
-    \renewcommand{\hwa@problemno}{\roman{problem}}
+\newcommand{\hwa@parseCounterStyle}[3]{
+  \ifthenelse{\equal{#1}{arabic}}{
+    \renewcommand{#2}{\arabic{#3}}
   }{
-    \ifthenelse{\equal{\hwa@problemsty}{alph}}{
-      \renewcommand{\hwa@problemno}{\alph{problem}}
+    \ifthenelse{\equal{#1}{roman}}{
+      \renewcommand{#2}{\roman{#3}}
     }{
-      \ClassError{HomeworkAssignment}{Invalid Value \hwa@problemsty for option problemSty}{Possible Values are alph, arabic, or roman. Standard is arabic}
+      \ifthenelse{\equal{#1}{alph}}{
+        \renewcommand{#2}{\alph{#3}}
+      }{
+        \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
+      }
     }
   }
 }
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \ifthenelse{\equal{\hwa@subproblemsty}{arabic}}{
   \renewcommand{\hwa@subproblemno}{\arabic{subproblem}}
 }{
