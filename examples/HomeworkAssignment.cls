@@ -39,7 +39,9 @@
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}
-             [2017/04/29 v1.4 HomeworkAssignment]
+[2017/04/29 v1.4 HomeworkAssignment]
+\LoadClassWithOptions{article}
+
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
   family=hwa,
@@ -49,7 +51,6 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \ProcessKeyvalOptions*
-\relax \LoadClass{article}
 \RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 
@@ -83,38 +84,22 @@
       \ifthenelse{\equal{#1}{alph}}{
         \renewcommand{#2}{\alph{#3}}
       }{
-        \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
+        \ifthenelse{\equal{#1}{Alph}}{
+          \renewcommand{#2}{\Alph{#3}}
+        }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}}
+          }{
+            \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
+          }
+        }
       }
     }
   }
 }
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\ifthenelse{\equal{\hwa@subproblemsty}{arabic}}{
-  \renewcommand{\hwa@subproblemno}{\arabic{subproblem}}
-}{
-  \ifthenelse{\equal{\hwa@subproblemsty}{roman}}{
-    \renewcommand{\hwa@subproblemno}{\roman{subproblem}}
-  }{
-    \ifthenelse{\equal{\hwa@subproblemsty}{alph}}{
-      \renewcommand{\hwa@subproblemno}{\alph{subproblem}}
-    }{
-      \ClassError{HomeworkAssignment}{Invalid Value \hwa@subproblemsty for option subproblemsty}{Possible Values are alph, arabic, or roman. Standard is alph}
-    }
-  }
-}
-\ifthenelse{\equal{\hwa@subsubproblemsty}{arabic}}{
-  \renewcommand{\hwa@subsubproblemno}{\arabic{subsubproblem}}
-}{
-  \ifthenelse{\equal{\hwa@subsubproblemsty}{roman}}{
-    \renewcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
-  }{
-    \ifthenelse{\equal{\hwa@subsubproblemsty}{alph}}{
-      \renewcommand{\hwa@subsubproblemno}{\alph{subsubproblem}}
-    }{
-      \ClassError{HomeworkAssignment}{Invalid Value \hwa@subsubproblemsty for option subsubproblemsty}{Possible Values are alph, arabic, or roman. Standard is roman}
-    }
-  }
-}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{problem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
 \newcommand{\hwa@kurs}{Kein Kurs}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
