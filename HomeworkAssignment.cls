@@ -38,7 +38,7 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}
+\ProvidesClass{HomeworkAssignment}[2017/04/30 v1.5.2]
 \LoadClassWithOptions{article}[2014/09/29 v1.4h Standard LaTeX document class]
 \RequirePackage{kvoptions} \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ } \DeclareStringOption[arabic]{problemsty}
