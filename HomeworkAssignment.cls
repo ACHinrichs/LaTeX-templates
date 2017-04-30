@@ -41,16 +41,10 @@
 \ProvidesClass{HomeworkAssignment}
 \LoadClassWithOptions{article}
 [2014/09/29 v1.4h Standard LaTeX document class]
-
-\RequirePackage{kvoptions}
-\SetupKeyvalOptions{
-  family=hwa,
-  prefix=hwa@
-}
-\DeclareStringOption[arabic]{problemsty}
+\RequirePackage{kvoptions} \SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ } \DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
-\DeclareStringOption[roman]{subsubproblemsty}
-\ProcessKeyvalOptions*
+\DeclareStringOption[roman]{subsubproblemsty} \ProcessKeyvalOptions*
 \RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 
@@ -75,30 +69,17 @@
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
 \newcommand{\hwa@parseCounterStyle}[3]{
-  \ifthenelse{\equal{#1}{arabic}}{
-    \renewcommand{#2}{\arabic{#3}}
-  }{
-    \ifthenelse{\equal{#1}{roman}}{
-      \renewcommand{#2}{\roman{#3}}
-    }{
-      \ifthenelse{\equal{#1}{alph}}{
-        \renewcommand{#2}{\alph{#3}}
-      }{
-        \ifthenelse{\equal{#1}{Alph}}{
-          \renewcommand{#2}{\Alph{#3}}
-        }{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
           \ifthenelse{\equal{#1}{Roman}}{
-            \renewcommand{#2}{\Roman{#3}}
-          }{
-            \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
-          }
-        }
-      }
-    }
-  }
-}
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{HomeworkAssignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
 \newcommand{\hwa@kurs}{Kein Kurs}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
@@ -130,9 +111,7 @@
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{section}{#1}
-}
+  *{#1} \addcontentsline{toc}{section}{#1} }
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
@@ -140,9 +119,7 @@
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
   {\normalfont\large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{subsection}{#1}
-}
+  *{#1} \addcontentsline{toc}{subsection}{#1} }
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
   {3}%Level
@@ -150,8 +127,7 @@
   {-.5em}%beforeskip
   {.5em}%afterskip
   {\normalfont\bfseries}%style
-  *{#1}
-}
+  *{#1} }
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
   {4}%Level
@@ -159,8 +135,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ }
-}
+  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
 
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
   {4}%Level
@@ -168,8 +143,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ }
-}
+  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
   \problem{Aufgabe \hwa@problemno} }
