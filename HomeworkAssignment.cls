@@ -38,7 +38,7 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[2017/04/30 v1.5.2]
+\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6]
 \LoadClassWithOptions{article}[2014/09/29 v1.4h Standard LaTeX document class]
 \RequirePackage{kvoptions} \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ } \DeclareStringOption[arabic]{problemsty}
@@ -46,6 +46,24 @@
 \DeclareStringOption[roman]{subsubproblemsty} \ProcessKeyvalOptions*
 \RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
+\RequirePackage{translations}
+\DeclareTranslationFallback{aufgabe}{Aufgabe}
+\DeclareTranslationFallback{loesung}{L\"osung}
+\DeclareTranslationFallback{beweis}{Beweis}
+\DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslationFallback{abgabe}{Abgabe}
+
+\DeclareTranslation{German}{aufgabe}{Aufgabe}
+\DeclareTranslation{German}{loesung}{L\"osung}
+\DeclareTranslation{German}{beweis}{Beweis}
+\DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslation{German}{abgabe}{Abgabe}
+
+\DeclareTranslation{English}{aufgabe}{Problem}
+\DeclareTranslation{English}{loesung}{Solution}
+\DeclareTranslation{English}{beweis}{Proof}
+\DeclareTranslation{English}{uebungsgruppe}{Tutorial}
+\DeclareTranslation{English}{abgabe}{Deadline}
 
 \fancypagestyle{firstpage}{
   %
@@ -58,7 +76,7 @@
   %
   \fancyhf{}
   % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ Abgabe:
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ \GetTranslation{abgabe}:
     \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
@@ -80,10 +98,10 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-\newcommand{\hwa@kurs}{Kein Kurs}
+\newcommand{\hwa@kurs}{?\GetTranslation{subject}?}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
-\newcommand{\hwa@tutorium}{}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
 \newcommand{\hwa@abgabe}{\today}
@@ -94,7 +112,7 @@
   \begin{centering}
     \huge{\textbf{\hwa@kurs}} {\hrule height 2pt} \vspace{.25cm}
     \large
-    Abgabe: \hwa@abgabe\\
+    \GetTranslation{abgabe}: \hwa@abgabe\\
     \vspace{.5cm} \hrule \vspace{.25cm}
     \normalsize{\@author}\\
     \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
@@ -134,7 +152,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+  *{\GetTranslation{loesung}\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
 
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
   {4}%Level
@@ -142,14 +160,14 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+  *{\GetTranslation{beweis}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{Aufgabe \hwa@problemno} }
+  \problem{\GetTranslation{aufgabe} \hwa@problemno} }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{Aufgabe \hwa@problemno{}.\hwa@subproblemno} }
+  \subproblem{\GetTranslation{Aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
