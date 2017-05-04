@@ -46,6 +46,7 @@
 \RecordChanges
 \usepackage[autostyle,german = guillemets]{csquotes}
 \usepackage{hyperref}
+\usepackage{amssymb}
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
 \end{document}
@@ -148,10 +149,15 @@
 % \enquote{plain} commands.\
 %
 % \DescribeMacro{\newproblem} \DescribeMacro{\newsubproblem}
-% \DescribeMacro{newsubsubproblem} These commands require no argument,
+% \DescribeMacro{\newsubsubproblem} These commands require no argument,
 % and automatically create a numbered title.  The optional Argument is
 % the new value for the coresponding counter.
-% 
+%
+% \subsection{Useful Macros}
+% \DescribeMacro{\QED} \DescribeMacro{\EOP} \DescribeMacro{\eop}
+% Display a flushed-right \textit{QED}, $\square$, or $\blacksquare$,
+% respectively. |\qed| is not implemented, to keep compatibility to
+% several Math-packages, which define the later.
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % \pagebreak
@@ -175,7 +181,8 @@
 %   contents. Type of numeration is now configurable.
 % \item[v1.5.1 - 2017/04/29] Bugfix
 % \item[v1.5.2 - 2017/04/29] Add version-number
-% \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add |\given| and |\toShow|
+% \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
+% |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
 % 
 % \end{description}
 % \pagebreak
@@ -206,9 +213,11 @@
 %
 % Loads required Packages
 %    \begin{macrocode}
-\RequirePackage{suffix} \RequirePackage{fancyhdr}
+\RequirePackage{suffix}
+\RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{translations}
+\RequirePackage{amssymb}
 %    \end{macrocode}
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
@@ -437,7 +446,22 @@
   \subsubproblem{\hwa@subsubproblemno)} }
 
 %    \end{macrocode}
-%
+% \begin{macro}{End of Proof}
+%    \begin{macrocode}
+\newcommand{\QED}{\begin{flushright}
+    \textit{QED}
+  \end{flushright}
+}
+\newcommand{\EOP}{\begin{flushright}
+    $\square$
+  \end{flushright}
+}
+\newcommand{\eop}{\begin{flushright}
+    $\blacksquare$
+  \end{flushright}
+}
+%    \end{macrocode}
+% \end{macro}
 % \textit{The End}
 %    \begin{macrocode}
 \endinput
