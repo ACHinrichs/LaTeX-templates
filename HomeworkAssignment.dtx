@@ -45,6 +45,7 @@
 \CodelineIndex
 \RecordChanges
 \usepackage[autostyle,german = guillemets]{csquotes}
+\usepackage{hyperref}
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
 \end{document}
@@ -132,10 +133,15 @@
 % will they increase a counter.  Nevertheless, hey will be shown
 % in the table of contents.\\
 %
-% \DescribeMacro{\solution} \DescribeMacro{\proof} They work like
+% \DescribeMacro{\solution} \DescribeMacro{\proof}
+% \DescribeMacro{\given} \DescribeMacro{\toShow} They work like
 % Paragraph, but do not take an argument, instead they print out
-% \enquote{L\"osung} and \enquote{Beweis} respective.  They are not
-% mentioned in the table of contents.
+% \enquote{L\"osung}, \enquote{Beweis} \enquote{Gegeben}, and
+% \enquote{Zu zeigen}, respectively\footnote{As of v1.6, Translations
+% are added, depending on the choosen Language, there may be an other
+% Text displayes.\\ See \ref{imp:translation} for all Translations}.
+% They are not mentioned in the table
+% of contents.
 % \subsubsection{\enquote*{better}
 % Sectioning\label{BETTER_SECTIONING_CMDS}}
 % The following commands are an augmented version of the
@@ -145,7 +151,7 @@
 % \DescribeMacro{newsubsubproblem} These commands require no argument,
 % and automatically create a numbered title.  The optional Argument is
 % the new value for the coresponding counter.
-%
+% 
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % \pagebreak
@@ -169,7 +175,7 @@
 %   contents. Type of numeration is now configurable.
 % \item[v1.5.1 - 2017/04/29] Bugfix
 % \item[v1.5.2 - 2017/04/29] Add version-number
-% \item[v1.6 - 2017/05/02] Add Translations (German and English)
+% \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add |\given| and |\toShow|
 % 
 % \end{description}
 % \pagebreak
@@ -179,6 +185,7 @@
 % into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
 % and sets the Version Loads the \texttt{article}, which is the
 % base-class.
+% \subsection{Packages & Options}
 %    \begin{macrocode}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
@@ -203,6 +210,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 %    \end{macrocode}
+% \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
 % is German
 %    \begin{macrocode}
@@ -230,6 +238,7 @@
 \DeclareTranslation{English}{zuZeigen}{To show}
 \DeclareTranslation{German}{gegeben}{Given}
 %    \end{macrocode}
+% \subsection{Headers & Footers}
 % Sets the page-headers.\\
 % All headers are cleread before they get any Text --- just to be sure.  \\
 % The headers look like specified above (\ref{HEADERS}). Also inserts
