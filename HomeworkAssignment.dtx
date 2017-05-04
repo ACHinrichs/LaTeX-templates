@@ -211,18 +211,24 @@
 \DeclareTranslationFallback{beweis}{Beweis}
 \DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslationFallback{abgabe}{Abgabe}
+\DeclareTranslationFallback{zuZeigen}{Zu zeigen}
+\DeclareTranslationFallback{gegeben}{Gegeben}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
 \DeclareTranslation{German}{beweis}{Beweis}
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
+\DeclareTranslation{German}{zuZeigen}{Zu zeigen:}
+\DeclareTranslation{German}{gegeben}{Gegeben}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
 \DeclareTranslation{English}{beweis}{Proof}
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
+\DeclareTranslation{English}{zuZeigen}{To show}
+\DeclareTranslation{German}{gegeben}{Given}
 %    \end{macrocode}
 % Sets the page-headers.\\
 % All headers are cleread before they get any Text --- just to be sure.  \\
@@ -386,6 +392,23 @@
   {\z@}%afterskip
   {\normalfont\bfseries}%style
   *{\GetTranslation{beweis}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+
+\newcommand{\toShow}[1][]{\@startsection{to show}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{\GetTranslation{zuZeigen}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+
+\newcommand{\given}[1][]{\@startsection{given}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont\bfseries}%style
+  *{\GetTranslation{gegeben}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+
 %    \end{macrocode}
 %
 % Defines \enquote*{better} sectioning commands. See
