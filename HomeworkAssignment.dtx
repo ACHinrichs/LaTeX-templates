@@ -200,6 +200,7 @@
 \DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
+\DeclareBoolOption[false]{listings}
 % Redefine the article-options
 %    \begin{macrocode}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
@@ -218,6 +219,16 @@
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 \RequirePackage{amssymb}
+
+\ifthenelse{\hwa@lstlisting}{
+  \RequirePackage{listings}
+  \lstset{
+    frame = single,
+    breaklines = true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+    basicstyle=\scriptsize
+  }
+}{}
 %    \end{macrocode}
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
