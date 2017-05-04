@@ -38,21 +38,36 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}
-\LoadClassWithOptions{article}
-[2014/09/29 v1.4h Standard LaTeX document class]
-
+\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6]
 \RequirePackage{kvoptions}
-\SetupKeyvalOptions{
-  family=hwa,
-  prefix=hwa@
-}
+\SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ }
 \DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
+\LoadClass{article}
 \RequirePackage{suffix} \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
+\RequirePackage{translations}
+\DeclareTranslationFallback{aufgabe}{Aufgabe}
+\DeclareTranslationFallback{loesung}{L\"osung}
+\DeclareTranslationFallback{beweis}{Beweis}
+\DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslationFallback{abgabe}{Abgabe}
+
+\DeclareTranslation{German}{aufgabe}{Aufgabe}
+\DeclareTranslation{German}{loesung}{L\"osung}
+\DeclareTranslation{German}{beweis}{Beweis}
+\DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslation{German}{abgabe}{Abgabe}
+
+\DeclareTranslation{English}{aufgabe}{Problem}
+\DeclareTranslation{English}{loesung}{Solution}
+\DeclareTranslation{English}{beweis}{Proof}
+\DeclareTranslation{English}{uebungsgruppe}{Tutorial}
+\DeclareTranslation{English}{abgabe}{Deadline}
 
 \fancypagestyle{firstpage}{
   %
@@ -65,7 +80,7 @@
   %
   \fancyhf{}
   % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ Abgabe:
+  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ \GetTranslation{abgabe}:
     \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
@@ -75,35 +90,22 @@
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
 \newcommand{\hwa@parseCounterStyle}[3]{
-  \ifthenelse{\equal{#1}{arabic}}{
-    \renewcommand{#2}{\arabic{#3}}
-  }{
-    \ifthenelse{\equal{#1}{roman}}{
-      \renewcommand{#2}{\roman{#3}}
-    }{
-      \ifthenelse{\equal{#1}{alph}}{
-        \renewcommand{#2}{\alph{#3}}
-      }{
-        \ifthenelse{\equal{#1}{Alph}}{
-          \renewcommand{#2}{\Alph{#3}}
-        }{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
           \ifthenelse{\equal{#1}{Roman}}{
-            \renewcommand{#2}{\Roman{#3}}
-          }{
-            \ClassError{HomeworkAssignment}{Invalid Value #1 for option Counter-Styling}{Possible Values are alph, arabic, Arabic, roman or Roman.}
-          }
-        }
-      }
-    }
-  }
-}
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{HomeworkAssignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-\newcommand{\hwa@kurs}{Kein Kurs}
+\newcommand{\hwa@kurs}{?\GetTranslation{subject}?}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
-\newcommand{\hwa@tutorium}{}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
 \newcommand{\hwa@abgabe}{\today}
@@ -114,7 +116,7 @@
   \begin{centering}
     \huge{\textbf{\hwa@kurs}} {\hrule height 2pt} \vspace{.25cm}
     \large
-    Abgabe: \hwa@abgabe\\
+    \GetTranslation{abgabe}: \hwa@abgabe\\
     \vspace{.5cm} \hrule \vspace{.25cm}
     \normalsize{\@author}\\
     \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
@@ -130,9 +132,7 @@
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{section}{#1}
-}
+  *{#1} \addcontentsline{toc}{section}{#1} }
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
@@ -140,9 +140,7 @@
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
   {\normalfont\large\bfseries}%style
-  *{#1}
-  \addcontentsline{toc}{subsection}{#1}
-}
+  *{#1} \addcontentsline{toc}{subsection}{#1} }
 
 \newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
   {3}%Level
@@ -150,8 +148,7 @@
   {-.5em}%beforeskip
   {.5em}%afterskip
   {\normalfont\bfseries}%style
-  *{#1}
-}
+  *{#1} }
 
 \newcommand{\solution}[1][]{\@startsection{solution}%Name
   {4}%Level
@@ -159,8 +156,7 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{L\"osung\ifthenelse{\equal{#1}{}} {} { #1}:~~ }
-}
+  *{\GetTranslation{loesung}\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
 
 \newcommand{\proof}[1][]{\@startsection{proof}%Name
   {4}%Level
@@ -168,15 +164,14 @@
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{Beweis\ifthenelse{\equal{#1} {} } {} { #1}:~~ }
-}
+  *{\GetTranslation{beweis}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{Aufgabe \hwa@problemno} }
+  \problem{\GetTranslation{aufgabe} \hwa@problemno} }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{Aufgabe \hwa@problemno{}.\hwa@subproblemno} }
+  \subproblem{\GetTranslation{Aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}

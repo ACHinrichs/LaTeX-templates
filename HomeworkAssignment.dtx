@@ -39,7 +39,6 @@
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6]
-%<class>\LoadClassWithOptions{article}[2014/09/29 v1.4h Standard LaTeX document class]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -181,10 +180,21 @@
 % and sets the Version Loads the \texttt{article}, which is the
 % base-class.
 %    \begin{macrocode}
-\RequirePackage{kvoptions} \SetupKeyvalOptions{ family=hwa,
-  prefix=hwa@ } \DeclareStringOption[arabic]{problemsty}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ }
+\DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
-\DeclareStringOption[roman]{subsubproblemsty} \ProcessKeyvalOptions*
+\DeclareStringOption[roman]{subsubproblemsty}
+% Redefine the article-options
+%    \begin{macrocode}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
+%    \end{macrocode}
+%
+% Processes the Options and loades article
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+\LoadClass{article}
 %    \end{macrocode}
 %
 % Loads required Packages
