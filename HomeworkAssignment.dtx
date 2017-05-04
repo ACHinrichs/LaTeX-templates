@@ -220,7 +220,7 @@
 \RequirePackage{translations}
 \RequirePackage{amssymb}
 
-\ifthenelse{\hwa@lstlisting}{
+\ifhwa@listings
   \RequirePackage{listings}
   \lstset{
     frame = single,
@@ -228,7 +228,8 @@
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
     basicstyle=\scriptsize
   }
-}{}
+\else
+\fi
 %    \end{macrocode}
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
@@ -450,7 +451,7 @@
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{\GetTranslation{Aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
+  \subproblem{\GetTranslation{aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
