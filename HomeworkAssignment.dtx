@@ -2,7 +2,7 @@
 %
 % Copyright (c) 2016 by Adrian C. Hinrichs
 %
-% This FIle may be distributed and/or modified under the condition of the below
+% This File may be distributed and/or modified under the condition of the below
 % license.
 %
 %
@@ -38,7 +38,7 @@
 \ProvidesFile{HomeworkAssignment.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6]
+%<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.2]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -70,7 +70,7 @@
 % \DoNotIndex{\newcommand,\newenvironment}
 % \GetFileInfo{HomeworkAssignment.cls}
 %
-% \renewcommand{\fileversion}{v1.5.2}
+% \renewcommand{\fileversion}{v1.6.1}
 % \renewcommand{\filedate}{$2017\backslash 04\backslash 30$}
 %
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
@@ -183,6 +183,7 @@
 % \item[v1.5.2 - 2017/04/29] Add version-number
 % \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
 % |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
+% \item[v1.6.2 - 2017/05/05] Bugfixes
 % 
 % \end{description}
 % \pagebreak
@@ -229,6 +230,7 @@
     basicstyle=\scriptsize
   }
 \else
+  \empty
 \fi
 %    \end{macrocode}
 % \subsection{Translations\label{imp:translation}}
@@ -248,7 +250,7 @@
 \DeclareTranslation{German}{beweis}{Beweis}
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
-\DeclareTranslation{German}{zuZeigen}{Zu zeigen:}
+\DeclareTranslation{German}{zuZeigen}{Zu zeigen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
@@ -257,7 +259,7 @@
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
-\DeclareTranslation{German}{gegeben}{Given}
+\DeclareTranslation{English}{gegeben}{Given}
 %    \end{macrocode}
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\

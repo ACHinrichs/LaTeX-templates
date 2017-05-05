@@ -38,7 +38,7 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6]
+\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.2]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -64,6 +64,7 @@
     basicstyle=\scriptsize
   }
 \else
+  \empty
 \fi
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
@@ -78,7 +79,7 @@
 \DeclareTranslation{German}{beweis}{Beweis}
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
-\DeclareTranslation{German}{zuZeigen}{Zu zeigen:}
+\DeclareTranslation{German}{zuZeigen}{Zu zeigen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
@@ -87,7 +88,7 @@
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
-\DeclareTranslation{German}{gegeben}{Given}
+\DeclareTranslation{English}{gegeben}{Given}
 
 \fancypagestyle{firstpage}{
   %
