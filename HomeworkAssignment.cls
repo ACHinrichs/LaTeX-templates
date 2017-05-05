@@ -38,7 +38,7 @@
 %% SOFTWARE.
 
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.2]
+\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.3]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -135,7 +135,7 @@
 
 \renewcommand{\maketitle} {
   \begin{centering}
-    \huge{\textbf{\hwa@kurs}} {\hrule height 2pt} \vspace{.25cm}
+    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt} \vspace{.25cm}
     \large
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \vspace{.5cm} \hrule \vspace{.25cm}
