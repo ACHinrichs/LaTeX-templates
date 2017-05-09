@@ -38,7 +38,7 @@
 \ProvidesFile{HomeworkAssignment.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.3]
+%<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.4]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -69,9 +69,9 @@
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 % \GetFileInfo{HomeworkAssignment.cls}
-%
-% \renewcommand{\fileversion}{v1.6.3}
-% \renewcommand{\filedate}{$2017\backslash 04\backslash 30$}
+% \fileversion
+% \renewcommand{\fileversion}{v1.6.4}
+% \renewcommand{\filedate}{$2017\backslash 05\backslash 09$}
 %
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
 % corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
@@ -154,6 +154,7 @@
 % the new value for the coresponding counter.
 %
 % \subsection{Useful Macros}
+% \subsubsection{Quod Erat Demunstarndum, End of Proof}
 % \DescribeMacro{\QED} \DescribeMacro{\EOP} \DescribeMacro{\eop}
 % Display a flushed-right \textit{QED}, $\square$, or $\blacksquare$,
 % respectively. |\qed| is not implemented, to keep compatibility to
@@ -184,6 +185,7 @@
 % \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
 % |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
 % \item[v1.6.3 - 2017/05/05] Bugfixes
+% \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line
 % 
 % \end{description}
 % \pagebreak
@@ -470,10 +472,7 @@
     $\square$
   \end{flushright}
 }
-\newcommand{\eop}{\begin{flushright}
-    $\blacksquare$
-  \end{flushright}
-}
+\newcommand{\eop}{\hfill$\blacksquare$}
 %    \end{macrocode}
 % \end{macro}
 % \textit{The End}
