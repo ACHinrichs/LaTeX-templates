@@ -36,9 +36,10 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-
+\def\fileversion{v2.0}
+\def\filedate{2017/05/13}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.3]
+\ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -46,26 +47,47 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{listings}
+\DeclareStringOption[v2]{design}
+\DeclareBoolOption[true]{twopage}
+\DeclareComplementaryOption{onepage}{twopage}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
+\ifhwa@twopage
+\PassOptionsToClass{twopage}{article}
+\else
+\PassOptionsToClass{onepage}{article}
+\fi
 \LoadClass{article}
 \RequirePackage{suffix}
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 \RequirePackage{amssymb}
-
 \ifhwa@listings
-  \RequirePackage{listings}
-  \lstset{
-    frame = single,
-    breaklines = true,
-    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-    basicstyle=\scriptsize
-  }
+\RequirePackage{listings}
+\lstset{
+  frame = single,
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\scriptsize
+}
 \else
-  \empty
+\empty
 \fi
+
+\ifthenelse{\equal{\hwa@design}{v2}}{
+  \RequirePackage{geometry}
+  \geometry{top=2cm, bottom=2cm, width=35em, headsep=14pt,hmarginratio={4:3}}
+}{
+  \ifthenelse{\equal{\hwa@design}{v1}}{
+    \empty
+  }{
+    \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+    is not known}{The option design takes an argument to set the
+    Pagestyle to the one of a previous version. Acceptable values are
+    'v1', or 'v2'}
+  }
+}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -223,10 +245,12 @@
     $\square$
   \end{flushright}
 }
-\newcommand{\eop}{\begin{flushright}
-    $\blacksquare$
+\newcommand{\eop}{\hfill$\blacksquare$}
+\newcommand{\QNED}{\begin{flushright}
+    $\triangle$
   \end{flushright}
 }
+\newcommand{\qned}{\hfill$\triangle$}
 \endinput
 %%
 %% End of file `HomeworkAssignment.cls'.

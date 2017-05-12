@@ -32,13 +32,14 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-
+\def\fileversion{v2.0}
+\def\filedate{2017/05/13}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{HomeworkAssignment}[2017/05/12 v1.7]
+%<class>\ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -68,10 +69,7 @@
 % brace \{ Vertical bar \| Right brace \} Tilde \~}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-% \GetFileInfo{HomeworkAssignment.cls}
-% \renewcommand{\fileversion}{v1.7}
-% \renewcommand{\filedate}{$2017\backslash 05\backslash 12$}
-%
+% 
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
 % corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
 % \filedate.}}
@@ -97,8 +95,15 @@
 % \texttt{Roman}, and \texttt{roman}. Standard values are:
 % \texttt{problemstyle=arabic, subproblemstyle=alph,
 % subsubproblemstyle=roman}.
+%
+% \DescribeMacro{design=<1>} Allows the User to select an older page-style,
+% for backwards compatibility.\\
+% Recognized values are |v1| and |v2|. Everytime a version
+% Changes the default look, a new possible value will be added.\\
+% Only set this if you really need to get an old look, \emph{older styles
+% are not going to be maintained!}
 % \subsection{Inherited options}
-% Because the class is inherited by Abstract, every Option that can be
+% Because the class is inherited by article, every Option that can be
 % passed to article, will be passed to article.
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
@@ -187,9 +192,10 @@
 % \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
 % |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
 % \item[v1.6.3 - 2017/05/05] Bugfixes
-% \item[v1.7 - 2017/05/09] Change |\eop| to be in the same line\\
-%   Add |\QNED|
-% 
+% \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line\\
+% \item[v1.7 - 2017/05/09] Add |\QNED|
+% \item[v2.0 - 2017/05/09] Change Margins, add Option to select older
+%   Page-Style  
 % \end{description}
 % \pagebreak
 % \section{Examples}
@@ -209,6 +215,9 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{listings}
+\DeclareStringOption[v2]{design}
+\DeclareBoolOption[true]{twopage}
+\DeclareComplementaryOption{onepage}{twopage}
 % Redefine the article-options
 %    \begin{macrocode}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
@@ -217,6 +226,11 @@
 % Processes the Options and loades article
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
+\ifhwa@twopage
+\PassOptionsToClass{twopage}{article}
+\else
+\PassOptionsToClass{onepage}{article}
+\fi
 \LoadClass{article}
 %    \end{macrocode}
 %
@@ -227,18 +241,32 @@
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 \RequirePackage{amssymb}
-
 \ifhwa@listings
-  \RequirePackage{listings}
-  \lstset{
-    frame = single,
-    breaklines = true,
-    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-    basicstyle=\scriptsize
-  }
+\RequirePackage{listings}
+\lstset{
+  frame = single,
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\scriptsize
+}
 \else
-  \empty
+\empty
 \fi
+
+% Make sure that this is the last Package loaded
+\ifthenelse{\equal{\hwa@design}{v2}}{
+  \RequirePackage{geometry}
+  \geometry{top=2cm, bottom=2cm, width=35em, headsep=14pt,hmarginratio={4:3}}
+}{
+  \ifthenelse{\equal{\hwa@design}{v1}}{
+    \empty
+  }{
+    \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+    is not known}{The option design takes an argument to set the
+    Pagestyle to the one of a previous version. Acceptable values are
+    'v1', or 'v2'}
+  }
+}
 %    \end{macrocode}
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
