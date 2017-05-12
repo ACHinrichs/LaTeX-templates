@@ -38,7 +38,7 @@
 \ProvidesFile{HomeworkAssignment.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.4]
+%<class>\ProvidesClass{HomeworkAssignment}[2017/05/12 v1.7]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -69,9 +69,8 @@
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 % \GetFileInfo{HomeworkAssignment.cls}
-% \fileversion
-% \renewcommand{\fileversion}{v1.6.4}
-% \renewcommand{\filedate}{$2017\backslash 05\backslash 09$}
+% \renewcommand{\fileversion}{v1.7}
+% \renewcommand{\filedate}{$2017\backslash 05\backslash 12$}
 %
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
 % corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
@@ -101,11 +100,6 @@
 % \subsection{Inherited options}
 % Because the class is inherited by Abstract, every Option that can be
 % passed to article, will be passed to article.
-% \subsection{\LaTeX Warning: Unused global option(s)}
-% Because the Options are handled via \texttt{kvoptions} and passed
-% directly to \texttt{article}, \LaTeX raises this warning. IMHO, the
-% Options are used and this warning can be ignored. Nevertheless I am
-% working on it.
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
@@ -140,7 +134,7 @@
 % \enquote{L\"osung}, \enquote{Beweis} \enquote{Gegeben}, and
 % \enquote{Zu zeigen}, respectively\footnote{As of v1.6, Translations
 % are added, depending on the choosen Language, there may be an other
-% Text displayes.\\ See \ref{imp:translation} for all Translations}.
+% Text displayed.\\ See \ref{imp:translation} for all Translations}.
 % They are not mentioned in the table
 % of contents.
 % \subsubsection{\enquote*{better}
@@ -154,13 +148,21 @@
 % the new value for the coresponding counter.
 %
 % \subsection{Useful Macros}
-% \subsubsection{Quod Erat Demunstarndum, End of Proof}
+% \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
 % \DescribeMacro{\QED} \DescribeMacro{\EOP} \DescribeMacro{\eop}
 % Display a flushed-right \textit{QED}, $\square$, or $\blacksquare$,
 % respectively. |\qed| is not implemented, to keep compatibility to
 % several Math-packages, which define the later.
+% \subsubsection{\textsc{Quod Non Erat Demunstarndum at iucundum est}}
+% \DescribeMacro{\QNED} \DescribeMacro{\qned}
+% Display a flushed-right $\triangle$. |\QNED| displays it in a new
+% line, |\qned| at the end of the same line.\\  In Mathematical proofs
+% this symbol is used to mark things, which we did not intend to
+% proof, but are interesting anyway.
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
+% 
+%
 % \pagebreak
 % \section{Development and support}
 %
@@ -169,7 +171,7 @@
 %   \url{https://github.com/ACHinrichs/LaTeX-templates}
 % \end{quote}
 % Please refer to that site for any bug report or development
-% information.
+% information. 
 %
 % \section{Changelog}
 % \begin{description}
@@ -185,10 +187,13 @@
 % \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
 % |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
 % \item[v1.6.3 - 2017/05/05] Bugfixes
-% \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line
+% \item[v1.7 - 2017/05/09] Change |\eop| to be in the same line\\
+%   Add |\QNED|
 % 
 % \end{description}
 % \pagebreak
+% \section{Examples}
+% For examples, pleas see the Git-Repo at \url{https://github.com/ACHinrichs/LaTeX-templates}
 % \section{Implementation}
 % The following part is verry boring, but I have not found a solution
 % to create a \texttt{.cls}--file without including the implemetation
@@ -473,6 +478,15 @@
   \end{flushright}
 }
 \newcommand{\eop}{\hfill$\blacksquare$}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{quod non erat demonstrandum at iucundum est}
+%    \begin{macrocode}
+\newcommand{\QNED}{\begin{flushright}
+    $\triangle$
+  \end{flushright}
+}
+\newcommand{\qned}{\hfill$\triangle$}
 %    \end{macrocode}
 % \end{macro}
 % \textit{The End}
