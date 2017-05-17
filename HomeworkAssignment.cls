@@ -48,14 +48,21 @@
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{listings}
 \DeclareStringOption[v2]{design}
-\DeclareBoolOption[true]{twopage}
-\DeclareComplementaryOption{onepage}{twopage}
+\DeclareBoolOption[true]{twoside}
+\DeclareComplementaryOption{oneside}{twoside}
+\DeclareBoolOption[true]{twocolumn}
+\DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
-\ifhwa@twopage
-\PassOptionsToClass{twopage}{article}
+\ifhwa@twoside
+\PassOptionsToClass{twoside}{article}
 \else
-\PassOptionsToClass{onepage}{article}
+\PassOptionsToClass{oneside}{article}
+\fi
+\ifhwa@twocolumn
+\PassOptionsToClass{twocolumn}{article}
+\else
+\PassOptionsToClass{onecolumn}{article}
 \fi
 \LoadClass{article}
 \RequirePackage{suffix}
@@ -77,7 +84,13 @@
 
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
-  \geometry{top=2cm, bottom=2cm, width=35em, headsep=14pt,hmarginratio={4:3}}
+  \ifhwa@twocolumn
+  \geometry{top=2cm, bottom=2cm, left=2cm,
+    headsep=14pt,hmarginratio={1:1}}
+  \else
+  \geometry{top=2cm, bottom=2cm, width=35em,
+    headsep=14pt,hmarginratio={4:3}}
+  \fi
 }{
   \ifthenelse{\equal{\hwa@design}{v1}}{
     \empty
@@ -117,14 +130,45 @@
   \fancyhf{}
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
-  \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
-  \fancyhead[L]{\hwa@tutorium} \fancyhead[R]{\@date } }
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyhead[L]{\hwa@tutorium}
+  \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   %
   \fancyhf{}
-  % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ \GetTranslation{abgabe}:
-    \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
+
+  \ifthenelse{\equal{\hwa@design}{v2}}{
+    \ifhwa@twoside % IF
+
+    \fancyhead[RO]{\@author}
+    \fancyhead[LO]{\hwa@kurs\\
+      \hwa@tutorium}
+    \fancyhead[LE]{\GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyfoot[RO,LE]{\thepage}
+
+    \else %ELSE
+
+    \fancyhead[R]{\hwa@kurs\\
+      \@author}
+    \fancyhead[L]{\hwa@tutorium\\
+      \GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyfoot[R]{\thepage}
+    \fi %ENDIF
+  }{
+    \ifthenelse{\equal{\hwa@design}{v1}}{
+      \fancyhead[RE,LO]{\@author}
+      \fancyhead[LE,RO]{\hwa@kurs\\
+        \GetTranslation{abgabe}: \hwa@abgabe}
+      \fancyfoot[RE,LO]{\thepage}
+    }{
+      \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+        is not known}{The option design takes an argument to set the
+        Pagestyle to the one of a previous version. Acceptable values are
+        'v1', or 'v2'}
+    }
+  }
+
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
 \AtBeginDocument{ \thispagestyle{firstpage}
@@ -156,14 +200,16 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 
 \renewcommand{\maketitle} {
-  \begin{centering}
-    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt} \vspace{.25cm}
-    \large
-    \GetTranslation{abgabe}: \hwa@abgabe\\
-    \vspace{.5cm} \hrule \vspace{.25cm}
-    \normalsize{\@author}\\
-    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
-  \end{centering}
+  \twocolumn[{%
+    \begin{centering}
+      \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
+      \vspace{.25cm} \large
+      \GetTranslation{abgabe}: \hwa@abgabe\\
+      \vspace{.5cm} \hrule \vspace{.25cm}
+      \normalsize{\@author}\\
+      \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+    \end{centering}
+  }]
 }
 \newcounter{problem} \setcounter{problem}{0}
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
