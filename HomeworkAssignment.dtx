@@ -50,6 +50,9 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{soul}
+
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
 \end{document}
@@ -212,14 +215,9 @@
 %   \caption{Field-Commands}
 %   \label{tbl:field-commands}
 % \end{table}\\
-% \newcommand{\GL}{\ensuremath{\text{GL}}}
-% \newcommand{\id}{\ensuremath{\text{id}}}
-% \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
-% \newcommand{\dx}{\:dx}
 % \DescribeMacro{Functions and Operators}
-% Output usefull Plaintext-Operators and Functions.\\
-% All, except |\dif{<1>}| print the \enquote*{themselve} as text,
-% |\diff{<1>}| outputs $ \diff{<1>} $.
+% Output usefull Plaintext-Operators and Functions.
+% See table \ref{tab:text-functions}.\\
 % \newcommand{\divides}{\ensuremath{\ |\ }}
 % \newcommand{\property}{\ensuremath{\ |\ }}
 % \newcommand{\Var}{\ensuremath{\text{Var}}}
@@ -228,12 +226,36 @@
 % \newcommand{\Comb}{\ensuremath{\text{Comb}}}
 % \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
 % \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-% \newcommand{\modulo}[2]{#1/\!\!#2\:}
 % \newcommand{\Pot}{\ensuremath{\text{Pot}}}
 % \newcommand{\Map}{\ensuremath{\text{Map}}}
 % \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 % \newcommand{\falls}{\text{\ falls}\ }
 % \newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
+% \newcommand{\GL}{\ensuremath{\text{GL}}}
+% \newcommand{\id}{\ensuremath{\text{id}}}
+% \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+% \newcommand{\dx}{\:dx}
+\begin{longtable}[h]{rl}
+    Command & Output \\
+    |\divides| and |property| & Prints a vertical Bar\\
+    |\Var| & $\Var$\\
+    |\Perm|& $\Perm$\\
+    |\Comb|& $\Comb$\\
+    |\MComb|& $\MComb$\\
+    |\Im| & $\Im$\\
+    |\Pot|& $\Pot$\\
+    |\Map|& $\Map$\\
+    |\Bin| & $\Bin$\\
+    |\GL| & $\GL$\\
+    |\id| & $\id$\\
+    |\dx|&$\dx$\\
+    |\excup|&$\excup$\\
+    |\dim[<1>]|&$\dim[<1>]$\\
+    |\diff{<1>}|&$\diff{<1>}$\\
+  \caption{Text-like Functions}
+  \label{tab:text-functions}
+\end{longtable}
+|\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In German, actual Translation may differ}
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % 
@@ -264,9 +286,11 @@
 % \item[v1.6.3 - 2017/05/05] Bugfixes
 % \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line\\
 % \item[v1.7 - 2017/05/09] Add |\QNED|
-% \item[v2.0 - 2017/05/09] Change Margins,\\
+% \item[v2.0 - 2017/05/20] Change Margins,\\
 %   Add Option to select older Page-Style, \\
 %   Change standardlayout to twocolumn and twoside\\
+%   \st{Steal} Use Macros by Alexander Bartolomey (See
+%   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %
 % \end{description}
 % \pagebreak
@@ -661,10 +685,7 @@
 \newcommand{\id}{\ensuremath{\text{id}}}
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\dx}{\:dx}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{Mathematical Functions}
-%    \begin{macrocode}
+
 \newcommand{\divides}{\ensuremath{\ |\ }}
 \newcommand{\property}{\ensuremath{\ |\ }}
 
@@ -675,7 +696,6 @@
 
 \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
 \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-\newcommand{\modulo}[2]{#1/\!\!#2\:}
 
 \newcommand{\Pot}{\ensuremath{\text{Pot}}}
 \newcommand{\Map}{\ensuremath{\text{Map}}}
