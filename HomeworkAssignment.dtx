@@ -178,7 +178,7 @@
 % GitHub:\url{https://github.com/occloxium}}
 % \texttt{amath}-Class\footnote{\texttt{Amath.sty} is part of Alexander
 % Bartolomey's Alphabet Classes:
-% \url{https://github.com/occloxium/AlphabetClasses}}
+% \url{https://github.com/occloxium/AlphabetClasses}}\\
 % \newcommand{\N}{\ensuremath{\mathbb{N}}}
 % \DescribeMacro{\N}
 % \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
@@ -192,11 +192,13 @@
 % \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % \DescribeMacro{\F}
 % \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
-% \DescribeMacro{\Primes}\footnote{Has to be |\Primes|, because |\P| creates \P}&$\Primes$&Set of all Primes\footnote{not a Field}
-% Defines a set of mathematical fields, which are verry usefull:
+% \DescribeMacro{\Primes}\footnote{Has to be |\Primes|, because |\P|
+% is already in use}\footnote{not a Field}
+% Defines a set of mathematical fields, which are verry usefull (see
+% Table \ref{tbl:field-commands})
 % \begin{table}[h]
 %   \centering
-%   \begin{tabular}{rll}
+%   \begin{tabular}{rll} 
 %       Command & Output & Description\\
 %     |\N|&$\N$&Natural Numbers\\
 %     |\Z|&$\Z$&Whole? Numbers\\
@@ -204,11 +206,20 @@
 %     |\R|&$\R$&Real Numbers\\
 %     |\C|&$\C$&Complex Numbers\\
 %     |\F|&$\F$&Prime-Fieled?\\
-%     |\Primes|\\
+%     |\Primes| &$\Primes$ & Set of all Primes\\
 %   \end{tabular}
 %   \caption{Field-Commands}
-% \end{table}
-% % \section{Pagestyle}
+%   \label{tbl:field-commands}
+% \end{table}\\
+% \newcommand{\GL}{\ensuremath{\text{GL}}}
+% \newcommand{\id}{\ensuremath{\text{id}}}
+% \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+% \newcommand{\dx}{\:dx}
+% \DescribeMacro{\GL}\DescribeMacro{\id}\DescribeMacro{\diff{<1>}}\DescribeMacro{\dx}
+% Output usefull Mathematical functions and Operators.\\
+% All, except |\dif{<1>}| print the \enquote*{themselve} as text,
+% |\diff{<1>}| outputs $\diff{<1>}}$.
+% \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % 
 %
