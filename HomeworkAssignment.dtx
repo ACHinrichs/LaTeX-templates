@@ -45,7 +45,8 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
-\usepackage[autostyle,german = guillemets]{csquotes}
+\usepackage[ngerman,english]{babel}
+\usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
 \usepackage{amssymb}
 \begin{document}
@@ -164,7 +165,50 @@
 % line, |\qned| at the end of the same line.\\  In Mathematical proofs
 % this symbol is used to mark things, which we did not intend to
 % proof, but are interesting anyway.
-% \section{Pagestyle}
+% \subsection{Stolen Goods}
+% \label{ALLES_NUR_GEKLAUT_EO-EO}
+% \begin{center}
+% \foreignblockquote{german}{Das ist alles nur geklaut}
+% \end{center}
+% \begin{flushright}
+%   \small{$\sim$Tobias K\"unzel}
+% \end{flushright}
+% These Commands are not mine, they are all stolen from Alexander
+% Bartolomey's\footnote{\enquote{Occloxium} on
+% GitHub:\url{https://github.com/occloxium}}
+% \texttt{amath}-Class\footnote{\texttt{Amath.sty} is part of Alexander
+% Bartolomey's Alphabet Classes:
+% \url{https://github.com/occloxium/AlphabetClasses}}
+% \newcommand{\N}{\ensuremath{\mathbb{N}}}
+% \DescribeMacro{\N}
+% \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+% \DescribeMacro{\Z}
+% \newcommand{\R}{\ensuremath{\mathbb{R}}}
+% \DescribeMacro{\R}
+% \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+% \DescribeMacro{\Q}
+% \newcommand{\C}{\ensuremath{\mathbb{C}}}
+% \DescribeMacro{\C}
+% \newcommand{\F}{\ensuremath{\mathbb{F}}}
+% \DescribeMacro{\F}
+% \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+% \DescribeMacro{\Primes}\footnote{Has to be |\Primes|, because |\P| creates \P}&$\Primes$&Set of all Primes\footnote{not a Field}
+% Defines a set of mathematical fields, which are verry usefull:
+% \begin{table}[h]
+%   \centering
+%   \begin{tabular}{rll}
+%       Command & Output & Description\\
+%     |\N|&$\N$&Natural Numbers\\
+%     |\Z|&$\Z$&Whole? Numbers\\
+%     |\Q|&$\Q$&Rational Numbers\\
+%     |\R|&$\R$&Real Numbers\\
+%     |\C|&$\C$&Complex Numbers\\
+%     |\F|&$\F$&Prime-Fieled?\\
+%     |\Primes|\\
+%   \end{tabular}
+%   \caption{Field-Commands}
+% \end{table}
+% % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % 
 %
@@ -294,6 +338,8 @@
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
+\DeclareTranslationFallback{falls}{falls}
+\DeclareTranslationFallback{Falls}{Falls}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -302,6 +348,8 @@
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
+\DeclareTranslation{German}{falls}{falls}
+\DeclareTranslation{German}{Falls}{Falls}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -310,6 +358,8 @@
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
 \DeclareTranslation{English}{gegeben}{Given}
+\DeclareTranslation{English}{falls}{if}
+\DeclareTranslation{English}{Falls}{If}
 %    \end{macrocode}
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
@@ -564,6 +614,62 @@
   \end{flushright}
 }
 \newcommand{\qned}{\hfill$\triangle$}
+%    \end{macrocode}
+% \end{macro}
+% The following Macros are all stolen (and adapted) from occloxium (see \ref{ALLES_NUR_GEKLAUT_EO-EO})
+% \begin{macro}{Math Common Set Symbols}
+%    \begin{macrocode}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+% The last one is mine
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{Mathematical Functions}
+%    \begin{macrocode}
+\newcommand{\GL}{\ensuremath{\text{GL}}}
+\newcommand{\id}{\ensuremath{\text{id}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\dx}{\:dx}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{Mathematical Functions}
+%    \begin{macrocode}
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\newcommand{\Var}{\ensuremath{\text{Var}}}
+\newcommand{\Perm}{\ensuremath{\text{Perm}}}
+\newcommand{\MComb}{\ensuremath{\text{MComb}}}
+\newcommand{\Comb}{\ensuremath{\text{Comb}}}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+\newcommand{\modulo}[2]{#1/\!\!#2\:}
+
+\newcommand{\Pot}{\ensuremath{\text{Pot}}}
+\newcommand{\Map}{\ensuremath{\text{Map}}}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+
+\newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
+\renewcommand{\char}{\ensuremath{\text{char}\ }}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{Math Big Quantors}
+%    \begin{macrocode}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 %    \end{macrocode}
 % \end{macro}
 % \textit{The End}
