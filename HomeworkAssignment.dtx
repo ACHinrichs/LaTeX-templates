@@ -33,7 +33,7 @@
 % SOFTWARE.
 % \fi
 \def\fileversion{v2.0}
-\def\filedate{2017/05/13}
+\def\filedate{2017/05/20}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -82,7 +82,7 @@
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
 % 
 % \maketitle
-% 
+% \tableofcontents
 % \section{Abstract}
 % This class provides a relative simple docuemnt--type for homework,
 % mainly created for assignments at the University This class is
@@ -107,6 +107,10 @@
 % Changes the default look, a new possible value will be added.\\
 % Only set this if you really need to get an old look, \emph{older styles
 % are not going to be maintained!}
+%
+% \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
+% usefull for Papers in Computer-Science and ;athematics. See
+% \ref{imp:tikz} for more informations
 % \subsection{Inherited options}
 % Because the class is inherited by article, every Option that can be
 % passed to article, will be passed to article.
@@ -196,7 +200,8 @@
 % \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % \DescribeMacro{\F}
 % \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
-% \DescribeMacro{\Primes}\footnote{Has to be |\Primes|, because |\P|
+% \DescribeMacro{\Primes}\footnote{Has to be
+% $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
 % is already in use}\footnote{not a Field}
 % Defines a set of mathematical fields, which are verry usefull (see
 % Table \ref{tbl:field-commands})
@@ -255,10 +260,11 @@
   \caption{Text-like Functions}
   \label{tab:text-functions}
 \end{longtable}
-|\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In German, actual Translation may differ}
+|\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
+  German, actual Translation may differ}
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
-% 
+% To do
 %
 % \pagebreak
 % \section{Development and support}
@@ -272,11 +278,11 @@
 %
 % \section{Changelog}
 % \begin{description}
-% \item[v1.0 - 2016/10/23] Intial
+% \item[v1.0 - 2016/10/23] Initial
 % \item[v1.1 - 2016/11/02] ...
 % \item[v1.2 - 2016/11/03] ...
 % \item[v1.3 - 2016/12/01] Provide the Class as .dtx file and more
-% \item[v1.4 - 2017/04/29] ``Minor'' bugfixes
+% \item[v1.4 - 2017/04/29] \enquote{Minor} bugfixes
 % \item[v1.5 - 2017/04/29] Problems are displayed in the table of
 %   contents. Type of numeration is now configurable.
 % \item[v1.5.1 - 2017/04/29] Bugfix
@@ -291,6 +297,7 @@
 %   Change standardlayout to twocolumn and twoside\\
 %   \st{Steal} Use Macros by Alexander Bartolomey (See
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
+%   Add some TikZ-Styles\\
 %
 % \end{description}
 % \pagebreak
@@ -316,6 +323,7 @@
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{tikz}
 % Redefine the article-options
 %    \begin{macrocode}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
@@ -356,7 +364,9 @@
 \else
 \empty
 \fi
-
+\ifhwa@tikz
+\RequirePackage{tikz}
+\fi
 % Make sure that this is the last Package loaded
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
@@ -378,6 +388,28 @@
   }
 }
 %    \end{macrocode}
+% \subsection{TikZ-Styles}
+% \label{imp:tikz}
+% If tikz is Wanted, load Usefull Styles
+%    \begin{macrocode}
+\ifhwa@tikz
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart
+}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
+\fi
+%    \end{macrocode}
+%
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
 % is German
