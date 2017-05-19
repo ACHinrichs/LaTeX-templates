@@ -48,7 +48,8 @@
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
-\usepackage{amssymb}
+\usepackage{amssymb} 
+\usepackage{amsmath}
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
 \end{document}
@@ -168,7 +169,7 @@
 % \subsection{Stolen Goods}
 % \label{ALLES_NUR_GEKLAUT_EO-EO}
 % \begin{center}
-% \foreignblockquote{german}{Das ist alles nur geklaut}
+% \foreignblockquote{ngerman}{Das ist alles nur geklaut}
 % \end{center}
 % \begin{flushright}
 %   \small{$\sim$Tobias K\"unzel}
@@ -215,10 +216,27 @@
 % \newcommand{\id}{\ensuremath{\text{id}}}
 % \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 % \newcommand{\dx}{\:dx}
-% \DescribeMacro{\GL}\DescribeMacro{\id}\DescribeMacro{\diff{<1>}}\DescribeMacro{\dx}
-% Output usefull Mathematical functions and Operators.\\
+% \DescribeMacro{Functions and Operators}
+% Output usefull Plaintext-Operators and Functions.\\
 % All, except |\dif{<1>}| print the \enquote*{themselve} as text,
-% |\diff{<1>}| outputs $\diff{<1>}}$.
+% |\diff{<1>}| outputs $ \diff{<1>} $.
+%
+%
+% \newcommand{\divides}{\ensuremath{\ |\ }}
+% \newcommand{\property}{\ensuremath{\ |\ }}
+% \newcommand{\Var}{\ensuremath{\text{Var}}}
+% \newcommand{\Perm}{\ensuremath{\text{Perm}}}
+% \newcommand{\MComb}{\ensuremath{\text{MComb}}}
+% \newcommand{\Comb}{\ensuremath{\text{Comb}}}
+% \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+% \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+% \newcommand{\modulo}[2]{#1/\!\!#2\:}
+% \newcommand{\Pot}{\ensuremath{\text{Pot}}}
+% \newcommand{\Map}{\ensuremath{\text{Map}}}
+% \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+% \newcommand{\falls}{\text{\ falls}\ }
+% \newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
+% \renewcommand{\char}{\ensuremath{\text{char}\ }}
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % 
@@ -305,13 +323,14 @@
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 \RequirePackage{amssymb}
+\RequirePackage{ams,ath}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
   frame = single,
   breaklines = true,
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-  basicstyle=\scriptsize
+  basicstyle=\scriptsize 
 }
 \else
 \empty
@@ -378,7 +397,7 @@
 % The headers look like specified above (\ref{HEADERS}). Also inserts
 % the Titlepage.
 %    \begin{macrocode}
-
+\makeatletter
 \fancypagestyle{firstpage}{
   %
   \fancyhf{}
