@@ -40,28 +40,6 @@
 \def\filedate{2017/05/20}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
-\begin{longtable}[h]{rl}
-    Command & Output \\
-    |\divides| and |property| & Prints a vertical Bar\\
-    |\Var| & $\Var$\\
-    |\Perm|& $\Perm$\\
-    |\Comb|& $\Comb$\\
-    |\MComb|& $\MComb$\\
-    |\Im| & $\Im$\\
-    |\Pot|& $\Pot$\\
-    |\Map|& $\Map$\\
-    |\Bin| & $\Bin$\\
-    |\GL| & $\GL$\\
-    |\id| & $\id$\\
-    |\dx|&$\dx$\\
-    |\excup|&$\excup$\\
-    |\dim[<1>]|&$\dim[<1>]$\\
-    |\diff{<1>}|&$\diff{<1>}$\\
-  \caption{Text-like Functions}
-  \label{tab:text-functions}
-\end{longtable}
-|\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
-  German, actual Translation may differ}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
