@@ -37,9 +37,31 @@
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
 \def\fileversion{v2.0}
-\def\filedate{2017/05/13}
+\def\filedate{2017/05/20}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
+\begin{longtable}[h]{rl}
+    Command & Output \\
+    |\divides| and |property| & Prints a vertical Bar\\
+    |\Var| & $\Var$\\
+    |\Perm|& $\Perm$\\
+    |\Comb|& $\Comb$\\
+    |\MComb|& $\MComb$\\
+    |\Im| & $\Im$\\
+    |\Pot|& $\Pot$\\
+    |\Map|& $\Map$\\
+    |\Bin| & $\Bin$\\
+    |\GL| & $\GL$\\
+    |\id| & $\id$\\
+    |\dx|&$\dx$\\
+    |\excup|&$\excup$\\
+    |\dim[<1>]|&$\dim[<1>]$\\
+    |\diff{<1>}|&$\diff{<1>}$\\
+  \caption{Text-like Functions}
+  \label{tab:text-functions}
+\end{longtable}
+|\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
+  German, actual Translation may differ}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -52,6 +74,7 @@
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{tikz}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
 \ifhwa@twoside
@@ -70,6 +93,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{translations}
 \RequirePackage{amssymb}
+\RequirePackage{ams,ath}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -81,7 +105,9 @@
 \else
 \empty
 \fi
-
+\ifhwa@tikz
+\RequirePackage{tikz}
+\fi
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
   \ifhwa@twocolumn
@@ -101,6 +127,22 @@
     'v1', or 'v2'}
   }
 }
+\ifhwa@tikz
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart
+}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
+\fi
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -108,6 +150,8 @@
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
+\DeclareTranslationFallback{falls}{falls}
+\DeclareTranslationFallback{Falls}{Falls}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -116,6 +160,8 @@
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
+\DeclareTranslation{German}{falls}{falls}
+\DeclareTranslation{German}{Falls}{Falls}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -124,7 +170,8 @@
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
 \DeclareTranslation{English}{gegeben}{Given}
-
+\DeclareTranslation{English}{falls}{if}
+\DeclareTranslation{English}{Falls}{If}
 \fancypagestyle{firstpage}{
   %
   \fancyhf{}
@@ -297,6 +344,43 @@
   \end{flushright}
 }
 \newcommand{\qned}{\hfill$\triangle$}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+\newcommand{\GL}{\ensuremath{\text{GL}}}
+\newcommand{\id}{\ensuremath{\text{id}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\dx}{\:dx}
+
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\newcommand{\Var}{\ensuremath{\text{Var}}}
+\newcommand{\Perm}{\ensuremath{\text{Perm}}}
+\newcommand{\MComb}{\ensuremath{\text{MComb}}}
+\newcommand{\Comb}{\ensuremath{\text{Comb}}}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+
+\newcommand{\Pot}{\ensuremath{\text{Pot}}}
+\newcommand{\Map}{\ensuremath{\text{Map}}}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+
+\newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \endinput
 %%
 %% End of file `HomeworkAssignment.cls'.
