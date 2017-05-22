@@ -37,7 +37,7 @@
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
 \def\fileversion{v2.0}
-\def\filedate{2017/05/20}
+\def\filedate{2017/05/21}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -70,8 +70,9 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
-\RequirePackage{ams,ath}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -85,7 +86,21 @@
 \fi
 \ifhwa@tikz
 \RequirePackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
 \fi
+ % Make sure that this is the last Package loaded
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
   \ifhwa@twocolumn
@@ -104,23 +119,7 @@
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
   }
-}
-\ifhwa@tikz
-\usetikzlibrary{shapes,arrows,positioning,decorations,
-  automata,backgrounds,petri,bending,
-  shapes.multipart
-}
-\tikzset{
-  treenode/.style = {shape=circle, rounded corners,
-    draw, align=center},
-  graynode/.style = {fill=gray},
-  normalnode/.style     = {treenode, font=\Large, bottom color=white},
-  array/.style = {rectangle split,
-    rectangle split horizontal,
-    rectangle split,
-    draw}
-}
-\fi
+}%    \end{macrocode}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}

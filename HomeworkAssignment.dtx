@@ -33,7 +33,7 @@
 % SOFTWARE.
 % \fi
 \def\fileversion{v2.0}
-\def\filedate{2017/05/20}
+\def\filedate{2017/05/21}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -292,7 +292,7 @@
 % \item[v1.6.3 - 2017/05/05] Bugfixes
 % \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line\\
 % \item[v1.7 - 2017/05/09] Add |\QNED|
-% \item[v2.0 - 2017/05/20] Change Margins,\\
+% \item[v2.0 - 2017/05/21] Change Margins,\\
 %   Add Option to select older Page-Style, \\
 %   Change standardlayout to twocolumn and twoside\\
 %   \st{Steal} Use Macros by Alexander Bartolomey (See
@@ -351,8 +351,9 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
-\RequirePackage{ams,ath}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -364,10 +365,32 @@
 \else
 \empty
 \fi
+%    \end{macrocode}
+% \subsection{TikZ-Styles}
+% \label{imp:tikz}
+% If tikz is Wanted, load Usefull Styles
+%    \begin{macrocode}
 \ifhwa@tikz
 \RequirePackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
 \fi
+%    \end{macrocode}
+% \subsection{Geometry}
 % Make sure that this is the last Package loaded
+%    \begin{macrocode}
+ % Make sure that this is the last Package loaded
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
   \ifhwa@twocolumn
@@ -386,29 +409,7 @@
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
   }
-}
-%    \end{macrocode}
-% \subsection{TikZ-Styles}
-% \label{imp:tikz}
-% If tikz is Wanted, load Usefull Styles
-%    \begin{macrocode}
-\ifhwa@tikz
-\usetikzlibrary{shapes,arrows,positioning,decorations,
-  automata,backgrounds,petri,bending,
-  shapes.multipart
-}
-\tikzset{
-  treenode/.style = {shape=circle, rounded corners,
-    draw, align=center},
-  graynode/.style = {fill=gray},
-  normalnode/.style     = {treenode, font=\Large, bottom color=white},
-  array/.style = {rectangle split,
-    rectangle split horizontal,
-    rectangle split,
-    draw}
-}
-\fi
-%    \end{macrocode}
+}%    \end{macrocode}
 %
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
