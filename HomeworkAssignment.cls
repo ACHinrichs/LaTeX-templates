@@ -37,7 +37,7 @@
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
 \def\fileversion{v2.0}
-\def\filedate{2017/05/21}
+\def\filedate{2017/05/23}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -321,6 +321,10 @@
   \end{flushright}
 }
 \newcommand{\qned}{\hfill$\triangle$}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}

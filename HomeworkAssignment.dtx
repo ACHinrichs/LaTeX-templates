@@ -33,7 +33,7 @@
 % SOFTWARE.
 % \fi
 \def\fileversion{v2.0}
-\def\filedate{2017/05/21}
+\def\filedate{2017/05/23}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -222,7 +222,7 @@
 % \end{table}\\
 % \DescribeMacro{Functions and Operators}
 % Output usefull Plaintext-Operators and Functions.
-% See table \ref{tab:text-functions}.\\
+% See table \ref{tab:text-functions}. Require Mathmode\\
 % \newcommand{\divides}{\ensuremath{\ |\ }}
 % \newcommand{\property}{\ensuremath{\ |\ }}
 % \newcommand{\Var}{\ensuremath{\text{Var}}}
@@ -262,6 +262,23 @@
 % \end{longtable}
 % |\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
 % German, actual Translation may differ}
+% \subsection{Rounding}
+% Require Mathmode
+% \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+% \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+% \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+% \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+% \begin{longtable}[H]{rll}
+%   Command & Output & Meaning\\
+%   |\floor{<1>}| & $\floor{<1>}$ & floor |<1>|\\
+%   |\ceil{<1>}| & $\ceil{<1>}$ & ceil |<1>|\\
+%   |\roundHU{<1>}| & $\roundHU{<1>}$ & Round |<1>| \enquote{half up}
+%   ($\floor{<1> + \frac{1}{2}}$)\\
+%   |\roundHD{<1>}| & $\roundHD{<1>}$ & Round |<1>| \enquote{half down}
+%   ($-\floor{<1> - \frac{1}{2}}$)\\
+%   \caption{Rounding Functions}
+%   \label{tab:rounding-functions}
+% \end{longtable}
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % To do
@@ -290,14 +307,15 @@
 % \item[v1.6 - 2017/05/02] Add Translations (German and English)\\ Add
 % |\given| and |\toShow|\\Add |\QED|, |\EOP|, and |\eop|
 % \item[v1.6.3 - 2017/05/05] Bugfixes
-% \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line\\
+% \item[v1.6.4 - 2017/05/09] Change |\eop| to be in the same line
 % \item[v1.7 - 2017/05/09] Add |\QNED|
-% \item[v2.0 - 2017/05/21] Change Margins,\\
+% \item[v2.0 - 2017/05/23] Change Margins,\\
 %   Add Option to select older Page-Style, \\
 %   Change standardlayout to twocolumn and twoside\\
 %   \st{Steal} Use Macros by Alexander Bartolomey (See
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %   Add some TikZ-Styles\\
+%   Add round functions
 %
 % \end{description}
 % \pagebreak
@@ -699,9 +717,19 @@
 \newcommand{\qned}{\hfill$\triangle$}
 %    \end{macrocode}
 % \end{macro}
-% The following Macros are all stolen (and adapted) from occloxium (see \ref{ALLES_NUR_GEKLAUT_EO-EO})
-% \begin{macro}{Math Common Set Symbols}
+% Rounding brakets
+% \begin{macro}{Round brakets}
 %    \begin{macrocode}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+%    \end{macrocode}
+% \end{macro}
+% The following Macros are all stolen (and adapted) from occloxium
+% (see \ref{ALLES_NUR_GEKLAUT_EO-EO})
+% \begin{macro}{Math Common Set Symbols}
+%    \begin{macrocode} 
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
