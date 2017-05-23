@@ -498,8 +498,6 @@
   
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
-\AtBeginDocument{ \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt} }
 %    \end{macrocode}
 % \subsection{Internal commands}
 % \subsubsection{Counter--Commands}
@@ -578,6 +576,8 @@
 %    \begin{macrocode}
 
 \renewcommand{\maketitle} {
+  \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt}
   \twocolumn[{%
     \begin{centering}
       \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}

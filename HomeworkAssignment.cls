@@ -88,7 +88,7 @@
 \RequirePackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,decorations,
   automata,backgrounds,petri,bending,
-  shapes.multipart
+  shapes.multipart}
 \tikzset{
   treenode/.style = {shape=circle, rounded corners,
     draw, align=center},
@@ -195,8 +195,6 @@
 
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
-\AtBeginDocument{ \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt} }
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
@@ -224,6 +222,8 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 
 \renewcommand{\maketitle} {
+  \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt}
   \twocolumn[{%
     \begin{centering}
       \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
