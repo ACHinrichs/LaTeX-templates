@@ -36,9 +36,10 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-
+\def\fileversion{v2.0}
+\def\filedate{2017/05/23}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[2017/05/02 v1.6.3]
+\ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -46,26 +47,79 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{listings}
+\DeclareStringOption[v2]{design}
+\DeclareBoolOption[true]{twoside}
+\DeclareComplementaryOption{oneside}{twoside}
+\DeclareBoolOption[true]{twocolumn}
+\DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{tikz}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
+\ifhwa@twoside
+\PassOptionsToClass{twoside}{article}
+\else
+\PassOptionsToClass{oneside}{article}
+\fi
+\ifhwa@twocolumn
+\PassOptionsToClass{twocolumn}{article}
+\else
+\PassOptionsToClass{onecolumn}{article}
+\fi
 \LoadClass{article}
 \RequirePackage{suffix}
 \RequirePackage{fancyhdr}
 \RequirePackage{ifthen}
 \RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
-
 \ifhwa@listings
-  \RequirePackage{listings}
-  \lstset{
-    frame = single,
-    breaklines = true,
-    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-    basicstyle=\scriptsize
-  }
+\RequirePackage{listings}
+\lstset{
+  frame = single,
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\scriptsize
+}
 \else
-  \empty
+\empty
 \fi
+\ifhwa@tikz
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
+\fi
+ % Make sure that this is the last Package loaded
+\ifthenelse{\equal{\hwa@design}{v2}}{
+  \RequirePackage{geometry}
+  \ifhwa@twocolumn
+  \geometry{top=2cm, bottom=2cm, left=2cm,
+    headsep=14pt,hmarginratio={1:1}}
+  \else
+  \geometry{top=2cm, bottom=2cm, width=35em,
+    headsep=14pt,hmarginratio={4:3}}
+  \fi
+}{
+  \ifthenelse{\equal{\hwa@design}{v1}}{
+    \empty
+  }{
+    \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+    is not known}{The option design takes an argument to set the
+    Pagestyle to the one of a previous version. Acceptable values are
+    'v1', or 'v2'}
+  }
+}%    \end{macrocode}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -73,6 +127,8 @@
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
+\DeclareTranslationFallback{falls}{falls}
+\DeclareTranslationFallback{Falls}{Falls}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -81,6 +137,8 @@
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
+\DeclareTranslation{German}{falls}{falls}
+\DeclareTranslation{German}{Falls}{Falls}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -89,24 +147,54 @@
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
 \DeclareTranslation{English}{gegeben}{Given}
-
+\DeclareTranslation{English}{falls}{if}
+\DeclareTranslation{English}{Falls}{If}
 \fancypagestyle{firstpage}{
   %
   \fancyhf{}
   % clear all six fields
   \renewcommand{\headrulewidth}{.7pt}
-  \renewcommand{\footrulewidth}{0pt} \fancyfoot[RE,LO]{\thepage}
-  \fancyhead[L]{\hwa@tutorium} \fancyhead[R]{\@date } }
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyhead[L]{\hwa@tutorium}
+  \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   %
   \fancyhf{}
-  % clear all six fields
-  \fancyhead[RE,LO]{\@author} \fancyhead[LE,RO]{\hwa@kurs\\ \GetTranslation{abgabe}:
-    \hwa@abgabe} \fancyfoot[RE,LO]{\thepage}
+
+  \ifthenelse{\equal{\hwa@design}{v2}}{
+    \ifhwa@twoside % IF
+
+    \fancyhead[RO]{\@author}
+    \fancyhead[LO]{\hwa@kurs\\
+      \hwa@tutorium}
+    \fancyhead[LE]{\GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyfoot[RO,LE]{\thepage}
+
+    \else %ELSE
+
+    \fancyhead[R]{\hwa@kurs\\
+      \@author}
+    \fancyhead[L]{\hwa@tutorium\\
+      \GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyfoot[R]{\thepage}
+    \fi %ENDIF
+  }{
+    \ifthenelse{\equal{\hwa@design}{v1}}{
+      \fancyhead[RE,LO]{\@author}
+      \fancyhead[LE,RO]{\hwa@kurs\\
+        \GetTranslation{abgabe}: \hwa@abgabe}
+      \fancyfoot[RE,LO]{\thepage}
+    }{
+      \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+        is not known}{The option design takes an argument to set the
+        Pagestyle to the one of a previous version. Acceptable values are
+        'v1', or 'v2'}
+    }
+  }
+
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
-\AtBeginDocument{ \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt} }
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
@@ -134,14 +222,18 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 
 \renewcommand{\maketitle} {
-  \begin{centering}
-    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt} \vspace{.25cm}
-    \large
-    \GetTranslation{abgabe}: \hwa@abgabe\\
-    \vspace{.5cm} \hrule \vspace{.25cm}
-    \normalsize{\@author}\\
-    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
-  \end{centering}
+  \thispagestyle{firstpage}
+  \setlength{\headheight}{25pt}
+  \twocolumn[{%
+    \begin{centering}
+      \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
+      \vspace{.25cm} \large
+      \GetTranslation{abgabe}: \hwa@abgabe\\
+      \vspace{.5cm} \hrule \vspace{.25cm}
+      \normalsize{\@author}\\
+      \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+    \end{centering}
+  }]
 }
 \newcounter{problem} \setcounter{problem}{0}
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
@@ -223,10 +315,53 @@
     $\square$
   \end{flushright}
 }
-\newcommand{\eop}{\begin{flushright}
-    $\blacksquare$
+\newcommand{\eop}{\hfill$\blacksquare$}
+\newcommand{\QNED}{\begin{flushright}
+    $\triangle$
   \end{flushright}
 }
+\newcommand{\qned}{\hfill$\triangle$}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+\newcommand{\GL}{\ensuremath{\text{GL}}}
+\newcommand{\id}{\ensuremath{\text{id}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\dx}{\:dx}
+
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\newcommand{\Var}{\ensuremath{\text{Var}}}
+\newcommand{\Perm}{\ensuremath{\text{Perm}}}
+\newcommand{\MComb}{\ensuremath{\text{MComb}}}
+\newcommand{\Comb}{\ensuremath{\text{Comb}}}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+
+\newcommand{\Pot}{\ensuremath{\text{Pot}}}
+\newcommand{\Map}{\ensuremath{\text{Map}}}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+
+\newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \endinput
 %%
 %% End of file `HomeworkAssignment.cls'.
