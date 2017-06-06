@@ -156,10 +156,12 @@
 % The following commands are an augmented version of the
 % \enquote{plain} commands.\
 %
-% \DescribeMacro{\newproblem} \DescribeMacro{\newsubproblem}
+% \DescribeMacro{\newproblem} \DescribeMacro{\newproblem*} \DescribeMacro{\newsubproblem}
 % \DescribeMacro{\newsubsubproblem} These commands require no argument,
 % and automatically create a numbered title.  The optional Argument is
-% the new value for the coresponding counter.
+% the new value for the coresponding counter.\\
+% Normally, |\newproblem| adds the new Created Problem to the
+% grading--table (see \ref{GRADING-TABLE}), |\newproblem*| does not do this.
 %
 % \subsection{Useful Macros}
 % \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
@@ -201,7 +203,7 @@
 % \DescribeMacro{\F}
 % \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 % \DescribeMacro{\Primes} 
-% Defines a set of mathematical fields, which are verry usefull (see
+% Defines a set of mathematical sets, which are verry usefull (see
 % Table \ref{tbl:field-commands})
 % \begin{table}[h]
 %   \centering
@@ -280,7 +282,7 @@
 %   \caption{Rounding Functions}
 %   \label{tab:rounding-functions}
 % \end{longtable}
-% \subsection{Grading Table}
+% \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
 % wouldn't it?\\
