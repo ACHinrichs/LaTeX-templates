@@ -213,13 +213,28 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+\edef\hwa@gradingtbl@aux@defs{}
+\newcommand{\hwa@gradingtbl@aux@lineOne}{}
+\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
+
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
 \newcommand{\addToGradingTbl}[1]{
-  \edef\hwa@gradingtbl@defs{\hwa@gradingtbl@defs|p{1cm}}
-  \appto{\hwa@gradingtbl@lineOne}{#1&}
-  \appto{\hwa@gradingtbl@lineTwo}{&}
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
+  \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
+}
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
 }
 \newcommand{\makeGradingTbl}{
   \begin{table}[hb]
@@ -265,7 +280,8 @@
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1} \addcontentsline{toc}{section}{#1} }
+  *{#1} \addcontentsline{toc}{section}{#1}
+}
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
@@ -315,10 +331,17 @@
   {\normalfont\bfseries}%style
   *{\GetTranslation{gegeben}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 
+\newcommand{\newproblemStar}[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+}
+
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
   \problem{\GetTranslation{aufgabe} \hwa@problemno}
-  \addToGradingTbl{\# \hwa@problemno} }
+
+  \addToGradingTbl{\# \hwa@problemno}
+}
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
