@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.0}
-\def\filedate{2017/05/23}
+\def\fileversion{v2.1a}
+\def\filedate{2017/05/30}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -84,6 +84,8 @@
 \else
 \empty
 \fi
+\RequirePackage{etoolbox}
+\RequirePackage{array}
 \ifhwa@tikz
 \RequirePackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,decorations,
@@ -211,6 +213,24 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+\edef\hwa@gradingtbl@defs{}
+\newcommand{\hwa@gradingtbl@lineOne}{}
+\newcommand{\hwa@gradingtbl@lineTwo}{}
+\newcommand{\addToGradingTbl}[1]{
+  \edef\hwa@gradingtbl@defs{\hwa@gradingtbl@defs|p{1cm}}
+  \appto{\hwa@gradingtbl@lineOne}{#1&}
+  \appto{\hwa@gradingtbl@lineTwo}{&}
+}
+\newcommand{\makeGradingTbl}{
+  \begin{table}[hb]
+    \centering
+    \Large
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$\\\hline
+    \hwa@gradingtbl@lineTwo          \\\hline
+    \endtabular
+  \end{table}
+  }
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?}
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
@@ -297,7 +317,8 @@
 
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno} }
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+  \addToGradingTbl{\# \hwa@problemno} }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}

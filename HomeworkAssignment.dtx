@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.0}
-\def\filedate{2017/05/23}
+\def\fileversion{v2.1a}
+\def\filedate{2017/05/30}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -316,6 +316,7 @@
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %   Add some TikZ-Styles\\
 %   Add round functions
+% \item[v2.1 - 2017/05/30] Add Grading-table
 %
 % \end{description}
 % \pagebreak
@@ -383,6 +384,8 @@
 \else
 \empty
 \fi
+\RequirePackage{etoolbox}
+\RequirePackage{array}
 %    \end{macrocode}
 % \subsection{TikZ-Styles}
 % \label{imp:tikz}
@@ -550,7 +553,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
 % \subsubsection{Counter--Commands
 % II\label{RE-DEF-COUNTER-CMDS-IMPLM}}
 % \begin{macro}{Counter--Style ParserCommands II}
@@ -560,6 +562,37 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{Grading-table}
+% \begin{macro}{\hwa@gradingtbl@...}
+%    \begin{macrocode}
+\edef\hwa@gradingtbl@defs{}
+\newcommand{\hwa@gradingtbl@lineOne}{}
+\newcommand{\hwa@gradingtbl@lineTwo}{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\addToGradingTbl}
+%    \begin{macrocode}
+\newcommand{\addToGradingTbl}[1]{
+  \edef\hwa@gradingtbl@defs{\hwa@gradingtbl@defs|p{1cm}}
+  \appto{\hwa@gradingtbl@lineOne}{#1&}
+  \appto{\hwa@gradingtbl@lineTwo}{&}
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\makeGradingTbl}
+%    \begin{macrocode}
+\newcommand{\makeGradingTbl}{
+  \begin{table}[hb]
+    \centering
+    \Large
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$\\\hline
+    \hwa@gradingtbl@lineTwo          \\\hline
+    \endtabular
+  \end{table}
+  }
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Commands}
@@ -684,7 +717,8 @@
 %    \begin{macrocode}
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno} }
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+  \addToGradingTbl{\# \hwa@problemno} }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
