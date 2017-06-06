@@ -331,16 +331,17 @@
   {\normalfont\bfseries}%style
   *{\GetTranslation{gegeben}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
 
-\newcommand{\newproblemStar}[1][]{\stepcounter{problem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
-}
 
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
   \problem{\GetTranslation{aufgabe} \hwa@problemno}
 
   \addToGradingTbl{\# \hwa@problemno}
+}
+
+\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
 }
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
