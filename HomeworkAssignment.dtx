@@ -173,7 +173,7 @@
 % line, |\qned| at the end of the same line.\\  In Mathematical proofs
 % this symbol is used to mark things, which we did not intend to
 % proof, but are interesting anyway.
-% \subsection{Stolen Goods}
+% \subsubsection{Stolen Goods}
 % \label{ALLES_NUR_GEKLAUT_EO-EO}
 % \begin{center}
 % \foreignblockquote{ngerman}{Das ist alles nur geklaut}
@@ -200,9 +200,7 @@
 % \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % \DescribeMacro{\F}
 % \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
-% \DescribeMacro{\Primes}\footnote{Has to be
-% $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
-% is already in use}\footnote{not a Field}
+% \DescribeMacro{\Primes} 
 % Defines a set of mathematical fields, which are verry usefull (see
 % Table \ref{tbl:field-commands})
 % \begin{table}[h]
@@ -215,11 +213,14 @@
 %     |\R|&$\R$&Real Numbers\\
 %     |\C|&$\C$&Complex Numbers\\
 %     |\F|&$\F$&Prime-Fieled?\\
-%     |\Primes| &$\Primes$ & Set of all Primes\\
+%     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
 %   \end{tabular}
 %   \caption{Field-Commands}
 %   \label{tbl:field-commands}
 % \end{table}\\
+% \footnotetext{Has to be
+% $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
+% is already in use}
 % \DescribeMacro{Functions and Operators}
 % Output usefull Plaintext-Operators and Functions.
 % See table \ref{tab:text-functions}. Require Mathmode\\
@@ -262,7 +263,7 @@
 % \end{longtable}
 % |\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
 % German, actual Translation may differ}
-% \subsection{Rounding}
+% \subsubsection{Rounding}
 % Require Mathmode
 % \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 % \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
@@ -279,6 +280,19 @@
 %   \caption{Rounding Functions}
 %   \label{tab:rounding-functions}
 % \end{longtable}
+% \subsection{Grading Table}
+% This Document-Class is still mainly designed for Homework, so
+% it would be nice, if there was a table to write Grades into,
+% wouldn't it?\\
+% 
+% \DescribeMacro{\addToGradingTable} Adds the given parameter
+% as an excercise to the Grading-Table. All Problems, created with
+% |\newproblem| are added automatically.
+%
+% \DescribeMacro{\makeGradingTable} Prints out the Table containig all
+% Defined exercises ($\neq$Problems). Like |\tableofcontent|, it needs a second run of
+% \LaTeX, until all are added.\\
+% See example documents fot output
 % \section{Pagestyle}
 % \subsection{Headers\label{HEADERS}}
 % To do
@@ -316,7 +330,8 @@
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %   Add some TikZ-Styles\\
 %   Add round functions
-% \item[v2.1 - 2017/05/30] Add Grading-table
+% \item[v2.1 - 2017/05/30] Add Grading-table\\
+%   Add |\newproblem*|
 %
 % \end{description}
 % \pagebreak
