@@ -332,8 +332,9 @@
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %   Add some TikZ-Styles\\
 %   Add round functions
-% \item[v2.1 - 2017/05/30] Add Grading-table\\
-%   Add |\newproblem*|
+% \item[v2.1 - 2017/06/07] Add Grading-table\\
+%   Add |\newproblem*|\\
+%   Change equation-numbering to uppercase roman
 %
 % \end{description}
 % \pagebreak
@@ -537,6 +538,13 @@
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
 %    \end{macrocode}
+% \section{Redefinition of existing Commands}
+% \begin{macro}
+%   Displays equation-numbers as upper-case roman numbers.
+%    \begin{macrocode}
+\renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Internal commands}
 % \subsubsection{Counter--Commands}
 % \begin{macro}{Counter--Commands}
