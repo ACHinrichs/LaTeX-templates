@@ -333,9 +333,7 @@
 
 
 \newcommand{\newproblem}[1][]{\stepcounter{problem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
-
+  \newproblem*[#1]
   \addToGradingTbl{\# \hwa@problemno}
 }
 
