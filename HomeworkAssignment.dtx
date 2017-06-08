@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.1a}
-\def\filedate{2017/05/30}
+\def\fileversion{v2.1c}
+\def\filedate{2017/06/08}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -608,7 +608,7 @@
 % \begin{macro}{\addToGradingTbl}
 %    \begin{macrocode}
 \newcommand{\addToGradingTbl}[1]{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}} 
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
   \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
 }
@@ -635,10 +635,10 @@
 \newcommand{\makeGradingTbl}{
   \begin{table}[hb]
     \centering
-    \Large
+    \large
     \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$\\\hline
-    \hwa@gradingtbl@lineTwo          \\\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$    \\\hline
+    \hwa@gradingtbl@lineTwo  \vspace{.15cm}~\\\hline
     \endtabular
   \end{table}
   }

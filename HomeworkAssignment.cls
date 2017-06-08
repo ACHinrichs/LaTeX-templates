@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.1a}
-\def\filedate{2017/05/30}
+\def\fileversion{v2.1c}
+\def\filedate{2017/06/08}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -197,6 +197,7 @@
 
   \renewcommand{\headrulewidth}{0.7pt}
   \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+\renewcommand{\theequation}{\Roman{equation}}
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
@@ -239,10 +240,10 @@
 \newcommand{\makeGradingTbl}{
   \begin{table}[hb]
     \centering
-    \Large
+    \large
     \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$\\\hline
-    \hwa@gradingtbl@lineTwo          \\\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$    \\\hline
+    \hwa@gradingtbl@lineTwo  \vpace{.15cm}~\\\hline
     \endtabular
   \end{table}
   }
