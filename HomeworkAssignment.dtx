@@ -766,7 +766,7 @@
 % informations.
 %    \begin{macrocode}
 
-\newcommand{\newproblem}[1][]{\stepcounter{problem}
+\newcommand{\newproblem}[1][]{
   \newproblem*[#1]
   \addToGradingTbl{\# \hwa@problemno}
 }
