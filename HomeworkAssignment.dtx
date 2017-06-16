@@ -605,9 +605,9 @@
 \newcommand{\hwa@gradingtbl@lineTwo}{}
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\addToGradingTbl}
+% \begin{macro}{\addToGradingTable}
 %    \begin{macrocode}
-\newcommand{\addToGradingTbl}[1]{
+\newcommand{\addToGradingTable}[1]{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}} 
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
   \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
@@ -630,9 +630,9 @@
 }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\makeGradingTbl}
+% \begin{macro}{\makeGradingTable}
 %    \begin{macrocode}
-\newcommand{\makeGradingTbl}{
+\newcommand{\makeGradingTable}{
   \begin{table}[hb]
     \centering
     \large
@@ -768,7 +768,7 @@
 
 \newcommand{\newproblem}[1][]{
   \newproblem*[#1]
-  \addToGradingTbl{\# \hwa@problemno}
+  \addToGradingTable{\# \hwa@problemno}
 }
 
 \WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
