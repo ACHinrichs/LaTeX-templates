@@ -37,7 +37,7 @@
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
 \def\fileversion{v2.1d}
-\def\filedate{2017/06/16}
+\def\filedate{2017/06/17}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -130,7 +130,8 @@
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
 \DeclareTranslationFallback{falls}{falls}
-\DeclareTranslationFallback{Falls}{Falls}
+\DeclareTranslationFallback{Annahme}{Annahme}
+\DeclareTranslationFallback{Angenommen-dass}{Anngenommen, dass}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -141,6 +142,8 @@
 \DeclareTranslation{German}{gegeben}{Gegeben}
 \DeclareTranslation{German}{falls}{falls}
 \DeclareTranslation{German}{Falls}{Falls}
+\DeclareTranslation{German}{Annahme}{Annahme}
+\DeclareTranslation{German}{Angenommen-dass}{Anngenommen, dass}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -151,6 +154,8 @@
 \DeclareTranslation{English}{gegeben}{Given}
 \DeclareTranslation{English}{falls}{if}
 \DeclareTranslation{English}{Falls}{If}
+\DeclareTranslation{English}{Annahme}{Assumption}
+\DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 \fancypagestyle{firstpage}{
   %
   \fancyhf{}
@@ -170,7 +175,10 @@
     \fancyhead[RO]{\@author}
     \fancyhead[LO]{\hwa@kurs\\
       \hwa@tutorium}
-    \fancyhead[LE]{\GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyhead[LE]{
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+      \GetTranslation{abgabe}: \hwa@abgabe
+    }
     \fancyfoot[RO,LE]{\thepage}
 
     \else %ELSE
@@ -178,10 +186,12 @@
     \fancyhead[R]{\hwa@kurs\\
       \@author}
     \fancyhead[L]{\hwa@tutorium\\
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe}
     \fancyfoot[R]{\thepage}
     \fi %ENDIF
   }{
+    %==== LEGACY CODE; DO NOT CHANGE ================================
     \ifthenelse{\equal{\hwa@design}{v1}}{
       \fancyhead[RE,LO]{\@author}
       \fancyhead[LE,RO]{\hwa@kurs\\
@@ -193,6 +203,7 @@
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
     }
+    %==== END OF LEGACY CODE ========================================
   }
 
   \renewcommand{\headrulewidth}{0.7pt}
@@ -253,6 +264,8 @@
 \newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
+\newcommand{\hwa@sheetTitle}{}
+\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
 \newcommand{\hwa@abgabe}{\today}
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
 \newcommand{\abgabe}[1]{\deadline{#1}}
@@ -264,6 +277,7 @@
     \begin{centering}
       \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
       \vspace{.25cm} \large
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe\\
       \vspace{.5cm} \hrule \vspace{.25cm}
       \normalsize{\@author}\\
@@ -300,7 +314,7 @@
   {\normalfont\bfseries}%style
   *{#1} }
 
-\newcommand{\keyword}[1][]{\@startsection{#1}%Name
+\newcommand{\keyword}[1]{\@startsection{#1}%Name
   {4}%Level
   {\parindent}%indent
   {-.1em}%beforeskip
@@ -316,6 +330,10 @@
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
 
 \newcommand{\newproblem}[1][]{

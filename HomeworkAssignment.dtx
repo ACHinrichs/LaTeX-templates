@@ -32,7 +32,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.1e}
+\def\fileversion{v2.2}
 \def\filedate{2017/06/17}
 % \iffalse
 %<*driver>
@@ -127,7 +127,10 @@
 %
 % \DescribeMacro{\deadline} \DescribeMacro{\abgabe} Sets the deadline
 % of the document.  Takes it as an argument.  Standard value is
-% |\today|.\\ |\abgabe| is deprecated\\ \
+% |\today|.\\ |\abgabe| is deprecated\\
+%
+% \DescribeMacro{\sheetTitle} Sets a descriptional Title of the Sheet,
+% will be written in the header of every page.\\
 % \subsubsection{Inherited from \texttt{article}}
 % \DescribeMacro{\author} Sets the author of the document.\\
 % \DescribeMacro{\date} Sets the date of the document.\\
@@ -337,12 +340,17 @@
 %   \ref{ALLES_NUR_GEKLAUT_EO-EO})\\
 %   Add some TikZ-Styles\\
 %   Add round functions
-% \item[v2.1 - Pending] Add Grading-table\\
+% \item[v2.2 - 2017/06/17] Add Grading-table\\
 %   Add |\keyword|, |\assumption|, and |\supposeThat|\\
 %   Add |\newproblem*|\\
+%   Add |\sheetTitle|\\
 %   Change equation-numbering to uppercase roman
 %
 % \end{description}
+% \paragraph{Note: }Since Version 2.0 the minor version of releases is always
+% even, the minor version of unstable versions is always odd. There
+% are no unstable patch--versions, instead unstable versions get an alphabetical
+% suffix.
 % \pagebreak
 % \section{Examples}
 % For examples, pleas see the Git-Repo at \url{https://github.com/ACHinrichs/LaTeX-templates}
