@@ -142,15 +142,23 @@
 % will they increase a counter.  Nevertheless, hey will be shown
 % in the table of contents.\\
 %
+% \DescribeMacro{\keyword\{\#1\}} Creates a new Paragraph ,which will
+% start with the Argument in Bold, followed by two non-breaking
+% spaces.\\
+% The following Macros make use of |\keyword|, so it is suggested to
+% use them instead.\\
+% 
 % \DescribeMacro{\solution} \DescribeMacro{\proof}
-% \DescribeMacro{\given} \DescribeMacro{\toShow} They work like
-% Paragraph, but do not take an argument, instead they print out
-% \enquote{L\"osung}, \enquote{Beweis} \enquote{Gegeben}, and
-% \enquote{Zu zeigen}, respectively\footnote{As of v1.6, Translations
-% are added, depending on the choosen Language, there may be an other
-% Text displayed.\\ See \ref{imp:translation} for all Translations}.
-% They are not mentioned in the table
-% of contents.
+% \DescribeMacro{\given} \DescribeMacro{\toShow}
+% \DescribeMacro{\assumption} \DescribeMacro{\supposeThat} They work like
+% |\keyword|, but take only an optional Argument print out
+% \enquote{Solution}, \enquote{Proof} \enquote{Given}, \enquote{To
+% show}, \enquote{Assumption}, and \enquote{Suppose that},
+% respectively \footnote{As of v1.6, Translations are added, depending
+% on the choosen Language, there may be an other Text displayed.\\ See
+% \ref{imp:translation} for all Translations}, via |\keyword|. If an
+% argument is passed, they print out this argument after the keyword. They
+% are not mentioned in the table of contents.
 % \subsubsection{\enquote*{better}
 % Sectioning\label{BETTER_SECTIONING_CMDS}}
 % The following commands are an augmented version of the
@@ -333,7 +341,7 @@
 %   Add some TikZ-Styles\\
 %   Add round functions
 % \item[v2.1 - Pending] Add Grading-table\\
-%   Add |\assumption| and |\supposeThat|\\
+%   Add |\keyword|, |\assumption|, and |\supposeThat|\\
 %   Add |\newproblem*|\\
 %   Change equation-numbering to uppercase roman
 %
@@ -733,7 +741,7 @@
   {\normalfont\bfseries}%style
   *{#1} }
 
-\newcommand{\keyword}[1][]{\@startsection{#1}%Name
+\newcommand{\keyword}[1]{\@startsection{#1}%Name
   {4}%Level
   {\parindent}%indent
   {-.1em}%beforeskip
