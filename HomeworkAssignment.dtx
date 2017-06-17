@@ -303,9 +303,6 @@
 % Defined exercises ($\neq$Problems). Like |\tableofcontent|, it needs a second run of
 % \LaTeX, until all are added.\\
 % See example documents fot output
-% \section{Pagestyle}
-% \subsection{Headers\label{HEADERS}}
-% To do
 % 
 % \pagebreak
 % \section{Development and support}
@@ -523,7 +520,10 @@
     \fancyhead[RO]{\@author}
     \fancyhead[LO]{\hwa@kurs\\
       \hwa@tutorium}
-    \fancyhead[LE]{\GetTranslation{abgabe}: \hwa@abgabe}
+    \fancyhead[LE]{
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+      \GetTranslation{abgabe}: \hwa@abgabe
+    }
     \fancyfoot[RO,LE]{\thepage}
 
     \else %ELSE
@@ -531,10 +531,12 @@
     \fancyhead[R]{\hwa@kurs\\
       \@author}
     \fancyhead[L]{\hwa@tutorium\\
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe}
     \fancyfoot[R]{\thepage}    
     \fi %ENDIF
   }{
+    %==== LEGACY CODE; DO NOT CHANGE ================================
     \ifthenelse{\equal{\hwa@design}{v1}}{
       \fancyhead[RE,LO]{\@author}
       \fancyhead[LE,RO]{\hwa@kurs\\
@@ -546,6 +548,7 @@
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
     }
+    %==== END OF LEGACY CODE ========================================
   }
   
   
@@ -677,6 +680,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\sheetTitle}
+%   Defines |\sheetTitle|.
+%    \begin{macrocode}
+\newcommand{\hwa@sheetTitle}{}
+\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\deadline}
 %   Defines |\deadline|. |\abgabe| equals |\deadline|
 %    \begin{macrocode}
@@ -696,6 +707,7 @@
     \begin{centering}
       \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
       \vspace{.25cm} \large
+      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe\\
       \vspace{.5cm} \hrule \vspace{.25cm}
       \normalsize{\@author}\\
