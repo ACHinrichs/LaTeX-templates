@@ -727,37 +727,22 @@
   {\normalfont\bfseries}%style
   *{#1} }
 
-\newcommand{\solution}[1][]{\@startsection{solution}%Name
+\newcommand{\keyword}[1][]{\@startsection{#1}%Name
   {4}%Level
   {\parindent}%indent
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{\GetTranslation{loesung}\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+  {#1:~~ }
+}
 
-\newcommand{\proof}[1][]{\@startsection{proof}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{beweis}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
-\newcommand{\toShow}[1][]{\@startsection{to show}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{zuZeigen}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
-\newcommand{\given}[1][]{\@startsection{given}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{gegeben}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
 %    \end{macrocode}
 %

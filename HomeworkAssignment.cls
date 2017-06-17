@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.1c}
-\def\filedate{2017/06/08}
+\def\fileversion{v2.1d}
+\def\filedate{2017/06/16}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -221,7 +221,7 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
-\newcommand{\addToGradingTbl}[1]{
+\newcommand{\addToGradingTable}[1]{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
   \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
@@ -237,13 +237,13 @@
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
   }
 }
-\newcommand{\makeGradingTbl}{
+\newcommand{\makeGradingTable}{
   \begin{table}[hb]
     \centering
     \large
     \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
     \hwa@gradingtbl@lineOne  $\Sigma$    \\\hline
-    \hwa@gradingtbl@lineTwo  \vpace{.15cm}~\\\hline
+    \hwa@gradingtbl@lineTwo  \vspace{.15cm}~\\\hline
     \endtabular
   \end{table}
   }
@@ -300,42 +300,27 @@
   {\normalfont\bfseries}%style
   *{#1} }
 
-\newcommand{\solution}[1][]{\@startsection{solution}%Name
+\newcommand{\keyword}[1][]{\@startsection{#1}%Name
   {4}%Level
   {\parindent}%indent
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  *{\GetTranslation{loesung}\ifthenelse{\equal{#1}{}} {} { #1}:~~ } }
+  {#1:~~ }
+}
 
-\newcommand{\proof}[1][]{\@startsection{proof}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{beweis}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
-\newcommand{\toShow}[1][]{\@startsection{to show}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{zuZeigen}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
-\newcommand{\given}[1][]{\@startsection{given}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont\bfseries}%style
-  *{\GetTranslation{gegeben}\ifthenelse{\equal{#1} {} } {} { #1}:~~ } }
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
 
-\newcommand{\newproblem}[1][]{\stepcounter{problem}
+\newcommand{\newproblem}[1][]{
   \newproblem*[#1]
-  \addToGradingTbl{\# \hwa@problemno}
+  \addToGradingTable{\# \hwa@problemno}
 }
 
 \WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
