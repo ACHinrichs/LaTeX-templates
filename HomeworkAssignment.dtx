@@ -462,7 +462,8 @@
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
 \DeclareTranslationFallback{falls}{falls}
-\DeclareTranslationFallback{Falls}{Falls}
+\DeclareTranslationFallback{Annahme}{Annahme}
+\DeclareTranslationFallback{Angenommen-dass}{Anngenommen, dass}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -473,6 +474,8 @@
 \DeclareTranslation{German}{gegeben}{Gegeben}
 \DeclareTranslation{German}{falls}{falls}
 \DeclareTranslation{German}{Falls}{Falls}
+\DeclareTranslation{German}{Annahme}{Annahme}
+\DeclareTranslation{German}{Angenommen-dass}{Anngenommen, dass}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -483,6 +486,8 @@
 \DeclareTranslation{English}{gegeben}{Given}
 \DeclareTranslation{English}{falls}{if}
 \DeclareTranslation{English}{Falls}{If}
+\DeclareTranslation{English}{Annahme}{Assumption}
+\DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 %    \end{macrocode}
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
@@ -743,6 +748,11 @@
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}}\ifthenelse{\equal{#1} {} } {} {~#1}}
 
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+
 
 %    \end{macrocode}
 %
