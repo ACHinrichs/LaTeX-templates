@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.2}
-\def\filedate{2017/06/17}
+\def\fileversion{v2.2.1}
+\def\filedate{2017/06/20}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -68,7 +68,7 @@
 \LoadClass{article}
 \RequirePackage{suffix}
 \RequirePackage{fancyhdr}
-\RequirePackage{ifthen}
+\RequirePackage{xifthen}
 \RequirePackage{translations}
 \PassOptionsToPackage{fleqn}{amsmath}
 \RequirePackage{amsmath}
@@ -314,27 +314,26 @@
   {\normalfont\bfseries}%style
   *{#1} }
 
-\newcommand{\keyword}[1]{\@startsection{#1}%Name
+\newcommand{\keyword}[1]{\@startsection{keyword}%Name
   {4}%Level
   {\parindent}%indent
   {-.1em}%beforeskip
   {\z@}%afterskip
   {\normalfont\bfseries}%style
-  {#1:~~ }
+  *{#1~~}
 }
 
-\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
 
-\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
 
-\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
 
-\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 
-\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}}\ifthenelse{\equal{#1} {} } {} {~#1}}
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
 
-\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}}\ifthenelse{\equal{#1} {} } {} {~#1}}
-
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
 
 \newcommand{\newproblem}[1][]{
   \newproblem*[#1]
