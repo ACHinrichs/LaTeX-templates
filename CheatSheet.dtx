@@ -1,0 +1,225 @@
+% \iffalse meta-comment
+%
+% Copyright (c) 2016 by Adrian C. Hinrichs
+%
+% This File may be distributed and/or modified under the condition of the below
+% license.
+%
+%
+% MIT License
+%
+%
+%
+% Copyright (c) 2017
+%
+%
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% \fi
+\def\fileversion{v0.1}
+\def\filedate{2017/06/23}
+% \iffalse
+%<*driver>
+\ProvidesFile{CheatSheet.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<class>\ProvidesClass{CheatSheet}[\filedate\space\fileversion]
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\usepackage[ngerman,english]{babel}
+\usepackage[autostyle,german=guillemets]{csquotes}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{soul}
+
+\begin{document}
+\DocInput{HomeworkAssignment.dtx}
+\end{document}
+%</driver> 
+% \fi
+% 
+% \CheckSum{0}
+% 
+% \CharacterTable {Upper-case
+% \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z Lower-case
+% \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z Digits
+% \0\1\2\3\4\5\6\7\8\9 Exclamation \!  Double quote \" Hash (number)
+% \# Dollar \$ Percent \% Ampersand \& Acute accent \' Left paren
+% \( Right paren \) Asterisk \* Plus \+ Comma \, Minus \- Point \.
+% Solidus \/ Colon \: Semicolon \; Less than \< Equals \= Greater than
+% \> Question mark \?
+% Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
+% brace \{ Vertical bar \| Right brace \} Tilde \~}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+% \title{The \textsf{CheatSheet} class\thanks{This document
+% corresponds to \textsf{CheatSheet}~\fileversion, dated~
+% \filedate.}}
+% \author{Adrian C Hinrichs \\
+% \texttt{adrian.hinrichs@rwth-aachen.de}}
+% 
+% \maketitle
+% \tableofcontents
+% \section{Abstract}
+% This Class provides a clean, multicolumn look.
+% \section{Options}
+% \subsection{Inherited options}
+% Because the class is inherited by article, every Option that can be
+% passed to article, will be passed to article.
+% \subsection{Own options}
+% Currently, there are no own options.
+% \section{Commands}
+% \subsection{Useful Macros}
+% \section{Development and support}
+% 
+% The class is developed at \emph{github}:
+% \begin{quote}
+%   \url{https://github.com/ACHinrichs/LaTeX-templates}
+% \end{quote}
+% Please refer to that site for any bug report or development
+% information. 
+%
+% \section{Changelog}
+% \begin{description}
+% \item[v0.0 - 2017/06/23] Initial
+% \end{description}
+% \paragraph{Note: }The minor version of stable versions is always
+% even, the minor version of unstable versions is always odd. There
+% are no unstable patch--versions, instead unstable versions get an alphabetical
+% suffix.
+% \pagebreak
+% \section{Examples}
+% For examples, pleas see the Git-Repo at
+% \url{https://github.com/ACHinrichs/LaTeX-templates} or my
+% CheatSheets at \url{https://github.com/ACHinrichs/CheatSheets}
+% \section{Implementation}
+% The following part is verry boring, but I have not found a solution
+% to create a \texttt{.cls}--file without including the implemetation
+% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
+% and sets the Version Loads the \texttt{article}, which is the
+% base-class.
+% \subsection{Packages \& Options}
+% \begin{macro}
+%   Set up kvoptions
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{ family=cs,
+  prefix=cs@ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Redefine the article-options
+%    \begin{macrocode}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
+%    \end{macrocode}
+%
+% Processes the Options and loades article
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+\LoadClass{article}
+%    \end{macrocode}
+%
+% Loads required Packages
+%    \begin{macrocode}
+\PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{fontenc}
+\PassOptionsToPackage{sfdefault}{AlegreyaSans}
+\RequirePackage{libertine}
+\RequirePackage{suffix}
+\RequirePackage{xifthen}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+\RequirePackage{xcolor}
+\definecolor{primaryColor}{cmyk}{1,.72,0,.38}
+
+\RequirePackage{listings}
+\lstset{
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\ttfamily\color{primaryColor}\scriptsize 
+}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+% \begin{macro}
+%   Turn off headers, pagenumbers, and sectionnumbers
+%    \begin{macrocode}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   \begin{macrocode}
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Geometry}
+% Make sure that this is the last Package loaded
+%    \begin{macrocode}
+%Make sure that this is the last Package loaded
+\RequirePackage{geometry}
+\geometry{top=1cm, bottom=1cm, left=1cm,
+  headsep=14pt,hmarginratio={1:1}}
+%
+% \subsection{Translations\label{imp:translation}}
+% Load translations, currently supports English and German, Fallback
+% is German
+%    \begin{macrocode}
+%    \end{macrocode}
+% \section{Redefinition of existing Commands}
+% \begin{macro}
+%   Displays equation-numbers as upper-case roman numbers.
+%    \begin{macrocode}
+\renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Colors Headings and math
+%    \begin{macrocode}
+\everymath\expandafter{\the\everymath \color{primaryColor}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[Sectioning]
+%   \begin{macrocode}
+\renewcommand{\section}{\hrule\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries\sffamily\color{primaryColor}}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\sffamily\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\sffamily}}
+%    \end{macrocode}
+% \end{macro}
+% \textit{The End}
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}
