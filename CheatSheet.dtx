@@ -1,4 +1,4 @@
-% \iffalse meta-comment
+s% \iffalse meta-comment
 %
 % Copyright (c) 2016 by Adrian C. Hinrichs
 %
@@ -201,6 +201,28 @@
 %   Colors Headings and math
 %    \begin{macrocode}
 \everymath\expandafter{\the\everymath \color{primaryColor}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[\maketitle]
+%    \begin{macrocode}
+\renewcommand{\title}[1]{
+  \def\thetitle{#1}
+}
+
+\renewcommand{\date}[1]{
+  \def\thedate{#1}
+}
+\renewcommand{\author}[1]{
+  \def\theauthor{#1}
+}
+
+\renewcommand{\maketitle}{
+  \begin{centering}
+    \color{primaryColor}\Large\textbf\sffamily\thetitle\\
+    \large\theauthor\\
+    \large\thedate\\
+  \end{centering}
+}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}[Sectioning]
