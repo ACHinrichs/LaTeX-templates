@@ -1,4 +1,4 @@
-s% \iffalse meta-comment
+% \iffalse meta-comment
 %
 % Copyright (c) 2016 by Adrian C. Hinrichs
 %
@@ -33,7 +33,7 @@ s% \iffalse meta-comment
 % SOFTWARE.
 % \fi
 \def\fileversion{v0.1}
-\def\filedate{2017/06/23}
+\def\filedate{2017/06/26}
 % \iffalse
 %<*driver>
 \ProvidesFile{CheatSheet.dtx}
@@ -156,6 +156,10 @@ s% \iffalse meta-comment
 
 \RequirePackage{xcolor}
 \definecolor{primaryColor}{cmyk}{1,.72,0,.38}
+\definecolor{secondaryColor}{named}{gray}
+
+\RequirePackage{mdframed}
+
 
 \RequirePackage{listings}
 \lstset{
@@ -217,11 +221,16 @@ s% \iffalse meta-comment
 }
 
 \renewcommand{\maketitle}{
-  \begin{centering}
-    \color{primaryColor}\Large\textbf\sffamily\thetitle\\
-    \large\theauthor\\
-    \large\thedate\\
-  \end{centering}
+  \begin{mdframed}[
+    linecolor=secondaryColor,linewidth=1pt,%
+    leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm
+    ]
+    {\color{primaryColor}\Large\textbf\sffamily\thetitle}\\
+    \normalsize\theauthor\\
+    \normalsize\thedate\\
+  \end{mdframed}
+  
+  {\color{secondaryColor} \rule{\linewidth}{1pt}}
 }
 %    \end{macrocode}
 % \end{macro}
