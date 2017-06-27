@@ -111,6 +111,9 @@
 % \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
 % usefull for Papers in Computer-Science and ;athematics. See
 % \ref{imp:tikz} for more informations
+%
+%
+% \DescribeMacro{fleqn} Passes |fleqn| to amsmath
 % \subsection{Inherited options}
 % Because the class is inherited by article, every Option that can be
 % passed to article, will be passed to article.
@@ -349,7 +352,7 @@
 %   Change equation-numbering to uppercase roman
 % \item[v2.2.1 - 2017/06/20] Fix error with commands like |\solution| \\
 %   and |\keyword|.
-% \item[v2.2.4 - 2017/06/27] Fixed math alignment, \\
+% \item[v2.3 - 2017/06/27] Fixed math alignment, \\
 %   Added option for flushed left equations, \\
 %   Updated amath port to use
 %
@@ -526,12 +529,11 @@
   \fancyhead[L]{\hwa@tutorium}
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
-  %
   \fancyhf{}
-
+  
   \ifthenelse{\equal{\hwa@design}{v2}}{
     \ifhwa@twoside % IF
-
+    
     \fancyhead[RO]{\@author}
     \fancyhead[LO]{\hwa@kurs\\
       \hwa@tutorium}
@@ -540,9 +542,9 @@
       \GetTranslation{abgabe}: \hwa@abgabe
     }
     \fancyfoot[RO,LE]{\thepage}
-
+    
     \else %ELSE
-
+    
     \fancyhead[R]{\hwa@kurs\\
       \@author}
     \fancyhead[L]{\hwa@tutorium\\
@@ -551,7 +553,7 @@
     \fancyfoot[R]{\thepage}
     \fi %ENDIF
   }{
-    %==== LEGACY CODE; DO NOT CHANGE ================================
+    % ==== LEGACY CODE; DO NOT CHANGE ================================
     \ifthenelse{\equal{\hwa@design}{v1}}{
       \fancyhead[RE,LO]{\@author}
       \fancyhead[LE,RO]{\hwa@kurs\\
@@ -563,12 +565,12 @@
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
     }
-    %==== END OF LEGACY CODE ========================================
+    % ==== END OF LEGACY CODE ========================================
   }
-
-
   \renewcommand{\headrulewidth}{0.7pt}
-  \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
 %    \end{macrocode}
 % \section{Redefinition of existing Commands}
 % \begin{macro}
@@ -623,10 +625,10 @@
 % \end{macro}
 % \subsubsection{Grading-table}
 % \begin{macro}{\hwa@gradingtbl@...}
-% Defines macros, which contents will be written to the AUX-File and
+% Defines macros whose contents will be written to the AUX-File and
 % read in the next run, and the usable commands. The later will
-% contain the information, but have to be defined incase the aux-file
-% does not exist
+% contain the information, but have to be defined (incase the aux-file
+% does not exist)
 %    \begin{macrocode}
 \edef\hwa@gradingtbl@aux@defs{}
 \newcommand{\hwa@gradingtbl@aux@lineOne}{}
