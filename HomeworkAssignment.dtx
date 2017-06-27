@@ -52,6 +52,21 @@
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{soul}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
 
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
@@ -219,48 +234,30 @@
 % \DescribeMacro{\Primes}
 % Defines a set of mathematical sets, which are verry usefull (see
 % Table \ref{tbl:field-commands})
-% \begin{table}[h]
-%   \centering
-%   \begin{tabular}{rll}
-%       Command & Output & Description\\
-%     |\N|&$\N$&Natural Numbers\\
-%     |\Z|&$\Z$&Whole Numbers\\
-%     |\Q|&$\Q$&Rational Numbers\\
-%     |\R|&$\R$&Real Numbers\\
-%     |\C|&$\C$&Complex Numbers\\
-%     |\F_n|&$\F_n$&Prime Field to base $n$\\
-%     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
-%   \end{tabular}
-%   \caption{Field-Commands}
+% \begin{longtable}[h]{rll}
+%   Command & Output & Description\\
+%   |\N|&$\N$&Natural Numbers\\
+%   |\Z|&$\Z$&Whole Numbers\\
+%   |\Q|&$\Q$&Rational Numbers\\
+%   |\R|&$\R$&Real Numbers\\
+%   |\C|&$\C$&Complex Numbers\\
+%   |\F_n|&$\F_n$&Prime Field to base $n$\\
+%   |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
+% \caption{Field-Commands}
 %   \label{tbl:field-commands}
-% \end{table}\\
+% \end{longtable}
 % \footnotetext{Has to be
 % $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
 % is already in use}
-% \DescribeMacro{Functions and Operators}
-% Output usefull Plaintext-Operators and Functions.
-% See table \ref{tab:text-functions}. Require Mathmode\\
-% \DeclareMathOperator{\GL}{GL}
-% \DeclareMathOperator{\id}{id}
-% \DeclareMathOperator{\Var}{Var}
-% \DeclareMathOperator{\Perm}{Perm}
-% \DeclareMathOperator{\MComb}{MComb}
-% \DeclareMathOperator{\Comb}{Comb}
-% \DeclareMathOperator{\Pot}{Pot}
-% \DeclareMathOperator{\Map}{Map}
-% \DeclareMathOperator{\Hom}{Hom}
-% \DeclareMathOperator{\Ker}{Ker}
-% \DeclareMathOperator{\Intpol}{Intpol}
-% \DeclareMathOperator{\Pol}{Pol}
-% \DeclareMathOperator{\Sol}{Sol}
-% \DeclareMathOperator{\Bin}{Bin}
-% \DeclareMathOperator{\charakteristik}{char}
 % \newcommand{\divides}{\ensuremath{\ |\ }}
 % \newcommand{\property}{\ensuremath{\ |\ }}
 % \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 % \newcommand{\falls}{\text{\ falls}\ }
 % \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 % \newcommand{\dx}{\:dx}
+% \DescribeMacro{Functions and Operators}
+% Output usefull Plaintext-Operators and Functions.
+% See table \ref{tab:text-functions}. Require Mathmode\\
 % \begin{longtable}[h]{rl}
 %   Command & Output \\
 %   |\divides| and |property| & Prints a vertical Bar\\
@@ -287,7 +284,7 @@
 % \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 % \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 % \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
-% \begin{longtable}[H]{rll}
+% \begin{longtable}[h]{rll}
 %   Command & Output & Meaning\\
 %   |\floor{<1>}| & $\floor{<1>}$ & floor |<1>|\\
 %   |\ceil{<1>}| & $\ceil{<1>}$ & ceil |<1>|\\
@@ -352,15 +349,35 @@
 %   Change equation-numbering to uppercase roman
 % \item[v2.2.1 - 2017/06/20] Fix error with commands like |\solution| \\
 %   and |\keyword|.
-% \item[v2.3 - 2017/06/27] Fixed math alignment, \\
-%   Added option for flushed left equations, \\
-%   Updated amath port to use
+% \item[v2.3 - 2017/06/27] Fix math alignment, \\
+%   Add option for flushed left equations, \\
+%   Update amath port to use
 %
 % \end{description}
-% \paragraph{Note: }Since Version 2.0 the minor version of releases is always
-% even, the minor version of unstable versions is always odd. There
-% are no unstable patch--versions, instead unstable versions get an alphabetical
-% suffix.
+% \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
+% applies:
+% \paragraph{Major Version} has to be increased, if
+% \begin{itemize}
+% \item there are changes, which create visible changes in the output
+%   of existing documents (except for bugfixes), or
+% \item a command is removed or changed in a way, that existing
+%   documents do not compile with the new version.
+% \end{itemize}
+% \paragraph{Minor Version} has to be increased, if
+% \begin{itemize}
+% \item new backwards compatible commands are introduced
+%   \begin{itemize}
+%   \item Bugfixes may be introduced too.
+%   \end{itemize}
+% \end{itemize}
+% The minor version of stable releases is always even, the minor
+% version of developtment versions is always odd. (0 counts as even). 
+% \paragraph{Patches} May be introduced on Stable Branch. With every
+% non-document-breaking bugfix, the patch--number has to be
+% incremented.\\
+% Because Fixing Bugs is a part of developtment, developtment-versions
+% to not have numeric patch--numbers, but alphabetic identifiers,
+% directly after the minor--version.
 % \pagebreak
 % \section{Examples}
 % For examples, pleas see the Git-Repo at \url{https://github.com/ACHinrichs/LaTeX-templates}

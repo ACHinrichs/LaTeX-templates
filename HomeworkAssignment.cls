@@ -6,29 +6,29 @@
 %%
 %% HomeworkAssignment.dtx  (with options: `class')
 %% Copyright (c) 2017 by Adrian C. Hinrichs
-%%
+%% 
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
-%%
-%%
+%% 
+%% 
 %% MIT License
-%%
-%%
-%%
+%% 
+%% 
+%% 
 %% Copyright (c) 2017
-%%
-%%
-%%
+%% 
+%% 
+%% 
 %% Permission is hereby granted, free of charge, to any person obtaining a copy
 %% of this software and associated documentation files (the "Software"), to deal
 %% in the Software without restriction, including without limitation the rights
 %% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 %% copies of the Software, and to permit persons to whom the Software is
 %% furnished to do so, subject to the following conditions:
-%%
+%% 
 %% The above copyright notice and this permission notice shall be included in all
 %% copies or substantial portions of the Software.
-%%
+%% 
 %% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 %% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 %% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.2.1}
-\def\filedate{2017/06/20}
+\def\fileversion{v2.3}
+\def\filedate{2017/06/27}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -53,7 +53,6 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{tikz}
-\DeclareBoolOption[true]{fleqn}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
 \ifhwa@twoside
@@ -71,15 +70,8 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xifthen}
 \RequirePackage{translations}
-% This needs to be done here instead, otherwise option for flushing equations
-% left is passed to a not yet loaded package
-% any mutation of the align environment will be flushed left by default.
-% If using LaTeX Syntax Display Math (e.g. \[\]) math will also get flushed left
-\ifhwa@fleqn
-\RequirePackage[fleqn]{amsmath}
-\else
+\PassOptionsToPackage{fleqn}{amsmath}
 \RequirePackage{amsmath}
-\fi
 \RequirePackage{amssymb}
 \ifhwa@listings
 \RequirePackage{listings}
@@ -174,7 +166,6 @@
   \fancyhead[L]{\hwa@tutorium}
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
-  %
   \fancyhf{}
 
   \ifthenelse{\equal{\hwa@design}{v2}}{
@@ -199,7 +190,7 @@
     \fancyfoot[R]{\thepage}
     \fi %ENDIF
   }{
-    %==== LEGACY CODE; DO NOT CHANGE ================================
+    % ==== LEGACY CODE; DO NOT CHANGE ================================
     \ifthenelse{\equal{\hwa@design}{v1}}{
       \fancyhead[RE,LO]{\@author}
       \fancyhead[LE,RO]{\hwa@kurs\\
@@ -211,11 +202,12 @@
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
     }
-    %==== END OF LEGACY CODE ========================================
+    % ==== END OF LEGACY CODE ========================================
   }
-
   \renewcommand{\headrulewidth}{0.7pt}
-  \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
@@ -386,6 +378,21 @@
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
 \newcommand{\GL}{\ensuremath{\text{GL}}}
 \newcommand{\id}{\ensuremath{\text{id}}}
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
@@ -394,22 +401,12 @@
 \newcommand{\divides}{\ensuremath{\ |\ }}
 \newcommand{\property}{\ensuremath{\ |\ }}
 
-\newcommand{\Var}{\ensuremath{\text{Var}}}
-\newcommand{\Perm}{\ensuremath{\text{Perm}}}
-\newcommand{\MComb}{\ensuremath{\text{MComb}}}
-\newcommand{\Comb}{\ensuremath{\text{Comb}}}
-
 \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
 \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-
-\newcommand{\Pot}{\ensuremath{\text{Pot}}}
-\newcommand{\Map}{\ensuremath{\text{Map}}}
 
 \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 
 \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
-
-\newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
 \let\oforall\forall
 \let\oexists\exists
 \renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
