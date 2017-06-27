@@ -6,29 +6,29 @@
 %%
 %% HomeworkAssignment.dtx  (with options: `class')
 %% Copyright (c) 2017 by Adrian C. Hinrichs
-%% 
+%%
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
-%% 
-%% 
+%%
+%%
 %% MIT License
-%% 
-%% 
-%% 
+%%
+%%
+%%
 %% Copyright (c) 2017
-%% 
-%% 
-%% 
+%%
+%%
+%%
 %% Permission is hereby granted, free of charge, to any person obtaining a copy
 %% of this software and associated documentation files (the "Software"), to deal
 %% in the Software without restriction, including without limitation the rights
 %% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 %% copies of the Software, and to permit persons to whom the Software is
 %% furnished to do so, subject to the following conditions:
-%% 
+%%
 %% The above copyright notice and this permission notice shall be included in all
 %% copies or substantial portions of the Software.
-%% 
+%%
 %% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 %% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 %% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -53,6 +53,7 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{tikz}
+\DeclareBoolOption[true]{fleqn}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
 \ifhwa@twoside
@@ -70,8 +71,15 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xifthen}
 \RequirePackage{translations}
-\PassOptionsToPackage{fleqn}{amsmath}
+% This needs to be done here instead, otherwise option for flushing equations
+% left is passed to a not yet loaded package
+% any mutation of the align environment will be flushed left by default.
+% If using LaTeX Syntax Display Math (e.g. \[\]) math will also get flushed left
+\ifhwa@fleqn
+\RequirePackage[fleqn]{amsmath}
+\else
 \RequirePackage{amsmath}
+\fi
 \RequirePackage{amssymb}
 \ifhwa@listings
 \RequirePackage{listings}

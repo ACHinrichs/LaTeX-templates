@@ -20,7 +20,7 @@
 % to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 % copies of the Software, and to permit persons to whom the Software is
 % furnished to do so, subject to the following conditions:
-% 
+%
 % The above copyright notice and this permission notice shall be included in all
 % copies or substantial portions of the Software.
 %
@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.2.1}
-\def\filedate{2017/06/20}
+\def\fileversion{v2.3}
+\def\filedate{2017/06/27}
 % \iffalse
 %<*driver>
 \ProvidesFile{HomeworkAssignment.dtx}
@@ -56,11 +56,11 @@
 \begin{document}
 \DocInput{HomeworkAssignment.dtx}
 \end{document}
-%</driver> 
+%</driver>
 % \fi
-% 
+%
 % \CheckSum{0}
-% 
+%
 % \CharacterTable {Upper-case
 % \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z Lower-case
 % \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z Digits
@@ -74,13 +74,13 @@
 % brace \{ Vertical bar \| Right brace \} Tilde \~}
 %
 % \DoNotIndex{\newcommand,\newenvironment}
-% 
+%
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
 % corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
 % \filedate.}}
 % \author{Adrian C Hinrichs \\
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
-% 
+%
 % \maketitle
 % \tableofcontents
 % \section{Abstract}
@@ -111,6 +111,9 @@
 % \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
 % usefull for Papers in Computer-Science and ;athematics. See
 % \ref{imp:tikz} for more informations
+%
+%
+% \DescribeMacro{fleqn} Passes |fleqn| to amsmath
 % \subsection{Inherited options}
 % Because the class is inherited by article, every Option that can be
 % passed to article, will be passed to article.
@@ -150,7 +153,7 @@
 % spaces.\\
 % The following Macros make use of |\keyword|, so it is suggested to
 % use them instead.\\
-% 
+%
 % \DescribeMacro{\solution} \DescribeMacro{\proof}
 % \DescribeMacro{\given} \DescribeMacro{\toShow}
 % \DescribeMacro{\assumption} \DescribeMacro{\supposeThat} They work like
@@ -197,7 +200,7 @@
 % These Commands are not mine, they are all stolen from Alexander
 % Bartolomey's\footnote{\enquote{Occloxium} on
 % GitHub:\url{https://github.com/occloxium}}
-% \texttt{amath}-Class\footnote{\texttt{Amath.sty} is part of Alexander
+% \texttt{amath}-Class\footnote{\texttt{amath.sty} is part of Alexander
 % Bartolomey's Alphabet Classes:
 % \url{https://github.com/occloxium/AlphabetClasses}}\\
 % \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -213,19 +216,19 @@
 % \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % \DescribeMacro{\F}
 % \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
-% \DescribeMacro{\Primes} 
+% \DescribeMacro{\Primes}
 % Defines a set of mathematical sets, which are verry usefull (see
 % Table \ref{tbl:field-commands})
 % \begin{table}[h]
 %   \centering
-%   \begin{tabular}{rll} 
+%   \begin{tabular}{rll}
 %       Command & Output & Description\\
 %     |\N|&$\N$&Natural Numbers\\
-%     |\Z|&$\Z$&Whole? Numbers\\
+%     |\Z|&$\Z$&Whole Numbers\\
 %     |\Q|&$\Q$&Rational Numbers\\
 %     |\R|&$\R$&Real Numbers\\
 %     |\C|&$\C$&Complex Numbers\\
-%     |\F|&$\F$&Prime-Fieled?\\
+%     |\F_n|&$\F_n$&Prime Field to base $n$\\
 %     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
 %   \end{tabular}
 %   \caption{Field-Commands}
@@ -237,21 +240,25 @@
 % \DescribeMacro{Functions and Operators}
 % Output usefull Plaintext-Operators and Functions.
 % See table \ref{tab:text-functions}. Require Mathmode\\
+% \DeclareMathOperator{\GL}{GL}
+% \DeclareMathOperator{\id}{id}
+% \DeclareMathOperator{\Var}{Var}
+% \DeclareMathOperator{\Perm}{Perm}
+% \DeclareMathOperator{\MComb}{MComb}
+% \DeclareMathOperator{\Comb}{Comb}
+% \DeclareMathOperator{\Pot}{Pot}
+% \DeclareMathOperator{\Map}{Map}
+% \DeclareMathOperator{\Hom}{Hom}
+% \DeclareMathOperator{\Ker}{Ker}
+% \DeclareMathOperator{\Intpol}{Intpol}
+% \DeclareMathOperator{\Pol}{Pol}
+% \DeclareMathOperator{\Sol}{Sol}
+% \DeclareMathOperator{\Bin}{Bin}
+% \DeclareMathOperator{\charakteristik}{char}
 % \newcommand{\divides}{\ensuremath{\ |\ }}
 % \newcommand{\property}{\ensuremath{\ |\ }}
-% \newcommand{\Var}{\ensuremath{\text{Var}}}
-% \newcommand{\Perm}{\ensuremath{\text{Perm}}}
-% \newcommand{\MComb}{\ensuremath{\text{MComb}}}
-% \newcommand{\Comb}{\ensuremath{\text{Comb}}}
-% \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
-% \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-% \newcommand{\Pot}{\ensuremath{\text{Pot}}}
-% \newcommand{\Map}{\ensuremath{\text{Map}}}
 % \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 % \newcommand{\falls}{\text{\ falls}\ }
-% \newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
-% \newcommand{\GL}{\ensuremath{\text{GL}}}
-% \newcommand{\id}{\ensuremath{\text{id}}}
 % \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 % \newcommand{\dx}{\:dx}
 % \begin{longtable}[h]{rl}
@@ -261,7 +268,6 @@
 %   |\Perm|& $\Perm$\\
 %   |\Comb|& $\Comb$\\
 %   |\MComb|& $\MComb$\\
-%   |\Im| & $\Im$\\
 %   |\Pot|& $\Pot$\\
 %   |\Map|& $\Map$\\
 %   |\Bin| & $\Bin$\\
@@ -269,7 +275,6 @@
 %   |\id| & $\id$\\
 %   |\dx|&$\dx$\\
 %   |\excup|&$\excup$\\
-%   |\dim[<1>]|&$\dim[<1>]$\\
 %   |\diff{<1>}|&$\diff{<1>}$\\
 %   \caption{Text-like Functions}
 %   \label{tab:text-functions}
@@ -297,7 +302,7 @@
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
 % wouldn't it?\\
-% 
+%
 % \DescribeMacro{\addToGradingTable} Adds the given parameter
 % as an excercise to the Grading-Table. All Problems, created with
 % |\newproblem| are added automatically.
@@ -306,16 +311,16 @@
 % Defined exercises ($\neq$Problems). Like |\tableofcontent|, it needs a second run of
 % \LaTeX, until all are added.\\
 % See example documents fot output
-% 
+%
 % \pagebreak
 % \section{Development and support}
-% 
-% The package is developed at \emph{github}:
+%
+% The package is developed at \emph{GitHub}:
 % \begin{quote}
 %   \url{https://github.com/ACHinrichs/LaTeX-templates}
 % \end{quote}
 % Please refer to that site for any bug report or development
-% information. 
+% information.
 %
 % \section{Changelog}
 % \begin{description}
@@ -345,8 +350,11 @@
 %   Add |\newproblem*|\\
 %   Add |\sheetTitle|\\
 %   Change equation-numbering to uppercase roman
-% \item[v2.2.1 - 2017/06/20] Fix error with commands like |\solution|
-% and |\keyword|.
+% \item[v2.2.1 - 2017/06/20] Fix error with commands like |\solution| \\
+%   and |\keyword|.
+% \item[v2.3 - 2017/06/27] Fixed math alignment, \\
+%   Added option for flushed left equations, \\
+%   Updated amath port to use
 %
 % \end{description}
 % \paragraph{Note: }Since Version 2.0 the minor version of releases is always
@@ -413,7 +421,7 @@
   frame = single,
   breaklines = true,
   postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-  basicstyle=\scriptsize 
+  basicstyle=\scriptsize
 }
 \else
 \empty
@@ -521,11 +529,10 @@
   \fancyhead[L]{\hwa@tutorium}
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
-  % 
   \fancyhf{}
-
+  
   \ifthenelse{\equal{\hwa@design}{v2}}{
-    \ifhwa@twoside % IF 
+    \ifhwa@twoside % IF
     
     \fancyhead[RO]{\@author}
     \fancyhead[LO]{\hwa@kurs\\
@@ -535,7 +542,7 @@
       \GetTranslation{abgabe}: \hwa@abgabe
     }
     \fancyfoot[RO,LE]{\thepage}
-
+    
     \else %ELSE
     
     \fancyhead[R]{\hwa@kurs\\
@@ -543,10 +550,10 @@
     \fancyhead[L]{\hwa@tutorium\\
       \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe}
-    \fancyfoot[R]{\thepage}    
+    \fancyfoot[R]{\thepage}
     \fi %ENDIF
   }{
-    %==== LEGACY CODE; DO NOT CHANGE ================================
+    % ==== LEGACY CODE; DO NOT CHANGE ================================
     \ifthenelse{\equal{\hwa@design}{v1}}{
       \fancyhead[RE,LO]{\@author}
       \fancyhead[LE,RO]{\hwa@kurs\\
@@ -558,12 +565,12 @@
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
     }
-    %==== END OF LEGACY CODE ========================================
+    % ==== END OF LEGACY CODE ========================================
   }
-  
-  
   \renewcommand{\headrulewidth}{0.7pt}
-  \renewcommand{\footrulewidth}{0pt} } \pagestyle{followingpage}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
 %    \end{macrocode}
 % \section{Redefinition of existing Commands}
 % \begin{macro}
@@ -618,10 +625,10 @@
 % \end{macro}
 % \subsubsection{Grading-table}
 % \begin{macro}{\hwa@gradingtbl@...}
-% Defines macros, which contents will be written to the AUX-File and
+% Defines macros whose contents will be written to the AUX-File and
 % read in the next run, and the usable commands. The later will
-% contain the information, but have to be defined incase the aux-file
-% does not exist
+% contain the information, but have to be defined (incase the aux-file
+% does not exist)
 %    \begin{macrocode}
 \edef\hwa@gradingtbl@aux@defs{}
 \newcommand{\hwa@gradingtbl@aux@lineOne}{}
@@ -635,7 +642,7 @@
 % \begin{macro}{\addToGradingTable}
 %    \begin{macrocode}
 \newcommand{\addToGradingTable}[1]{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}} 
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
   \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
 }
@@ -844,7 +851,7 @@
 % The following Macros are all stolen (and adapted) from occloxium
 % (see \ref{ALLES_NUR_GEKLAUT_EO-EO})
 % \begin{macro}{Math Common Set Symbols}
-%    \begin{macrocode} 
+%    \begin{macrocode}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
@@ -857,6 +864,21 @@
 % \end{macro}
 % \begin{macro}{Mathematical Functions}
 %    \begin{macrocode}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char} 
 \newcommand{\GL}{\ensuremath{\text{GL}}}
 \newcommand{\id}{\ensuremath{\text{id}}}
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
@@ -865,22 +887,12 @@
 \newcommand{\divides}{\ensuremath{\ |\ }}
 \newcommand{\property}{\ensuremath{\ |\ }}
 
-\newcommand{\Var}{\ensuremath{\text{Var}}}
-\newcommand{\Perm}{\ensuremath{\text{Perm}}}
-\newcommand{\MComb}{\ensuremath{\text{MComb}}}
-\newcommand{\Comb}{\ensuremath{\text{Comb}}}
-
 \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
 \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-
-\newcommand{\Pot}{\ensuremath{\text{Pot}}}
-\newcommand{\Map}{\ensuremath{\text{Map}}}
 
 \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 
 \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
-
-\newcommand{\Bin}{\ensuremath{\text{Bin}\ }}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{Math Big Quantors}
