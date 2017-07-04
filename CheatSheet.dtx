@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v0.1}
-\def\filedate{2017/06/26}
+\def\fileversion{v0.2}
+\def\filedate{2017/07/04}
 % \iffalse
 %<*driver>
 \ProvidesFile{CheatSheet.dtx}
@@ -104,7 +104,7 @@
 %
 % \section{Changelog}
 % \begin{description}
-% \item[v0.0 - 2017/06/23] Initial
+% \item[v0.2 - 2017/07/06] Initial
 % \end{description}
 % \paragraph{Note: }The minor version of stable versions is always
 % even, the minor version of unstable versions is always odd. There
@@ -115,12 +115,6 @@
 % For examples, pleas see the Git-Repo at
 % \url{https://github.com/ACHinrichs/LaTeX-templates} or my
 % CheatSheets at \url{https://github.com/ACHinrichs/CheatSheets}
-% \section{Implementation}
-% The following part is verry boring, but I have not found a solution
-% to create a \texttt{.cls}--file without including the implemetation
-% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
-% and sets the Version Loads the \texttt{article}, which is the
-% base-class.
 % \subsection{Packages \& Options}
 % \begin{macro}
 %   Set up kvoptions
@@ -153,6 +147,11 @@
 \PassOptionsToPackage{fleqn}{amsmath}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
+\RequirePackage{multicol}
+\RequirePackage{calc}
+\RequirePackage{xtab}
+\PassOptionsToPackage{autostyle,german=guillemets}{csquotes}
+\RequirePackage{csquotes}
 
 \RequirePackage{xcolor}
 \definecolor{primaryColor}{cmyk}{1,.72,0,.38}
@@ -170,25 +169,37 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 % \begin{macro}
-%   Turn off headers, pagenumbers, and sectionnumbers
+%   Turn off headers, pagenumbers, and sectionnumbers. Set |parindent|
+%   and |parskip|
 %    \begin{macrocode}
 \pagestyle{empty}
 \setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}
 %   \begin{macrocode}
 %    \end{macrocode}
 % \end{macro}
-
-% \subsection{Geometry}
+% \begin{macro}
+%   Set Font size
+%    \begin{macrocode}
+\AtBeginDocument{
+  \raggedright
+  \footnotesize
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
 % Make sure that this is the last Package loaded
 %    \begin{macrocode}
 %Make sure that this is the last Package loaded
 \RequirePackage{geometry}
 \geometry{top=1cm, bottom=1cm, left=1cm,
   headsep=14pt,hmarginratio={1:1}}
-%
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
 % is German
