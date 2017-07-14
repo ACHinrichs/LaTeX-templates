@@ -52,6 +52,7 @@
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{soul}
+\usepackage{todonotes}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Var}{Var}
@@ -91,7 +92,7 @@
 % \DoNotIndex{\newcommand,\newenvironment}
 %
 % \title{The \textsf{HomeworkAssignment} class\thanks{This document
-% corresponds to \textsf{HomeworkAssignment}~\fileversion,dated~
+% corresponds to \textsf{HomeworkAssignment}~\fileversion, dated~
 % \filedate.}}
 % \author{Adrian C Hinrichs \\
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
@@ -103,7 +104,7 @@
 % mainly created for assignments at the University This class is
 % inherited from \texttt{article}, it is not perfect, but I am trying
 % my verry best.
-% \section{Options}
+% \section{Options\label{sec:Options}}
 % \DescribeMacro{problemstyle=<1>} \DescribeMacro{subproblemstyle=<1>}
 % \DescribeMacro{subsubproblemstyle=<1>} These options allow the
 % customizatuion of the displayed numbers.  For Example, if
@@ -309,6 +310,59 @@
 % \LaTeX, until all are added.\\
 % See example documents fot output
 %
+% \section{Dependencies}
+% \subsection{Mandatory Dependencies}
+% This class is build uppon \textrm{article}, so of course the first
+% dependency is:
+% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+% \begin{description}
+% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+% \end{description}
+% Because I am very lazy, the \texttt{HomeworkAssignment} is \enquote{a little
+% bit} bloated. These are all required packages:
+% \begin{description}
+% \dep{kvoptions}{Heiko
+% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+% \texttt{key=value}--style options}
+% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+% it easy to define \texttt{$\backslash$macro*} commands}
+% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+% if--else--structures}
+% \dep{translations}{Clemens
+% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
+% easy method of translations.}
+% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
+% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
+% better math-typesetting}
+% \dep{amssymb}{American Mathematical
+% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+% mathematical symbols}
+% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+% of programming facilities geared primarily towards \LaTeX class and
+% package authors}
+% \dep{array}{Frank Mittelbach, David Carlisle, The
+% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
+% for tables and arrays\todo{\texttt{array} possibly can be removed}}
+% \end{description}
+% \subsection{Recommended Dependencies}
+% These are not loaded automatically, but require a switch as option
+% (see \autoref{sec:Options}). The switch is typically the name of the
+% package.
+% \begin{description}
+% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
+% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
+% tool. When loading TikZ, the HomeworkAssignment automatically loads
+% a shipload of TikZ--librarys and own styles\todo{I intend to move
+% these styles to a own package, so that they are usable without the
+% HomeworkAssignment}. See \autoref{imp:tikz} for more informations}
+% \dep{listings}{1996–2004 Carsten Heinz, 2006–2007 Brooks Moses,
+% 2013– Jobst Hoffmann}{https://www.ctan.org/pkg/listings}{For
+% source--code. Sourcecode in the HomeworkAssignment is automatically
+% framed, printed in \texttt{scriptsize}, and linebeals will be
+% introduced}
+% \end{description}
 % \pagebreak
 % \section{Development and support}
 %
