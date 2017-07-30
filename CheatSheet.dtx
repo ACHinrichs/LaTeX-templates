@@ -32,19 +32,19 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v0.2}
-\def\filedate{2017/07/04}
+\def\csfileversion{v0.4}
+\def\csfiledate{2017/07/29}
 % \iffalse
 %<*driver>
 \ProvidesFile{CheatSheet.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{CheatSheet}[\filedate\space\fileversion]
+%<class>\ProvidesClass{CheatSheet}[\csfiledate\space\csfileversion]
 %<*driver>
-\documentclass{ltxdoc}
-\EnableCrossrefs
-\CodelineIndex
-\RecordChanges
+\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+%\EnableCrossrefs
+%\CodelineIndex
+%\RecordChanges
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
@@ -53,8 +53,63 @@
 \usepackage{longtable}
 \usepackage{soul}
 
+\title{The \textsf{CheatSheet} class\footnotemark}
+\author{Adrian
+  C. Hinrichs\\\href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}}
+\date{\today}
+\footnotetext{This document corresponds to \textsf{CheatSheet.cls}
+  \csfileversion, dated \csfiledate}
+
+
 \begin{document}
-\DocInput{HomeworkAssignment.dtx}
+\maketitle
+\section{Abstract}
+This Class provides a clean, multicolumn look designed for Cheat Sheets
+\section{Options}
+\subsection{(Not)Inherited options}
+Because the class is inherited by article, every Option that can be
+passed to article, will be passed to article. There is only one
+restriction:
+\begin{description}
+\item[\texttt{twocolumn}] Because I create the columns with
+  \texttt{multicol}, \texttt{article} would screw up the layout if
+  \texttt{twocoloumn} would be passed, so this raises an error.
+\end{description}
+\subsection{Own options}
+Currently, there are no own options.
+\section{Commands}
+\subsection{Useful Macros}
+\section{Development and support}
+
+The class is developed at \emph{GitHub}:
+\begin{quote}
+  \url{https://github.com/ACHinrichs/LaTeX-templates}
+\end{quote}
+Please refer to that site for any bug report or development
+information. 
+\section{Changelog}
+\begin{description}
+\item[v0.2 - 2017/07/06] Initial
+\item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
+  it is the other way around)
+\end{description}
+\paragraph{Note: }The minor version of stable versions is always even,
+the minor version of unstable versions is always odd. There are no
+unstable patch--versions, instead unstable versions get an
+alphabetical suffix.\\
+
+\section{Known Bugs}
+\begin{itemize}
+\item When trying to use \lstinline{\lstinline} in the label of an
+  \lstinline{description}--item, the code--snippet will be displayed
+  at the bottom of the column. Possibly relates to floats not being
+  supported by \lstinline{multicol}%At least in this ducoment
+\end{itemize}
+\section{Examples}
+For examples, pleas see the Git-Repo at
+\url{https://github.com/ACHinrichs/LaTeX-templates} or my
+CheatSheets at
+\url{https://github.com/ACHinrichs/CheatSheets}\textbf{ or this document!}
 \end{document}
 %</driver> 
 % \fi
@@ -75,53 +130,20 @@
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 % 
-% \title{The \textsf{CheatSheet} class\thanks{This document
-% corresponds to \textsf{CheatSheet}~\fileversion, dated~
-% \filedate.}}
-% \author{Adrian C Hinrichs \\
-% \texttt{adrian.hinrichs@rwth-aachen.de}}
-% 
-% \maketitle
-% \tableofcontents
-% \section{Abstract}
-% This Class provides a clean, multicolumn look.
-% \section{Options}
-% \subsection{Inherited options}
-% Because the class is inherited by article, every Option that can be
-% passed to article, will be passed to article.
-% \subsection{Own options}
-% Currently, there are no own options.
-% \section{Commands}
-% \subsection{Useful Macros}
-% \section{Development and support}
-% 
-% The class is developed at \emph{github}:
-% \begin{quote}
-%   \url{https://github.com/ACHinrichs/LaTeX-templates}
-% \end{quote}
-% Please refer to that site for any bug report or development
-% information. 
-%
-% \section{Changelog}
-% \begin{description}
-% \item[v0.2 - 2017/07/06] Initial
-% \end{description}
-% \paragraph{Note: }The minor version of stable versions is always
-% even, the minor version of unstable versions is always odd. There
-% are no unstable patch--versions, instead unstable versions get an alphabetical
-% suffix.
-% \pagebreak
-% \section{Examples}
-% For examples, pleas see the Git-Repo at
-% \url{https://github.com/ACHinrichs/LaTeX-templates} or my
-% CheatSheets at \url{https://github.com/ACHinrichs/CheatSheets}
-% \subsection{Packages \& Options}
 % \begin{macro}
 %   Set up kvoptions
 %    \begin{macrocode}
 \RequirePackage{kvoptions}
+\RequirePackage{xifthen}
+
 \SetupKeyvalOptions{ family=cs,
   prefix=cs@ }
+\DeclareStringOption[4]{columns}
+%Make twocoloumn __not__ be passed to article
+\DeclareVoidOption{twocolumn}{\ClassError{CheatSheet}{'twocolumn' is not
+    supported, use 'columns=2' instead!}{Because I can not 'catch' an
+    option, I have to emit an Error; if article gets the option
+    'twocolumn', the whole layout will be corrupted!}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}
@@ -130,20 +152,37 @@
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 %    \end{macrocode}
 %
-% Processes the Options and loades article
+% Processes the Options and loads article
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
+
+
+
+%\ifcs@twocolumn
+%\ifthenelse{\equal{\cs@columns}{2}}{
+%  \ClassWarning{CheatSheet}{You passed
+%    'twocoloumn' and 'columns=2', please use *only* 'columns=N' (where
+%    is the number of columns you desire), to avoid option clashes!}
+%}{
+%  \ifthenelse{\equal{\cs@columns}{4}}{
+%    \ClassWarning{CheatSheet}{You passed 'twocoloumn', but 'columns' is set to 4 (the default value),
+%      please use 'columns=2' instead of 'twocoloumn'}
+%    \renewcommand{\cs@columns}{1}
+%  }{
+%    \ClassError{CheatSheet}{Option clash}{You passed
+%      'twocoloumn', but 'columns' is set to \cs@columns}
+%  }
+%}
+%\fi
+
 \LoadClass{article}
 %    \end{macrocode}
-%
 % Loads required Packages
 %    \begin{macrocode}
 \PassOptionsToPackage{T1}{fontenc}
 \RequirePackage{fontenc}
-\PassOptionsToPackage{sfdefault}{AlegreyaSans}
 \RequirePackage{libertine}
 \RequirePackage{suffix}
-\RequirePackage{xifthen}
 \PassOptionsToPackage{fleqn}{amsmath}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
@@ -178,8 +217,11 @@
 \setlength{\parskip}{0pt plus 0.5ex}
 %    \end{macrocode}
 % \end{macro}
+% Redefine document, so that it is always multicolumn
 % \begin{macro}
-%   \begin{macrocode}
+%    \begin{macrocode}
+\AtBeginDocument{\begin{multicols}{\cs@columns}}
+\AtEndEnvironment{document}{\end{multicols}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}
