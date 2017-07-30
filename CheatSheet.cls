@@ -36,7 +36,7 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\csfileversion{v0.4}
+\def\csfileversion{v0.6}
 \def\csfiledate{2017/07/29}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{CheatSheet}[\csfiledate\space\csfileversion]
@@ -63,8 +63,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{multicol}
-\RequirePackage{calc}
-\RequirePackage{xtab}
 \PassOptionsToPackage{autostyle,german=guillemets}{csquotes}
 \RequirePackage{csquotes}
 

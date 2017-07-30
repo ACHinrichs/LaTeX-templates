@@ -32,7 +32,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\csfileversion{v0.4}
+\def\csfileversion{v0.6}
 \def\csfiledate{2017/07/29}
 % \iffalse
 %<*driver>
@@ -83,8 +83,49 @@ restriction:
 \end{description}
 \section{Commands}
 None so far.
-
+\vfill\null\columnbreak
 \section{Dependencies}
+
+This class is build uppon \textrm{article}, so of course the first
+dependency is:
+\newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+\begin{description}
+\dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+\end{description}
+These are all required packages:
+\begin{description}
+  \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach, Rainer Sch\"opf, et
+    al.}{https://www.ctan.org/pkg/amsmath}{For better math-typesetting}
+  \dep{amssymb}{American Mathematical
+    Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+    mathematical symbols}
+  \dep{csqutotes}{Philipp Lehman (inaktiv), Joseph
+    Wright}{https://www.ctan.org/pkg/csquotes}{For better citation}
+  \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+    Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+    of programming facilities geared primarily towards \LaTeX class and
+    package authors}
+  \dep{fontenc}{The
+    \LaTeX{}--Team}{https://www.ctan.org/pkg/fontenc}{The package
+    allows the user to select font encodings}
+  \dep{kvoptions}{Heiko Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+    \texttt{key=value}--style options}
+  \dep{libertine}{Bob Tennent}{https://www.ctan.org/pkg/libertine}{ A
+    nicer than default font (at least in my opinion)}
+  \dep{mdframed}{Marco Daniel, Elke
+    Schubert}{https://www.ctan.org/pkg/mdframed}{Provides breakable,
+    colored, framed boxes}
+  \dep{multicol}{The \LaTeX--Team, Frank
+    Mittelbach}{https://www.ctan.org/pkg/multicol}{Provides the
+    multicolumn--layout}
+  \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+    it easy to define \texttt{$\backslash$macro*} commands}
+  \dep{xcolor}{Uwe Kern}{https://www.ctan.org/pkg/xcolor}{Based uppon
+    \lstinline{color}, it provides colors}
+  \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+    if--else--structures} 
+\end{description}
 \section{Development and support}
 
 The class is developed at \emph{GitHub}:
@@ -218,8 +259,6 @@ more Cheats
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{multicol}
-\RequirePackage{calc}
-\RequirePackage{xtab}
 \PassOptionsToPackage{autostyle,german=guillemets}{csquotes}
 \RequirePackage{csquotes}
 
