@@ -76,9 +76,15 @@ restriction:
   \texttt{twocoloumn} would be passed, so this raises an error.
 \end{description}
 \subsection{Own options}
-Currently, there are no own options.
+\begin{description}
+\item[\texttt{columns=<x>}] Sets the number of columns.  Note that 1
+  column is not supported by \lstinline{multicol} and will be set to
+  2.  standard value is 4
+\end{description}
 \section{Commands}
-\subsection{Useful Macros}
+None so far.
+
+\section{Dependencies}
 \section{Development and support}
 
 The class is developed at \emph{GitHub}:
@@ -98,6 +104,12 @@ the minor version of unstable versions is always odd. There are no
 unstable patch--versions, instead unstable versions get an
 alphabetical suffix.\\
 
+\section{Credits}
+This class is not based upon, but inspired by a document I found on
+\textsc{Stackoverflow}.  Unfortunately, I can't find it anymore.  If
+you happen to find it, feel free to open a Pull-Request (or an Issue,
+or send me an E-Mail) , so that I can credit him or her!
+
 \section{Known Bugs}
 \begin{itemize}
 \item When trying to use \lstinline{\lstinline} in the label of an
@@ -109,7 +121,26 @@ alphabetical suffix.\\
 For examples, pleas see the Git-Repo at
 \url{https://github.com/ACHinrichs/LaTeX-templates} or my
 CheatSheets at
-\url{https://github.com/ACHinrichs/CheatSheets}\textbf{ or this document!}
+\url{https://github.com/ACHinrichs/CheatSheets}\textbf{ or this
+  document!}
+
+\section{Minimal Document}
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+\usepackage{hyperref}
+
+\title{Cheat--Sheet}
+\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Some things}
+Cheats
+\section{Other things}
+more Cheats
+\end{document}
+\end{lstlisting}
+
 \end{document}
 %</driver> 
 % \fi
