@@ -1,10 +1,10 @@
 %%
-%% This is file `CheatSheet.cls',
+%% This is file `cheatsheet.cls',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% CheatSheet.dtx  (with options: `class')
+%% cheatsheet.dtx  (with options: `class')
 %% Copyright (c) 2017 by Adrian C. Hinrichs
 %% 
 %% This File may be distributed and/or modified under the condition of the below
@@ -36,10 +36,10 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\csfileversion{v0.6}
-\def\csfiledate{2017/07/29}
+\def\csfileversion{v0.7}
+\def\csfiledate{2017/08/01}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{CheatSheet}[\csfiledate\space\csfileversion]
+\ProvidesClass{cheatsheet}[\csfiledate\space\csfileversion]
 \RequirePackage{kvoptions}
 \RequirePackage{xifthen}
 
@@ -131,4 +131,4 @@
   {\normalfont\small\sffamily}}
 \endinput
 %%
-%% End of file `CheatSheet.cls'.
+%% End of file `cheatsheet.cls'.

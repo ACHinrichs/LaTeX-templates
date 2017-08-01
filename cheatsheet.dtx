@@ -32,16 +32,16 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\csfileversion{v0.6}
-\def\csfiledate{2017/07/29}
+\def\csfileversion{v0.7}
+\def\csfiledate{2017/08/01}
 % \iffalse
 %<*driver>
-\ProvidesFile{CheatSheet.dtx}
+\ProvidesFile{cheatsheet.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{CheatSheet}[\csfiledate\space\csfileversion]
+%<class>\ProvidesClass{cheatsheet}[\csfiledate\space\csfileversion]
 %<*driver>
-\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+\documentclass[a4paper,landscape,columns=3]{cheatsheet}
 %\EnableCrossrefs
 %\CodelineIndex
 %\RecordChanges
@@ -53,11 +53,11 @@
 \usepackage{longtable}
 \usepackage{soul}
 
-\title{The \textsf{CheatSheet} class\footnotemark}
+\title{The \textsf{cheatsheet} class\footnotemark}
 \author{Adrian
   C. Hinrichs\\\href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}}
 \date{\today}
-\footnotetext{This document corresponds to \textsf{CheatSheet.cls}
+\footnotetext{This document corresponds to \textsf{cheatsheet.cls}
   \csfileversion, dated \csfiledate}
 
 
@@ -83,7 +83,7 @@ restriction:
 \end{description}
 \section{Commands}
 None so far.
-\vfill\null\columnbreak
+%\vfill\null\columnbreak
 \section{Dependencies}
 
 This class is build uppon \textrm{article}, so of course the first
@@ -139,6 +139,9 @@ information.
 \item[v0.2 - 2017/07/06] Initial
 \item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
   it is the other way around)
+\item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
+  it is the other way around)
+\item[v0.8 - 2017/01/08] Change names to match CTANS requirements
 \end{description}
 \paragraph{Note: }The minor version of stable versions is always even,
 the minor version of unstable versions is always odd. There are no
