@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\csfileversion{v0.7}
-\def\csfiledate{2017/08/01}
+\def\csfileversion{v1.0}
+\def\csfiledate{2017/08/18}
 % \iffalse
 %<*driver>
 \ProvidesFile{cheatsheet.dtx}
@@ -109,6 +109,12 @@ These are all required packages:
   \dep{fontenc}{The
     \LaTeX{}--Team}{https://www.ctan.org/pkg/fontenc}{The package
     allows the user to select font encodings}
+  \dep{hyperref}{Sebastian Rahtz, Heiko
+  Oberdiek}{https://www.ctan.org/pkg/hyperref}{I originally did not
+    want to include it, but apparently I can not use
+    \textbackslash\lstinline{AtBeginDocument} if hyperref is not the
+    first Package to be loaded.\\
+    If anyone has an other solution, please let me know!}
   \dep{kvoptions}{Heiko Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
     \texttt{key=value}--style options}
   \dep{libertine}{Bob Tennent}{https://www.ctan.org/pkg/libertine}{ A
@@ -139,9 +145,8 @@ information.
 \item[v0.2 - 2017/07/06] Initial
 \item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
   it is the other way around)
-\item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
-  it is the other way around)
-\item[v0.8 - 2017/01/08] Change names to match CTANS requirements
+\item[v0.8 - 2017/08/18] Change names to match CTANS requirements,\\
+  Fix a possibly old Bug, could date back to \lstinline{v0.4}
 \end{description}
 \paragraph{Note: }The minor version of stable versions is always even,
 the minor version of unstable versions is always odd. There are no
@@ -294,7 +299,7 @@ CheatSheets at
 % Redefine document, so that it is always multicolumn
 % \begin{macro}
 %    \begin{macrocode}
-\AtBeginDocument{ \bgroup % POSSIBLY BUG FIX:Include this command if
+\AtBeginDocument{%\bgroup % POSSIBLY BUG FIX:Include this command if
                           % you should ever encounter the later error
                           % at the first time of compilation (with
                           % removed .aux)
@@ -314,7 +319,7 @@ CheatSheets at
 %    \begin{macrocode}
 \AtBeginDocument{
   \raggedright
-  \footnotesize
+  %footnotesize
 }
 %    \end{macrocode}
 % \end{macro}

@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\csfileversion{v0.7}
-\def\csfiledate{2017/08/01}
+\def\csfileversion{v1.0}
+\def\csfiledate{2017/08/18}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{cheatsheet}[\csfiledate\space\csfileversion]
 \RequirePackage{kvoptions}
@@ -84,7 +84,7 @@
 \setcounter{secnumdepth}{0}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
-\AtBeginDocument{ \bgroup % POSSIBLY BUG FIX:Include this command if
+\AtBeginDocument{%\bgroup % POSSIBLY BUG FIX:Include this command if
                           % you should ever encounter the later error
                           % at the first time of compilation (with
                           % removed .aux)
@@ -99,7 +99,7 @@
 \AtEndEnvironment{document}{\end{multicols}}
 \AtBeginDocument{
   \raggedright
-  \footnotesize
+  %footnotesize
 }
 \RequirePackage{geometry}
 \geometry{top=1cm, bottom=1cm, left=1cm,
