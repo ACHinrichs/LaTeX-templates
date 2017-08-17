@@ -83,19 +83,14 @@
 \setcounter{secnumdepth}{0}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
-\AtBeginDocument{\begin{multicols}{\cs@columns}}
-\AtEndEnvironment{document}{\end{multicols}}
-\AtBeginDocument{
-  \raggedright
-  \footnotesize
-}
-\RequirePackage{geometry}
+
+\RequirePackage{geometry} 
 \geometry{top=1cm, bottom=1cm, left=1cm,
   headsep=14pt,hmarginratio={1:1}}
 \renewcommand{\theequation}{\Roman{equation}}
 \everymath\expandafter{\the\everymath \color{primaryColor}}
 \renewcommand{\title}[1]{
-  \def\thetitle{#1}
+  \def\thetitle{Hallo, #1}
 }
 
 \renewcommand{\date}[1]{
@@ -111,7 +106,7 @@
     leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm
     ]
     {\color{primaryColor}\Large\textbf\sffamily\thetitle}\\
-    \normalsize\theauthor\\
+    \normalsize HALLILLP\theauthor\\
     \normalsize\thedate\\
   \end{mdframed}
 

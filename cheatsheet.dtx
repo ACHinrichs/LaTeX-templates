@@ -42,29 +42,27 @@
 %<class>\ProvidesClass{cheatsheet}[\csfiledate\space\csfileversion]
 %<*driver>
 \documentclass[a4paper,landscape,columns=3]{cheatsheet}
-%\EnableCrossrefs
-%\CodelineIndex
-%\RecordChanges
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{longtable}
-\usepackage{soul}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{longtable} 
+%\usepackage{soul}
+\usepackage{listings}
 
 \title{The \textsf{cheatsheet} class\footnotemark}
 \author{Adrian
   C. Hinrichs\\\href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}}
 \date{\today}
-\footnotetext{This document corresponds to \textsf{cheatsheet.cls}
-  \csfileversion, dated \csfiledate}
 
 
 \begin{document}
 \maketitle
+\footnotetext{This document corresponds to \textsf{cheatsheet.cls}
+  \csfileversion, dated \csfiledate}
 \section{Abstract}
-This Class provides a clean, multicolumn look designed for Cheat Sheets
+ This Class provides a clean, multicolumn look designed for Cheat Sheets
 \section{Options}
 \subsection{(Not)Inherited options}
 Because the class is inherited by article, every Option that can be
