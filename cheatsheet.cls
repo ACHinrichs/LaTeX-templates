@@ -56,6 +56,7 @@
 
 \LoadClass{article}
 \PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{hyperref}
 \RequirePackage{fontenc}
 \RequirePackage{libertine}
 \RequirePackage{suffix}
@@ -83,14 +84,30 @@
 \setcounter{secnumdepth}{0}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
-
-\RequirePackage{geometry} 
+\AtBeginDocument{ \bgroup % POSSIBLY BUG FIX:Include this command if
+                          % you should ever encounter the later error
+                          % at the first time of compilation (with
+                          % removed .aux)
+ %! LaTeX Error: Can be used only in preamble.
+ %See the LaTeX manual or LaTeX Companion for explanation.
+ %Type  H <return>  for immediate help.
+ %...
+ %
+ %l.6 \HyperFirstAtBeginDocument
+ %                             {\ifx\hyper@anchor\@undefined
+  \begin{multicols}{\cs@columns}}
+\AtEndEnvironment{document}{\end{multicols}}
+\AtBeginDocument{
+  \raggedright
+  \footnotesize
+}
+\RequirePackage{geometry}
 \geometry{top=1cm, bottom=1cm, left=1cm,
   headsep=14pt,hmarginratio={1:1}}
 \renewcommand{\theequation}{\Roman{equation}}
 \everymath\expandafter{\the\everymath \color{primaryColor}}
 \renewcommand{\title}[1]{
-  \def\thetitle{Hallo, #1}
+  \def\thetitle{#1}
 }
 
 \renewcommand{\date}[1]{
@@ -106,7 +123,7 @@
     leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm
     ]
     {\color{primaryColor}\Large\textbf\sffamily\thetitle}\\
-    \normalsize HALLILLP\theauthor\\
+    \normalsize\theauthor\\
     \normalsize\thedate\\
   \end{mdframed}
 

@@ -44,7 +44,6 @@
 \documentclass[a4paper,landscape,columns=3]{cheatsheet}
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
-\usepackage{hyperref}
 %\usepackage{amssymb}
 %\usepackage{amsmath}
 %\usepackage{longtable} 
@@ -53,11 +52,14 @@
 
 \title{The \textsf{cheatsheet} class\footnotemark}
 \author{Adrian
-  C. Hinrichs\\\href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}}
+  C. Hinrichs\\
+  \href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}
+}
 \date{\today}
 
 
 \begin{document}
+%\begin{multicols}{3}
 \maketitle
 \footnotetext{This document corresponds to \textsf{cheatsheet.cls}
   \csfileversion, dated \csfiledate}
@@ -81,9 +83,9 @@ restriction:
 \end{description}
 \section{Commands}
 None so far.
-%\vfill\null\columnbreak
+\vfill\null\columnbreak
 \section{Dependencies}
-
+  
 This class is build uppon \textrm{article}, so of course the first
 dependency is:
 \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
@@ -168,19 +170,19 @@ CheatSheets at
 
 \section{Minimal Document}
 \begin{lstlisting}[language={[LaTeX]TeX}]
-\documentclass[a4paper,landscape,columns=3]{CheatSheet}
-\usepackage{hyperref}
-
-\title{Cheat--Sheet}
-\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
-\date{\today}
-\begin{document}
-\maketitle
-\section{Some things}
-Cheats
-\section{Other things}
-more Cheats
-\end{document}
+%\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+%\usepackage{hyperref}
+%
+%\title{Cheat--Sheet}
+%\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
+%\date{\today}
+%\begin{document}
+%\maketitle
+%\section{Some things}
+%Cheats
+%\section{Other things}
+%more Cheats
+%\end{document}
 \end{lstlisting}
 
 \end{document}
@@ -253,6 +255,7 @@ more Cheats
 % Loads required Packages
 %    \begin{macrocode}
 \PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{hyperref}
 \RequirePackage{fontenc}
 \RequirePackage{libertine}
 \RequirePackage{suffix}
@@ -291,7 +294,18 @@ more Cheats
 % Redefine document, so that it is always multicolumn
 % \begin{macro}
 %    \begin{macrocode}
-\AtBeginDocument{\begin{multicols}{\cs@columns}}
+\AtBeginDocument{ \bgroup % POSSIBLY BUG FIX:Include this command if
+                          % you should ever encounter the later error
+                          % at the first time of compilation (with
+                          % removed .aux)
+ %! LaTeX Error: Can be used only in preamble. 
+ %See the LaTeX manual or LaTeX Companion for explanation.
+ %Type  H <return>  for immediate help.
+ %...                                              
+ %                                                
+ %l.6 \HyperFirstAtBeginDocument
+ %                             {\ifx\hyper@anchor\@undefined
+  \begin{multicols}{\cs@columns}}
 \AtEndEnvironment{document}{\end{multicols}}
 %    \end{macrocode}
 % \end{macro}
