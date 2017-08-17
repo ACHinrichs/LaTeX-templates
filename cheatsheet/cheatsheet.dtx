@@ -64,7 +64,11 @@
 \footnotetext{This document corresponds to \textsf{cheatsheet.cls}
   \csfileversion, dated \csfiledate}
 \section{Abstract}
- This Class provides a clean, multicolumn look designed for Cheat Sheets
+This Class provides a clean, multi-column design intended for Cheat
+Sheets.\\
+
+It imports the most useful Packages and encloses the document in a
+multicol-environment.
 \section{Options}
 \subsection{(Not)Inherited options}
 Because the class is inherited by article, every Option that can be
@@ -175,19 +179,18 @@ CheatSheets at
 
 \section{Minimal Document}
 \begin{lstlisting}[language={[LaTeX]TeX}]
-%\documentclass[a4paper,landscape,columns=3]{CheatSheet}
-%\usepackage{hyperref}
-%
-%\title{Cheat--Sheet}
-%\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
-%\date{\today}
-%\begin{document}
-%\maketitle
-%\section{Some things}
-%Cheats
-%\section{Other things}
-%more Cheats
-%\end{document}
+\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+
+\title{Cheat--Sheet}
+\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Some things}
+Cheats
+\section{Other things}
+more Cheats
+\end{document}
 \end{lstlisting}
 
 \end{document}

@@ -3,7 +3,7 @@
 This Class provides a clean, multi-column design intended for Cheat
 Sheets. 
 
-It Imports the most useful Packages and encloses the document in a
+It imports the most useful Packages and encloses the document in a
 multicol-environment.
 
 See the documentation for a minimal example document.
