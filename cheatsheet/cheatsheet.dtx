@@ -1,0 +1,402 @@
+% \iffalse meta-comment
+%
+% Copyright (c) 2016 by Adrian C. Hinrichs
+%
+% This File may be distributed and/or modified under the condition of the below
+% license.
+%
+%
+% MIT License
+%
+%
+%
+% Copyright (c) 2017
+%
+%
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% \fi
+\def\csfileversion{v1.0}
+\def\csfiledate{2017/08/18}
+% \iffalse
+%<*driver>
+\ProvidesFile{cheatsheet.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<class>\ProvidesClass{cheatsheet}[\csfiledate\space\csfileversion]
+%<*driver>
+\documentclass[a4paper,landscape,columns=3]{cheatsheet}
+\usepackage[ngerman,english]{babel}
+\usepackage[autostyle,german=guillemets]{csquotes}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{longtable} 
+%\usepackage{soul}
+\usepackage{listings}
+
+\title{The \textsf{cheatsheet} class\footnotemark}
+\author{Adrian
+  C. Hinrichs\\
+  \href{mailto:adrian.hinrichs@rwth-aachen.de}{adrian.hinrichs@rwth-aachen.de}
+}
+\date{\today}
+
+
+\begin{document}
+%\begin{multicols}{3}
+\maketitle
+\footnotetext{This document corresponds to \textsf{cheatsheet.cls}
+  \csfileversion, dated \csfiledate}
+\section{Abstract}
+This Class provides a clean, multi-column design intended for Cheat
+Sheets.\\
+
+It imports the most useful Packages and encloses the document in a
+multicol-environment.
+\section{Options}
+\subsection{(Not)Inherited options}
+Because the class is inherited by article, every Option that can be
+passed to article, will be passed to article. There is only one
+restriction:
+\begin{description}
+\item[\texttt{twocolumn}] Because I create the columns with
+  \texttt{multicol}, \texttt{article} would screw up the layout if
+  \texttt{twocoloumn} would be passed, so this raises an error.
+\end{description}
+\subsection{Own options}
+\begin{description}
+\item[\texttt{columns=<x>}] Sets the number of columns.  Note that 1
+  column is not supported by \lstinline{multicol} and will be set to
+  2.  standard value is 4
+\end{description}
+\section{Commands}
+None so far.
+\vfill\null\columnbreak
+\section{Dependencies}
+  
+This class is build uppon \textrm{article}, so of course the first
+dependency is:
+\newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+\begin{description}
+\dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+\end{description}
+These are all required packages:
+\begin{description}
+  \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach, Rainer Sch\"opf, et
+    al.}{https://www.ctan.org/pkg/amsmath}{For better math-typesetting}
+  \dep{amssymb}{American Mathematical
+    Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+    mathematical symbols}
+  \dep{csqutotes}{Philipp Lehman (inaktiv), Joseph
+    Wright}{https://www.ctan.org/pkg/csquotes}{For better citation}
+  \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+    Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+    of programming facilities geared primarily towards \LaTeX class and
+    package authors}
+  \dep{fontenc}{The
+    \LaTeX{}--Team}{https://www.ctan.org/pkg/fontenc}{The package
+    allows the user to select font encodings}
+  \dep{hyperref}{Sebastian Rahtz, Heiko
+  Oberdiek}{https://www.ctan.org/pkg/hyperref}{I originally did not
+    want to include it, but apparently I can not use
+    \textbackslash\lstinline{AtBeginDocument} if hyperref is not the
+    first Package to be loaded.\\
+    If anyone has an other solution, please let me know!}
+  \dep{kvoptions}{Heiko Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+    \texttt{key=value}--style options}
+  \dep{libertine}{Bob Tennent}{https://www.ctan.org/pkg/libertine}{ A
+    nicer than default font (at least in my opinion)}
+  \dep{mdframed}{Marco Daniel, Elke
+    Schubert}{https://www.ctan.org/pkg/mdframed}{Provides breakable,
+    colored, framed boxes}
+  \dep{multicol}{The \LaTeX--Team, Frank
+    Mittelbach}{https://www.ctan.org/pkg/multicol}{Provides the
+    multicolumn--layout}
+  \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+    it easy to define \texttt{$\backslash$macro*} commands}
+  \dep{xcolor}{Uwe Kern}{https://www.ctan.org/pkg/xcolor}{Based uppon
+    \lstinline{color}, it provides colors}
+  \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+    if--else--structures} 
+\end{description}
+\section{Development and support}
+
+The class is developed at \emph{GitHub}:
+\begin{quote}
+  \url{https://github.com/ACHinrichs/LaTeX-templates}
+\end{quote}
+Please refer to that site for any bug report or development
+information. 
+\section{Changelog}
+\begin{description}
+\item[v0.2 - 2017/07/06] Initial
+\item[v0.4 - 2017/07/29] Enclose document with multicol (technicaly,
+  it is the other way around)
+\item[v0.8 - 2017/08/18] Change names to match CTANS requirements,\\
+  Fix a possibly old Bug, could date back to \lstinline{v0.4}
+\end{description}
+\paragraph{Note: }The minor version of stable versions is always even,
+the minor version of unstable versions is always odd. There are no
+unstable patch--versions, instead unstable versions get an
+alphabetical suffix.\\
+
+\section{Credits}
+This class is not based upon, but inspired by a document I found on
+\textsc{Stackoverflow}.  Unfortunately, I can't find it anymore.  If
+you happen to find it, feel free to open a Pull-Request (or an Issue,
+or send me an E-Mail) , so that I can credit him or her!
+
+\section{Known Bugs}
+\begin{itemize}
+\item When trying to use \lstinline{\lstinline} in the label of an
+  \lstinline{description}--item, the code--snippet will be displayed
+  at the bottom of the column. Possibly relates to floats not being
+  supported by \lstinline{multicol}%At least in this ducoment
+\end{itemize}
+\section{Examples}
+For examples, pleas see the Git-Repo at
+\url{https://github.com/ACHinrichs/LaTeX-templates} or my
+CheatSheets at
+\url{https://github.com/ACHinrichs/CheatSheets}\textbf{ or this
+  document!}
+
+\section{Minimal Document}
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\documentclass[a4paper,landscape,columns=3]{CheatSheet}
+
+\title{Cheat--Sheet}
+\author{A. Uthor\\\href{mailto:author@mail.eg}{author@mail.eg}}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Some things}
+Cheats
+\section{Other things}
+more Cheats
+\end{document}
+\end{lstlisting}
+
+\end{document}
+%</driver> 
+% \fi
+% 
+% \CheckSum{0}
+% 
+% \CharacterTable {Upper-case
+% \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z Lower-case
+% \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z Digits
+% \0\1\2\3\4\5\6\7\8\9 Exclamation \!  Double quote \" Hash (number)
+% \# Dollar \$ Percent \% Ampersand \& Acute accent \' Left paren
+% \( Right paren \) Asterisk \* Plus \+ Comma \, Minus \- Point \.
+% Solidus \/ Colon \: Semicolon \; Less than \< Equals \= Greater than
+% \> Question mark \?
+% Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
+% brace \{ Vertical bar \| Right brace \} Tilde \~}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+% \begin{macro}
+%   Set up kvoptions
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\RequirePackage{xifthen}
+
+\SetupKeyvalOptions{ family=cs,
+  prefix=cs@ }
+\DeclareStringOption[4]{columns}
+%Make twocoloumn __not__ be passed to article
+\DeclareVoidOption{twocolumn}{\ClassError{CheatSheet}{'twocolumn' is not
+    supported, use 'columns=2' instead!}{Because I can not 'catch' an
+    option, I have to emit an Error; if article gets the option
+    'twocolumn', the whole layout will be corrupted!}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Redefine the article-options
+%    \begin{macrocode}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
+%    \end{macrocode}
+%
+% Processes the Options and loads article
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+
+
+
+%\ifcs@twocolumn
+%\ifthenelse{\equal{\cs@columns}{2}}{
+%  \ClassWarning{CheatSheet}{You passed
+%    'twocoloumn' and 'columns=2', please use *only* 'columns=N' (where
+%    is the number of columns you desire), to avoid option clashes!}
+%}{
+%  \ifthenelse{\equal{\cs@columns}{4}}{
+%    \ClassWarning{CheatSheet}{You passed 'twocoloumn', but 'columns' is set to 4 (the default value),
+%      please use 'columns=2' instead of 'twocoloumn'}
+%    \renewcommand{\cs@columns}{1}
+%  }{
+%    \ClassError{CheatSheet}{Option clash}{You passed
+%      'twocoloumn', but 'columns' is set to \cs@columns}
+%  }
+%}
+%\fi
+
+\LoadClass{article}
+%    \end{macrocode}
+% Loads required Packages
+%    \begin{macrocode}
+\PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{hyperref}
+\RequirePackage{fontenc}
+\RequirePackage{libertine}
+\RequirePackage{suffix}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{multicol}
+\PassOptionsToPackage{autostyle,german=guillemets}{csquotes}
+\RequirePackage{csquotes}
+
+\RequirePackage{xcolor}
+\definecolor{primaryColor}{cmyk}{1,.72,0,.38}
+\definecolor{secondaryColor}{named}{gray}
+
+\RequirePackage{mdframed}
+
+
+\RequirePackage{listings}
+\lstset{
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\ttfamily\color{primaryColor}\scriptsize 
+}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+% \begin{macro}
+%   Turn off headers, pagenumbers, and sectionnumbers. Set |parindent|
+%   and |parskip|
+%    \begin{macrocode}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+%    \end{macrocode}
+% \end{macro}
+% Redefine document, so that it is always multicolumn
+% \begin{macro}
+%    \begin{macrocode}
+\AtBeginDocument{%\bgroup % POSSIBLY BUG FIX:Include this command if
+                          % you should ever encounter the later error
+                          % at the first time of compilation (with
+                          % removed .aux)
+ %! LaTeX Error: Can be used only in preamble. 
+ %See the LaTeX manual or LaTeX Companion for explanation.
+ %Type  H <return>  for immediate help.
+ %...                                              
+ %                                                
+ %l.6 \HyperFirstAtBeginDocument
+ %                             {\ifx\hyper@anchor\@undefined
+  \begin{multicols}{\cs@columns}}
+\AtEndEnvironment{document}{\end{multicols}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Set Font size
+%    \begin{macrocode}
+\AtBeginDocument{
+  \raggedright
+  %footnotesize
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+% Make sure that this is the last Package loaded
+%    \begin{macrocode}
+%Make sure that this is the last Package loaded
+\RequirePackage{geometry}
+\geometry{top=1cm, bottom=1cm, left=1cm,
+  headsep=14pt,hmarginratio={1:1}}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Translations\label{imp:translation}}
+% Load translations, currently supports English and German, Fallback
+% is German
+%    \begin{macrocode}
+%    \end{macrocode}
+% \section{Redefinition of existing Commands}
+% \begin{macro}
+%   Displays equation-numbers as upper-case roman numbers.
+%    \begin{macrocode}
+\renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Colors Headings and math
+%    \begin{macrocode}
+\everymath\expandafter{\the\everymath \color{primaryColor}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[\maketitle]
+%    \begin{macrocode}
+\renewcommand{\title}[1]{
+  \def\thetitle{#1}
+}
+
+\renewcommand{\date}[1]{
+  \def\thedate{#1}
+}
+\renewcommand{\author}[1]{
+  \def\theauthor{#1}
+}
+
+\renewcommand{\maketitle}{
+  \begin{mdframed}[
+    linecolor=secondaryColor,linewidth=1pt,%
+    leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm
+    ]
+    {\color{primaryColor}\Large\textbf\sffamily\thetitle}\\
+    \normalsize\theauthor\\
+    \normalsize\thedate\\
+  \end{mdframed}
+  
+  {\color{secondaryColor} \rule{\linewidth}{1pt}}
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[Sectioning]
+%   \begin{macrocode}
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries\sffamily\color{primaryColor}}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\sffamily\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\sffamily}}
+%    \end{macrocode}
+% \end{macro}
+% \textit{The End}
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}

@@ -1,0 +1,10 @@
+mkdir $1
+mkdir $1/tex
+mkdir $1/tex/latex/
+mkdir $1/tex/latex/$1
+mkdir $1/doc
+mkdir $1/doc/latex
+mkdir $1/doc/latex/$1
+mkdir $1/source
+mkdir $1/source/latex
+mkdir $1/source/latex/$1
