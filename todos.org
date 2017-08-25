@@ -1,0 +1,26 @@
+ This file lists all ToDos for all LaTeX-Packages and Classes in this
+ Repo
+
+
+* cheatsheet
+
+
+
+* HomeworkAssignment
+  - [ ] Rename to homeworkassignment
+    - To comply to CTANs requirements of all lowercase packagenames.
+    - [ ] Add proof by contradiction environment
+  - [ ] Add points for excercises
+    - Expand \newproblem \newsubproblem etc by an optional argument to
+      take the maximum ammount of point one can gain at this problem.
+      - When passed this is passed to \newsubproblem, create a box to
+	write the points down
+      - Add this number of points to the »gradingtable«
+    - To implement this, the existing optional argument, taking
+      the exercise number has to be replaced with an own command
+      - [ ] replace the optional argument of \newproblem by a new
+       command \setproblemnumber
+    - [ ] Add Option to remove the hlines from the layout
+      - Standard hlines=all
+      - hlines=none remove all
+      - hlines=header just remove the hlines around the Title
