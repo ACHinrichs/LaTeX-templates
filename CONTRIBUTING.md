@@ -51,7 +51,7 @@ new version to CTAN`, for example).
 ToDos
 -----
 All ToDos are stored in `/todos.org` on the repository-root. The ToDos
-must have a description/specification. I will prioritize
+must have a description/specification. I will prioritise
 them. Important todos will be added to milestones.
 
 ToDos which are done, shall be marked as done. They will be removed
