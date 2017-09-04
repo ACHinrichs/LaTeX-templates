@@ -1,4 +1,4 @@
-% Created 2017-08-25 Fr 17:59
+% Created 2017-09-04 Mo 17:10
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -29,12 +29,14 @@
 \tableofcontents
 
 This file lists all ToDos for all \LaTeX{}-Packages and Classes in this
-Repo
+ Repo
 
 
 \section{cheatsheet}
 \label{sec-1}
-
+\begin{itemize}
+\item $\square$ BUG: Footnotes appear all on the first page
+\end{itemize}
 
 
 \section{HomeworkAssignment}
@@ -47,18 +49,20 @@ Repo
 \end{itemize}
 \item $\square$ Add points for excercises
 \begin{itemize}
-\item Expand \newproblem \newsubproblem etc by an optional argument to
-take the maximum ammount of point one can gain at this problem.
+\item Expand \textbackslash \{\} newproblem newsubproblem etc by an
+optional argument to take the maximum ammount of point one can
+gain at this problem.
 \begin{itemize}
-\item When passed this is passed to \newsubproblem, create a box to
-write the points down
+\item When passed this is passed to \textbackslash{}newsubproblem,
+create a box to write the points down
 \item Add this number of points to the »gradingtable«
 \end{itemize}
 \item To implement this, the existing optional argument, taking
 the exercise number has to be replaced with an own command
 \begin{itemize}
-\item $\square$ replace the optional argument of \newproblem by a new
-command \setproblemnumber
+\item $\square$ replace the optional argument of
+\textbackslash{}newproblem by a new command
+\textbackslash{}setproblemnumber
 \end{itemize}
 \item $\square$ Add Option to remove the hlines from the layout
 \begin{itemize}
