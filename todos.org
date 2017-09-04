@@ -1,4 +1,5 @@
- This file lists all ToDos for all LaTeX-Packages and Classes in this
+ #+STARTUP: showeverything 
+This file lists all ToDos for all LaTeX-Packages and Classes in this
  Repo
 
 
