@@ -87,7 +87,6 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-\RequirePackage{calc}
 
 \ifhwa@tikz
 \RequirePackage{tikz}
