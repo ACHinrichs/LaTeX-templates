@@ -37,5 +37,5 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
     - hlines=header just remove the hlines around the Title
   - [ ] Remove legacy styles
   - [ ] Update Docu
-** TODO [/] v3.?
+** TODO [0/1] v3.?
   - [ ] Unite Implementation and DOcumentation part of Documentation
