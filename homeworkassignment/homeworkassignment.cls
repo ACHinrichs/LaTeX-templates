@@ -104,7 +104,7 @@
     draw}
 }
 \fi
-\newcommand{\hwa@pointboxsize}{1.5cm}
+\newcommand{\hwa@pointboxsize}{3em}
  % Make sure that this is the last Package loaded
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
@@ -258,9 +258,9 @@
 \DeclareDocumentCommand\makeGradingTable{o}{
   \begin{table}[hb]
     \centering
-    \normalsize
+    \large
     \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
     \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
     \endtabular
   \end{table}
@@ -296,34 +296,50 @@
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
 \newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 
-\newcommand{\problem}[1]{\@startsection{problem}%Name
+\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
   {\normalfont\Large\bfseries}%style
-  *{#1} \addcontentsline{toc}{section}{#1}
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill
+     \frame{\framebox[\hwa@pointboxsize]{
+         \hfill \normalfont{\large/\small{#2}}}}
+    }
+  }
+  \addcontentsline{toc}{section}{#1}
 }
 
-\newcommand{\problemWithPoints}[2]{\problem{#1 \hfill
-    \framebox[\hwa@pointboxsize]{\hfill\normalfont\large/\small{#2}}}
-}
-
-\newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
+\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
   {\normalfont\large\bfseries}%style
-  *{#1} \addcontentsline{toc}{subsection}{#1} }
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\small{#2}}
+    }
+  }
+  \addcontentsline{toc}{subsection}{#1}
+}
 
-\newcommand{\subsubproblem}[1]{\@startsection{subsubproblem}%Name
+\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
   {3}%Level
   {\z@}%indent
   {-.5em}%beforeskip
   {.5em}%afterskip
   {\normalfont\bfseries}%style
-  *{#1} }
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\scriptsize{#2}}
+    }
+  }
+}
 
 \newcommand{\keyword}[1]{\@startsection{keyword}%Name
   {4}%Level
@@ -355,7 +371,7 @@
       \setcounter{problem}{1}
     }
     %\newproblem*[#1]
-    \problemWithPoints{\GetTranslation{aufgabe} \hwa@problemno}{#2}
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }
@@ -365,15 +381,28 @@
   \problem{\GetTranslation{aufgabe} \hwa@problemno}
 }
 
-\newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
+\DeclareDocumentCommand\newsubproblem{O{} g}{
+  \stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{\GetTranslation{aufgabe}
-    \hwa@problemno{}.\hwa@subproblemno}
+  \IfNoValueTF{#2}{
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}
+  }
+  {
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}[#2]
+  }
 }
 
-\newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
+\DeclareDocumentCommand\newsubsubproblem{O{} g}{
+  \stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \subsubproblem{\hwa@subsubproblemno)}
+  \IfNoValueTF{#2}{
+    \subsubproblem{\hwa@subsubproblemno)}
+  }
+  {
+    \subsubproblem{\hwa@subsubproblemno)}[#2]
+  }
 }
 
 \newcommand{\QED}{\begin{flushright}
