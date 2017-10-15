@@ -514,7 +514,6 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-\RequirePackage{calc}
 
 %    \end{macrocode}
 % \subsection{TikZ-Styles}
@@ -859,6 +858,17 @@
   *{#1} \addcontentsline{toc}{section}{#1}
 }
 
+
+\newcommand{\problemWithPoints}[2]{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large\bfseries}%style
+  *{#1 \hfill \framebox[\hwa@pointboxsize]{\hfill\normalfont\large/\small{#2}}}\addcontentsline{toc}{section}{#1}
+}
+
+
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
@@ -904,10 +914,15 @@
 % informations.
 %    \begin{macrocode}
 \DeclareDocumentCommand\newproblem{O{} g}{
-  \newproblem*[#1]
   \IfNoValueTF{#2}{
+    \newproblem*[#1]
     \addToGradingTable{\# \hwa@problemno}
   }{
+    \IfNoValueF{#1}{
+      \setcounter{problem}{1}
+    }
+    %\newproblem*[#1]
+    \problemWithPoints{\GetTranslation{aufgabe} \hwa@problemno}{#2}
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }

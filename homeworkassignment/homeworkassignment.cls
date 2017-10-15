@@ -37,7 +37,7 @@
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
 \def\fileversion{v2.5}
-\def\filedate{2017/10/08}
+\def\filedate{2017/10/15}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -305,6 +305,15 @@
   *{#1} \addcontentsline{toc}{section}{#1}
 }
 
+\newcommand{\problemWithPoints}[2]{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large\bfseries}%style
+  *{#1 \hfill \framebox[\hwa@pointboxsize]{\hfill\normalfont\large/\small{#2}}}\addcontentsline{toc}{section}{#1}
+}
+
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
@@ -343,10 +352,15 @@
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
 
 \DeclareDocumentCommand\newproblem{O{} g}{
-  \newproblem*[#1]
   \IfNoValueTF{#2}{
+    \newproblem*[#1]
     \addToGradingTable{\# \hwa@problemno}
   }{
+    \IfNoValueF{#1}{
+      \setcounter{problem}{1}
+    }
+    %\newproblem*[#1]
+    \problemWithPoints{\GetTranslation{aufgabe} \hwa@problemno}{#2}
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }

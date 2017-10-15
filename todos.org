@@ -19,8 +19,7 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
   - [ ] Add proof by contradiction environment
   - [ ] Create environments for all existing proofs
   - [-] [1/2] Add points for excercises
-    - [-] Expand \textbackslash{}newproblem 
-      #+LATEX: \sout{\textbackslash{}newsubproblem etc}
+    - [-] Expand \textbackslash{}newproblem \textbackslash{}newsubproblem etc
       by an optional argument to take the maximum ammount of point one
       can gain at this problem. 
       - [ ] When passed this is passed to \textbackslash{}newsubproblem,
