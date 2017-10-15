@@ -1,10 +1,10 @@
 %%
-%% This is file `HomeworkAssignment.cls',
+%% This is file `homeworkassignment.cls',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% HomeworkAssignment.dtx  (with options: `class')
+%% homeworkassignment.dtx  (with options: `class')
 %% Copyright (c) 2017 by Adrian C. Hinrichs
 %% 
 %% This File may be distributed and/or modified under the condition of the below
@@ -36,10 +36,10 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.4}
-\def\filedate{2017/04/07}
+\def\fileversion{v2.5}
+\def\filedate{2017/10/08}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
-\ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
+\ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -116,7 +116,7 @@
   \ifthenelse{\equal{\hwa@design}{v1}}{
     \empty
   }{
-    \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+    \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
     is not known}{The option design takes an argument to set the
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
@@ -197,7 +197,7 @@
         \GetTranslation{abgabe}: \hwa@abgabe}
       \fancyfoot[RE,LO]{\thepage}
     }{
-      \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+      \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
         is not known}{The option design takes an argument to set the
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
@@ -219,7 +219,7 @@
         \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
           \ifthenelse{\equal{#1}{Roman}}{
             \renewcommand{#2}{\Roman{#3}} }{
-            \ClassError{HomeworkAssignment}{Invalid Value #1 for
+            \ClassError{homeworkassignment}{Invalid Value #1 for
               option Counter-Styling}{Possible Values are alph,
               arabic, Arabic, roman or Roman.}  } } } } } }
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
@@ -413,4 +413,4 @@
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \endinput
 %%
-%% End of file `HomeworkAssignment.cls'.
+%% End of file `homeworkassignment.cls'.

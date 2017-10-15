@@ -32,14 +32,14 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.4}
-\def\filedate{2017/04/07}
+\def\fileversion{v2.5}
+\def\filedate{2017/10/08}
 % \iffalse
 %<*driver>
-\ProvidesFile{HomeworkAssignment.dtx}
+\ProvidesFile{homeworkassignment.dtx}
 %</driver>
 %<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<class>\ProvidesClass{HomeworkAssignment}[\filedate\space\fileversion]
+%<class>\ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 %<*driver>
 \documentclass{ltxdoc}
 \EnableCrossrefs
@@ -71,7 +71,7 @@
 \DeclareMathOperator{\charakteristik}{char}
 
 \begin{document}
-\DocInput{HomeworkAssignment.dtx}
+\DocInput{homeworkassignment.dtx}
 \end{document}
 %</driver>
 % \fi
@@ -92,8 +92,11 @@
 %
 % \DoNotIndex{\newcommand,\newenvironment}
 %
-% \title{The \textsf{HomeworkAssignment} class\thanks{This document
-% corresponds to \textsf{HomeworkAssignment}~\fileversion, dated~
+% \title{The \textsf{homeworkassignment}\footnote{The name was changed
+% with version v3.0, to become compatible with CTANs guidlines and to
+% maintain a degree of backwards compatibility.  The class was called
+% \textsf{HomeworkAssignment} prior to v3.0} class\thanks{This document
+% corresponds to \textsf{homeworkassignment}~\fileversion, dated~
 % \filedate.}}
 % \author{Adrian C Hinrichs \\
 % \texttt{adrian.hinrichs@rwth-aachen.de}}
@@ -320,7 +323,7 @@
 % \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
 % Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
 % \end{description}
-% Because I am very lazy, the \texttt{HomeworkAssignment} is \enquote{a little
+% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
 % bit} bloated. These are all required packages:
 % \begin{description}
 % \dep{kvoptions}{Heiko
@@ -354,13 +357,13 @@
 % \begin{description}
 % \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
 % al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
-% tool. When loading TikZ, the HomeworkAssignment automatically loads
+% tool. When loading TikZ, the homeworkassignment automatically loads
 % a shipload of TikZ--librarys and own styles\todo{I intend to move
 % these styles to a own package, so that they are usable without the
-% HomeworkAssignment}. See \autoref{imp:tikz} for more informations}
+% homeworkassignment}. See \autoref{imp:tikz} for more informations}
 % \dep{listings}{1996–2004 Carsten Heinz, 2006–2007 Brooks Moses,
 % 2013– Jobst Hoffmann}{https://www.ctan.org/pkg/listings}{For
-% source--code. Sourcecode in the HomeworkAssignment is automatically
+% source--code. Sourcecode in the homeworkassignment is automatically
 % framed, printed in \texttt{scriptsize}, and linebeals will be
 % introduced}
 % \end{description}
@@ -407,6 +410,10 @@
 % \item[v2.4 - 2017/04/07] Fix math alignment, \\
 %   Add option for flushed left equations, \\
 %   Update amath port to use
+% \item[v3.0 - pending] Rename to \texttt{homeworkassignment}\\
+%   Add Environment for various proofs
+%   Add points for exercises and a place to fill them in\\
+%   Add option to remove or decrease the hlines
 %
 % \end{description}
 % \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
@@ -539,7 +546,7 @@
   \ifthenelse{\equal{\hwa@design}{v1}}{
     \empty
   }{
-    \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+    \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
     is not known}{The option design takes an argument to set the
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
@@ -632,7 +639,7 @@
         \GetTranslation{abgabe}: \hwa@abgabe}
       \fancyfoot[RE,LO]{\thepage}
     }{
-      \ClassError{HomeworkAssignment}{Value '\hwa@design' for key 'design'
+      \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
         is not known}{The option design takes an argument to set the
         Pagestyle to the one of a previous version. Acceptable values are
         'v1', or 'v2'}
@@ -678,7 +685,7 @@
         \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
           \ifthenelse{\equal{#1}{Roman}}{
             \renewcommand{#2}{\Roman{#3}} }{
-            \ClassError{HomeworkAssignment}{Invalid Value #1 for
+            \ClassError{homeworkassignment}{Invalid Value #1 for
               option Counter-Styling}{Possible Values are alph,
               arabic, Arabic, roman or Roman.}  } } } } } }
 %    \end{macrocode}
