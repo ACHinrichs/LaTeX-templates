@@ -305,13 +305,8 @@
   *{#1} \addcontentsline{toc}{section}{#1}
 }
 
-\newcommand{\problemWithPoints}[2]{\@startsection{problem}%Name
-  {1}%Level
-  {\z@}%indent
-  {-2em \@plus -1em \@minus -1em}%beforeskip
-  {1ex \@plus .5ex}%afterskip
-  {\normalfont\Large\bfseries}%style
-  *{#1 \hfill \framebox[\hwa@pointboxsize]{\hfill\normalfont\large/\small{#2}}}\addcontentsline{toc}{section}{#1}
+\newcommand{\problemWithPoints}[2]{\problem{#1 \hfill
+    \framebox[\hwa@pointboxsize]{\hfill\normalfont\large/\small{#2}}}
 }
 
 \newcommand{\subproblem}[1]{\@startsection{subproblem}%Name
