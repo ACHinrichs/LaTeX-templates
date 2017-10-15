@@ -33,7 +33,7 @@
 % SOFTWARE.
 % \fi
 \def\fileversion{v2.5}
-\def\filedate{2017/10/08}
+\def\filedate{2017/10/15}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -349,6 +349,12 @@
 % \dep{array}{Frank Mittelbach, David Carlisle, The
 % \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
 % for tables and arrays\todo{\texttt{array} possibly can be removed}}
+% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
+% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
+% high-level interface for producing documentlevel commands. In that
+% way, it offers a replacement for \LaTeXe 's
+% \texttt{\textbackslash{}newcommand} macro, with significantly improved
+% functionality.}
 % \end{description}
 % \subsection{Recommended Dependencies}
 % These are not loaded automatically, but require a switch as option
@@ -361,11 +367,11 @@
 % a shipload of TikZ--librarys and own styles\todo{I intend to move
 % these styles to a own package, so that they are usable without the
 % homeworkassignment}. See \autoref{imp:tikz} for more informations}
-% \dep{listings}{1996–2004 Carsten Heinz, 2006–2007 Brooks Moses,
-% 2013– Jobst Hoffmann}{https://www.ctan.org/pkg/listings}{For
+% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
+% Hoffmann}{https://www.ctan.org/pkg/listings}{For
 % source--code. Sourcecode in the homeworkassignment is automatically
 % framed, printed in \texttt{scriptsize}, and linebeals will be
-% introduced}
+% introduced} 
 % \end{description}
 % \pagebreak
 % \section{Development and support}
@@ -438,7 +444,7 @@
 % non-document-breaking bugfix, the patch--number has to be
 % incremented.\\
 % Because Fixing Bugs is a part of developtment, developtment-versions
-% to not have numeric patch--numbers, but alphabetic identifiers,
+% do not have numeric patch--numbers, but alphabetic identifiers,
 % directly after the minor--version.
 % \pagebreak
 % \section{Examples}
@@ -507,6 +513,9 @@
 \fi
 \RequirePackage{etoolbox}
 \RequirePackage{array}
+\RequirePackage{xparse}
+\RequirePackage{calc}
+
 %    \end{macrocode}
 % \subsection{TikZ-Styles}
 % \label{imp:tikz}
@@ -528,6 +537,11 @@
     draw}
 }
 \fi
+%    \end{macrocode}
+% \subsection{Constants}
+% Defines some constants
+%    \begin{macrocode}
+\newcommand{\hwa@pointboxsize}{1.5cm}
 %    \end{macrocode}
 % \subsection{Geometry}
 % Make sure that this is the last Package loaded
@@ -551,7 +565,8 @@
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
   }
-}%    \end{macrocode}
+}
+%    \end{macrocode}
 %
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
@@ -594,7 +609,7 @@
 %    \end{macrocode}
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
-% All headers are cleread before they get any Text --- just to be sure.  \\
+% All headers are cleared before they get any Text --- just to be sure.  \\
 % The headers look like specified above (\ref{HEADERS}). Also inserts
 % the Titlepage.
 %    \begin{macrocode}
@@ -720,10 +735,14 @@
 % \end{macro}
 % \begin{macro}{\addToGradingTable}
 %    \begin{macrocode}
-\newcommand{\addToGradingTable}[1]{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
-  \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
+\DeclareDocumentCommand\addToGradingTable{m g}{
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \IfNoValueTF{#2}{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+  }{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill {#2} &}
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -744,14 +763,21 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\makeGradingTable}
+%   Outputs a table to fill in the reached Points.  Only shows Problems
+%   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
+%   according number of maximum points for each problem, if
+%   specified.\\Displayes the total number of maximum Problems, if
+%   given by Argument  
+%   \paragraph{Arguments}  \texttt{[\#1]}: \emph{Optional.} The total number of points
+%   reachable.
 %    \begin{macrocode}
-\newcommand{\makeGradingTable}{
+\DeclareDocumentCommand\makeGradingTable{o}{
   \begin{table}[hb]
     \centering
-    \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$    \\\hline
-    \hwa@gradingtbl@lineTwo  \vspace{.15cm}~\\\hline
+    \normalsize
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline
+    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
     \endtabular
   \end{table}
   }
@@ -877,9 +903,13 @@
 % \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
 % informations.
 %    \begin{macrocode}
-\newcommand{\newproblem}[1][]{
+\DeclareDocumentCommand\newproblem{O{} g}{
   \newproblem*[#1]
-  \addToGradingTable{\# \hwa@problemno}
+  \IfNoValueTF{#2}{
+    \addToGradingTable{\# \hwa@problemno}
+  }{
+    \addToGradingTable{\# \hwa@problemno}{/#2}
+  }
 }
 
 \WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
@@ -889,17 +919,20 @@
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{\GetTranslation{aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
+  \subproblem{\GetTranslation{aufgabe}
+    \hwa@problemno{}.\hwa@subproblemno}
+}
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \subsubproblem{\hwa@subsubproblemno)} }
+  \subsubproblem{\hwa@subsubproblemno)}
+}
 
 %    \end{macrocode}
 % \begin{macro}{End of Proof}
 %    \begin{macrocode}
 \newcommand{\QED}{\begin{flushright}
-    \textit{QED}
+    \textsc{Qed}
   \end{flushright}
 }
 \newcommand{\EOP}{\begin{flushright}

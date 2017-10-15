@@ -86,6 +86,9 @@
 \fi
 \RequirePackage{etoolbox}
 \RequirePackage{array}
+\RequirePackage{xparse}
+\RequirePackage{calc}
+
 \ifhwa@tikz
 \RequirePackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,decorations,
@@ -102,6 +105,7 @@
     draw}
 }
 \fi
+\newcommand{\hwa@pointboxsize}{1.5cm}
  % Make sure that this is the last Package loaded
 \ifthenelse{\equal{\hwa@design}{v2}}{
   \RequirePackage{geometry}
@@ -121,7 +125,7 @@
     Pagestyle to the one of a previous version. Acceptable values are
     'v1', or 'v2'}
   }
-}%    \end{macrocode}
+}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -232,10 +236,14 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
-\newcommand{\addToGradingTable}[1]{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{1cm}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne#1 &}
-  \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo   &}
+\DeclareDocumentCommand\addToGradingTable{m g}{
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \IfNoValueTF{#2}{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+  }{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill {#2} &}
+  }
 }
 \AtEndDocument{%
   \immediate\write\@auxout{%
@@ -248,13 +256,13 @@
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
   }
 }
-\newcommand{\makeGradingTable}{
+\DeclareDocumentCommand\makeGradingTable{o}{
   \begin{table}[hb]
     \centering
-    \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs |p{1cm}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$    \\\hline
-    \hwa@gradingtbl@lineTwo  \vspace{.15cm}~\\\hline
+    \normalsize
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline
+    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
     \endtabular
   \end{table}
   }
@@ -335,9 +343,13 @@
 
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
 
-\newcommand{\newproblem}[1][]{
+\DeclareDocumentCommand\newproblem{O{} g}{
   \newproblem*[#1]
-  \addToGradingTable{\# \hwa@problemno}
+  \IfNoValueTF{#2}{
+    \addToGradingTable{\# \hwa@problemno}
+  }{
+    \addToGradingTable{\# \hwa@problemno}{/#2}
+  }
 }
 
 \WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
@@ -347,14 +359,17 @@
 
 \newcommand{\newsubproblem}[1][]{\stepcounter{subproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \subproblem{\GetTranslation{aufgabe} \hwa@problemno{}.\hwa@subproblemno} }
+  \subproblem{\GetTranslation{aufgabe}
+    \hwa@problemno{}.\hwa@subproblemno}
+}
 
 \newcommand{\newsubsubproblem}[1][]{\stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \subsubproblem{\hwa@subsubproblemno)} }
+  \subsubproblem{\hwa@subsubproblemno)}
+}
 
 \newcommand{\QED}{\begin{flushright}
-    \textit{QED}
+    \textsc{Qed}
   \end{flushright}
 }
 \newcommand{\EOP}{\begin{flushright}
