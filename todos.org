@@ -38,5 +38,7 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
   - [ ] Remove legacy styles
   - [ ] Update Docu
   - [ ] Add allowdisplaybreaks
+  - [ ] BUG of onecolumn and maketitle
+    - Pull changes from NumRech u3
 ** TODO [0/1] v3.?
   - [ ] Unite Implementation and DOcumentation part of Documentation
