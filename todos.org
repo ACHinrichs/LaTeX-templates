@@ -36,9 +36,10 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
     - hlines=none remove all
     - hlines=header just remove the hlines around the Title
   - [X] Remove legacy styles
-  - [ ] Update Docu
+  - [ ] Rework Docu
+    - Unite Implementation and Documentation part of Documentation
+    - Document all features
+    - Update Changelog
   - [X] Add allowdisplaybreaks
   - [X] BUG of onecolumn and maketitle
     - Pull changes from NumRech u3
-** TODO [0/1] v3.?
-  - [ ] Unite Implementation and Documentation part of Documentation
