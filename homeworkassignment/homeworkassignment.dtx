@@ -673,6 +673,24 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Internal commands}
+% \begin{macro}{\hwa@maketitletext}
+%   Prints out the title with author etc. Used to reduce code
+%   duplication for two- and onecolumn styles
+%    \begin{macrocode}
+\newcommand{\hwa@maketitletext}{
+  \begin{centering}
+    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
+    \vspace{.25cm} \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe\\
+    \vspace{.5cm} \hrule \vspace{.25cm}
+    \normalsize{\@author}\\
+    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+  \end{centering}
+}
+%    \end{macrocode}
+% \end{macro}
+
 % \subsubsection{Counter--Commands}
 % \begin{macro}{Counter--Commands}
 %   These are used to output the Exercise numbers in the desired style
@@ -823,18 +841,13 @@
 
 \renewcommand{\maketitle} {
   \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt}
-  \twocolumn[{%
-    \begin{centering}
-      \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
-      \vspace{.25cm} \large
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe\\
-      \vspace{.5cm} \hrule \vspace{.25cm}
-      \normalsize{\@author}\\
-      \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
-    \end{centering}
-  }]
+  \ifhwa@twocolumn{
+    \twocolumn[{
+      \hwa@maketitletext
+    }]
+  }\else{
+    \hwa@maketitletext
+  }\fi
 }
 %    \end{macrocode}
 % \end{macro}
