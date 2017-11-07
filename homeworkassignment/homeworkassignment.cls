@@ -53,6 +53,7 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{tikz}
+\DeclareStringOption[all]{hlines}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
 \ifhwa@twoside
@@ -88,6 +89,37 @@
 \RequirePackage{array}
 \RequirePackage{xparse}
 
+
+
+\newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+  \vspace{.25cm}}
+\newcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+\newcommand{\hwa@headrulewidth}{.7pt}
+\ifthenelse{\equal{\hwa@hlines}{all}}{
+  \renewcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+    \vspace{.25cm}}
+  \renewcommand{\hwa@headrulewidth}{.7pt}
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+}{
+  \ifthenelse{\equal{\hwa@hlines}{decreased}}{
+    \renewcommand{\hwa@hline@LONE}{ \vspace{.25cm} {\hrule height 2pt}
+      \vspace{.25cm}}
+    \renewcommand{\hwa@headrulewidth}{.7pt}
+  }{\ifthenelse{\equal{\hwa@hlines}{header}}{
+      \renewcommand{\hwa@headrulewidth}{.7pt}
+    }{\ifthenelse{\equal{\hwa@hlines}{none}}{
+        \renewcommand{\hwa@headrulewidth}{0pt}
+      }{
+        \ClassError{homeworkassignment}{Value '\hwa@lines' for key 'hlines'
+          is not known}{The option hlines takes an argument to set which
+          hlines are drawn. Possible values are 'all','decreased' , 'header', and
+          'none'. 'all' is standard.}
+      }
+    }
+    \renewcommand{\hwa@hline@LONE}{~\\\vspace{.5cm}}
+  }
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.75cm}}
+}
 \ifhwa@tikz
 \RequirePackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,decorations,
@@ -163,7 +195,7 @@
   %
   \fancyhf{}
   % clear all six fields
-  \renewcommand{\headrulewidth}{.7pt}
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
   \renewcommand{\footrulewidth}{0pt}
   \fancyfoot[R]{\thepage}
   \fancyhead[L]{\hwa@tutorium}
@@ -207,20 +239,19 @@
     }
     % ==== END OF LEGACY CODE ========================================
   }
-  \renewcommand{\headrulewidth}{0.7pt}
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
   \renewcommand{\footrulewidth}{0pt}
 }
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
-    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
-    \vspace{.25cm} \large
+    \huge{\textbf{\hwa@kurs}}\hwa@hline@LONE \large
     \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
-    \vspace{.5cm} \hrule \vspace{.25cm}
+    \hwa@hline@LTWO
     \normalsize{\@author}\\
-    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+    \hwa@hline@LTWO \normalsize
   \end{centering}
 }
 
