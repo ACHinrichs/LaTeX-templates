@@ -36,7 +36,7 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5b}
+\def\fileversion{v2.5c}
 \def\filedate{2017/11/07}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
@@ -47,7 +47,6 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{listings}
-\DeclareStringOption[v2]{design}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
@@ -137,26 +136,15 @@
 }
 \fi
 \newcommand{\hwa@pointboxsize}{3em}
- % Make sure that this is the last Package loaded
-\ifthenelse{\equal{\hwa@design}{v2}}{
-  \RequirePackage{geometry}
-  \ifhwa@twocolumn
+\RequirePackage{geometry}
+\ifhwa@twocolumn{
   \geometry{top=2cm, bottom=2cm, left=2cm,
     headsep=14pt,hmarginratio={1:1}}
-  \else
+}\else{
   \geometry{top=2cm, bottom=2cm, width=35em,
     headsep=14pt,hmarginratio={4:3}}
-  \fi
-}{
-  \ifthenelse{\equal{\hwa@design}{v1}}{
-    \empty
-  }{
-    \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
-    is not known}{The option design takes an argument to set the
-    Pagestyle to the one of a previous version. Acceptable values are
-    'v1', or 'v2'}
-  }
-}
+}\fi
+
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -202,9 +190,7 @@
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   \fancyhf{}
-
-  \ifthenelse{\equal{\hwa@design}{v2}}{
-    \ifhwa@twoside % IF
+  \ifhwa@twoside{ % IF
 
     \fancyhead[RO]{\@author}
     \fancyhead[LO]{\hwa@kurs\\
@@ -215,7 +201,7 @@
     }
     \fancyfoot[RO,LE]{\thepage}
 
-    \else %ELSE
+  }\else{ %ELSE
 
     \fancyhead[R]{\hwa@kurs\\
       \@author}
@@ -223,22 +209,7 @@
       \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
       \GetTranslation{abgabe}: \hwa@abgabe}
     \fancyfoot[R]{\thepage}
-    \fi %ENDIF
-  }{
-    % ==== LEGACY CODE; DO NOT CHANGE ================================
-    \ifthenelse{\equal{\hwa@design}{v1}}{
-      \fancyhead[RE,LO]{\@author}
-      \fancyhead[LE,RO]{\hwa@kurs\\
-        \GetTranslation{abgabe}: \hwa@abgabe}
-      \fancyfoot[RE,LO]{\thepage}
-    }{
-      \ClassError{homeworkassignment}{Value '\hwa@design' for key 'design'
-        is not known}{The option design takes an argument to set the
-        Pagestyle to the one of a previous version. Acceptable values are
-        'v1', or 'v2'}
-    }
-    % ==== END OF LEGACY CODE ========================================
-  }
+  }\fi %ENDIF
   \renewcommand{\headrulewidth}{\hwa@headrulewidth}
   \renewcommand{\footrulewidth}{0pt}
 }
