@@ -679,11 +679,17 @@
 }
 \pagestyle{followingpage}
 %    \end{macrocode}
-% \section{Redefinition of existing Commands}
+% \subsection{Enhance Mathenvironments}
 % \begin{macro}
 %   Displays equation-numbers as upper-case roman numbers.
 %    \begin{macrocode}
 \renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}
+%   Allow pagebreaks in Mathmode
+%    \begin{macrocode}
+\allowdisplaybreaks
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Internal commands}
