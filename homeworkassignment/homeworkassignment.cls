@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5}
-\def\filedate{2017/10/15}
+\def\fileversion{v2.5b}
+\def\filedate{2017/11/07}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -212,6 +212,18 @@
 }
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
+\newcommand{\hwa@maketitletext}{
+  \begin{centering}
+    \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
+    \vspace{.25cm} \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe\\
+    \vspace{.5cm} \hrule \vspace{.25cm}
+    \normalsize{\@author}\\
+    \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
+  \end{centering}
+}
+
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
@@ -241,7 +253,8 @@
   \IfNoValueTF{#2}{
     \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
   }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill {#2} &}
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+      {\string\small #2} &}
   }
 }
 \AtEndDocument{%
@@ -279,18 +292,13 @@
 
 \renewcommand{\maketitle} {
   \thispagestyle{firstpage}
-  \setlength{\headheight}{25pt}
-  \twocolumn[{%
-    \begin{centering}
-      \huge{\textbf{\hwa@kurs}} \vspace{.25cm} {\hrule height 2pt}
-      \vspace{.25cm} \large
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe\\
-      \vspace{.5cm} \hrule \vspace{.25cm}
-      \normalsize{\@author}\\
-      \vspace{.25cm} \hrule \vspace{.25cm} \normalsize
-    \end{centering}
-  }]
+  \ifhwa@twocolumn{
+    \twocolumn[{
+      \hwa@maketitletext
+    }]
+  }\else{
+    \hwa@maketitletext
+  }\fi
 }
 \newcounter{problem} \setcounter{problem}{0}
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
@@ -368,7 +376,7 @@
     \addToGradingTable{\# \hwa@problemno}
   }{
     \IfNoValueF{#1}{
-      \setcounter{problem}{1}
+      \setcounter{problem}{#1}
     }
     %\newproblem*[#1]
     \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]

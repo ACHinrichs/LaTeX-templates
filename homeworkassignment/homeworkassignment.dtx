@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.5}
-\def\filedate{2017/10/15}
+\def\fileversion{v2.5b}
+\def\filedate{2017/11/07}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -758,7 +758,8 @@
   \IfNoValueTF{#2}{
     \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
   }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill {#2} &}
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+      {\string\small #2} &}
   }
 }
 %    \end{macrocode}
@@ -941,7 +942,7 @@
     \addToGradingTable{\# \hwa@problemno}
   }{
     \IfNoValueF{#1}{
-      \setcounter{problem}{1}
+      \setcounter{problem}{#1}
     }
     %\newproblem*[#1]
     \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
