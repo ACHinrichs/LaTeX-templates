@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.5c}
-\def\filedate{2017/11/07}
+\def\fileversion{v2.5d}
+\def\filedate{2017/11/09}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -629,13 +629,13 @@
 % Make sure that this is the last Package loaded
 %    \begin{macrocode}
 \RequirePackage{geometry}
-\ifhwa@twocolumn{
-  \geometry{top=2cm, bottom=2cm, left=2cm,
+\ifhwa@twocolumn
+\geometry{top=2cm, bottom=2cm, left=2cm,
     headsep=14pt,hmarginratio={1:1}}
-}\else{
-  \geometry{top=2cm, bottom=2cm, width=35em,
-    headsep=14pt,hmarginratio={4:3}}
-}\fi
+\else
+\geometry{top=2cm, bottom=2cm, width=35em,
+  headsep=14pt,hmarginratio={4:3}}
+\fi
 
 %    \end{macrocode}
 %
@@ -695,26 +695,25 @@
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   \fancyhf{}
-  \ifhwa@twoside{ % IF
-    
-    \fancyhead[RO]{\@author}
-    \fancyhead[LO]{\hwa@kurs\\
-      \hwa@tutorium}
-    \fancyhead[LE]{
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe
-    }
-    \fancyfoot[RO,LE]{\thepage}
-    
-  }\else{ %ELSE
-    
-    \fancyhead[R]{\hwa@kurs\\
-      \@author}
-    \fancyhead[L]{\hwa@tutorium\\
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe}
-    \fancyfoot[R]{\thepage}
-  }\fi %ENDIF
+  \ifhwa@twoside % IF
+  \fancyhead[RO]{\@author}
+  \fancyhead[LO]{\hwa@kurs\\
+    \hwa@tutorium}
+  \fancyhead[LE]{
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe
+  }
+  \fancyfoot[RO,LE]{\thepage}
+  
+  \else %ELSE
+  
+  \fancyhead[R]{\hwa@kurs\\
+    \@author}
+  \fancyhead[L]{\hwa@tutorium\\
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe}
+  \fancyfoot[R]{\thepage}
+  \fi %ENDIF
   \renewcommand{\headrulewidth}{\hwa@headrulewidth}
   \renewcommand{\footrulewidth}{0pt}
 }

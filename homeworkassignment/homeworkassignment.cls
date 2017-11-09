@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5c}
-\def\filedate{2017/11/07}
+\def\fileversion{v2.5d}
+\def\filedate{2017/11/09}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{kvoptions}
@@ -137,13 +137,13 @@
 \fi
 \newcommand{\hwa@pointboxsize}{3em}
 \RequirePackage{geometry}
-\ifhwa@twocolumn{
-  \geometry{top=2cm, bottom=2cm, left=2cm,
+\ifhwa@twocolumn
+\geometry{top=2cm, bottom=2cm, left=2cm,
     headsep=14pt,hmarginratio={1:1}}
-}\else{
-  \geometry{top=2cm, bottom=2cm, width=35em,
-    headsep=14pt,hmarginratio={4:3}}
-}\fi
+\else
+\geometry{top=2cm, bottom=2cm, width=35em,
+  headsep=14pt,hmarginratio={4:3}}
+\fi
 
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
@@ -190,31 +190,31 @@
   \fancyhead[R]{\@date } }
 \fancypagestyle{followingpage}{
   \fancyhf{}
-  \ifhwa@twoside{ % IF
+  \ifhwa@twoside % IF
+  \fancyhead[RO]{\@author}
+  \fancyhead[LO]{\hwa@kurs\\
+    \hwa@tutorium}
+  \fancyhead[LE]{
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe
+  }
+  \fancyfoot[RO,LE]{\thepage}
 
-    \fancyhead[RO]{\@author}
-    \fancyhead[LO]{\hwa@kurs\\
-      \hwa@tutorium}
-    \fancyhead[LE]{
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe
-    }
-    \fancyfoot[RO,LE]{\thepage}
+  \else %ELSE
 
-  }\else{ %ELSE
-
-    \fancyhead[R]{\hwa@kurs\\
-      \@author}
-    \fancyhead[L]{\hwa@tutorium\\
-      \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-      \GetTranslation{abgabe}: \hwa@abgabe}
-    \fancyfoot[R]{\thepage}
-  }\fi %ENDIF
+  \fancyhead[R]{\hwa@kurs\\
+    \@author}
+  \fancyhead[L]{\hwa@tutorium\\
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe}
+  \fancyfoot[R]{\thepage}
+  \fi %ENDIF
   \renewcommand{\headrulewidth}{\hwa@headrulewidth}
   \renewcommand{\footrulewidth}{0pt}
 }
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
+\allowdisplaybreaks
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textbf{\hwa@kurs}}\hwa@hline@LONE \large
