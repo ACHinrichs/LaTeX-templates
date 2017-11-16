@@ -356,6 +356,8 @@
 % way, it offers a replacement for \LaTeXe 's
 % \texttt{\textbackslash{}newcommand} macro, with significantly improved
 % functionality.}
+% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
+% Sans inspired font, used for all sans serifes fonts}
 % \end{description}
 % \subsection{Recommended Dependencies}
 % These are not loaded automatically, but require a switch as option
@@ -372,7 +374,7 @@
 % Hoffmann}{https://www.ctan.org/pkg/listings}{For
 % source--code. Sourcecode in the homeworkassignment is automatically
 % framed, printed in \texttt{scriptsize}, and linebeals will be
-% introduced} 
+% introduced}
 % \end{description}
 % \pagebreak
 % \section{Development and support}
@@ -556,7 +558,7 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-
+\RequirePackage{gillius2}
 %    \end{macrocode}
 
 % \begin{macro}{\hwa@hline@L...}
@@ -739,8 +741,8 @@
 %    \begin{macrocode}
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
-    \huge{\textbf{\hwa@kurs}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\
@@ -927,7 +929,7 @@
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
-  {\normalfont\Large\bfseries}%style
+  {\normalfont\Large \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill
@@ -943,7 +945,7 @@
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
-  {\normalfont\large\bfseries}%style
+  {\normalfont\large \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill \framebox[\hwa@pointboxsize]{
@@ -958,7 +960,7 @@
   {\z@}%indent
   {-.5em}%beforeskip
   {.5em}%afterskip
-  {\normalfont\bfseries}%style
+  {\normalfont \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill \framebox[\hwa@pointboxsize]{
@@ -972,7 +974,7 @@
   {\parindent}%indent
   {-.1em}%beforeskip
   {\z@}%afterskip
-  {\normalfont\bfseries}%style
+  {\normalfont \sffamily\bfseries}%style
   *{#1~~}
 }
 

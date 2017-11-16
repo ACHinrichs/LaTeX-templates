@@ -87,7 +87,7 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-
+\RequirePackage{gillius2}
 
 
 \newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
@@ -217,8 +217,8 @@
 \allowdisplaybreaks
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
-    \huge{\textbf{\hwa@kurs}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\
@@ -311,7 +311,7 @@
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
   {1ex \@plus .5ex}%afterskip
-  {\normalfont\Large\bfseries}%style
+  {\normalfont\Large \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill
@@ -327,7 +327,7 @@
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
   {.5ex \@plus .5ex}%afterskip
-  {\normalfont\large\bfseries}%style
+  {\normalfont\large \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill \framebox[\hwa@pointboxsize]{
@@ -342,7 +342,7 @@
   {\z@}%indent
   {-.5em}%beforeskip
   {.5em}%afterskip
-  {\normalfont\bfseries}%style
+  {\normalfont \sffamily\bfseries}%style
   *{#1
     \IfNoValueF{#2}{
       \hfill \framebox[\hwa@pointboxsize]{
@@ -356,7 +356,7 @@
   {\parindent}%indent
   {-.1em}%beforeskip
   {\z@}%afterskip
-  {\normalfont\bfseries}%style
+  {\normalfont \sffamily\bfseries}%style
   *{#1~~}
 }
 
