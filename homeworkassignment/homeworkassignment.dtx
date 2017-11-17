@@ -271,6 +271,77 @@
 \fi
 \LoadClass{article}
 %    \end{macrocode}
+% \begin{macro}{\hwa@hline@L...}
+%   Defines new commands to output desired lines and change the
+%   constant \textrm{\textbackslash{}hwa@headrulewidth}\\
+%   \begin{framed}
+%     \textsf{ATTENTION: \textrm{\textbackslash{}hwa@hline@LONE} breaks the
+%     line automatically, in opposite to \textrm{\textbackslash{}hwa@hline@LTWO}}
+%   \end{framed}
+%    \begin{macrocode}
+
+\newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+  \vspace{.25cm}}
+\newcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+\newcommand{\hwa@headrulewidth}{.7pt}
+\ifthenelse{\equal{\hwa@hlines}{all}}{
+  \renewcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+    \vspace{.25cm}}
+  \renewcommand{\hwa@headrulewidth}{.7pt}
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+}{
+  \ifthenelse{\equal{\hwa@hlines}{decreased}}{
+    \renewcommand{\hwa@hline@LONE}{ \vspace{.25cm} {\hrule height 2pt}
+      \vspace{.25cm}}
+    \renewcommand{\hwa@headrulewidth}{.7pt}
+  }{\ifthenelse{\equal{\hwa@hlines}{header}}{
+      \renewcommand{\hwa@headrulewidth}{.7pt}
+    }{\ifthenelse{\equal{\hwa@hlines}{none}}{
+        \renewcommand{\hwa@headrulewidth}{0pt}
+      }{
+        \ClassError{homeworkassignment}{Value '\hwa@lines' for key 'hlines'
+          is not known}{The option hlines takes an argument to set which
+          hlines are drawn. Possible values are 'all','decreased' , 'header', and
+          'none'. 'all' is standard.}
+      }
+    }
+    \renewcommand{\hwa@hline@LONE}{~\\\vspace{.5cm}}
+  }
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.75cm}}
+}
+%    \end{macrocode}
+% \end{macro}
+% \label{imp:tikz}
+% If tikz is Wanted, load Usefull Styles
+%    \begin{macrocode}
+\ifhwa@tikz
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
+\fi
+%    \end{macrocode}
+% Make sure that this is the last Package loaded
+%    \begin{macrocode}
+\RequirePackage{geometry}
+\ifhwa@twocolumn
+\geometry{top=2cm, bottom=2cm, left=2cm,
+    headsep=14pt,hmarginratio={1:1}}
+\else
+\geometry{top=2cm, bottom=2cm, width=35em,
+  headsep=14pt,hmarginratio={4:3}}
+\fi
+%    \end{macrocode}
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
@@ -574,86 +645,13 @@
 %
 %
 
-% \begin{macro}{\hwa@hline@L...}
-%   Defines new commands to output desired lines and change the
-%   constant \textrm{\textbackslash{}hwa@headrulewidth}\\
-%   \begin{framed}
-%     \textsf{ATTENTION: \textrm{\textbackslash{}hwa@hline@LONE} breaks the
-%     line automatically, in opposite to \textrm{\textbackslash{}hwa@hline@LTWO}}
-%   \end{framed}
-%    \begin{macrocode}
-
-\newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
-  \vspace{.25cm}}
-\newcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
-\newcommand{\hwa@headrulewidth}{.7pt}
-\ifthenelse{\equal{\hwa@hlines}{all}}{
-  \renewcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
-    \vspace{.25cm}}
-  \renewcommand{\hwa@headrulewidth}{.7pt}
-  \renewcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
-}{
-  \ifthenelse{\equal{\hwa@hlines}{decreased}}{
-    \renewcommand{\hwa@hline@LONE}{ \vspace{.25cm} {\hrule height 2pt}
-      \vspace{.25cm}}
-    \renewcommand{\hwa@headrulewidth}{.7pt}
-  }{\ifthenelse{\equal{\hwa@hlines}{header}}{
-      \renewcommand{\hwa@headrulewidth}{.7pt}
-    }{\ifthenelse{\equal{\hwa@hlines}{none}}{
-        \renewcommand{\hwa@headrulewidth}{0pt}
-      }{
-        \ClassError{homeworkassignment}{Value '\hwa@lines' for key 'hlines'
-          is not known}{The option hlines takes an argument to set which
-          hlines are drawn. Possible values are 'all','decreased' , 'header', and
-          'none'. 'all' is standard.}
-      }
-    }
-    \renewcommand{\hwa@hline@LONE}{~\\\vspace{.5cm}}
-  }
-  \renewcommand{\hwa@hline@LTWO}{\vspace{.75cm}}
-}
-%    \end{macrocode}
-% \end{macro}
 % \subsection{TikZ-Styles}
-% \label{imp:tikz}
-% If tikz is Wanted, load Usefull Styles
-%    \begin{macrocode}
-\ifhwa@tikz
-\RequirePackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning,decorations,
-  automata,backgrounds,petri,bending,
-  shapes.multipart}
-\tikzset{
-  treenode/.style = {shape=circle, rounded corners,
-    draw, align=center},
-  graynode/.style = {fill=gray},
-  normalnode/.style     = {treenode, font=\Large, bottom color=white},
-  array/.style = {rectangle split,
-    rectangle split horizontal,
-    rectangle split,
-    draw}
-}
-\fi
-%    \end{macrocode}
 % \subsection{Constants}
 % Defines some constants
 %    \begin{macrocode}
 \newcommand{\hwa@pointboxsize}{3em}
 %    \end{macrocode}
 % \subsection{Geometry}
-% Make sure that this is the last Package loaded
-%    \begin{macrocode}
-\RequirePackage{geometry}
-\ifhwa@twocolumn
-\geometry{top=2cm, bottom=2cm, left=2cm,
-    headsep=14pt,hmarginratio={1:1}}
-\else
-\geometry{top=2cm, bottom=2cm, width=35em,
-  headsep=14pt,hmarginratio={4:3}}
-\fi
-
-%    \end{macrocode}
-%
 % \subsection{Translations\label{imp:translation}}
 % Load translations, currently supports English and German, Fallback
 % is German

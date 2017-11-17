@@ -89,7 +89,6 @@
 \fi
 \LoadClass{article}
 
-
 \newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
   \vspace{.25cm}}
 \newcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
@@ -135,7 +134,6 @@
     draw}
 }
 \fi
-\newcommand{\hwa@pointboxsize}{3em}
 \RequirePackage{geometry}
 \ifhwa@twocolumn
 \geometry{top=2cm, bottom=2cm, left=2cm,
@@ -145,6 +143,7 @@
   headsep=14pt,hmarginratio={4:3}}
 \fi
 
+\newcommand{\hwa@pointboxsize}{3em}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
