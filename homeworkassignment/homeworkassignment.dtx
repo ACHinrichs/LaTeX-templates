@@ -110,6 +110,13 @@
 % inherited from \texttt{article}, it is not perfect, but I am trying
 % my verry best.
 % \section{Options\label{sec:Options}}
+% KV-Options is essential for this.
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ }
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
+%    \end{macrocode}
 % \DescribeMacro{problemstyle=<1>} \DescribeMacro{subproblemstyle=<1>}
 % \DescribeMacro{subsubproblemstyle=<1>} These options allow the
 % customizatuion of the displayed numbers.  For Example, if
@@ -121,23 +128,125 @@
 % \texttt{Roman}, and \texttt{roman}. Standard values are:
 % \texttt{problemstyle=arabic, subproblemstyle=alph,
 % subsubproblemstyle=roman}.
-%
-% \DescribeMacro{design=<1>} Allows the User to select an older page-style,
-% for backwards compatibility.\\
-% Recognized values are |v1| and |v2|. Everytime a version
-% Changes the default look, a new possible value will be added.\\
-% Only set this if you really need to get an old look, \emph{older styles
-% are not going to be maintained!}
-%
+%    \begin{macrocode}
+\DeclareStringOption[arabic]{problemsty}
+\DeclareStringOption[alph]{subproblemsty}
+\DeclareStringOption[roman]{subsubproblemsty}
+%    \end{macrocode}
 % \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
-% usefull for Papers in Computer-Science and ;athematics. See
+% usefull for Papers in Computer-Science and mathematics. See
 % \ref{imp:tikz} for more informations
+%    \begin{macrocode}
+\DeclareBoolOption[false]{tikz}
+%    \end{macrocode}
 %
-%
-% \DescribeMacro{fleqn} Passes |fleqn| to amsmath
-% \subsection{Inherited options}
-% Because the class is inherited by article, every Option that can be
-% passed to article, will be passed to article.
+% \DescribeMacro{listings} Loads Listings Package and sets
+% listing-layout to use a small fontsize. Adds indication for linebreaks.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{listings}
+%    \end{macrocode}
+% \DescribeMacro{oneside, twoside}
+% Changes layout. \textrm{oneside} is the complementary option to
+% \texttt{twoside}\\
+% Standard layout is twopaged.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{twoside}
+\DeclareComplementaryOption{oneside}{twoside}
+%    \end{macrocode}
+% \DescribeMacro{onecolumn,twocolumn}
+% Changes layout. \textrm{onecolumn} is the complementary option to
+% \texttt{twocolumn}.\\
+% Standard Layout has two columns
+%    \begin{macrocode}
+\DeclareBoolOption[true]{twocolumn}
+\DeclareComplementaryOption{onecolumn}{twocolumn}
+%    \end{macrocode}
+% \DescribeMacro{hlines=<1>}
+% KeyValue-option. Takes the level of hlines. Available are
+% \texttt{all},\texttt{decreased},\texttt{header}, \texttt{none}, with
+% decreasing number of lines; none displays none, header only the one
+% under headers and decreased adds the big line in the title, while
+% all displays all.
+%    \begin{macrocode}
+\DeclareStringOption[all]{hlines}
+%    \end{macrocode}
+% Loads article and processes the options
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+\ifhwa@twoside
+\PassOptionsToClass{twoside}{article}
+\else
+\PassOptionsToClass{oneside}{article}
+\fi
+\ifhwa@twocolumn
+\PassOptionsToClass{twocolumn}{article}
+\else
+\PassOptionsToClass{onecolumn}{article}
+\fi
+\LoadClass{article}
+%    \end{macrocode}
+% \section{Dependencies}
+% \subsection{Mandatory Dependencies}
+% This class is build uppon \textrm{article}, so of course the first
+% dependency is:
+% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+% \begin{description}
+% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+% \end{description}
+% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
+% bit} bloated. These are all required packages:
+% \begin{description}
+% \dep{kvoptions}{Heiko
+% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+% \texttt{key=value}--style options}
+% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+% it easy to define \texttt{$\backslash$macro*} commands}
+% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+% if--else--structures}
+% \dep{translations}{Clemens
+% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
+% easy method of translations.}
+% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
+% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
+% better math-typesetting}
+% \dep{amssymb}{American Mathematical
+% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+% mathematical symbols}
+% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+% of programming facilities geared primarily towards \LaTeX class and
+% package authors}
+% \dep{array}{Frank Mittelbach, David Carlisle, The
+% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
+% for tables and arrays\todo{\texttt{array} possibly can be removed}}
+% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
+% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
+% high-level interface for producing documentlevel commands. In that
+% way, it offers a replacement for \LaTeXe 's
+% \texttt{\textbackslash{}newcommand} macro, with significantly improved
+% functionality.}
+% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
+% Sans inspired font, used for all sans serifes fonts}
+% \end{description}
+% \subsection{Recommended Dependencies}
+% These are not loaded automatically, but require a switch as option
+% (see \autoref{sec:Options}). The switch is typically the name of the
+% package.
+% \begin{description}
+% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
+% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
+% tool. When loading TikZ, the homeworkassignment automatically loads
+% a shipload of TikZ--librarys and own styles\todo{I intend to move
+% these styles to a own package, so that they are usable without the
+% homeworkassignment}. See \autoref{imp:tikz} for more informations}
+% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
+% Hoffmann}{https://www.ctan.org/pkg/listings}{For
+% source--code. Sourcecode in the homeworkassignment is automatically
+% framed, printed in \texttt{scriptsize}, and linebeals will be
+% introduced}
+% \end{description}
+% 
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
@@ -314,68 +423,6 @@
 % Defined exercises ($\neq$Problems). Like |\tableofcontent|, it needs a second run of
 % \LaTeX, until all are added.\\
 % See example documents fot output
-%
-% \section{Dependencies}
-% \subsection{Mandatory Dependencies}
-% This class is build uppon \textrm{article}, so of course the first
-% dependency is:
-% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
-% \begin{description}
-% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
-% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
-% \end{description}
-% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
-% bit} bloated. These are all required packages:
-% \begin{description}
-% \dep{kvoptions}{Heiko
-% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
-% \texttt{key=value}--style options}
-% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
-% it easy to define \texttt{$\backslash$macro*} commands}
-% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
-% if--else--structures}
-% \dep{translations}{Clemens
-% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
-% easy method of translations.}
-% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
-% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
-% better math-typesetting}
-% \dep{amssymb}{American Mathematical
-% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
-% mathematical symbols}
-% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
-% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
-% of programming facilities geared primarily towards \LaTeX class and
-% package authors}
-% \dep{array}{Frank Mittelbach, David Carlisle, The
-% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
-% for tables and arrays\todo{\texttt{array} possibly can be removed}}
-% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
-% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
-% high-level interface for producing documentlevel commands. In that
-% way, it offers a replacement for \LaTeXe 's
-% \texttt{\textbackslash{}newcommand} macro, with significantly improved
-% functionality.}
-% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
-% Sans inspired font, used for all sans serifes fonts}
-% \end{description}
-% \subsection{Recommended Dependencies}
-% These are not loaded automatically, but require a switch as option
-% (see \autoref{sec:Options}). The switch is typically the name of the
-% package.
-% \begin{description}
-% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
-% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
-% tool. When loading TikZ, the homeworkassignment automatically loads
-% a shipload of TikZ--librarys and own styles\todo{I intend to move
-% these styles to a own package, so that they are usable without the
-% homeworkassignment}. See \autoref{imp:tikz} for more informations}
-% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
-% Hoffmann}{https://www.ctan.org/pkg/listings}{For
-% source--code. Sourcecode in the homeworkassignment is automatically
-% framed, printed in \texttt{scriptsize}, and linebeals will be
-% introduced}
-% \end{description}
 % \pagebreak
 % \section{Development and support}
 %
@@ -500,40 +547,7 @@
 % and sets the Version Loads the \texttt{article}, which is the
 % base-class.
 % \subsection{Packages \& Options}
-%    \begin{macrocode}
-\RequirePackage{kvoptions}
-\SetupKeyvalOptions{ family=hwa,
-  prefix=hwa@ }
-\DeclareStringOption[arabic]{problemsty}
-\DeclareStringOption[alph]{subproblemsty}
-\DeclareStringOption[roman]{subsubproblemsty}
-\DeclareBoolOption[false]{listings}
-\DeclareBoolOption[true]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
-\DeclareBoolOption[true]{twocolumn}
-\DeclareComplementaryOption{onecolumn}{twocolumn}
-\DeclareBoolOption[false]{tikz}
-\DeclareStringOption[all]{hlines}
-% Redefine the article-options
-%    \begin{macrocode}
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
-%    \end{macrocode}
 %
-% Processes the Options and loades article
-%    \begin{macrocode}
-\ProcessKeyvalOptions*
-\ifhwa@twoside
-\PassOptionsToClass{twoside}{article}
-\else
-\PassOptionsToClass{oneside}{article}
-\fi
-\ifhwa@twocolumn
-\PassOptionsToClass{twocolumn}{article}
-\else
-\PassOptionsToClass{onecolumn}{article}
-\fi
-\LoadClass{article}
-%    \end{macrocode}
 %
 % Loads required Packages
 %    \begin{macrocode}

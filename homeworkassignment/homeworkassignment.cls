@@ -43,17 +43,17 @@
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \DeclareStringOption[arabic]{problemsty}
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
+\DeclareBoolOption[false]{tikz}
 \DeclareBoolOption[false]{listings}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
-\DeclareBoolOption[false]{tikz}
 \DeclareStringOption[all]{hlines}
-\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
 \ProcessKeyvalOptions*
 \ifhwa@twoside
 \PassOptionsToClass{twoside}{article}
