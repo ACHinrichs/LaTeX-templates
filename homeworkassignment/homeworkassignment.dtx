@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.5d}
-\def\filedate{2017/11/09}
+\def\fileversion{v2.5e}
+\def\filedate{2017/11/17}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -109,6 +109,81 @@
 % mainly created for assignments at the University This class is
 % inherited from \texttt{article}, it is not perfect, but I am trying
 % my verry best.
+% \section{Dependencies}
+% \subsection{Mandatory Dependencies}
+% This class is build uppon \textrm{article}, so of course the first
+% dependency is:
+% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+% \begin{description}
+% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+% \end{description}
+% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
+% bit} bloated. These are all required packages:
+% \begin{description}
+% \dep{kvoptions}{Heiko
+% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+% \texttt{key=value}--style options}
+% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+% it easy to define \texttt{$\backslash$macro*} commands}
+% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+% if--else--structures}
+% \dep{translations}{Clemens
+% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
+% easy method of translations.}
+% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
+% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
+% better math-typesetting}
+% \dep{amssymb}{American Mathematical
+% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+% mathematical symbols}
+% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+% of programming facilities geared primarily towards \LaTeX class and
+% package authors}
+% \dep{array}{Frank Mittelbach, David Carlisle, The
+% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
+% for tables and arrays\todo{\texttt{array} possibly can be removed}}
+% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
+% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
+% high-level interface for producing documentlevel commands. In that
+% way, it offers a replacement for \LaTeXe 's
+% \texttt{\textbackslash{}newcommand} macro, with significantly improved
+% functionality.}
+% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
+% Sans inspired font, used for all sans serifes fonts}
+% \end{description}
+% \subsection{Recommended Dependencies}
+% These are not loaded automatically, but require a switch as option
+% (see \autoref{sec:Options}). The switch is typically the name of the
+% package.
+% \begin{description}
+% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
+% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
+% tool. When loading TikZ, the homeworkassignment automatically loads
+% a shipload of TikZ--librarys and own styles\todo{I intend to move
+% these styles to a own package, so that they are usable without the
+% homeworkassignment}. See \autoref{imp:tikz} for more informations}
+% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
+% Hoffmann}{https://www.ctan.org/pkg/listings}{For
+% source--code. Sourcecode in the homeworkassignment is automatically
+% framed, printed in \texttt{scriptsize}, and linebeals will be
+% introduced}
+% \end{description}
+% Loads required Packages
+%    \begin{macrocode}
+\RequirePackage{suffix}
+\RequirePackage{fancyhdr}
+\RequirePackage{xifthen}
+\RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{etoolbox}
+\RequirePackage{array}
+\RequirePackage{xparse}
+\RequirePackage{gillius2}
+%    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
 %    \begin{macrocode}
@@ -183,70 +258,19 @@
 \else
 \PassOptionsToClass{onecolumn}{article}
 \fi
+\ifhwa@listings
+\RequirePackage{listings}
+\lstset{
+  frame = single,
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\scriptsize
+}
+\else
+\empty
+\fi
 \LoadClass{article}
 %    \end{macrocode}
-% \section{Dependencies}
-% \subsection{Mandatory Dependencies}
-% This class is build uppon \textrm{article}, so of course the first
-% dependency is:
-% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
-% \begin{description}
-% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
-% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
-% \end{description}
-% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
-% bit} bloated. These are all required packages:
-% \begin{description}
-% \dep{kvoptions}{Heiko
-% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
-% \texttt{key=value}--style options}
-% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
-% it easy to define \texttt{$\backslash$macro*} commands}
-% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
-% if--else--structures}
-% \dep{translations}{Clemens
-% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
-% easy method of translations.}
-% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
-% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
-% better math-typesetting}
-% \dep{amssymb}{American Mathematical
-% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
-% mathematical symbols}
-% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
-% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
-% of programming facilities geared primarily towards \LaTeX class and
-% package authors}
-% \dep{array}{Frank Mittelbach, David Carlisle, The
-% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
-% for tables and arrays\todo{\texttt{array} possibly can be removed}}
-% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
-% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
-% high-level interface for producing documentlevel commands. In that
-% way, it offers a replacement for \LaTeXe 's
-% \texttt{\textbackslash{}newcommand} macro, with significantly improved
-% functionality.}
-% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
-% Sans inspired font, used for all sans serifes fonts}
-% \end{description}
-% \subsection{Recommended Dependencies}
-% These are not loaded automatically, but require a switch as option
-% (see \autoref{sec:Options}). The switch is typically the name of the
-% package.
-% \begin{description}
-% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
-% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
-% tool. When loading TikZ, the homeworkassignment automatically loads
-% a shipload of TikZ--librarys and own styles\todo{I intend to move
-% these styles to a own package, so that they are usable without the
-% homeworkassignment}. See \autoref{imp:tikz} for more informations}
-% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
-% Hoffmann}{https://www.ctan.org/pkg/listings}{For
-% source--code. Sourcecode in the homeworkassignment is automatically
-% framed, printed in \texttt{scriptsize}, and linebeals will be
-% introduced}
-% \end{description}
-% 
 % \section{Commands}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
@@ -549,31 +573,6 @@
 % \subsection{Packages \& Options}
 %
 %
-% Loads required Packages
-%    \begin{macrocode}
-\RequirePackage{suffix}
-\RequirePackage{fancyhdr}
-\RequirePackage{xifthen}
-\RequirePackage{translations}
-\PassOptionsToPackage{fleqn}{amsmath}
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
-\ifhwa@listings
-\RequirePackage{listings}
-\lstset{
-  frame = single,
-  breaklines = true,
-  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
-  basicstyle=\scriptsize
-}
-\else
-\empty
-\fi
-\RequirePackage{etoolbox}
-\RequirePackage{array}
-\RequirePackage{xparse}
-\RequirePackage{gillius2}
-%    \end{macrocode}
 
 % \begin{macro}{\hwa@hline@L...}
 %   Defines new commands to output desired lines and change the

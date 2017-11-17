@@ -36,10 +36,21 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5d}
-\def\filedate{2017/11/09}
+\def\fileversion{v2.5e}
+\def\filedate{2017/11/17}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
+\RequirePackage{suffix}
+\RequirePackage{fancyhdr}
+\RequirePackage{xifthen}
+\RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{etoolbox}
+\RequirePackage{array}
+\RequirePackage{xparse}
+\RequirePackage{gillius2}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -65,14 +76,6 @@
 \else
 \PassOptionsToClass{onecolumn}{article}
 \fi
-\LoadClass{article}
-\RequirePackage{suffix}
-\RequirePackage{fancyhdr}
-\RequirePackage{xifthen}
-\RequirePackage{translations}
-\PassOptionsToPackage{fleqn}{amsmath}
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -84,10 +87,7 @@
 \else
 \empty
 \fi
-\RequirePackage{etoolbox}
-\RequirePackage{array}
-\RequirePackage{xparse}
-\RequirePackage{gillius2}
+\LoadClass{article}
 
 
 \newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
