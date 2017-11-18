@@ -684,37 +684,48 @@
 % \texttt{amath}-Class\footnote{\texttt{amath.sty} is part of Alexander
 % Bartolomey's Alphabet Classes:
 % \url{https://github.com/occloxium/AlphabetClasses}}\\
-% \newcommand{\N}{\ensuremath{\mathbb{N}}}
-% \DescribeMacro{\N}
-% \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-% \DescribeMacro{\Z}
-% \newcommand{\R}{\ensuremath{\mathbb{R}}}
-% \DescribeMacro{\R}
-% \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-% \DescribeMacro{\Q}
-% \newcommand{\C}{\ensuremath{\mathbb{C}}}
-% \DescribeMacro{\C}
-% \newcommand{\F}{\ensuremath{\mathbb{F}}}
-% \DescribeMacro{\F}
-% \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
-% \DescribeMacro{\Primes}
-% Defines a set of mathematical sets, which are verry usefull (see
-% Table \ref{tbl:field-commands})
-% \begin{longtable}[h]{rll}
-%   Command & Output & Description\\
-%   |\N|&$\N$&Natural Numbers\\
-%   |\Z|&$\Z$&Whole Numbers\\
-%   |\Q|&$\Q$&Rational Numbers\\
-%   |\R|&$\R$&Real Numbers\\
-%   |\C|&$\C$&Complex Numbers\\
-%   |\F_n|&$\F_n$&Prime Field to base $n$\\
-%   |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
-% \caption{Field-Commands}
-%   \label{tbl:field-commands}
-% \end{longtable}
-% \footnotetext{Has to be
-% $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
-% is already in use}
+% \begin{macro}{\N}~\\
+%   \newcommand{\N}{\ensuremath{\mathbb{N}}}
+%   \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+%   \DescribeMacro{\Z}
+%   \newcommand{\R}{\ensuremath{\mathbb{R}}}
+%   \DescribeMacro{\R}
+%   \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+%   \DescribeMacro{\Q}
+%   \newcommand{\C}{\ensuremath{\mathbb{C}}}
+%   \DescribeMacro{\C}
+%   \newcommand{\F}{\ensuremath{\mathbb{F}}}
+%   \DescribeMacro{\F}
+%   \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+%   \DescribeMacro{\Primes}
+%   Defines a set of mathematical sets, which are verry usefull (see
+%   \autoref{tbl:field-commands})
+%   \begin{longtable}[h]{rll}
+%     Command & Output & Description\\
+%     |\N|&$\N$&Natural Numbers\\
+%     |\Z|&$\Z$&Whole Numbers\\
+%     |\Q|&$\Q$&Rational Numbers\\
+%     |\R|&$\R$&Real Numbers\\
+%     |\C|&$\C$&Complex Numbers\\
+%     |\F_n|&$\F_n$&Prime Field to base $n$\\
+%     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
+%     \caption{Field-Commands}
+%     \label{tbl:field-commands}
+%   \end{longtable}
+%   \footnotetext{Has to be
+%   $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
+%   is already in use}
+%    \begin{macrocode}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+% The last one is mine
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+%    \end{macrocode}
+% \end{macro}
 % \newcommand{\divides}{\ensuremath{\ |\ }}
 % \newcommand{\property}{\ensuremath{\ |\ }}
 % \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
@@ -1110,20 +1121,6 @@
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
-%    \end{macrocode}
-% \end{macro}
-% The following Macros are all stolen (and adapted) from occloxium
-% (see \ref{ALLES_NUR_GEKLAUT_EO-EO})
-% \begin{macro}{Math Common Set Symbols}
-%    \begin{macrocode}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\F}{\ensuremath{\mathbb{F}}}
-% The last one is mine
-\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{Mathematical Functions}

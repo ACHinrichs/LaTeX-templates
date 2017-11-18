@@ -310,7 +310,15 @@
 \newcommand{\eop}{\hfill\(\blacksquare\)}
 \newcommand{\QNED}{\begin{flushright} \(\triangle\)
   \end{flushright}
-} \newcommand{\qned}{\hfill\(\triangle\)}
+}
+\newcommand{\qned}{\hfill\(\triangle\)}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -426,13 +434,6 @@
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\F}{\ensuremath{\mathbb{F}}}
-\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Var}{Var}
