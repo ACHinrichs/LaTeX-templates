@@ -249,6 +249,56 @@
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+
+\DeclareDocumentCommand\newproblem{O{} g}{
+  \IfNoValueTF{#2}{
+    \newproblem*[#1]
+    \addToGradingTable{\# \hwa@problemno}
+  }{
+    \IfNoValueF{#1}{
+      \stepcounter{problem}% to reset the lower counters
+      \setcounter{problem}{#1}
+    }
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \addToGradingTable{\# \hwa@problemno}{/#2}
+  }
+}
+
+\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \stepcounter{problem}% to reset the lower counters
+    \setcounter{problem}{#1}}
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+}
+
+\DeclareDocumentCommand\newsubproblem{O{} g}{
+  \stepcounter{subproblem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \setcounter{subproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}
+  }
+  {
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}[#2]
+  }
+}
+
+\DeclareDocumentCommand\newsubsubproblem{O{} g}{
+  \stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subsubproblem{\hwa@subsubproblemno)}
+  }
+  {
+    \subsubproblem{\hwa@subsubproblemno)}[#2]
+  }
+}
+
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -294,10 +344,6 @@
     \hwa@hline@LTWO \normalsize
   \end{centering}
 }
-
-\newcounter{problem} \setcounter{problem}{0}
-\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
-\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
@@ -364,49 +410,6 @@
     \hwa@maketitletext
   }\fi
 }
-\DeclareDocumentCommand\newproblem{O{} g}{
-  \IfNoValueTF{#2}{
-    \newproblem*[#1]
-    \addToGradingTable{\# \hwa@problemno}
-  }{
-    \IfNoValueF{#1}{
-      \setcounter{problem}{#1}
-    }
-    %\newproblem*[#1]
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
-    \addToGradingTable{\# \hwa@problemno}{/#2}
-  }
-}
-
-\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
-}
-
-\DeclareDocumentCommand\newsubproblem{O{} g}{
-  \stepcounter{subproblem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \IfNoValueTF{#2}{
-    \subproblem{\GetTranslation{aufgabe}
-      \hwa@problemno{}.\hwa@subproblemno}
-  }
-  {
-    \subproblem{\GetTranslation{aufgabe}
-      \hwa@problemno{}.\hwa@subproblemno}[#2]
-  }
-}
-
-\DeclareDocumentCommand\newsubsubproblem{O{} g}{
-  \stepcounter{subsubproblem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \IfNoValueTF{#2}{
-    \subsubproblem{\hwa@subsubproblemno)}
-  }
-  {
-    \subsubproblem{\hwa@subsubproblemno)}[#2]
-  }
-}
-
 \newcommand{\QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}

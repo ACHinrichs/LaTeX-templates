@@ -37,12 +37,13 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
     - hlines=header just remove the hlines around the Title
   - [X] Remove legacy styles
   - [ ] Rework Docu
-    - Unite Implementation and Documentation part of Documentation
-    - Document all features
-    - Update Changelog
+    - [ ] Unite Implementation and Documentation part of Documentation
+    - [ ] Document all features
+    - [ ] Update Changelog
   - [X] Add allowdisplaybreaks
   - [X] BUG of onecolumn and maketitle
     - Pull changes from NumRech u3
-  - [ ] BUG Subproblem counter not reset on newproblem with number
+  - [-] BUG Subproblem counter not reset on newproblem with number
     (see NumRech u5)
-    - Check if subsubproblem works!
+    - [X] Fix
+    - [ ] Check if subsubproblem works!

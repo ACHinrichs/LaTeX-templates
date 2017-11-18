@@ -412,7 +412,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \section{Commands}
-% \subsection{Constants}
+% \subsection{Counters and Constants}
 % Defines some constants
 % \begin{macro}{\hwa@pointboxsize}
 % Explains it self.
@@ -560,17 +560,75 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsubsection{\enquote*{better}
-% Sectioning\label{BETTER_SECTIONING_CMDS}} 
+% Sectioning\label{BETTER_SECTIONING_CMDS}}
 % The following commands are an augmented version of the
 % \enquote{plain} commands.\
-%
-% \DescribeMacro{\newproblem} \DescribeMacro{\newproblem*} \DescribeMacro{\newsubproblem}
-% \DescribeMacro{\newsubsubproblem} These commands require no argument,
-% and automatically create a numbered title.  The optional Argument is
-% the new value for the coresponding counter.\\
-% Normally, |\newproblem| adds the new Created Problem to the
-% grading--table (see \ref{GRADING-TABLE}), |\newproblem*| does not do this.
-%
+% \begin{macro}{\newproblem}
+%   ~\\
+%   \DescribeMacro{\newproblem*} \DescribeMacro{\newsubproblem}
+%   \DescribeMacro{\newsubsubproblem} These commands require no argument,
+%   and automatically create a numbered title.  The optional Argument is
+%   the new value for the coresponding counter.\\
+%   Normally, |\newproblem| adds the new Created Problem to the
+%   grading--table (see \autoref{GRADING-TABLE}), |\newproblem*| does not
+%   do this.\\
+%   
+%   They use coutners, of course:
+%    \begin{macrocode}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareDocumentCommand\newproblem{O{} g}{
+  \IfNoValueTF{#2}{
+    \newproblem*[#1]
+    \addToGradingTable{\# \hwa@problemno}
+  }{
+    \IfNoValueF{#1}{
+      \stepcounter{problem}% to reset the lower counters
+      \setcounter{problem}{#1}
+    }
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \addToGradingTable{\# \hwa@problemno}{/#2}
+  }
+}
+
+\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \stepcounter{problem}% to reset the lower counters
+    \setcounter{problem}{#1}}
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+}
+
+\DeclareDocumentCommand\newsubproblem{O{} g}{
+  \stepcounter{subproblem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \setcounter{subproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}
+  }
+  {
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}[#2]
+  }
+}
+
+\DeclareDocumentCommand\newsubsubproblem{O{} g}{
+  \stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subsubproblem{\hwa@subsubproblemno)}
+  }
+  {
+    \subsubproblem{\hwa@subsubproblemno)}[#2]
+  }
+}
+
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Useful Macros}
 % \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
 % \DescribeMacro{\QED} \DescribeMacro{\EOP} \DescribeMacro{\eop}
@@ -877,12 +935,6 @@
 % \end{macro}
 
 % \subsubsection{Counter--Commands}
-%    \begin{macrocode}
-\newcounter{problem} \setcounter{problem}{0}
-\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
-\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
-
-%    \end{macrocode}
 % \begin{macro}{Counter--Commands}
 %   These are used to output the Exercise numbers in the desired style
 %    \begin{macrocode}
@@ -1020,51 +1072,6 @@
 % Defines \enquote*{better} sectioning commands. See
 % \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
 % informations.
-%    \begin{macrocode}
-\DeclareDocumentCommand\newproblem{O{} g}{
-  \IfNoValueTF{#2}{
-    \newproblem*[#1]
-    \addToGradingTable{\# \hwa@problemno}
-  }{
-    \IfNoValueF{#1}{
-      \setcounter{problem}{#1}
-    }
-    %\newproblem*[#1]
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
-    \addToGradingTable{\# \hwa@problemno}{/#2}
-  }
-}
-
-\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
-}
-
-\DeclareDocumentCommand\newsubproblem{O{} g}{
-  \stepcounter{subproblem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{subproblem}{#1}}
-  \IfNoValueTF{#2}{
-    \subproblem{\GetTranslation{aufgabe}
-      \hwa@problemno{}.\hwa@subproblemno}
-  }
-  {
-    \subproblem{\GetTranslation{aufgabe}
-      \hwa@problemno{}.\hwa@subproblemno}[#2]
-  }
-}
-
-\DeclareDocumentCommand\newsubsubproblem{O{} g}{
-  \stepcounter{subsubproblem}
-  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
-  \IfNoValueTF{#2}{
-    \subsubproblem{\hwa@subsubproblemno)}
-  }
-  {
-    \subsubproblem{\hwa@subsubproblemno)}[#2]
-  }
-}
-
-%    \end{macrocode}
 % \begin{macro}{End of Proof}
 %    \begin{macrocode}
 \newcommand{\QED}{\begin{flushright}
