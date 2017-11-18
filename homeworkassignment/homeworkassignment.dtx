@@ -631,16 +631,38 @@
 % \end{macro}
 % \subsection{Useful Macros}
 % \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
-% \DescribeMacro{\QED} \DescribeMacro{\EOP} \DescribeMacro{\eop}
-% Display a flushed-right \textit{QED}, $\square$, or $\blacksquare$,
+% \begin{macro}{\QED}~\\ \DescribeMacro{\EOP} \DescribeMacro{\eop}
+% Display a flushed-right \textit{QED}, \(\square\), or \(\blacksquare\),
 % respectively. |\qed| is not implemented, to keep compatibility to
 % several Math-packages, which define the later.
+%    \begin{macrocode}
+\newcommand{\QED}{\begin{flushright}
+    \textsc{Qed}
+  \end{flushright}
+}
+\newcommand{\EOP}{\begin{flushright}
+    \(\square\)
+  \end{flushright}
+}
+\newcommand{\eop}{\hfill\(\blacksquare\)}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsubsection{\textsc{Quod Non Erat Demunstarndum at iucundum est}}
-% \DescribeMacro{\QNED} \DescribeMacro{\qned}
-% Display a flushed-right $\triangle$. |\QNED| displays it in a new
-% line, |\qned| at the end of the same line.\\  In Mathematical proofs
-% this symbol is used to mark things, which we did not intend to
-% proof, but are interesting anyway.
+% \begin{macro}{\QNED}~\\ \DescribeMacro{\qned}
+%   Display a flushed-right \(triangle\). |\QNED| displays it in a new
+%   line, |\qned| at the end of the same line.\\ In Mathematical proofs this
+%   symbol is used to mark things, which we did not intend to proof,
+%   but are interesting anyway or things wich are not proofed
+%   mathematically, but are explained in a ay, whcih lets no doubt on
+%   their correctness.
+%    \begin{macrocode}
+\newcommand{\QNED}{\begin{flushright} \(\triangle\)
+  \end{flushright}
+} \newcommand{\qned}{\hfill\(\triangle\)}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsubsection{Stolen Goods}
 % \label{ALLES_NUR_GEKLAUT_EO-EO}
 % \begin{center}
@@ -1072,27 +1094,7 @@
 % Defines \enquote*{better} sectioning commands. See
 % \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
 % informations.
-% \begin{macro}{End of Proof}
-%    \begin{macrocode}
-\newcommand{\QED}{\begin{flushright}
-    \textsc{Qed}
-  \end{flushright}
-}
-\newcommand{\EOP}{\begin{flushright}
-    $\square$
-  \end{flushright}
-}
-\newcommand{\eop}{\hfill$\blacksquare$}
-%    \end{macrocode}
-% \end{macro}
 % \begin{macro}{quod non erat demonstrandum at iucundum est}
-%    \begin{macrocode}
-\newcommand{\QNED}{\begin{flushright}
-    $\triangle$
-  \end{flushright}
-}
-\newcommand{\qned}{\hfill$\triangle$}
-%    \end{macrocode}
 % \end{macro}
 % Rounding brakets
 % \begin{macro}{Round brakets}

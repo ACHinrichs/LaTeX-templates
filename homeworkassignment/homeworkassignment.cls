@@ -299,6 +299,18 @@
   }
 }
 
+\newcommand{\QED}{\begin{flushright}
+    \textsc{Qed}
+  \end{flushright}
+}
+\newcommand{\EOP}{\begin{flushright}
+    \(\square\)
+  \end{flushright}
+}
+\newcommand{\eop}{\hfill\(\blacksquare\)}
+\newcommand{\QNED}{\begin{flushright} \(\triangle\)
+  \end{flushright}
+} \newcommand{\qned}{\hfill\(\triangle\)}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -410,20 +422,6 @@
     \hwa@maketitletext
   }\fi
 }
-\newcommand{\QED}{\begin{flushright}
-    \textsc{Qed}
-  \end{flushright}
-}
-\newcommand{\EOP}{\begin{flushright}
-    $\square$
-  \end{flushright}
-}
-\newcommand{\eop}{\hfill$\blacksquare$}
-\newcommand{\QNED}{\begin{flushright}
-    $\triangle$
-  \end{flushright}
-}
-\newcommand{\qned}{\hfill$\triangle$}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
