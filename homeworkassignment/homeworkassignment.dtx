@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.5e}
-\def\filedate{2017/11/17}
+\def\fileversion{v2.5f}
+\def\filedate{2017/11/18}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -635,26 +635,13 @@
 % \pagebreak
 % \section{Examples}
 % For examples, pleas see the Git-Repo at \url{https://github.com/ACHinrichs/LaTeX-templates}
-% \section{Implementation}
-% The following part is verry boring, but I have not found a solution
-% to create a \texttt{.cls}--file without including the implemetation
-% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
-% and sets the Version Loads the \texttt{article}, which is the
-% base-class.
-% \subsection{Packages \& Options}
-%
-%
-
-% \subsection{TikZ-Styles}
-% \subsection{Constants}
-% Defines some constants
-%    \begin{macrocode}
-\newcommand{\hwa@pointboxsize}{3em}
-%    \end{macrocode}
-% \subsection{Geometry}
-% \subsection{Translations\label{imp:translation}}
-% Load translations, currently supports English and German, Fallback
-% is German
+% \section{Translations\label{imp:translation}}
+% Homeworkassignment currently supports English and German, fallback
+% language is German. Unfortunatly these two are the only Languages I
+% am capable of translating reliable, so if you want to use an other
+% language, I would be verry happy if you would help me to translate
+% homeworkassignment! Please open an issue, author a pull-request or
+% send me an e-mail.
 %    \begin{macrocode}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
@@ -691,6 +678,22 @@
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 %    \end{macrocode}
+% \section{Implementation}
+% The following part is verry boring, but I have not found a solution
+% to create a \texttt{.cls}--file without including the implemetation
+% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
+% and sets the Version Loads the \texttt{article}, which is the
+% base-class.
+% \subsection{Packages \& Options}
+%
+
+% \subsection{TikZ-Styles}
+% \subsection{Constants}
+% Defines some constants
+%    \begin{macrocode}
+\newcommand{\hwa@pointboxsize}{3em}
+%    \end{macrocode}
+% \subsection{Geometry}
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
 % All headers are cleared before they get any Text --- just to be sure.  \\

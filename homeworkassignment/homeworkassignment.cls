@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5e}
-\def\filedate{2017/11/17}
+\def\fileversion{v2.5f}
+\def\filedate{2017/11/18}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -142,8 +142,6 @@
 \geometry{top=2cm, bottom=2cm, width=35em,
   headsep=14pt,hmarginratio={4:3}}
 \fi
-
-\newcommand{\hwa@pointboxsize}{3em}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -178,6 +176,8 @@
 \DeclareTranslation{English}{Falls}{If}
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
+
+\newcommand{\hwa@pointboxsize}{3em}
 \fancypagestyle{firstpage}{
   %
   \fancyhf{}
