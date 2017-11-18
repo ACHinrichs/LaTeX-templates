@@ -567,8 +567,14 @@
 %   ~\\
 %   \DescribeMacro{\newproblem*} \DescribeMacro{\newsubproblem}
 %   \DescribeMacro{\newsubsubproblem} These commands require no argument,
-%   and automatically create a numbered title.  The optional Argument is
-%   the new value for the coresponding counter.\\
+%   and automatically create a numbered title.
+%   They have two optional arguments:
+%   \texttt{\textbackslash{newproblem}[\#1]\{\#2\}} where \texttt{\#1}
+%   is the (sub(sub))problem-number and \texttt{\#2} are the
+%   points. If there is a number of Points assigned to a
+%   (sub(sub))problem, then the command will generate a box to write
+%   the reched number of points down next to it.\\
+% 
 %   Normally, |\newproblem| adds the new Created Problem to the
 %   grading--table (see \autoref{GRADING-TABLE}), |\newproblem*| does not
 %   do this.\\
@@ -659,7 +665,8 @@
 %    \begin{macrocode}
 \newcommand{\QNED}{\begin{flushright} \(\triangle\)
   \end{flushright}
-} \newcommand{\qned}{\hfill\(\triangle\)}
+}
+\newcommand{\qned}{\hfill\(\triangle\)}
 %    \end{macrocode}
 % \end{macro}
 % 
