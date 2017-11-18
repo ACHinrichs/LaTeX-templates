@@ -182,14 +182,73 @@
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
-\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}} % To store the value
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
-\newcommand{\hwa@abgabe}{\today}
+\newcommand{\hwa@abgabe}{\today}} % To store the value
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
 \newcommand{\abgabe}[1]{\deadline{#1}}
 \newcommand{\hwa@sheetTitle}{}
 \newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
+\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill
+     \frame{\framebox[\hwa@pointboxsize]{
+         \hfill \normalfont{\large/\small{#2}}}}
+    }
+  }
+  \addcontentsline{toc}{section}{#1}
+}
+
+\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+  {2}%Level
+  {\z@}%indent
+  {-1em \@plus -.5em \@minus -.5em}%beforeskip
+  {.5ex \@plus .5ex}%afterskip
+  {\normalfont\large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\small{#2}}
+    }
+  }
+  \addcontentsline{toc}{subsection}{#1}
+}
+
+\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+  {3}%Level
+  {\z@}%indent
+  {-.5em}%beforeskip
+  {.5em}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\scriptsize{#2}}
+    }
+  }
+}
+
+\newcommand{\keyword}[1]{\@startsection{keyword}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1~~}
+}
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -235,6 +294,10 @@
     \hwa@hline@LTWO \normalsize
   \end{centering}
 }
+
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
@@ -301,76 +364,6 @@
     \hwa@maketitletext
   }\fi
 }
-\newcounter{problem} \setcounter{problem}{0}
-\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
-\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
-
-\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
-  {1}%Level
-  {\z@}%indent
-  {-2em \@plus -1em \@minus -1em}%beforeskip
-  {1ex \@plus .5ex}%afterskip
-  {\normalfont\Large \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill
-     \frame{\framebox[\hwa@pointboxsize]{
-         \hfill \normalfont{\large/\small{#2}}}}
-    }
-  }
-  \addcontentsline{toc}{section}{#1}
-}
-
-\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
-  {2}%Level
-  {\z@}%indent
-  {-1em \@plus -.5em \@minus -.5em}%beforeskip
-  {.5ex \@plus .5ex}%afterskip
-  {\normalfont\large \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill \framebox[\hwa@pointboxsize]{
-        \hfill\normalfont\large/\small{#2}}
-    }
-  }
-  \addcontentsline{toc}{subsection}{#1}
-}
-
-\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
-  {3}%Level
-  {\z@}%indent
-  {-.5em}%beforeskip
-  {.5em}%afterskip
-  {\normalfont \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill \framebox[\hwa@pointboxsize]{
-        \hfill\normalfont\large/\scriptsize{#2}}
-    }
-  }
-}
-
-\newcommand{\keyword}[1]{\@startsection{keyword}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont \sffamily\bfseries}%style
-  *{#1~~}
-}
-
-\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
-
 \DeclareDocumentCommand\newproblem{O{} g}{
   \IfNoValueTF{#2}{
     \newproblem*[#1]
