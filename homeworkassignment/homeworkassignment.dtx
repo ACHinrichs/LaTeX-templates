@@ -468,15 +468,74 @@
 % sectioning-commands are different from Article
 % \subsubsection{\enquote*{plain}
 % Sectioning\label{PLAIN_SECTIONING_CMDS}}
-% \DescribeMacro{\problem} \DescribeMacro{\subproblem}
-% \DescribeMacro{\subsubproblem} These commands work like theyr
+% \begin{macro}{\problem}~\\ \DescribeMacro{\subproblem}
+% \DescribeMacro{\subsubproblem} These commands work like their
 % counterpart in article, except that there will be no number, nor
-% will they increase a counter.  Nevertheless, hey will be shown
+% will they increase a counter.  Nevertheless, they will be shown
 % in the table of contents.\\
-%
-% \DescribeMacro{\keyword\{\#1\}} Creates a new Paragraph ,which will
-% start with the Argument in Bold, followed by two non-breaking
-% spaces.\\
+%    \begin{macrocode}
+\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill
+     \frame{\framebox[\hwa@pointboxsize]{
+         \hfill \normalfont{\large/\small{#2}}}}
+    }
+  }
+  \addcontentsline{toc}{section}{#1}
+}
+
+\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+  {2}%Level
+  {\z@}%indent
+  {-1em \@plus -.5em \@minus -.5em}%beforeskip
+  {.5ex \@plus .5ex}%afterskip
+  {\normalfont\large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\small{#2}}
+    }
+  }
+  \addcontentsline{toc}{subsection}{#1}
+}
+
+\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+  {3}%Level
+  {\z@}%indent
+  {-.5em}%beforeskip
+  {.5em}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\scriptsize{#2}}
+    }
+  }
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\keyword}
+%   Creates a new Paragraph ,which will
+%   start with the Argument in Bold, followed by two non-breaking
+%   spaces.\\
+%    \begin{macrocode}
+\newcommand{\keyword}[1]{\@startsection{keyword}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1~~}
+}
+%    \end{macrocode}
+% 
 % The following Macros make use of |\keyword|, so it is suggested to
 % use them instead.\\
 %
@@ -488,11 +547,20 @@
 % show}, \enquote{Assumption}, and \enquote{Suppose that},
 % respectively \footnote{As of v1.6, Translations are added, depending
 % on the choosen Language, there may be an other Text displayed.\\ See
-% \ref{imp:translation} for all Translations}, via |\keyword|. If an
+% \autoref{imp:translation} for all Translations}, via |\keyword|. If an
 % argument is passed, they print out this argument after the keyword. They
 % are not mentioned in the table of contents.
+%    \begin{macrocode}
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
+%    \end{macrocode}
+% \end{macro}
 % \subsubsection{\enquote*{better}
-% Sectioning\label{BETTER_SECTIONING_CMDS}}
+% Sectioning\label{BETTER_SECTIONING_CMDS}} 
 % The following commands are an augmented version of the
 % \enquote{plain} commands.\
 %
@@ -809,6 +877,12 @@
 % \end{macro}
 
 % \subsubsection{Counter--Commands}
+%    \begin{macrocode}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+
+%    \end{macrocode}
 % \begin{macro}{Counter--Commands}
 %   These are used to output the Exercise numbers in the desired style
 %    \begin{macrocode}
@@ -939,84 +1013,9 @@
 %    \end{macrocode}
 % \end{macro}
 % Defines and initialize all counters.
-%    \begin{macrocode}
-\newcounter{problem} \setcounter{problem}{0}
-\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
-\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
-
-%    \end{macrocode}
 %
 % Defines \enquote*{plain} sectioning-commands.  See
 % \ref{SECTIONING_CMDS} for more informations.
-%    \begin{macrocode}
-\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
-  {1}%Level
-  {\z@}%indent
-  {-2em \@plus -1em \@minus -1em}%beforeskip
-  {1ex \@plus .5ex}%afterskip
-  {\normalfont\Large \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill
-     \frame{\framebox[\hwa@pointboxsize]{
-         \hfill \normalfont{\large/\small{#2}}}}
-    }
-  }
-  \addcontentsline{toc}{section}{#1}
-}
-
-\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
-  {2}%Level
-  {\z@}%indent
-  {-1em \@plus -.5em \@minus -.5em}%beforeskip
-  {.5ex \@plus .5ex}%afterskip
-  {\normalfont\large \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill \framebox[\hwa@pointboxsize]{
-        \hfill\normalfont\large/\small{#2}}
-    }
-  }
-  \addcontentsline{toc}{subsection}{#1}
-}
-
-\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
-  {3}%Level
-  {\z@}%indent
-  {-.5em}%beforeskip
-  {.5em}%afterskip
-  {\normalfont \sffamily\bfseries}%style
-  *{#1
-    \IfNoValueF{#2}{
-      \hfill \framebox[\hwa@pointboxsize]{
-        \hfill\normalfont\large/\scriptsize{#2}}
-    }
-  }
-}
-
-\newcommand{\keyword}[1]{\@startsection{keyword}%Name
-  {4}%Level
-  {\parindent}%indent
-  {-.1em}%beforeskip
-  {\z@}%afterskip
-  {\normalfont \sffamily\bfseries}%style
-  *{#1~~}
-}
-
-\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
-
-\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
-
-
-%    \end{macrocode}
 %
 % Defines \enquote*{better} sectioning commands. See
 % \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
