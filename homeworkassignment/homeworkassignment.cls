@@ -142,6 +142,41 @@
 \geometry{top=2cm, bottom=2cm, width=35em,
   headsep=14pt,hmarginratio={4:3}}
 \fi
+\fancypagestyle{firstpage}{
+  %
+  \fancyhf{}
+  % clear all six fields
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyhead[L]{\hwa@tutorium}
+  \fancyhead[R]{\@date } }
+\fancypagestyle{followingpage}{
+  \fancyhf{}
+  \ifhwa@twoside % IF
+  \fancyhead[RO]{\@author}
+  \fancyhead[LO]{\hwa@kurs\\
+    \hwa@tutorium}
+  \fancyhead[LE]{
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe
+  }
+  \fancyfoot[RO,LE]{\thepage}
+
+  \else %ELSE
+
+  \fancyhead[R]{\hwa@kurs\\
+    \@author}
+  \fancyhead[L]{\hwa@tutorium\\
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe}
+  \fancyfoot[R]{\thepage}
+  \fi %ENDIF
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
+\newcommand{\hwa@pointboxsize}{3em}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -177,41 +212,6 @@
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 
-\newcommand{\hwa@pointboxsize}{3em}
-\fancypagestyle{firstpage}{
-  %
-  \fancyhf{}
-  % clear all six fields
-  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
-  \renewcommand{\footrulewidth}{0pt}
-  \fancyfoot[R]{\thepage}
-  \fancyhead[L]{\hwa@tutorium}
-  \fancyhead[R]{\@date } }
-\fancypagestyle{followingpage}{
-  \fancyhf{}
-  \ifhwa@twoside % IF
-  \fancyhead[RO]{\@author}
-  \fancyhead[LO]{\hwa@kurs\\
-    \hwa@tutorium}
-  \fancyhead[LE]{
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-    \GetTranslation{abgabe}: \hwa@abgabe
-  }
-  \fancyfoot[RO,LE]{\thepage}
-
-  \else %ELSE
-
-  \fancyhead[R]{\hwa@kurs\\
-    \@author}
-  \fancyhead[L]{\hwa@tutorium\\
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-    \GetTranslation{abgabe}: \hwa@abgabe}
-  \fancyfoot[R]{\thepage}
-  \fi %ENDIF
-  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
-  \renewcommand{\footrulewidth}{0pt}
-}
-\pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
 \newcommand{\hwa@maketitletext}{

@@ -342,7 +342,70 @@
   headsep=14pt,hmarginratio={4:3}}
 \fi
 %    \end{macrocode}
+% \section{Page-Layout}
+% Initially, the homeworkassignment had a verry \emph{special}
+% appereance, which became much mor customizable with version 3.0, see
+% \ref{sec:OPTIONS} if you want to know how.
+% \subsection{Headers \& Footers}
+% Sets the page-headers.\\
+% All headers are cleared before they get any Text --- just to be
+% sure.  \\
+% 
+% The headers have the date on the subject and the author on the right
+% side, the tutorial, sheat-title and deadline on the left side, the
+% pagenumber is displayed in the right  footer.\\
+% If the document is
+% twopaged, the informations in the headers are splittet, so that author
+% and subject are displayed only on odd pages and the title on even,
+% the pagenumber is displayed on the right side on odd pages and on the
+% left side on even pages.\\
+% On the first page, only the date and tutorial will be displayed in the
+% header, the rest of infomration should be in the title.
+%    \begin{macrocode}
+\fancypagestyle{firstpage}{
+  %
+  \fancyhf{}
+  % clear all six fields
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyhead[L]{\hwa@tutorium}
+  \fancyhead[R]{\@date } }
+\fancypagestyle{followingpage}{
+  \fancyhf{}
+  \ifhwa@twoside % IF
+  \fancyhead[RO]{\@author}
+  \fancyhead[LO]{\hwa@kurs\\
+    \hwa@tutorium}
+  \fancyhead[LE]{
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe
+  }
+  \fancyfoot[RO,LE]{\thepage}
+  
+  \else %ELSE
+  
+  \fancyhead[R]{\hwa@kurs\\
+    \@author}
+  \fancyhead[L]{\hwa@tutorium\\
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe}
+  \fancyfoot[R]{\thepage}
+  \fi %ENDIF
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
+%    \end{macrocode}
 % \section{Commands}
+% \subsection{Constants}
+% Defines some constants
+% \begin{macro}{\hwa@pointboxsize}
+% Explains it self.
+%    \begin{macrocode}
+\newcommand{\hwa@pointboxsize}{3em}
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
 % \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
 % the document.  Takes the subject as argument.  Standard Value is
@@ -688,53 +751,7 @@
 %
 
 % \subsection{TikZ-Styles}
-% \subsection{Constants}
-% Defines some constants
-%    \begin{macrocode}
-\newcommand{\hwa@pointboxsize}{3em}
-%    \end{macrocode}
 % \subsection{Geometry}
-% \subsection{Headers \& Footers}
-% Sets the page-headers.\\
-% All headers are cleared before they get any Text --- just to be sure.  \\
-% The headers look like specified above (\ref{HEADERS}). Also inserts
-% the Titlepage.
-%    \begin{macrocode}
-\fancypagestyle{firstpage}{
-  %
-  \fancyhf{}
-  % clear all six fields
-  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
-  \renewcommand{\footrulewidth}{0pt}
-  \fancyfoot[R]{\thepage}
-  \fancyhead[L]{\hwa@tutorium}
-  \fancyhead[R]{\@date } }
-\fancypagestyle{followingpage}{
-  \fancyhf{}
-  \ifhwa@twoside % IF
-  \fancyhead[RO]{\@author}
-  \fancyhead[LO]{\hwa@kurs\\
-    \hwa@tutorium}
-  \fancyhead[LE]{
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-    \GetTranslation{abgabe}: \hwa@abgabe
-  }
-  \fancyfoot[RO,LE]{\thepage}
-  
-  \else %ELSE
-  
-  \fancyhead[R]{\hwa@kurs\\
-    \@author}
-  \fancyhead[L]{\hwa@tutorium\\
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
-    \GetTranslation{abgabe}: \hwa@abgabe}
-  \fancyfoot[R]{\thepage}
-  \fi %ENDIF
-  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
-  \renewcommand{\footrulewidth}{0pt}
-}
-\pagestyle{followingpage}
-%    \end{macrocode}
 % \subsection{Enhance Mathenvironments}
 % \begin{macro}
 %   Displays equation-numbers as upper-case roman numbers.
