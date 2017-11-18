@@ -397,6 +397,20 @@
 }
 \pagestyle{followingpage}
 %    \end{macrocode}
+% \subsection{Enhance Mathenvironments}
+% A couple of thigns, to make math-environments more beautifull and compact.
+% \begin{macro}{\theequation}
+%   Displays equation-numbers as upper-case roman numbers.
+%    \begin{macrocode}
+\renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\allowdisplaybreaks}
+%   Allow pagebreaks in Mathmode
+%    \begin{macrocode}
+\allowdisplaybreaks
+%    \end{macrocode}
+% \end{macro}
 % \section{Commands}
 % \subsection{Constants}
 % Defines some constants
@@ -407,21 +421,45 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Document Informations\label{DOC_INFO_CMDS}}
-% \DescribeMacro{\subject} \DescribeMacro{\kurs} Sets the subject of
-% the document.  Takes the subject as argument.  Standard Value is
-% \enquote{Kein Kurs}\\
-% |\kurs| is deprecated.\\ \
-%
-% \DescribeMacro{\tutorial}\DescribeMacro{\tutorium} Sets the tutorial
+% \begin{macro}{\subject, \kurs} Sets the subject
+%   of the document.  Takes the subject as argument.  Standard
+%   Value is
+%   \enquote{Kein Kurs}\\
+%   |\kurs| is deprecated.\\ \
+%    \begin{macrocode}
+\newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
+\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
+\newcommand{\kurs}[1]{\subject{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tutorial, \tutorium} Sets the tutorial
 % of the author.  Takes it as an argument. Stamdard Value is empty, so
 % that this command can be omitted.\\ |\tutorium| is deprecated.\\ \
-%
-% \DescribeMacro{\deadline} \DescribeMacro{\abgabe} Sets the deadline
-% of the document.  Takes it as an argument.  Standard value is
-% |\today|.\\ |\abgabe| is deprecated\\
-%
-% \DescribeMacro{\sheetTitle} Sets a descriptional Title of the Sheet,
-% will be written in the header of every page.\\
+%    \begin{macrocode}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}} % To store the value
+\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
+\newcommand{\tutorium}[1]{\tutorial{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\deadline, \abgabe}
+%   Sets the deadline of the document.  Takes it as an argument.
+%   Standard value is |\today|.\\ |\abgabe| is deprecated\\
+%    \begin{macrocode}
+\newcommand{\hwa@abgabe}{\today}} % To store the value
+\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+\newcommand{\abgabe}[1]{\deadline{#1}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\sheetTitle}
+%   Sets a descriptional Title of the
+%   Sheet,
+%   will be written in the header of every page.
+%    \begin{macrocode}
+\newcommand{\hwa@sheetTitle}{}
+\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
+%    \end{macrocode}
+% \end{macro}
 % \subsubsection{Inherited from \texttt{article}}
 % \DescribeMacro{\author} Sets the author of the document.\\
 % \DescribeMacro{\date} Sets the date of the document.\\
@@ -752,19 +790,6 @@
 
 % \subsection{TikZ-Styles}
 % \subsection{Geometry}
-% \subsection{Enhance Mathenvironments}
-% \begin{macro}
-%   Displays equation-numbers as upper-case roman numbers.
-%    \begin{macrocode}
-\renewcommand{\theequation}{\Roman{equation}}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}
-%   Allow pagebreaks in Mathmode
-%    \begin{macrocode}
-\allowdisplaybreaks
-%    \end{macrocode}
-% \end{macro}
 % \subsection{Internal commands}
 % \begin{macro}{\hwa@maketitletext}
 %   Prints out the title with author etc. Used to reduce code
@@ -894,39 +919,8 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Commands}
-% \begin{macro}{\subject}
-%   Defines |\kurs|. |\subject| equals |\kurs|
-%    \begin{macrocode}
-\newcommand{\hwa@kurs}{?\GetTranslation{subject}?}
-\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
-\newcommand{\kurs}[1]{\subject{#1}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\tutorial}
-%   Defines |\tutorial|. |\tutorium| equals |\tutorial|
-%    \begin{macrocode}
-\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
-\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
-\newcommand{\tutorium}[1]{\tutorial{#1}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\sheetTitle}
-%   Defines |\sheetTitle|.
-%    \begin{macrocode}
-\newcommand{\hwa@sheetTitle}{}
-\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\deadline}
 %   Defines |\deadline|. |\abgabe| equals |\deadline|
-%    \begin{macrocode}
-\newcommand{\hwa@abgabe}{\today}
-\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
-\newcommand{\abgabe}[1]{\deadline{#1}}
-%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\maketitle}
 %   Overrides maketitle.

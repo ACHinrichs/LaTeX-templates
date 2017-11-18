@@ -176,7 +176,20 @@
   \renewcommand{\footrulewidth}{0pt}
 }
 \pagestyle{followingpage}
+\renewcommand{\theequation}{\Roman{equation}}
+\allowdisplaybreaks
 \newcommand{\hwa@pointboxsize}{3em}
+\newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
+\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
+\newcommand{\kurs}[1]{\subject{#1}}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
+\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
+\newcommand{\tutorium}[1]{\tutorial{#1}}
+\newcommand{\hwa@abgabe}{\today}
+\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+\newcommand{\abgabe}[1]{\deadline{#1}}
+\newcommand{\hwa@sheetTitle}{}
+\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -212,8 +225,6 @@
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 
-\renewcommand{\theequation}{\Roman{equation}}
-\allowdisplaybreaks
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
@@ -279,17 +290,6 @@
     \endtabular
   \end{table}
   }
-\newcommand{\hwa@kurs}{?\GetTranslation{subject}?}
-\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
-\newcommand{\kurs}[1]{\subject{#1}}
-\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}
-\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
-\newcommand{\tutorium}[1]{\tutorial{#1}}
-\newcommand{\hwa@sheetTitle}{}
-\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
-\newcommand{\hwa@abgabe}{\today}
-\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
-\newcommand{\abgabe}[1]{\deadline{#1}}
 
 \renewcommand{\maketitle} {
   \thispagestyle{firstpage}
