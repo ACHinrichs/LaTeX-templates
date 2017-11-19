@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5f}
-\def\filedate{2017/11/18}
+\def\fileversion{v2.5g}
+\def\filedate{2017/11/19}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -356,6 +356,80 @@
 \renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
 \newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+\DeclareDocumentCommand\addToGradingTable{m g}{
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \IfNoValueTF{#2}{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+  }{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+      {\string\small #2} &}
+  }
+}
+\DeclareDocumentCommand\makeGradingTable{o}{
+  \begin{table}[hb]
+    \centering
+    \large
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
+    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+    \endtabular
+  \end{table}
+  }
+\edef\hwa@gradingtbl@aux@defs{}
+\newcommand{\hwa@gradingtbl@aux@lineOne}{}
+\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
+
+\edef\hwa@gradingtbl@defs{}
+\newcommand{\hwa@gradingtbl@lineOne}{}
+\newcommand{\hwa@gradingtbl@lineTwo}{}
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+}
+\renewcommand{\maketitle} {
+  \thispagestyle{firstpage}
+  \ifhwa@twocolumn{
+    \twocolumn[{
+      \hwa@maketitletext
+    }]
+  }\else{
+    \hwa@maketitletext
+  }\fi
+}
+\newcommand{\hwa@maketitletext}{
+  \begin{centering}
+    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \GetTranslation{abgabe}: \hwa@abgabe\\
+    \hwa@hline@LTWO
+    \normalsize{\@author}\\
+    \hwa@hline@LTWO \normalsize
+  \end{centering}
+}
+\newcommand{\hwa@problemno}{\arabic{problem}}
+\newcommand{\hwa@subproblemno}{\alph{subproblem}}
+\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+\newcommand{\hwa@parseCounterStyle}[3]{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{homeworkassignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -390,83 +464,6 @@
 \DeclareTranslation{English}{Falls}{If}
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
-
-\newcommand{\hwa@maketitletext}{
-  \begin{centering}
-    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
-    \GetTranslation{abgabe}: \hwa@abgabe\\
-    \hwa@hline@LTWO
-    \normalsize{\@author}\\
-    \hwa@hline@LTWO \normalsize
-  \end{centering}
-}
-
-\newcommand{\hwa@problemno}{\arabic{problem}}
-\newcommand{\hwa@subproblemno}{\alph{subproblem}}
-\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
-\newcommand{\hwa@parseCounterStyle}[3]{
-  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
-    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
-      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
-        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
-          \ifthenelse{\equal{#1}{Roman}}{
-            \renewcommand{#2}{\Roman{#3}} }{
-            \ClassError{homeworkassignment}{Invalid Value #1 for
-              option Counter-Styling}{Possible Values are alph,
-              arabic, Arabic, roman or Roman.}  } } } } } }
-\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
-\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-\edef\hwa@gradingtbl@aux@defs{}
-\newcommand{\hwa@gradingtbl@aux@lineOne}{}
-\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
-
-\edef\hwa@gradingtbl@defs{}
-\newcommand{\hwa@gradingtbl@lineOne}{}
-\newcommand{\hwa@gradingtbl@lineTwo}{}
-\DeclareDocumentCommand\addToGradingTable{m g}{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
-  \IfNoValueTF{#2}{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
-  }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
-      {\string\small #2} &}
-  }
-}
-\AtEndDocument{%
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
-  }
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
-  }
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
-  }
-}
-\DeclareDocumentCommand\makeGradingTable{o}{
-  \begin{table}[hb]
-    \centering
-    \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
-    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
-    \endtabular
-  \end{table}
-  }
-
-\renewcommand{\maketitle} {
-  \thispagestyle{firstpage}
-  \ifhwa@twocolumn{
-    \twocolumn[{
-      \hwa@maketitletext
-    }]
-  }\else{
-    \hwa@maketitletext
-  }\fi
-}
 \endinput
 %%
 %% End of file `homeworkassignment.cls'.

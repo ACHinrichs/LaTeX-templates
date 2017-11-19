@@ -32,8 +32,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v2.5f}
-\def\filedate{2017/11/18}
+\def\fileversion{v2.5g}
+\def\filedate{2017/11/19}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -412,7 +412,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \section{Commands}
-% \subsection{Counters and Constants}
+% \subsection{Constants}
 % Defines some constants
 % \begin{macro}{\hwa@pointboxsize}
 % Explains it self.
@@ -579,7 +579,7 @@
 %   grading--table (see \autoref{GRADING-TABLE}), |\newproblem*| does not
 %   do this.\\
 %   
-%   They use coutners, of course:
+%   They use coutners, of course:\label{imp:Counters}
 %    \begin{macrocode}
 \newcounter{problem} \setcounter{problem}{0}
 \newcounter{subproblem}[problem] \setcounter{subproblem}{0}
@@ -857,14 +857,145 @@
 % it would be nice, if there was a table to write Grades into,
 % wouldn't it?\\
 %
-% \DescribeMacro{\addToGradingTable} Adds the given parameter
+% \begin{macro}{\addToGradingTable} Adds the given parameter
 % as an excercise to the Grading-Table. All Problems, created with
 % |\newproblem| are added automatically.
-%
-% \DescribeMacro{\makeGradingTable} Prints out the Table containig all
-% Defined exercises ($\neq$Problems). Like |\tableofcontent|, it needs a second run of
-% \LaTeX, until all are added.\\
+%    \begin{macrocode}
+\DeclareDocumentCommand\addToGradingTable{m g}{
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \IfNoValueTF{#2}{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+  }{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+      {\string\small #2} &}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\makeGradingTable}
+%   Outputs a table to fill in the reached Points.  Only shows Problems
+%   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
+%   according number of maximum points for each problem, if
+%   specified.\\Displayes the total number of maximum Problems, if
+%   given by Argument Like |\tableofcontent|, it needs a second run of
+%   \LaTeX, until all are added.\\
+%   \texttt{[\#1]}: \emph{Optional.} The total number of points
+%   reachable.
+%    \begin{macrocode}
+\DeclareDocumentCommand\makeGradingTable{o}{
+  \begin{table}[hb]
+    \centering
+    \large
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
+    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+    \endtabular
+  \end{table}
+  }
+%    \end{macrocode}
+% \end{macro}
 % See example documents fot output
+% \subsubsection{Internal commands}
+% \begin{macro}{\hwa@gradingtbl@...}
+% Defines macros whose contents will be written to the AUX-File and
+% read in the next run, and the usable commands. The later will
+% contain the information, but have to be defined (incase the aux-file
+% does not exist)
+%    \begin{macrocode}
+\edef\hwa@gradingtbl@aux@defs{}
+\newcommand{\hwa@gradingtbl@aux@lineOne}{}
+\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
+
+\edef\hwa@gradingtbl@defs{}
+\newcommand{\hwa@gradingtbl@lineOne}{}
+\newcommand{\hwa@gradingtbl@lineTwo}{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\write\@auxout}
+%   Write to aux
+%    \begin{macrocode}
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Title}
+% \begin{macro}{\maketitle}
+%   Overrides maketitle.
+%    \begin{macrocode}
+\renewcommand{\maketitle} {
+  \thispagestyle{firstpage}
+  \ifhwa@twocolumn{
+    \twocolumn[{
+      \hwa@maketitletext
+    }]
+  }\else{
+    \hwa@maketitletext
+  }\fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hwa@maketitletext}
+%   Prints out the title with author etc. Used to reduce code
+%   duplication for two- and onecolumn styles
+%    \begin{macrocode}
+\newcommand{\hwa@maketitletext}{
+  \begin{centering}
+    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \GetTranslation{abgabe}: \hwa@abgabe\\
+    \hwa@hline@LTWO
+    \normalsize{\@author}\\
+    \hwa@hline@LTWO \normalsize
+  \end{centering}
+}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Counters}
+% The actual counters are defined in \autoref{imp:Counters}.
+% \begin{macro}{Counter--Commands}
+%   These are used to output the Exercise numbers in the desired style
+%    \begin{macrocode}
+\newcommand{\hwa@problemno}{\arabic{problem}}
+\newcommand{\hwa@subproblemno}{\alph{subproblem}}
+\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+%    \end{macrocode}
+%   Redefines the three counter-commands:
+%    \begin{macrocode}
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\hwa@parseCounterStyle}
+%   This takes a style-input (\#1), one of the three previous defined
+%   commands (\#2) and the coresponding counter (\#3) to redefine \#1,
+%   so that it corresponds to \#2.  See
+%   \ref{RE-DEF-COUNTER-CMDS-IMPLM} for example usement.
+%
+%    \begin{macrocode}
+\newcommand{\hwa@parseCounterStyle}[3]{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{homeworkassignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
+%    \end{macrocode}
+% \end{macro}
 % \pagebreak
 % \section{Development and support}
 %
@@ -980,8 +1111,6 @@
 % do not have numeric patch--numbers, but alphabetic identifiers,
 % directly after the minor--version.
 % \pagebreak
-% \section{Examples}
-% For examples, pleas see the Git-Repo at \url{https://github.com/ACHinrichs/LaTeX-templates}
 % \section{Translations\label{imp:translation}}
 % Homeworkassignment currently supports English and German, fallback
 % language is German. Unfortunatly these two are the only Languages I
@@ -1025,180 +1154,7 @@
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
 %    \end{macrocode}
-% \section{Implementation}
-% The following part is verry boring, but I have not found a solution
-% to create a \texttt{.cls}--file without including the implemetation
-% into the document.  \StopEventually{\PrintIndex} Loads \LaTeX{}2e
-% and sets the Version Loads the \texttt{article}, which is the
-% base-class.
-% \subsection{Packages \& Options}
-%
-
-% \subsection{TikZ-Styles}
-% \subsection{Geometry}
-% \subsection{Internal commands}
-% \begin{macro}{\hwa@maketitletext}
-%   Prints out the title with author etc. Used to reduce code
-%   duplication for two- and onecolumn styles
-%    \begin{macrocode}
-\newcommand{\hwa@maketitletext}{
-  \begin{centering}
-    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
-    \GetTranslation{abgabe}: \hwa@abgabe\\
-    \hwa@hline@LTWO
-    \normalsize{\@author}\\
-    \hwa@hline@LTWO \normalsize
-  \end{centering}
-}
-%    \end{macrocode}
-% \end{macro}
-
-% \subsubsection{Counter--Commands}
-% \begin{macro}{Counter--Commands}
-%   These are used to output the Exercise numbers in the desired style
-%    \begin{macrocode}
-\newcommand{\hwa@problemno}{\arabic{problem}}
-\newcommand{\hwa@subproblemno}{\alph{subproblem}}
-\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \subsubsection{Counter--Style Parser}
-% \begin{macro}{Counter--Style Parser}
-%   This takes a style-input (\#1), one of the three previous defined
-%   commands (\#2) and the coresponding counter (\#3) to redefine \#1,
-%   so that it corresponds to \#2.  See
-%   \ref{RE-DEF-COUNTER-CMDS-IMPLM} for example usement.
-%
-%    \begin{macrocode}
-\newcommand{\hwa@parseCounterStyle}[3]{
-  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
-    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
-      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
-        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
-          \ifthenelse{\equal{#1}{Roman}}{
-            \renewcommand{#2}{\Roman{#3}} }{
-            \ClassError{homeworkassignment}{Invalid Value #1 for
-              option Counter-Styling}{Possible Values are alph,
-              arabic, Arabic, roman or Roman.}  } } } } } }
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsubsection{Counter--Commands
-% II\label{RE-DEF-COUNTER-CMDS-IMPLM}}
-% \begin{macro}{Counter--Style ParserCommands II}
-%   Redefines the three counter-commands
-%
-%    \begin{macrocode}
-\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
-\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-%    \end{macrocode}
-% \end{macro}
-% \subsubsection{Grading-table}
-% \begin{macro}{\hwa@gradingtbl@...}
-% Defines macros whose contents will be written to the AUX-File and
-% read in the next run, and the usable commands. The later will
-% contain the information, but have to be defined (incase the aux-file
-% does not exist)
-%    \begin{macrocode}
-\edef\hwa@gradingtbl@aux@defs{}
-\newcommand{\hwa@gradingtbl@aux@lineOne}{}
-\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
-
-\edef\hwa@gradingtbl@defs{}
-\newcommand{\hwa@gradingtbl@lineOne}{}
-\newcommand{\hwa@gradingtbl@lineTwo}{}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\addToGradingTable}
-%    \begin{macrocode}
-\DeclareDocumentCommand\addToGradingTable{m g}{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
-  \IfNoValueTF{#2}{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
-  }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
-      {\string\small #2} &}
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}
-%   Write to aux
-%    \begin{macrocode}
-\AtEndDocument{%
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
-  }
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
-  }
-  \immediate\write\@auxout{%
-    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-% \begin{macro}{\makeGradingTable}
-%   Outputs a table to fill in the reached Points.  Only shows Problems
-%   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
-%   according number of maximum points for each problem, if
-%   specified.\\Displayes the total number of maximum Problems, if
-%   given by Argument  
-%   \paragraph{Arguments}  \texttt{[\#1]}: \emph{Optional.} The total number of points
-%   reachable.
-%    \begin{macrocode}
-\DeclareDocumentCommand\makeGradingTable{o}{
-  \begin{table}[hb]
-    \centering
-    \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
-    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
-    \endtabular
-  \end{table}
-  }
-%    \end{macrocode}
-% \end{macro}
-% \subsection{Commands}
-% \begin{macro}{\deadline}
-%   Defines |\deadline|. |\abgabe| equals |\deadline|
-% \end{macro}
-% \begin{macro}{\maketitle}
-%   Overrides maketitle.
-%    \begin{macrocode}
-
-\renewcommand{\maketitle} {
-  \thispagestyle{firstpage}
-  \ifhwa@twocolumn{
-    \twocolumn[{
-      \hwa@maketitletext
-    }]
-  }\else{
-    \hwa@maketitletext
-  }\fi
-}
-%    \end{macrocode}
-% \end{macro}
-% Defines and initialize all counters.
-%
-% Defines \enquote*{plain} sectioning-commands.  See
-% \ref{SECTIONING_CMDS} for more informations.
-%
-% Defines \enquote*{better} sectioning commands. See
-% \ref{SECTIONING_CMDS} and \ref{BETTER_SECTIONING_CMDS} for more
-% informations.
-% \begin{macro}{quod non erat demonstrandum at iucundum est}
-% \end{macro}
-% Rounding brakets
-% \begin{macro}{Round brakets}
-% \end{macro}
-% \begin{macro}{Mathematical Functions}
-% \end{macro}
+%\section*{End}
 % \textit{The End}
 %    \begin{macrocode}
 \endinput
