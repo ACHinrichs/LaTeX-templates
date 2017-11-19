@@ -346,6 +346,10 @@
 
 \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
 \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -457,10 +461,6 @@
     \hwa@maketitletext
   }\fi
 }
-\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
-\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
-\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
-\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
 \let\oforall\forall
 \let\oexists\exists
 \renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}

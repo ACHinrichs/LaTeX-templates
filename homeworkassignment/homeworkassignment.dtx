@@ -834,6 +834,12 @@
 %   \caption{Rounding Functions}
 %   \label{tab:rounding-functions}
 % \end{longtable}
+%    \begin{macrocode}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+%    \end{macrocode}
 % \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
@@ -1178,12 +1184,6 @@
 % \end{macro}
 % Rounding brakets
 % \begin{macro}{Round brakets}
-%    \begin{macrocode}
-\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
-\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
-\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
-\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
-%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{Mathematical Functions}
 % \end{macro}
