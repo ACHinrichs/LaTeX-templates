@@ -319,6 +319,33 @@
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
+
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
+\newcommand{\dx}{\:dx}
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -434,33 +461,6 @@
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\Perm}{Perm}
-\DeclareMathOperator{\MComb}{MComb}
-\DeclareMathOperator{\Comb}{Comb}
-\DeclareMathOperator{\Pot}{Pot}
-\DeclareMathOperator{\Map}{Map}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\Intpol}{Intpol}
-\DeclareMathOperator{\Pol}{Pol}
-\DeclareMathOperator{\Sol}{Sol}
-\DeclareMathOperator{\Bin}{Bin}
-\DeclareMathOperator{\charakteristik}{char}
-\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
-\newcommand{\dx}{\:dx}
-
-\newcommand{\divides}{\ensuremath{\ |\ }}
-\newcommand{\property}{\ensuremath{\ |\ }}
-
-\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
-\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-
-\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
-
-\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
 \let\oforall\forall
 \let\oexists\exists
 \renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}

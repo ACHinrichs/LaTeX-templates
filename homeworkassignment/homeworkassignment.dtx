@@ -726,35 +726,97 @@
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 %    \end{macrocode}
 % \end{macro}
-% \newcommand{\divides}{\ensuremath{\ |\ }}
-% \newcommand{\property}{\ensuremath{\ |\ }}
-% \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
-% \newcommand{\falls}{\text{\ falls}\ }
-% \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
-% \newcommand{\dx}{\:dx}
-% \DescribeMacro{Functions and Operators}
-% Output usefull Plaintext-Operators and Functions.
-% See table \ref{tab:text-functions}. Require Mathmode\\
-% \begin{longtable}[h]{rl}
-%   Command & Output \\
-%   |\divides| and |property| & Prints a vertical Bar\\
-%   |\Var| & $\Var$\\
-%   |\Perm|& $\Perm$\\
-%   |\Comb|& $\Comb$\\
-%   |\MComb|& $\MComb$\\
-%   |\Pot|& $\Pot$\\
-%   |\Map|& $\Map$\\
-%   |\Bin| & $\Bin$\\
-%   |\GL| & $\GL$\\
-%   |\id| & $\id$\\
-%   |\dx|&$\dx$\\
-%   |\excup|&$\excup$\\
-%   |\diff{<1>}|&$\diff{<1>}$\\
-%   \caption{Text-like Functions}
-%   \label{tab:text-functions}
-% \end{longtable}
-% |\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
-% German, actual Translation may differ}
+% \begin{macro}{\GL}~\\
+%   \DescribeMacro{\id}
+%   \DescribeMacro{\Var}
+%   \DescribeMacro{\Perm}
+%   \DescribeMacro{\MComb}
+%   \DescribeMacro{\Comb}
+%   \DescribeMacro{\Pot}
+%   \DescribeMacro{\Map}
+%   \DescribeMacro{\Hom}
+%   \DescribeMacro{\Ker}
+%   \DescribeMacro{\Intpol}
+%   \DescribeMacro{\Pol}
+%   \DescribeMacro{\Sol}
+%   \DescribeMacro{\Bin}
+%   \DescribeMacro{\charakteristik}
+%   \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+%   \DescribeMacro{\diff}
+%   \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
+%   \DescribeMacro{\partdiff}
+%   \newcommand{\dx}{\:dx}
+%   \DescribeMacro{\dx}
+%   \newcommand{\divides}{\ensuremath{\ |\ }}
+%   \DescribeMacro{\divides}
+%   \newcommand{\property}{\ensuremath{\ |\ }}
+%   \DescribeMacro{\property}
+%   \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+%   \DescribeMacro{\dim}
+%   \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+%   \DescribeMacro{\Im}
+%   \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+%   \DescribeMacro{\excup}
+%   \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+%   \DescribeMacro{\falls}
+%   Output usefull Plaintext-Operators and Functions.
+%   See table \ref{tab:functions}. Require Mathmode\\
+%   \begin{longtable}[h]{rl}
+%     Command & Output \\
+%     |\GL| & $\GL$\\
+%     |\id| & $\id$\\
+%     |\Var| & $\Var$\\
+%     |\Perm|& $\Perm$\\
+%     |\Comb|& $\Comb$\\
+%     |\MComb|& $\MComb$\\
+%     |\Pot|& $\Pot$\\
+%     |\Map|& $\Map$\\
+%     |\Hom|& $\Hom$\\
+%     |\Intpol|& $\Intpol$\\
+%     |\Pol|& $\Pol$\\
+%     |\Sol|& $\Sol$\\
+%     |\Bin| & $\Bin$\\
+%     |\charakteristik| & $\charakteristik$\\
+%     |\diff{<1>}|&$\diff{<1>}$\\
+%     |\partdiff{<1>}|&$\partdiff{<1>}$\\
+%     |\divides| and |property| & Prints a vertical line\\
+%     |\dx|&$\dx$\\
+%     |\excup|&$\excup$\\
+%     \caption{Common Functions}
+%     \label{tab:functions}
+%   \end{longtable}
+%   |\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
+%   German, actual Translation may differ}
+%    \begin{macrocode}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
+
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
+\newcommand{\dx}{\:dx}
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+%    \end{macrocode}
+% \end{macro}
 % \subsubsection{Rounding}
 % Require Mathmode
 % \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
@@ -1124,35 +1186,6 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{Mathematical Functions}
-%    \begin{macrocode}
-\DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\Perm}{Perm}
-\DeclareMathOperator{\MComb}{MComb}
-\DeclareMathOperator{\Comb}{Comb}
-\DeclareMathOperator{\Pot}{Pot}
-\DeclareMathOperator{\Map}{Map}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\Intpol}{Intpol}
-\DeclareMathOperator{\Pol}{Pol}
-\DeclareMathOperator{\Sol}{Sol}
-\DeclareMathOperator{\Bin}{Bin}
-\DeclareMathOperator{\charakteristik}{char} 
-\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
-\newcommand{\dx}{\:dx}
-
-\newcommand{\divides}{\ensuremath{\ |\ }}
-\newcommand{\property}{\ensuremath{\ |\ }}
-
-\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
-\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
-
-\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
-
-\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
-%    \end{macrocode}
 % \end{macro}
 % \begin{macro}{Math Big Quantors}
 %    \begin{macrocode}
