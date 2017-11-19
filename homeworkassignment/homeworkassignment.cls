@@ -350,6 +350,12 @@
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}
@@ -461,12 +467,6 @@
     \hwa@maketitletext
   }\fi
 }
-\let\oforall\forall
-\let\oexists\exists
-\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
-\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
-\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
-\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \endinput
 %%
 %% End of file `homeworkassignment.cls'.

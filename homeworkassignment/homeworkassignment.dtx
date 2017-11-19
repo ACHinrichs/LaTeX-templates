@@ -840,6 +840,18 @@
 \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
 \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
 %    \end{macrocode}
+% \begin{macro}{\bigforall}~\\
+%   \DescribeMacro{\bigexists} Redefines big versions of quantors,
+%   adds an h-skip to normal version.
+%    \begin{macrocode}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+%    \end{macrocode}
+% \end{macro}
 % \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
@@ -1186,16 +1198,6 @@
 % \begin{macro}{Round brakets}
 % \end{macro}
 % \begin{macro}{Mathematical Functions}
-% \end{macro}
-% \begin{macro}{Math Big Quantors}
-%    \begin{macrocode}
-\let\oforall\forall
-\let\oexists\exists
-\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
-\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
-\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
-\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
-%    \end{macrocode}
 % \end{macro}
 % \textit{The End}
 %    \begin{macrocode}
