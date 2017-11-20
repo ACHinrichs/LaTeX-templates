@@ -429,7 +429,7 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-\NewDocumentEnvironment{proof}{G{\GetTranslation{Beweis}} O[\QED}
+\NewDocumentEnvironment{proof}{G{\GetTranslation{Beweis}} O{\QED}}
 {
   \keyword{#1:~~}
 }
