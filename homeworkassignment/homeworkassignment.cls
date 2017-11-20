@@ -182,10 +182,10 @@
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
 \newcommand{\kurs}[1]{\subject{#1}}
-\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}} % To store the value
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?} % To store the value
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
-\newcommand{\hwa@abgabe}{\today}} % To store the value
+\newcommand{\hwa@abgabe}{\today} % To store the value
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
 \newcommand{\abgabe}[1]{\deadline{#1}}
 \newcommand{\hwa@sheetTitle}{}
@@ -244,7 +244,6 @@
   *{#1~~}
 }
 \newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
-\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
@@ -417,9 +416,6 @@
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
-\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
-\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
 \newcommand{\hwa@parseCounterStyle}[3]{
   \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
     \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
@@ -430,6 +426,16 @@
             \ClassError{homeworkassignment}{Invalid Value #1 for
               option Counter-Styling}{Possible Values are alph,
               arabic, Arabic, roman or Roman.}  } } } } } }
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+\NewDocumentEnvironment{proof}{G{\GetTranslation{Beweis}} O[\QED}
+{
+  \keyword{#1:~~}
+}
+{
+  #2
+}
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
 \DeclareTranslationFallback{beweis}{Beweis}

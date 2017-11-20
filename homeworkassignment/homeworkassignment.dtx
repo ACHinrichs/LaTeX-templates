@@ -436,7 +436,7 @@
 % of the author.  Takes it as an argument. Stamdard Value is empty, so
 % that this command can be omitted.\\ |\tutorium| is deprecated.\\ \
 %    \begin{macrocode}
-\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?}} % To store the value
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?} % To store the value
 \newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
 \newcommand{\tutorium}[1]{\tutorial{#1}}
 %    \end{macrocode}
@@ -445,7 +445,7 @@
 %   Sets the deadline of the document.  Takes it as an argument.
 %   Standard value is |\today|.\\ |\abgabe| is deprecated\\
 %    \begin{macrocode}
-\newcommand{\hwa@abgabe}{\today}} % To store the value
+\newcommand{\hwa@abgabe}{\today} % To store the value
 \newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
 \newcommand{\abgabe}[1]{\deadline{#1}}
 %    \end{macrocode}
@@ -552,7 +552,6 @@
 % are not mentioned in the table of contents.
 %    \begin{macrocode}
 \newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
-\newcommand{\proof}[1][]{\keyword{\GetTranslation{beweis}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
@@ -969,13 +968,6 @@
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
 %    \end{macrocode}
-%   Redefines the three counter-commands:
-%    \begin{macrocode}
-\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
-\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
-\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-%    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\hwa@parseCounterStyle}
 %   This takes a style-input (\#1), one of the three previous defined
@@ -996,6 +988,26 @@
               arabic, Arabic, roman or Roman.}  } } } } } }
 %    \end{macrocode}
 % \end{macro}
+%   Redefines the three counter-commands:
+%    \begin{macrocode}
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+%    \end{macrocode}
+% \end{macro}
+% \section{Environments}
+% \subsection{Proof}
+% Used for proofes. Starts bth proof and ends with a End-Of-Proof
+% symbol.
+%    \begin{macrocode} 
+\NewDocumentEnvironment{proof}{G{\GetTranslation{Beweis}} O[\QED}
+{
+  \keyword{#1:~~}
+}
+{
+  #2
+}
+%    \end{macrocode}
 % \pagebreak
 % \section{Development and support}
 %
