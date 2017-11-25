@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5g}
-\def\filedate{2017/11/19}
+\def\fileversion{v2.5h}
+\def\filedate{2017/11/20}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -429,12 +429,19 @@
 \hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
 \hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
 \hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
-\NewDocumentEnvironment{proof}{G{\GetTranslation{Beweis}} O{\QED}}
+\NewDocumentEnvironment{proof}{G{\GetTranslation{beweis}} O{\QED}}
 {
   \keyword{#1:~~}
 }
 {
   #2
+}
+\NewDocumentEnvironment{contradiction}
+{
+  \begin{proof}{\GetTranslation{beweis}~\GetTranslation{per}~\GetTranslation{Widerspruch}}{lightning}
+}
+{
+  \end{proof}
 }
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
 \DeclareTranslationFallback{loesung}{L\"osung}
@@ -446,6 +453,8 @@
 \DeclareTranslationFallback{falls}{falls}
 \DeclareTranslationFallback{Annahme}{Annahme}
 \DeclareTranslationFallback{Angenommen-dass}{Anngenommen, dass}
+\DeclareTranslationFallback{per}{per}
+\DeclareTranslationFallback{Widerspruch}{Widerspruch}
 
 \DeclareTranslation{German}{aufgabe}{Aufgabe}
 \DeclareTranslation{German}{loesung}{L\"osung}
@@ -458,6 +467,8 @@
 \DeclareTranslation{German}{Falls}{Falls}
 \DeclareTranslation{German}{Annahme}{Annahme}
 \DeclareTranslation{German}{Angenommen-dass}{Anngenommen, dass}
+\DeclareTranslation{German}{per}{per}
+\DeclareTranslation{German}{Widerspruch}{Widerspruch}
 
 \DeclareTranslation{English}{aufgabe}{Problem}
 \DeclareTranslation{English}{loesung}{Solution}
@@ -470,6 +481,8 @@
 \DeclareTranslation{English}{Falls}{If}
 \DeclareTranslation{English}{Annahme}{Assumption}
 \DeclareTranslation{English}{Angenommen-dass}{Suppose that}
+\DeclareTranslation{English}{per}{by}
+\DeclareTranslation{English}{Widerspruch}{contradiction}
 \endinput
 %%
 %% End of file `homeworkassignment.cls'.
