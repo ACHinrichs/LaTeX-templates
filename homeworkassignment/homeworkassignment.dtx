@@ -259,6 +259,11 @@
 \else
 \PassOptionsToClass{onecolumn}{article}
 \fi
+\LoadClass{article}
+
+%    \end{macrocode}
+% Loads listings, if wanted
+%    \begin{macrocode}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -270,7 +275,6 @@
 \else
 \empty
 \fi
-\LoadClass{article}
 %    \end{macrocode}
 % \begin{macro}{\hwa@hline@L...}
 %   Defines new commands to output desired lines and change the

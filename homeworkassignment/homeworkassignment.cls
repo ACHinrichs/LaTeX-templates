@@ -77,6 +77,8 @@
 \else
 \PassOptionsToClass{onecolumn}{article}
 \fi
+\LoadClass{article}
+
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -88,7 +90,6 @@
 \else
 \empty
 \fi
-\LoadClass{article}
 
 \newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
   \vspace{.25cm}}
