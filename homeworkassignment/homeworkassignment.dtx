@@ -1,0 +1,1202 @@
+% \iffalse meta-comment
+%
+% Copyright (c) 2016 by Adrian C. Hinrichs
+%
+% This File may be distributed and/or modified under the condition of the below
+% license.
+%
+%
+% MIT License
+%
+%
+%
+% Copyright (c) 2017
+%
+%
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% \fi
+\def\fileversion{v3.0}
+\def\filedate{2017/12/26}
+% \iffalse
+%<*driver>
+\ProvidesFile{homeworkassignment.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<class>\ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\usepackage[ngerman,english]{babel}
+\usepackage[autostyle,german=guillemets]{csquotes}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{soul}
+\usepackage{todonotes}
+\usepackage[T1]{fontenc}
+\usepackage{framed}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
+
+\begin{document}
+\DocInput{homeworkassignment.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable {Upper-case
+% \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z Lower-case
+% \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z Digits
+% \0\1\2\3\4\5\6\7\8\9 Exclamation \!  Double quote \" Hash (number)
+% \# Dollar \$ Percent \% Ampersand \& Acute accent \' Left paren
+% \( Right paren \) Asterisk \* Plus \+ Comma \, Minus \- Point \.
+% Solidus \/ Colon \: Semicolon \; Less than \< Equals \= Greater than
+% \> Question mark \?
+% Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \] Circumflex \^ Underscore \_ Grave accent \` Left
+% brace \{ Vertical bar \| Right brace \} Tilde \~}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+% \title{The \textsf{homeworkassignment}\footnote{The name was changed
+% with version v3.0, to become compatible with CTANs guidlines and to
+% maintain a degree of backwards compatibility.  The class was called
+% \textsf{HomeworkAssignment} prior to v3.0} class\thanks{This document
+% corresponds to \textsf{homeworkassignment}~\fileversion, dated~
+% \filedate.}}
+% \author{Adrian C Hinrichs \\
+% \texttt{adrian.hinrichs@rwth-aachen.de}}
+%
+% \maketitle
+% \tableofcontents
+% \section{Abstract}
+% This class provides a relative simple document--type for homework,
+% mainly created for assignments at the University This class is
+% inherited from \texttt{article}, it is not perfect, but I am trying
+% my verry best.
+% \section{Dependencies}
+% \subsection{Mandatory Dependencies}
+% This class is build uppon \textrm{article}, so of course the first
+% dependency is:
+% \newcommand{\dep}[4]{\item[\texttt{#1}]\textsc{#2}, \url{#3},\\#4}{}
+% \begin{description}
+% \dep{article}{1992 Leslie Lamport, 1994-97 Frank Mittelbach
+% Johannes Braams, The \LaTeX-Team}{https://www.ctan.org/pkg/kvoptions}
+% \end{description}
+% Because I am very lazy, the \texttt{homeworkassignment} is \enquote{a little
+% bit} bloated. These are all required packages:
+% \begin{description}
+% \dep{kvoptions}{Heiko
+% Oberdiek}{https://www.ctan.org/pkg/kvoptions}{for
+% \texttt{key=value}--style options}
+% \dep{suffix}{David Kastrup}{https://www.ctan.org/pkg/suffix}{Makes
+% it easy to define \texttt{$\backslash$macro*} commands}
+% \dep{xifthen}{Josselin Noirel}{https://www.ctan.org/pkg/xifthen}{For
+% if--else--structures}
+% \dep{translations}{Clemens
+% Niederberger}{https://www.ctan.org/pkg/translations}{Implements an
+% easy method of translations.}
+% \dep{amsmath}{The \LaTeX--Team, Frank Mittelbach
+% Rainer Sch\"opf, et al.}{https://www.ctan.org/pkg/amsmath}{For
+% better math-typesetting}
+% \dep{amssymb}{American Mathematical
+% Society}{mirror.ctan.org/fonts/amsfonts/doc/amssymb.pdf}{For more
+% mathematical symbols}
+% \dep{etoolbox}{Philipp Lehman (inactive), Joseph
+% Wright}{https://www.ctan.org/pkg/etoolbox}{The package is a toolbox
+% of programming facilities geared primarily towards \LaTeX class and
+% package authors}
+% \dep{array}{Frank Mittelbach, David Carlisle, The
+% \LaTeX--Team}{https://www.ctan.org/pkg/array}{A new implementations
+% for tables and arrays\todo{\texttt{array} possibly can be removed}}
+% \dep{xparse}{Frank Mittelbach, Chris Rowley, David Carlisle, The
+% \LaTeX3 Project}{https://ctan.org/pkg/xparse}{The package provides a
+% high-level interface for producing documentlevel commands. In that
+% way, it offers a replacement for \LaTeXe 's
+% \texttt{\textbackslash{}newcommand} macro, with significantly improved
+% functionality.}
+% \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
+% Sans inspired font, used for all sans serifes fonts}
+% \end{description}
+% \subsection{Recommended Dependencies}
+% These are not loaded automatically, but require a switch as option
+% (see \autoref{sec:Options}). The switch is typically the name of the
+% package.
+% \begin{description}
+% \dep{tikz}{Till Tantau, Mark Wibrow, Christian Feuers\"anger et
+% al.}{https://www.ctan.org/pkg/pgf}{An incredible powerfull image
+% tool. When loading TikZ, the homeworkassignment automatically loads
+% a shipload of TikZ--librarys and own styles\todo{I intend to move
+% these styles to a own package, so that they are usable without the
+% homeworkassignment}. See \autoref{imp:tikz} for more informations}
+% \dep{listings}{Carsten Heinz, Brooks Moses, Jobst
+% Hoffmann}{https://www.ctan.org/pkg/listings}{For
+% source--code. Sourcecode in the homeworkassignment is automatically
+% framed, printed in \texttt{scriptsize}, and linebeals will be
+% introduced}
+% \end{description}
+% Loads required Packages
+%    \begin{macrocode}
+\RequirePackage{suffix}
+\RequirePackage{fancyhdr}
+\RequirePackage{xifthen}
+\RequirePackage{translations}
+\PassOptionsToPackage{fleqn}{amsmath}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{etoolbox}
+\RequirePackage{array}
+\RequirePackage{xparse}
+\RequirePackage{gillius2}
+\RequirePackage{wasysym}
+%    \end{macrocode}
+% \section{Options\label{sec:Options}}
+% KV-Options is essential for this.
+%    \begin{macrocode}
+\RequirePackage{kvoptions} 
+\SetupKeyvalOptions{ family=hwa,
+  prefix=hwa@ }
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOptionKey}{article}}
+%    \end{macrocode}
+% \DescribeMacro{problemstyle=<1>} \DescribeMacro{subproblemstyle=<1>}
+% \DescribeMacro{subsubproblemstyle=<1>} These options allow the
+% customizatuion of the displayed numbers.  For Example, if
+% \texttt{problemstyle=Roman, subproblemstyle=arabic,
+% subsubproblemstyle=roman} is passed, The first subsubproblem of the
+% first subproblem
+% of the first problem would be labled as \textbf{i)} of \textbf{Problem I.1}.\\
+% Available options are \texttt{arabic}, \texttt{Alph}, \texttt{alph},
+% \texttt{Roman}, and \texttt{roman}. Standard values are:
+% \texttt{problemstyle=arabic, subproblemstyle=alph,
+% subsubproblemstyle=roman}.
+%    \begin{macrocode}
+\DeclareStringOption[arabic]{problemsty}
+\DeclareStringOption[alph]{subproblemsty}
+\DeclareStringOption[roman]{subsubproblemsty}
+%    \end{macrocode}
+% \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
+% usefull for Papers in Computer-Science and mathematics. See
+% \ref{imp:tikz} for more informations
+%    \begin{macrocode}
+\DeclareBoolOption[false]{tikz}
+%    \end{macrocode}
+%
+% \DescribeMacro{listings} Loads Listings Package and sets
+% listing-layout to use a small fontsize. Adds indication for linebreaks.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{listings}
+%    \end{macrocode}
+% \DescribeMacro{oneside, twoside}
+% Changes layout. \textrm{oneside} is the complementary option to
+% \texttt{twoside}\\
+% Standard layout is twopaged.
+%    \begin{macrocode}
+\DeclareBoolOption[true]{twoside}
+\DeclareComplementaryOption{oneside}{twoside}
+%    \end{macrocode}
+% \DescribeMacro{onecolumn,twocolumn}
+% Changes layout. \textrm{onecolumn} is the complementary option to
+% \texttt{twocolumn}.\\
+% Standard Layout has two columns
+%    \begin{macrocode}
+\DeclareBoolOption[true]{twocolumn}
+\DeclareComplementaryOption{onecolumn}{twocolumn}
+%    \end{macrocode}
+% \DescribeMacro{hlines=<1>}
+% KeyValue-option. Takes the level of hlines. Available are
+% \texttt{all},\texttt{decreased},\texttt{header}, \texttt{none}, with
+% decreasing number of lines; none displays none, header only the one
+% under headers and decreased adds the big line in the title, while
+% all displays all.
+%    \begin{macrocode}
+\DeclareStringOption[all]{hlines}
+%    \end{macrocode}
+% Loads article and processes the options
+%    \begin{macrocode}
+\ProcessKeyvalOptions*
+\ifhwa@twoside
+\PassOptionsToClass{twoside}{article}
+\else
+\PassOptionsToClass{oneside}{article}
+\fi
+\ifhwa@twocolumn
+\PassOptionsToClass{twocolumn}{article}
+\else
+\PassOptionsToClass{onecolumn}{article}
+\fi
+\LoadClass{article}
+
+%    \end{macrocode}
+% Loads listings, if wanted
+%    \begin{macrocode}
+\ifhwa@listings
+\RequirePackage{listings}
+\lstset{
+  frame = single,
+  breaklines = true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}},
+  basicstyle=\scriptsize
+}
+\else
+\empty
+\fi
+%    \end{macrocode}
+% \begin{macro}{\hwa@hline@L...}
+%   Defines new commands to output desired lines and change the
+%   constant \textrm{\textbackslash{}hwa@headrulewidth}\\
+%   \begin{framed}
+%     \textsf{ATTENTION: \textrm{\textbackslash{}hwa@hline@LONE} breaks the
+%     line automatically, in opposite to \textrm{\textbackslash{}hwa@hline@LTWO}}
+%   \end{framed}
+%    \begin{macrocode}
+
+\newcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+  \vspace{.25cm}}
+\newcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+\newcommand{\hwa@headrulewidth}{.7pt}
+\ifthenelse{\equal{\hwa@hlines}{all}}{
+  \renewcommand{\hwa@hline@LONE}{\vspace{.25cm} {\hrule height 2pt}
+    \vspace{.25cm}}
+  \renewcommand{\hwa@headrulewidth}{.7pt}
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.5cm} \hrule \vspace{.25cm}}
+}{
+  \ifthenelse{\equal{\hwa@hlines}{decreased}}{
+    \renewcommand{\hwa@hline@LONE}{ \vspace{.25cm} {\hrule height 2pt}
+      \vspace{.25cm}}
+    \renewcommand{\hwa@headrulewidth}{.7pt}
+  }{\ifthenelse{\equal{\hwa@hlines}{header}}{
+      \renewcommand{\hwa@headrulewidth}{.7pt}
+    }{\ifthenelse{\equal{\hwa@hlines}{none}}{
+        \renewcommand{\hwa@headrulewidth}{0pt}
+      }{
+        \ClassError{homeworkassignment}{Value '\hwa@lines' for key 'hlines'
+          is not known}{The option hlines takes an argument to set which
+          hlines are drawn. Possible values are 'all','decreased' , 'header', and
+          'none'. 'all' is standard.}
+      }
+    }
+    \renewcommand{\hwa@hline@LONE}{~\\\vspace{.5cm}}
+  }
+  \renewcommand{\hwa@hline@LTWO}{\vspace{.75cm}}
+}
+%    \end{macrocode}
+% \end{macro}
+% \label{imp:tikz}
+% If tikz is Wanted, load Usefull Styles
+%    \begin{macrocode}
+\ifhwa@tikz
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,decorations,
+  automata,backgrounds,petri,bending,
+  shapes.multipart}
+\tikzset{
+  treenode/.style = {shape=circle, rounded corners,
+    draw, align=center},
+  graynode/.style = {fill=gray},
+  normalnode/.style     = {treenode, font=\Large, bottom color=white},
+  array/.style = {rectangle split,
+    rectangle split horizontal,
+    rectangle split,
+    draw}
+}
+\fi
+%    \end{macrocode}
+% Make sure that this is the last Package loaded
+%    \begin{macrocode}
+\RequirePackage{geometry}
+\ifhwa@twocolumn
+\geometry{top=2cm, bottom=2cm, left=2cm,
+    headsep=14pt,hmarginratio={1:1}}
+\else
+\geometry{top=2cm, bottom=2cm, width=35em,
+  headsep=14pt,hmarginratio={4:3}}
+\fi
+%    \end{macrocode}
+% \section{Page-Layout}
+% Initially, the homeworkassignment had a verry \emph{special}
+% appereance, which became much mor customizable with version 3.0, see
+% \ref{sec:OPTIONS} if you want to know how.
+% \subsection{Headers \& Footers}
+% Sets the page-headers.\\
+% All headers are cleared before they get any Text --- just to be
+% sure.  \\
+% 
+% The headers have the date on the subject and the author on the right
+% side, the tutorial, sheat-title and deadline on the left side, the
+% pagenumber is displayed in the right  footer.\\
+% If the document is
+% twopaged, the informations in the headers are splittet, so that author
+% and subject are displayed only on odd pages and the title on even,
+% the pagenumber is displayed on the right side on odd pages and on the
+% left side on even pages.\\
+% On the first page, only the date and tutorial will be displayed in the
+% header, the rest of infomration should be in the title.
+%    \begin{macrocode}
+\fancypagestyle{firstpage}{
+  %
+  \fancyhf{}
+  % clear all six fields
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[R]{\thepage}
+  \fancyhead[L]{\hwa@tutorium}
+  \fancyhead[R]{\@date } }
+\fancypagestyle{followingpage}{
+  \fancyhf{}
+  \ifhwa@twoside % IF
+  \fancyhead[RO]{\@author}
+  \fancyhead[LO]{\hwa@kurs\\
+    \hwa@tutorium}
+  \fancyhead[LE]{
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe
+  }
+  \fancyfoot[RO,LE]{\thepage}
+  
+  \else %ELSE
+  
+  \fancyhead[R]{\hwa@kurs\\
+    \@author}
+  \fancyhead[L]{\hwa@tutorium\\
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\hwa@sheetTitle\\}
+    \GetTranslation{abgabe}: \hwa@abgabe}
+  \fancyfoot[R]{\thepage}
+  \fi %ENDIF
+  \renewcommand{\headrulewidth}{\hwa@headrulewidth}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{followingpage}
+%    \end{macrocode}
+% \subsection{Enhance Mathenvironments}
+% A couple of thigns, to make math-environments more beautifull and compact.
+% \begin{macro}{\theequation}
+%   Displays equation-numbers as upper-case roman numbers.
+%    \begin{macrocode}
+\renewcommand{\theequation}{\Roman{equation}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\allowdisplaybreaks}
+%   Allow pagebreaks in Mathmode
+%    \begin{macrocode}
+\allowdisplaybreaks
+%    \end{macrocode}
+% \end{macro}
+% \section{Commands}
+% \subsection{Constants}
+% Defines some constants
+% \begin{macro}{\hwa@pointboxsize}
+% Explains it self.
+%    \begin{macrocode}
+\newcommand{\hwa@pointboxsize}{3em}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Document Informations\label{DOC_INFO_CMDS}}
+% \begin{macro}{\subject, \kurs} Sets the subject
+%   of the document.  Takes the subject as argument.  Standard
+%   Value is
+%   \enquote{Kein Kurs}\\
+%   |\kurs| is deprecated.\\ \
+%    \begin{macrocode}
+\newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
+\newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
+\newcommand{\kurs}[1]{\subject{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\tutorial, \tutorium} Sets the tutorial
+% of the author.  Takes it as an argument. Stamdard Value is empty, so
+% that this command can be omitted.\\ |\tutorium| is deprecated.\\ \
+%    \begin{macrocode}
+\newcommand{\hwa@tutorium}{?\GetTranslation{uebungsgruppe}?} % To store the value
+\newcommand{\tutorial}[1]{\renewcommand{\hwa@tutorium}{#1}}
+\newcommand{\tutorium}[1]{\tutorial{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\deadline, \abgabe}
+%   Sets the deadline of the document.  Takes it as an argument.
+%   Standard value is |\today|.\\ |\abgabe| is deprecated\\
+%    \begin{macrocode}
+\newcommand{\hwa@abgabe}{\today} % To store the value
+\newcommand{\deadline}[1]{\def\hwa@abgabe{#1}}
+\newcommand{\abgabe}[1]{\deadline{#1}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\sheetTitle}
+%   Sets a descriptional Title of the
+%   Sheet,
+%   will be written in the header of every page.
+%    \begin{macrocode}
+\newcommand{\hwa@sheetTitle}{}
+\newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{Inherited from \texttt{article}}
+% \DescribeMacro{\author} Sets the author of the document.\\
+% \DescribeMacro{\date} Sets the date of the document.\\
+% \subsection{Sectioning\label{SECTIONING_CMDS}}
+% Because the class is designed for Assignments, the
+% sectioning-commands are different from Article
+% \subsubsection{\enquote*{plain}
+% Sectioning\label{PLAIN_SECTIONING_CMDS}}
+% \begin{macro}{\problem}~\\ \DescribeMacro{\subproblem}
+% \DescribeMacro{\subsubproblem} These commands work like their
+% counterpart in article, except that there will be no number, nor
+% will they increase a counter.  Nevertheless, they will be shown
+% in the table of contents.\\
+%    \begin{macrocode}
+\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+  {1}%Level
+  {\z@}%indent
+  {-2em \@plus -1em \@minus -1em}%beforeskip
+  {1ex \@plus .5ex}%afterskip
+  {\normalfont\Large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill
+     \frame{\framebox[\hwa@pointboxsize]{
+         \hfill \normalfont{\large/\small{#2}}}}
+    }
+  }
+  \addcontentsline{toc}{section}{#1}
+}
+
+\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+  {2}%Level
+  {\z@}%indent
+  {-1em \@plus -.5em \@minus -.5em}%beforeskip
+  {.5ex \@plus .5ex}%afterskip
+  {\normalfont\large \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\small{#2}}
+    }
+  }
+  \addcontentsline{toc}{subsection}{#1}
+}
+
+\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+  {3}%Level
+  {\z@}%indent
+  {-.5em}%beforeskip
+  {.5em}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1
+    \IfNoValueF{#2}{
+      \hfill \framebox[\hwa@pointboxsize]{
+        \hfill\normalfont\large/\scriptsize{#2}}
+    }
+  }
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\keyword}
+%   Creates a new Paragraph ,which will
+%   start with the Argument in Bold, followed by two non-breaking
+%   spaces.\\
+%    \begin{macrocode}
+\newcommand{\keyword}[1]{\@startsection{keyword}%Name
+  {4}%Level
+  {\parindent}%indent
+  {-.1em}%beforeskip
+  {\z@}%afterskip
+  {\normalfont \sffamily\bfseries}%style
+  *{#1~~}
+}
+%    \end{macrocode}
+% 
+% The following Macros make use of |\keyword|, so it is suggested to
+% use them instead.\\
+%
+% \DescribeMacro{\solution} \DescribeMacro{\proof}
+% \DescribeMacro{\given} \DescribeMacro{\toShow}
+% \DescribeMacro{\assumption} \DescribeMacro{\supposeThat} They work like
+% |\keyword|, but take only an optional Argument print out
+% \enquote{Solution}, \enquote{Proof} \enquote{Given}, \enquote{To
+% show}, \enquote{Assumption}, and \enquote{Suppose that},
+% respectively \footnote{As of v1.6, Translations are added, depending
+% on the choosen Language, there may be an other Text displayed.\\ See
+% \autoref{imp:translation} for all Translations}, via |\keyword|. If an
+% argument is passed, they print out this argument after the keyword. They
+% are not mentioned in the table of contents.
+%    \begin{macrocode}
+\newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{\enquote*{better}
+% Sectioning\label{BETTER_SECTIONING_CMDS}}
+% The following commands are an augmented version of the
+% \enquote{plain} commands.\
+% \begin{macro}{\newproblem}
+%   ~\\
+%   \DescribeMacro{\newproblem*} \DescribeMacro{\newsubproblem}
+%   \DescribeMacro{\newsubsubproblem} These commands require no argument,
+%   and automatically create a numbered title.
+%   They have two optional arguments:
+%   \texttt{\textbackslash{newproblem}[\#1]\{\#2\}} where \texttt{\#1}
+%   is the (sub(sub))problem-number and \texttt{\#2} are the
+%   points. If there is a number of Points assigned to a
+%   (sub(sub))problem, then the command will generate a box to write
+%   the reched number of points down next to it.\\
+% 
+%   Normally, |\newproblem| adds the new Created Problem to the
+%   grading--table (see \autoref{GRADING-TABLE}), |\newproblem*| does not
+%   do this.\\
+%   
+%   They use coutners, of course:\label{imp:Counters}
+%    \begin{macrocode}
+\newcounter{problem} \setcounter{problem}{0}
+\newcounter{subproblem}[problem] \setcounter{subproblem}{0}
+\newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
+
+%    \end{macrocode}
+%    \begin{macrocode}
+\DeclareDocumentCommand\newproblem{O{} g}{
+  \IfNoValueTF{#2}{
+    \newproblem*[#1]
+    \addToGradingTable{\# \hwa@problemno}
+  }{
+    \IfNoValueF{#1}{
+      \stepcounter{problem}% to reset the lower counters
+      \setcounter{problem}{#1}
+    }
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \addToGradingTable{\# \hwa@problemno}{/#2}
+  }
+}
+
+\WithSuffix\newcommand\newproblem*[1][]{\stepcounter{problem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \stepcounter{problem}% to reset the lower counters
+    \setcounter{problem}{#1}}
+  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+}
+
+\DeclareDocumentCommand\newsubproblem{O{} g}{
+  \stepcounter{subproblem}
+  \ifthenelse{\equal{#1}{}} { } {
+    \setcounter{subproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}
+  }
+  {
+    \subproblem{\GetTranslation{aufgabe}
+      \hwa@problemno{}.\hwa@subproblemno}[#2]
+  }
+}
+
+\DeclareDocumentCommand\newsubsubproblem{O{} g}{
+  \stepcounter{subsubproblem}
+  \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
+  \IfNoValueTF{#2}{
+    \subsubproblem{\hwa@subsubproblemno)}
+  }
+  {
+    \subsubproblem{\hwa@subsubproblemno)}[#2]
+  }
+}
+
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Useful Macros}
+% \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
+% \begin{macro}{\QED}~\\ \DescribeMacro{\EOP} \DescribeMacro{\eop}
+% Display a flushed-right \textit{QED}, \(\square\), or \(\blacksquare\),
+% respectively. |\qed| is not implemented, to keep compatibility to
+% several Math-packages, which define the later.
+%    \begin{macrocode}
+\newcommand{\QED}{\begin{flushright}
+    \textsc{Qed}
+  \end{flushright}
+}
+\newcommand{\EOP}{\begin{flushright}
+    \(\square\)
+  \end{flushright}
+}
+\newcommand{\eop}{\hfill\(\blacksquare\)}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsubsection{\textsc{Quod Non Erat Demunstarndum at iucundum est}}
+% \begin{macro}{\QNED}~\\ \DescribeMacro{\qned}
+%   Display a flushed-right \(triangle\). |\QNED| displays it in a new
+%   line, |\qned| at the end of the same line.\\ In Mathematical proofs this
+%   symbol is used to mark things, which we did not intend to proof,
+%   but are interesting anyway or things wich are not proofed
+%   mathematically, but are explained in a ay, whcih lets no doubt on
+%   their correctness.
+%    \begin{macrocode}
+\newcommand{\QNED}{\begin{flushright} \(\triangle\)
+  \end{flushright}
+}
+\newcommand{\qned}{\hfill\(\triangle\)}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsubsection{Stolen Goods}
+% \label{ALLES_NUR_GEKLAUT_EO-EO}
+% \begin{center}
+% \foreignblockquote{ngerman}{Das ist alles nur geklaut}
+% \end{center}
+% \begin{flushright}
+%   \small{$\sim$Tobias K\"unzel}
+% \end{flushright}
+% These Commands are not mine, they are all stolen from Alexander
+% Bartolomey's\footnote{\enquote{Occloxium} on
+% GitHub:\url{https://github.com/occloxium}}
+% \texttt{amath}-Class\footnote{\texttt{amath.sty} is part of Alexander
+% Bartolomey's Alphabet Classes:
+% \url{https://github.com/occloxium/AlphabetClasses}}\\
+% \begin{macro}{\N}~\\
+%   \newcommand{\N}{\ensuremath{\mathbb{N}}}
+%   \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+%   \DescribeMacro{\Z}
+%   \newcommand{\R}{\ensuremath{\mathbb{R}}}
+%   \DescribeMacro{\R}
+%   \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+%   \DescribeMacro{\Q}
+%   \newcommand{\C}{\ensuremath{\mathbb{C}}}
+%   \DescribeMacro{\C}
+%   \newcommand{\F}{\ensuremath{\mathbb{F}}}
+%   \DescribeMacro{\F}
+%   \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+%   \DescribeMacro{\Primes}
+%   Defines a set of mathematical sets, which are verry usefull (see
+%   \autoref{tbl:field-commands})
+%   \begin{longtable}[h]{rll}
+%     Command & Output & Description\\
+%     |\N|&$\N$&Natural Numbers\\
+%     |\Z|&$\Z$&Whole Numbers\\
+%     |\Q|&$\Q$&Rational Numbers\\
+%     |\R|&$\R$&Real Numbers\\
+%     |\C|&$\C$&Complex Numbers\\
+%     |\F_n|&$\F_n$&Prime Field to base $n$\\
+%     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
+%     \caption{Field-Commands}
+%     \label{tbl:field-commands}
+%   \end{longtable}
+%   \footnotetext{Has to be
+%   $\backslash$\texttt{Primes}, because $\backslash$\texttt{P}
+%   is already in use}
+%    \begin{macrocode}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+% The last one is mine
+\newcommand{\Primes}{\ensuremath{\mathbb{P}}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\GL}~\\
+%   \DescribeMacro{\id}
+%   \DescribeMacro{\Var}
+%   \DescribeMacro{\Perm}
+%   \DescribeMacro{\MComb}
+%   \DescribeMacro{\Comb}
+%   \DescribeMacro{\Pot}
+%   \DescribeMacro{\Map}
+%   \DescribeMacro{\Hom}
+%   \DescribeMacro{\Ker}
+%   \DescribeMacro{\Intpol}
+%   \DescribeMacro{\Pol}
+%   \DescribeMacro{\Sol}
+%   \DescribeMacro{\Bin}
+%   \DescribeMacro{\charakteristik}
+%   \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+%   \DescribeMacro{\diff}
+%   \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
+%   \DescribeMacro{\partdiff}
+%   \newcommand{\dx}{\:dx}
+%   \DescribeMacro{\dx}
+%   \newcommand{\divides}{\ensuremath{\ |\ }}
+%   \DescribeMacro{\divides}
+%   \newcommand{\property}{\ensuremath{\ |\ }}
+%   \DescribeMacro{\property}
+%   \renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+%   \DescribeMacro{\dim}
+%   \renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+%   \DescribeMacro{\Im}
+%   \newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+%   \DescribeMacro{\excup}
+%   \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+%   \DescribeMacro{\falls}
+%   Output usefull Plaintext-Operators and Functions.
+%   See table \ref{tab:functions}. Require Mathmode\\
+%   \begin{longtable}[h]{rl}
+%     Command & Output \\
+%     |\GL| & $\GL$\\
+%     |\id| & $\id$\\
+%     |\Var| & $\Var$\\
+%     |\Perm|& $\Perm$\\
+%     |\Comb|& $\Comb$\\
+%     |\MComb|& $\MComb$\\
+%     |\Pot|& $\Pot$\\
+%     |\Map|& $\Map$\\
+%     |\Hom|& $\Hom$\\
+%     |\Intpol|& $\Intpol$\\
+%     |\Pol|& $\Pol$\\
+%     |\Sol|& $\Sol$\\
+%     |\Bin| & $\Bin$\\
+%     |\charakteristik| & $\charakteristik$\\
+%     |\diff{<1>}|&$\diff{<1>}$\\
+%     |\partdiff{<1>}|&$\partdiff{<1>}$\\
+%     |\divides| and |property| & Prints a vertical line\\
+%     |\dx|&$\dx$\\
+%     |\excup|&$\excup$\\
+%     \caption{Common Functions}
+%     \label{tab:functions}
+%   \end{longtable}
+%   |\falls| prints out \foreigntextquote{ngerman}{falls}\footnote{In
+%   German, actual Translation may differ}
+%    \begin{macrocode}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Perm}{Perm}
+\DeclareMathOperator{\MComb}{MComb}
+\DeclareMathOperator{\Comb}{Comb}
+\DeclareMathOperator{\Pot}{Pot}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Intpol}{Intpol}
+\DeclareMathOperator{\Pol}{Pol}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\charakteristik}{char}
+
+\newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
+\newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
+\newcommand{\dx}{\:dx}
+\newcommand{\divides}{\ensuremath{\ |\ }}
+\newcommand{\property}{\ensuremath{\ |\ }}
+
+\renewcommand{\dim}[1][]{\ensuremath{\text{dim}_{#1}\ }}
+\renewcommand{\Im}{\ensuremath{\text{Im}\ }}
+
+\newcommand{\excup}{\ensuremath{\stackrel{.}{\cup}}}
+\newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
+%    \end{macrocode}
+% \end{macro}
+% \subsubsection{Rounding}
+% Require Mathmode
+% \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+% \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+% \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+% \newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+% \begin{longtable}[h]{rll}
+%   Command & Output & Meaning\\
+%   |\floor{<1>}| & $\floor{<1>}$ & floor |<1>|\\
+%   |\ceil{<1>}| & $\ceil{<1>}$ & ceil |<1>|\\
+%   |\roundHU{<1>}| & $\roundHU{<1>}$ & Round |<1>| \enquote{half up}
+%   ($\floor{<1> + \frac{1}{2}}$)\\
+%   |\roundHD{<1>}| & $\roundHD{<1>}$ & Round |<1>| \enquote{half down}
+%   ($-\floor{<1> - \frac{1}{2}}$)\\
+%   \caption{Rounding Functions}
+%   \label{tab:rounding-functions}
+% \end{longtable}
+%    \begin{macrocode}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+\newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
+\newcommand{\roundHD}[1]{\ensuremath{\left\lfloor #1 \right\rceil}}
+%    \end{macrocode}
+% \begin{macro}{\bigforall}~\\
+%   \DescribeMacro{\bigexists} Redefines big versions of quantors,
+%   adds an h-skip to normal version.
+%    \begin{macrocode}
+\let\oforall\forall
+\let\oexists\exists
+\renewcommand{\forall}{\ensuremath{\hskip 2pt \oforall \hskip 2pt}}
+\renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
+\newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
+\newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Grading Table\label{GRADING-TABLE}}
+% This Document-Class is still mainly designed for Homework, so
+% it would be nice, if there was a table to write Grades into,
+% wouldn't it?\\
+%
+% \begin{macro}{\addToGradingTable} Adds the given parameter
+% as an excercise to the Grading-Table. All Problems, created with
+% |\newproblem| are added automatically.
+%    \begin{macrocode}
+\DeclareDocumentCommand\addToGradingTable{m g}{
+  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \IfNoValueTF{#2}{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+  }{
+    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+      {\string\small #2} &}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\makeGradingTable}
+%   Outputs a table to fill in the reached Points.  Only shows Problems
+%   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
+%   according number of maximum points for each problem, if
+%   specified.\\Displayes the total number of maximum Problems, if
+%   given by Argument Like |\tableofcontent|, it needs a second run of
+%   \LaTeX, until all are added.\\
+%   \texttt{[\#1]}: \emph{Optional.} The total number of points
+%   reachable.
+%    \begin{macrocode}
+\DeclareDocumentCommand\makeGradingTable{o}{
+  \begin{table}[hb]
+    \centering
+    \large
+    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
+    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+    \endtabular
+  \end{table}
+  }
+%    \end{macrocode}
+% \end{macro}
+% See example documents fot output
+% \subsubsection{Internal commands}
+% \begin{macro}{\hwa@gradingtbl@...}
+% Defines macros whose contents will be written to the AUX-File and
+% read in the next run, and the usable commands. The later will
+% contain the information, but have to be defined (incase the aux-file
+% does not exist)
+%    \begin{macrocode}
+\edef\hwa@gradingtbl@aux@defs{}
+\newcommand{\hwa@gradingtbl@aux@lineOne}{}
+\newcommand{\hwa@gradingtbl@aux@lineTwo}{}
+
+\edef\hwa@gradingtbl@defs{}
+\newcommand{\hwa@gradingtbl@lineOne}{}
+\newcommand{\hwa@gradingtbl@lineTwo}{}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\write\@auxout}
+%   Write to aux
+%    \begin{macrocode}
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineOne{\hwa@gradingtbl@aux@lineOne}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Title}
+% \begin{macro}{\maketitle}
+%   Overrides maketitle.
+%    \begin{macrocode}
+\renewcommand{\maketitle} {
+  \thispagestyle{firstpage}
+  \ifhwa@twocolumn{
+    \twocolumn[{
+      \hwa@maketitletext
+    }]
+  }\else{
+    \hwa@maketitletext
+  }\fi
+}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hwa@maketitletext}
+%   Prints out the title with author etc. Used to reduce code
+%   duplication for two- and onecolumn styles
+%    \begin{macrocode}
+\newcommand{\hwa@maketitletext}{
+  \begin{centering}
+    \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \GetTranslation{abgabe}: \hwa@abgabe\\
+    \hwa@hline@LTWO
+    \normalsize{\@author}\\
+    \hwa@hline@LTWO \normalsize
+  \end{centering}
+}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Counters}
+% The actual counters are defined in \autoref{imp:Counters}.
+% \begin{macro}{Counter--Commands}
+%   These are used to output the Exercise numbers in the desired style
+%    \begin{macrocode}
+\newcommand{\hwa@problemno}{\arabic{problem}}
+\newcommand{\hwa@subproblemno}{\alph{subproblem}}
+\newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
+%    \end{macrocode}
+%
+% \begin{macro}{\hwa@parseCounterStyle}
+%   This takes a style-input (\#1), one of the three previous defined
+%   commands (\#2) and the coresponding counter (\#3) to redefine \#1,
+%   so that it corresponds to \#2.  See
+%   \ref{RE-DEF-COUNTER-CMDS-IMPLM} for example usement.
+%
+%    \begin{macrocode}
+\newcommand{\hwa@parseCounterStyle}[3]{
+  \ifthenelse{\equal{#1}{arabic}}{ \renewcommand{#2}{\arabic{#3}} }{
+    \ifthenelse{\equal{#1}{roman}}{ \renewcommand{#2}{\roman{#3}} }{
+      \ifthenelse{\equal{#1}{alph}}{ \renewcommand{#2}{\alph{#3}} }{
+        \ifthenelse{\equal{#1}{Alph}}{ \renewcommand{#2}{\Alph{#3}} }{
+          \ifthenelse{\equal{#1}{Roman}}{
+            \renewcommand{#2}{\Roman{#3}} }{
+            \ClassError{homeworkassignment}{Invalid Value #1 for
+              option Counter-Styling}{Possible Values are alph,
+              arabic, Arabic, roman or Roman.}  } } } } } }
+%    \end{macrocode}
+% \end{macro}
+%   Redefines the three counter-commands:
+%    \begin{macrocode}
+\hwa@parseCounterStyle{\hwa@problemsty}{\hwa@problemno}{problem}
+\hwa@parseCounterStyle{\hwa@subproblemsty}{\hwa@subproblemno}{subproblem}
+\hwa@parseCounterStyle{\hwa@subsubproblemsty}{\hwa@subsubproblemno}{subsubproblem}
+%    \end{macrocode}
+% \end{macro}
+% \section{Environments}
+% \subsection{Proof}
+% Used for proofes. Starts bth proof and ends with a End-Of-Proof
+% symbol.
+%    \begin{macrocode} 
+\NewDocumentEnvironment{proof}{G{\GetTranslation{beweis}} O{\QED}}
+{
+  \keyword{#1:~~}
+}
+{
+  #2
+}
+%    \end{macrocode}
+% \subsection{Proof by contradiction}
+% Used for proofes. Starts bth proof and ends with a End-Of-Proof
+% symbol.
+%    \begin{macrocode} 
+\NewDocumentEnvironment{contradiction}{}
+{
+  \begin{proof}{\GetTranslation{beweis}~\GetTranslation{per}~\GetTranslation{Widerspruch}}[\hfill\lightning\\]
+  }
+  {
+  \end{proof}
+}
+%    \end{macrocode}
+% \pagebreak
+% \section{Development and support}
+%
+% The package is developed at \emph{GitHub}:
+% \begin{quote}
+%   \url{https://github.com/ACHinrichs/LaTeX-templates}
+% \end{quote}
+% Please refer to that site for any bug report or development
+% information.
+%
+% \section{Changelog}
+% \begin{description}
+% \item[v1.0 - 2016/10/23] Initial
+% \item[v1.1 - 2016/11/02] ...
+% \item[v1.2 - 2016/11/03] ...
+% \item[v1.3 - 2016/12/01]
+%   \begin{itemize}
+%   \item Provide the Class as .dtx file and more
+%   \end{itemize}
+% \item[v1.4 - 2017/04/29]
+%   \begin{itemize}
+%   \item \enquote{Minor} bugfixes
+%   \end{itemize}
+% \item[v1.5 - 2017/04/29]
+%   \begin{itemize}
+%   \item Problems are displayed in the table of contents. Type of
+%     numeration is now configurable.
+%   \end{itemize}
+% \item[v1.5.1 - 2017/04/29]
+%   \begin{itemize}
+%   \item Bugfix
+%   \end{itemize}
+% \item[v1.5.2 - 2017/04/29]
+%   \begin{itemize}
+%   \item Add version-number
+%   \end{itemize}
+% \item[v1.6 - 2017/05/02]
+%   \begin{itemize}
+%   \item Add Translations (German and English)
+%   \item Add |\given| and |\toShow|
+%   \item Add |\QED|, |\EOP|, and |\eop|
+%   \end{itemize}
+% \item[v1.6.3 - 2017/05/05]
+%   \begin{itemize}
+%   \item Bugfixes
+%   \end{itemize}
+% \item[v1.6.4 - 2017/05/09]
+%   \begin{itemize}
+%   \item Change |\eop| to be in the same line
+%   \end{itemize}
+% \item[v1.7 - 2017/05/09]
+%   \begin{itemize}
+%   \item Add |\QNED|
+%   \end{itemize}
+% \item[v2.0 - 2017/05/23]\enquote{Layout 2.0}
+%   \begin{itemize}
+%   \item Change Margins
+%   \item Add Option to select older Page-Style
+%   \item Change standardlayout to twocolumn and twoside
+%   \item \st{Steal} Use Macros by Alexander Bartolomey (See \ref{ALLES_NUR_GEKLAUT_EO-EO})
+%   \item Add some TikZ-Styles
+%   \item Add round functions
+%   \end{itemize}
+% \item[v2.2 - 2017/06/17]
+%   \begin{itemize}
+%   \item Add Grading-table
+%   \item Add |\keyword|, |\assumption|, and |\supposeThat|
+%   \item Add |\newproblem*|
+%   \item Add |\sheetTitle|
+%   \item Change equation-numbering to uppercase roman
+%   \end{itemize}
+% \item[v2.2.1 - 2017/06/20]
+%   \begin{itemize}
+%   \item Fix error with commands like |\solution| and |\keyword|.
+%   \end{itemize}
+% \item[v2.4 - 2017/04/07]
+%   \begin{itemize}
+%   \item Fix math alignment
+%   \item Add option for flushed left equations
+%   \item Update amath port to use
+%   \end{itemize}
+% \item[v3.0 - 2017/12/26] \enquote{WS 2017}
+%   \begin{itemize}
+%   \item Rename to \texttt{homeworkassignment}
+%   \item Add Environment for various proofs
+%   \item Add points for exercises and a place to fill them in
+%   \item Add option to remove or decrease or remove the hlines
+%   \item Remove legacy styles
+%   \item Rework the documentation
+%   \item Beautify Maths
+%   \item Fix OneColumn-Maktitle-Bug
+%   \item Fix Subproblem-Counter not beeing reset
+%   \item Merry Christmas!
+%   \end{itemize}
+%   
+% \end{description}
+% \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
+% applies:
+% \paragraph{Major Version} has to be increased, if
+% \begin{itemize}
+% \item there are changes, which create visible changes in the output
+%   of existing documents (except for bugfixes), or
+% \item a command is removed or changed in a way, that existing
+%   documents do not compile with the new version.
+% \end{itemize}
+% \paragraph{Minor Version} has to be increased, if
+% \begin{itemize}
+% \item new backwards compatible commands are introduced
+%   \begin{itemize}
+%   \item Bugfixes may be introduced too.
+%   \end{itemize}
+% \end{itemize}
+% The minor version of stable releases is always even, the minor
+% version of developtment versions is always odd. (0 counts as even). 
+% \paragraph{Patches} May be introduced on Stable Branch. With every
+% non-document-breaking bugfix, the patch--number has to be
+% incremented.\\
+% Because Fixing Bugs is a part of developtment, developtment-versions
+% do not have numeric patch--numbers, but alphabetic identifiers,
+% directly after the minor--version.
+% \pagebreak
+% \section{Translations\label{imp:translation}}
+% Homeworkassignment currently supports English and German, fallback
+% language is German. Unfortunatly these two are the only Languages I
+% am capable of translating reliable, so if you want to use an other
+% language, I would be verry happy if you would help me to translate
+% homeworkassignment! Please open an issue, author a pull-request or
+% send me an e-mail.
+%    \begin{macrocode}
+\DeclareTranslationFallback{aufgabe}{Aufgabe}
+\DeclareTranslationFallback{loesung}{L\"osung}
+\DeclareTranslationFallback{beweis}{Beweis}
+\DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslationFallback{abgabe}{Abgabe}
+\DeclareTranslationFallback{zuZeigen}{Zu zeigen}
+\DeclareTranslationFallback{gegeben}{Gegeben}
+\DeclareTranslationFallback{falls}{falls}
+\DeclareTranslationFallback{Annahme}{Annahme}
+\DeclareTranslationFallback{Angenommen-dass}{Anngenommen, dass}
+\DeclareTranslationFallback{per}{per}
+\DeclareTranslationFallback{Widerspruch}{Widerspruch}
+
+\DeclareTranslation{German}{aufgabe}{Aufgabe}
+\DeclareTranslation{German}{loesung}{L\"osung}
+\DeclareTranslation{German}{beweis}{Beweis}
+\DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
+\DeclareTranslation{German}{abgabe}{Abgabe}
+\DeclareTranslation{German}{zuZeigen}{Zu zeigen}
+\DeclareTranslation{German}{gegeben}{Gegeben}
+\DeclareTranslation{German}{falls}{falls}
+\DeclareTranslation{German}{Falls}{Falls}
+\DeclareTranslation{German}{Annahme}{Annahme}
+\DeclareTranslation{German}{Angenommen-dass}{Anngenommen, dass}
+\DeclareTranslation{German}{per}{per}
+\DeclareTranslation{German}{Widerspruch}{Widerspruch}
+
+\DeclareTranslation{English}{aufgabe}{Problem}
+\DeclareTranslation{English}{loesung}{Solution}
+\DeclareTranslation{English}{beweis}{Proof}
+\DeclareTranslation{English}{uebungsgruppe}{Tutorial}
+\DeclareTranslation{English}{abgabe}{Deadline}
+\DeclareTranslation{English}{zuZeigen}{To show}
+\DeclareTranslation{English}{gegeben}{Given}
+\DeclareTranslation{English}{falls}{if}
+\DeclareTranslation{English}{Falls}{If}
+\DeclareTranslation{English}{Annahme}{Assumption}
+\DeclareTranslation{English}{Angenommen-dass}{Suppose that}
+\DeclareTranslation{English}{per}{by}
+\DeclareTranslation{English}{Widerspruch}{contradiction}
+%    \end{macrocode}
+%\section*{End}
+% \textit{The End}
+%    \begin{macrocode}
+\endinput
+%    \end{macrocode}

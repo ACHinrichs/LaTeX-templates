@@ -1,6 +1,11 @@
-#+STARTUP: showeverything 
+# +STARTUP: showeverything 
 This file lists all ToDos for all LaTeX-Packages and Classes in this
  Repo
+
+* TODO Rework Readme
+  - Installation is very outdated
+  - cheatsheet is not present in readme
+  - info about CTAN
 
 
 * cheatsheet
@@ -8,22 +13,39 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
 
 
 * HomeworkAssignment
-  - [ ] Rename to homeworkassignment
+** TODO [100%] v3.0
+  - [X] Rename to homeworkassignment
     - To comply to CTANs requirements of all lowercase packagenames.
-    - [ ] Add proof by contradiction environment
-  - [ ] Add points for excercises
-    - Expand \textbackslash {} newproblem newsubproblem etc by an
-      optional argument to take the maximum ammount of point one can
-      gain at this problem.
-      - When passed this is passed to \textbackslash{}newsubproblem,
+  - [X] Add proof by contradiction environment
+  - [X] Create environments for all existing proofs
+    - Contradiction, plain üroof and a varable one are implemented;
+      that should be enough
+  - [X] [2/2] Add points for excercises
+    - [X] Expand \textbackslash{}newproblem \textbackslash{}newsubproblem etc
+      by an optional argument to take the maximum ammount of point one
+      can gain at this problem. 
+      - [X] When passed this is passed to \textbackslash{}newsubproblem,
         create a box to write the points down
-      - Add this number of points to the »gradingtable«
-    - To implement this, the existing optional argument, taking
+      - [X] Add this number of points to the »gradingtable«
+    - [X] To implement this, the existing optional argument, taking
       the exercise number has to be replaced with an own command
-      - [ ] replace the optional argument of
+      - replace the optional argument of
         \textbackslash{}newproblem by a new command
         \textbackslash{}setproblemnumber
-    - [ ] Add Option to remove the hlines from the layout
-      - Standard hlines=all
-      - hlines=none remove all
-      - hlines=header just remove the hlines around the Title
+	- Solved different
+  - [X] Add Option to remove the hlines from the layout
+    - Standard hlines=all
+    - hlines=none remove all
+    - hlines=header just remove the hlines around the Title
+  - [X] Remove legacy styles
+  - [X] Rework Docu
+    - [X] Unite Implementation and Documentation part of Documentation
+    - [X] Document all features
+    - [X] Update Changelog
+  - [X] Add allowdisplaybreaks
+  - [X] BUG of onecolumn and maketitle
+    - Pull changes from NumRech u3
+  - [X] BUG Subproblem counter not reset on newproblem with number
+    (see NumRech u5)
+    - [X] Fix
+    - [X] Check if subsubproblem works!

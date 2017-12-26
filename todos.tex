@@ -1,4 +1,4 @@
-% Created 2017-09-04 Mo 17:10
+% Created 2017-11-19 So 12:50
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -31,45 +31,77 @@
 This file lists all ToDos for all \LaTeX{}-Packages and Classes in this
  Repo
 
+\section{{\bfseries\sffamily TODO} Rework Readme}
+\label{sec-1}
+\begin{itemize}
+\item Installation is very outdated
+\item cheatsheet is not present in readme
+\item info about CTAN
+\end{itemize}
+
 
 \section{cheatsheet}
-\label{sec-1}
+\label{sec-2}
 \begin{itemize}
 \item $\square$ BUG: Footnotes appear all on the first page
 \end{itemize}
 
 
 \section{HomeworkAssignment}
-\label{sec-2}
+\label{sec-3}
+\subsection{{\bfseries\sffamily TODO} [60\%] v3.0}
+\label{sec-3-1}
 \begin{itemize}
-\item $\square$ Rename to homeworkassignment
+\item $\boxtimes$ Rename to homeworkassignment
 \begin{itemize}
 \item To comply to CTANs requirements of all lowercase packagenames.
+\end{itemize}
 \item $\square$ Add proof by contradiction environment
-\end{itemize}
-\item $\square$ Add points for excercises
+\item $\square$ Create environments for all existing proofs
+\item $\boxtimes$ [2/2] Add points for excercises
 \begin{itemize}
-\item Expand \textbackslash \{\} newproblem newsubproblem etc by an
-optional argument to take the maximum ammount of point one can
-gain at this problem.
+\item $\boxtimes$ Expand \textbackslash{}newproblem \textbackslash{}newsubproblem etc
+by an optional argument to take the maximum ammount of point one
+can gain at this problem. 
 \begin{itemize}
-\item When passed this is passed to \textbackslash{}newsubproblem,
+\item $\boxtimes$ When passed this is passed to \textbackslash{}newsubproblem,
 create a box to write the points down
-\item Add this number of points to the »gradingtable«
+\item $\boxtimes$ Add this number of points to the »gradingtable«
 \end{itemize}
-\item To implement this, the existing optional argument, taking
+\item $\boxtimes$ To implement this, the existing optional argument, taking
 the exercise number has to be replaced with an own command
 \begin{itemize}
-\item $\square$ replace the optional argument of
+\item replace the optional argument of
 \textbackslash{}newproblem by a new command
 \textbackslash{}setproblemnumber
+\begin{itemize}
+\item Solved different
 \end{itemize}
-\item $\square$ Add Option to remove the hlines from the layout
+\end{itemize}
+\end{itemize}
+\item $\boxtimes$ Add Option to remove the hlines from the layout
 \begin{itemize}
 \item Standard hlines=all
 \item hlines=none remove all
 \item hlines=header just remove the hlines around the Title
 \end{itemize}
+\item $\boxtimes$ Remove legacy styles
+\item $\boxminus$ Rework Docu
+\begin{itemize}
+\item $\boxtimes$ Unite Implementation and Documentation part of Documentation
+\item $\boxtimes$ Document all features
+\item $\square$ Update Changelog
+\end{itemize}
+\item $\boxtimes$ Add allowdisplaybreaks
+\item $\boxtimes$ BUG of onecolumn and maketitle
+\begin{itemize}
+\item Pull changes from NumRech u3
+\end{itemize}
+\item $\boxminus$ BUG Subproblem counter not reset on newproblem with number
+(see NumRech u5)
+\begin{itemize}
+\item $\boxtimes$ Fix
+\item $\square$ Check if subsubproblem works!
 \end{itemize}
 \end{itemize}
 % Emacs 25.1.1 (Org mode 8.2.10)
