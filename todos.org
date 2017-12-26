@@ -13,10 +13,10 @@ This file lists all ToDos for all LaTeX-Packages and Classes in this
 
 
 * HomeworkAssignment
-** TODO [60%] v3.0
+** TODO [70%] v3.0
   - [X] Rename to homeworkassignment
     - To comply to CTANs requirements of all lowercase packagenames.
-  - [ ] Add proof by contradiction environment
+  - [X] Add proof by contradiction environment
   - [ ] Create environments for all existing proofs
   - [X] [2/2] Add points for excercises
     - [X] Expand \textbackslash{}newproblem \textbackslash{}newsubproblem etc

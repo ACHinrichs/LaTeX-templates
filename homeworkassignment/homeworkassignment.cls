@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v2.5h}
-\def\filedate{2017/11/20}
+\def\fileversion{v2.5i}
+\def\filedate{2017/12/26}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -51,6 +51,7 @@
 \RequirePackage{array}
 \RequirePackage{xparse}
 \RequirePackage{gillius2}
+\RequirePackage{wasysym}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -436,11 +437,11 @@
 {
   #2
 }
-\NewDocumentEnvironment{contradiction}
+\NewDocumentEnvironment{contradiction}{}
 {
-  \begin{proof}{\GetTranslation{beweis}~\GetTranslation{per}~\GetTranslation{Widerspruch}}{lightning}
-}
-{
+  \begin{proof}{\GetTranslation{beweis}~\GetTranslation{per}~\GetTranslation{Widerspruch}}[\hfill\lightning\\]
+  }
+  {
   \end{proof}
 }
 \DeclareTranslationFallback{aufgabe}{Aufgabe}
