@@ -1,0 +1,68 @@
+\mode<presentation>
+
+% Yes, these definitions are from the rwth-template
+\definecolor{rwth}   {RGB}{  0  84 159}
+\definecolor{rwth-75}{RGB}{ 64 127 183}
+\definecolor{rwth-50}{RGB}{142 186 229}
+\definecolor{rwth-25}{RGB}{199 221 242}
+\definecolor{rwth-10}{RGB}{232 241 250}
+
+% All the other colors
+% Secondary colors
+\definecolor{black}   {RGB}{  0   0   0}
+\definecolor{black-75}{RGB}{100 101 103}
+
+\definecolor{grun}   {RGB}{ 87 171  39}
+\definecolor{grun-75}{RGB}{141 192  96}
+\definecolor{grun-50}{RGB}{184 214 152}
+\definecolor{grun-25}{RGB}{221 235 206}
+\definecolor{grun-10}{RGB}{242 247 236}
+
+\definecolor{rot}   {RGB}{204   7  30}
+\definecolor{rot-75}{RGB}{216  92  65}
+\definecolor{rot-50}{RGB}{230 150 121}
+\definecolor{rot-25}{RGB}{243 205 187}
+\definecolor{rot-10}{RGB}{250 235 227}
+
+% Main colors
+\setbeamercolor*{normal text}{fg=black}
+
+\setbeamercolor*{structure}{fg=rwth}
+
+\setbeamercolor{palette primary}{   use=structure,fg=structure.fg,bg=rwth-50}
+\setbeamercolor{palette secondary}{ use=structure,fg=structure.fg,bg=rwth-25}
+\setbeamercolor{palette tertiary}{  use=structure,fg=structure.fg,bg=rwth-10}
+\setbeamercolor{palette quaternary}{use=structure,fg=structure.fg,bg=rwth-10}
+
+% Sidebar
+\setbeamercolor*{sidebar}{parent=palette primary}
+\setbeamercolor*{palette sidebar primary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar secondary}{use=structure,fg=structure.fg}
+\setbeamercolor*{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar quaternary}{use=structure,fg=structure.fg}
+
+% Outer structure
+\setbeamercolor{frametitle}{fg=black}
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=black-75}
+
+\setbeamercolor{date}{fg=black}
+\setbeamercolor{section}{fg=black}
+
+% Blocks and special text
+\setbeamercolor*{block title}{fg=palette primary,bg=palette secondary}
+\setbeamercolor{block body}{bg=palette tertiary}
+
+\setbeamercolor*{example text}{fg=grun}
+\setbeamercolor{block title example}{bg=grun-25}
+\setbeamercolor{block body example}{bg=grun-10}
+
+\setbeamercolor*{alerted text}{fg=rot}
+\setbeamercolor{block title alerted}{bg=rot-25}
+\setbeamercolor{block body alerted}{bg=rot-10}
+
+% Title page header bar
+\setbeamercolor{title page bar}{parent={primary}}
+
+\mode<all>
