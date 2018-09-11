@@ -6,6 +6,7 @@
 
 \mode<presentation>
 
+
 %This template uses a 16:9 paper-format
 \geometry{paperwidth=33.867cm,paperheight=19.05cm}
 
@@ -23,6 +24,11 @@
 \setlength{\leftmarginiii}{3em}
 
 % Load all the parts
+\DeclareOptionBeamer{sectiontitles}{
+  \PassOptionsToPackage{sectiontitles=#1}{beamerinnerthemeprojektion}
+}
+\ProcessOptionsBeamer
+
 \useinnertheme{projektion}
 \useoutertheme{projektion}
 \usecolortheme{projektion}

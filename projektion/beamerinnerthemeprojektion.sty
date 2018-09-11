@@ -4,6 +4,16 @@
 \RequirePackage{calc}
 \RequirePackage{ifthen}
 
+% For conditionals
+\def\prjktn@inner@false{f}
+\def\prjktn@inner@true{t}
+
+\DeclareOptionBeamer{sectiontitles}{\def\prjktn@inner@sectiontitles{#1}}
+\ExecuteOptionsBeamer{sectiontitles=t} % default value
+\ProcessOptionsBeamer
+% t= true, anything else disables them, t is default
+
+
 \providecommand\inserttitle{}
 \providecommand\insertsubtitle{}
 
@@ -21,6 +31,8 @@
         \includegraphics[width=\paperwidth]{#2}};}  
   }
 }
+
+
 \newcommand{\prjktn@inversetitlepagebox}[2]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.south west)$) rectangle
@@ -68,6 +80,37 @@
     {\usebeamerfont{author}\insertauthor};
   }
 }
+
+
+%%%
+% Section Titles page 
+%%%
+\defbeamertemplate{section title}{projektion}{
+  \usebeamercolor{palette primary}
+  \prjktn@titlepagebox{bg}{}
+  \tikz[overlay, remember picture]{
+    % Insert title
+    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\insertsectionhead};
+
+    % Paint Line
+    \draw[line width=2pt,color=bg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+  }
+}
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\AtBeginSection[]{
+  \setbeamertemplate{section title}[projektion]{}
+\begin{frame}[plain]
+  \usebeamertemplate{section title}
+\end{frame}
+}
+\else
+\fi
+
 
 %%%
 % Template for final slide
