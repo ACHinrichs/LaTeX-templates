@@ -1,0 +1,80 @@
+\mode<presentation>
+
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+
+\defbeamertemplate*{footertext}{projektion}{}
+\defbeamertemplate*{footertextextra}{projektion}{}
+
+\setlength{\headsep}{0pt}
+
+\makeatletter
+\newlength\leftmarrr
+\setlength{\leftmarrr}{\beamer@leftmargin}
+\makeatother
+
+\makeatletter
+\define@key{beamerframe}{t}[true]{% top
+  \beamer@frametopskip=\titleheight\relax%
+  \beamer@framebottomskip=0pt plus 1fill\relax%
+  \beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+  \beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+  \def\beamer@initfirstlineunskip{%
+    \def\beamer@firstlineitemizeunskip{%
+      \vskip-\partopsep\vskip-\topsep\vskip-\parskip%
+      \global\let\beamer@firstlineitemizeunskip=\relax}%
+    \everypar{\global\let\beamer@firstlineitemizeunskip=\relax}}
+}
+\makeatother
+
+%%%
+% Header
+%%%
+\defbeamertemplate*{headline}{polynom-blue}{}
+
+%%%
+% Frame title
+%%%
+\newlength\vertlinebase
+\makeatletter
+\defbeamertemplate*{frametitle}{projektion}
+{
+  \ifthenelse{\equals{\@framesubtitle}{}}
+    {\setlength{\vertlinebase}{1ex}}
+    {\setlength{\vertlinebase}{0pt}}
+  \usebeamercolor{title page bar}
+  \vskip1.5\titleheight
+  \hspace{-1em}
+  \tikz[baseline=\vertlinebase]{
+    \draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);
+  }
+  \hspace{8pt}
+  % \ifthenelse{\equals{\@framesubtitle}{}}
+  %   {\vskip 0pt}
+  %   {\vskip 18pt}
+  \vbox{
+    \fontsize{36pt}{0pt}\selectfont\insertframesubtitle\\
+    \fontsize{50pt}{40pt}\selectfont\insertframetitle
+  }
+}
+\makeatother
+
+%%%
+% Footer
+%%%
+\defbeamertemplate*{footline}{projektion}{
+  \usebeamercolor{title page bar}
+  \tikz[overlay, remember picture]{
+    \draw[color=fg,fill] (current page.south west) rectangle ($(current
+    page.south west)+(\insertframenumber * (\paperwidth/\inserttotalframenumber, .5mm)$)
+  }
+  
+}
+
+\defbeamertemplate*{sidebar left}{projektion}{}
+\defbeamertemplate*{sidebar right}{projektion}{}
+\setbeamersize{sidebar width left=0pt}
+\setbeamersize{sidebar width right=0pt}
+\defbeamertemplate*{navigation symbols}{projektion}{}
+
+\mode<all>

@@ -1,0 +1,154 @@
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{ifthen}
+
+% For conditionals
+\def\prjktn@inner@false{f}
+\def\prjktn@inner@true{t}
+
+\DeclareOptionBeamer{sectiontitles}{\def\prjktn@inner@sectiontitles{#1}}
+\ExecuteOptionsBeamer{sectiontitles=t} % default value
+\ProcessOptionsBeamer
+% t= true, anything else disables them, t is default
+
+
+\providecommand\inserttitle{}
+\providecommand\insertsubtitle{}
+
+\usetikzlibrary{calc}
+
+% #1: Color
+% #2: Image path (can be empty))
+\newcommand{\prjktn@titlepagebox}[2]{
+  \tikz[overlay, remember picture] {
+    \fill[color=#1] ($(current page.north west)$) rectangle
+    ($(current page.north east)+(0,-\titlebarheight)$);
+    \ifthenelse{\equal{#2}{}}{}{
+      \node[inner sep=0pt] (picture) at ($(current page.north
+      west)+(0.5\paperwidth,-.5\titlebarheight)$) {
+        \includegraphics[width=\paperwidth]{#2}};}  
+  }
+}
+
+
+\newcommand{\prjktn@inversetitlepagebox}[2]{
+  \tikz[overlay, remember picture] {
+    \fill[color=#1] ($(current page.south west)$) rectangle
+    ($(current page.north east)+(0,-\titlebarheight)$);
+    \ifthenelse{\equal{#2}{}}{}{
+      \node[inner sep=0pt] (picture) at ($(current page.north
+      west)+(0.5\paperwidth,-.5\titlebarheight)$) {
+        \includegraphics[width=\paperwidth]{#2}};}  
+  }
+}
+
+\newcommand{\prjktn@debug@cross}{
+  \tikz[overlay, remember picture] {
+    \draw[color=red] (current page.north)
+    -- (current page.south);
+    \draw[color=red] (current page.west)
+    -- (current page.east);
+  }
+}
+
+\defbeamertemplate*{background}{projektion}{}
+
+%%%
+% Title page 
+%%%
+\defbeamertemplate{title page}{projektion}[1][]{
+  \usebeamercolor{title page bar}
+  \prjktn@titlepagebox{fg}{}
+  \tikz[overlay, remember picture]{
+    
+    % Insert title
+    % TODO text field should be bound on the left to prevent it 
+    % (a) from overfilling the hbox and 
+    % (b) extending the safe-space of the page itself
+    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\inserttitle{}};
+
+    % Paint Line
+    \draw[line width=1pt,color=fg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+    \usebeamercolor{author}
+    % Insert author
+    \node[color=fg,anchor=west, text width=.2\paperwidth] (author) at ($(current page.south west)
+    + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{author}\insertauthor};
+  }
+}
+
+
+%%%
+% Section Titles page 
+%%%
+\defbeamertemplate{section title}{projektion}{
+  \usebeamercolor{palette secondary}
+  \prjktn@titlepagebox{bg}{}
+  \tikz[overlay, remember picture]{
+    % Insert title
+    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\insertsectionhead};
+
+    % Paint Line
+    \draw[line width=1pt,color=bg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+  }
+}
+
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\AtBeginSection[]{
+  \setbeamertemplate{section title}[projektion]{}
+\begin{frame}[plain]
+  \usebeamertemplate{section title}
+\end{frame}
+}
+\else
+\fi
+
+
+%%%
+% Template for final slide
+%%%
+\defbeamertemplate{final page}{projektion}[2][]{
+  \usebeamercolor{title page bar}
+  \prjktn@inversetitlepagebox{fg}{}
+  \tikz[overlay, remember picture]{
+    
+    % Insert title
+    \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,\titlebarheight)$)
+    {\usebeamerfont{title}#1};
+
+    % Insert author
+    \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}#2};
+  }
+}
+
+%%%
+% Items
+%%%
+\defbeamertemplate*{itemize item}{bullet}{•}
+\defbeamertemplate*{itemize subitem}{bar}{\textendash}
+\defbeamertemplate*{itemize subsubitem}{sq}{\fontsize{8pt}{8pt}\selectfont■}
+
+\setbeamertemplate{enumerate item}{\arabic{enumi}.}
+\setbeamertemplate{enumerate subitem}{\roman{enumii}.}
+\setbeamertemplate{enumerate subsubitem}{\Roman{enumiii}.}
+
+%%%
+% Margins
+%%%
+\setbeamersize{text margin left=\leftmargin}
+\setbeamersize{text margin right=\rightmargin}
+
+\mode<all>

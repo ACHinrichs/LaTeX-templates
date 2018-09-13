@@ -1,0 +1,37 @@
+% Polynom-Beamer style.
+% Based uppon a PowerPoint-Template by Alexander Bartolomey
+%
+% Author: Adrian C. Hinrichs & Alexander Bartolomey
+% Version: 2018-09-13
+
+\mode<presentation>
+
+%This template uses a 16:9 paper-format
+\geometry{paperwidth=33.867cm,paperheight=19.05cm}
+
+\newlength{\titlepagelinewidth}
+\setlength{\titlepagelinewidth}{.7\paperwidth}
+\newlength{\titleheight}
+\setlength{\titleheight}{1.5cm}
+\newlength{\titlebarheight}
+\setlength{\titlebarheight}{0.66\paperheight}
+
+\setlength{\rightmargin}{.1\paperwidth}
+\setlength{\leftmargin}{.1\paperwidth}
+\setlength{\leftmargini}{1em}
+\setlength{\leftmarginii}{3em}
+\setlength{\leftmarginiii}{3em}
+
+% Load all the parts
+\DeclareOptionBeamer{sectiontitles}{
+  \PassOptionsToPackage{sectiontitles=#1}{beamerinnerthemeprojektion}
+}
+\ProcessOptionsBeamer
+
+\useinnertheme{projektion}
+\useoutertheme{projektion}
+\usecolortheme{projektion}
+\usefonttheme{projektion}
+
+
+\mode<all> 
