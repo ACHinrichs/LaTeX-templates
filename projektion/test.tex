@@ -1,20 +1,24 @@
-% This file provides an example Beamer presentation using the RWTH theme
+% This file provides an example Beamer presentation using the Polynom Theme
 % showcasing some of the more common options, similar to the Powerpoint version
-% 12.11.2014: Revision 1 (Harold Bruintjes, Tim Lange)
+% 
 
-% For RWTH, beamer should be loaded with class option t (top)
+% For Polynom, beamer should be loaded with class option t (top)
 \documentclass[t]{beamer}
 %\usepackage[utf8]{inputenc}
 \RequirePackage{ifthen}
+\usepackage{amath}
+\usepackage{bmath}
+\usepackage{lmodern}
+\usepackage{amsfonts}
 % Use fontspec to get Arial font
 % Requires use of XeLaTeX
 \usepackage{fontspec}
-\setmainfont{Product Sans}
-\setsansfont{Product Sans}
+%\setmainfont{Product Sans}
+\setsansfont[]{Product Sans}
+\setmonofont[]{Fira Mono}
 % Also force Arial for math for a more consistent look
-%\usepackage{unicode-math}
-%\setmathfont{Arial}
-
+\usefonttheme[onlymath]{serif}
+\boldmath
 % German style date formatting (footer)
 \usepackage[ddmmyyyy]{datetime}
 \renewcommand{\dateseparator}{.}
@@ -23,27 +27,24 @@
 \usepackage[compatibility=false]{caption}
 \captionsetup{singlelinecheck=off,justification=raggedleft,labelformat=empty,labelsep=none}
 
-
-% Load the actual RWTH theme. Suggested is to load the full theme,
+% Load the actual Polynom theme. Suggested is to load the full theme,
 % as it requires some specific dimensions
 \usetheme{projektion}
 
 % Setup presentation information
 \title{Testing: Gitlab-CI}
-\subtitle{}
-\date[RWTH]{Maschinelle Übersetzung\enskip \enskip\today}
+\date[Polynom]{Maschinelle Übersetzung\enskip\enskip\today}
 \author{Alexander Bartolomey}
-\institute[RWTH]{RWTH Aachen University}
+\institute[Polynom]{Polynom Aachen University}
 
 % Set the logo to the file `logo`
 % It will be scaled automatically
-\logo{}
 
 % Uncomment this if you want a TOC at every section start
-%\AtBeginSection{\frame{
-%    \frametitle{Content}
-%    \tableofcontents[currentsection]
-%}}
+\AtBeginSection{\frame{
+   \frametitle{Content}
+   \tableofcontents[currentsection]
+}}
 
 \begin{document}
 
@@ -51,37 +52,41 @@
 % Title page with a blue bar
 \setbeamercolor{title page bar}{fg=polynom-blue}
 \setbeamertemplate{title page}[projektion]{}
+
 \begin{frame}[plain]
-\titlepage{}
-\end{frame}
-
-% Title page with a 1/3rd size picture
-%\setbeamercolor{title page bar}{fg=white}
-%\setbeamertemplate{title page}[rwth][title_small]{}
-%\begin{frame}[plain]
-%\titlepage
-%\end{frame}
-
-% Title page with a 2/3rd size picture
-%\setbeamertemplate{title page}[rwth2][title_large]{}
-%\begin{frame}[plain]
-%\titlepage
-%\end{frame}
-
-% Start a new section (text is displayed on top of a frame)
-% Frame with items
-\begin{frame}
-  \framesubtitle{Test:}
-  \frametitle{Inhalt}
+  \titlepage{}
 \end{frame}
 
 \section{Pytest}
 
+\begin{frame}[fragile]
+  \framesubtitle{Test:}
+  \frametitle{Inhalt}
+  Damit die gestapelte Überschrift benutzt wird, muss \begin{itemize}
+    \item die obere Zeile mit \verb|\framesubtitle{...}| und die
+    \item untere Hauptzeile mit \verb|\frametitle{...}| angegeben werden.
+  \end{itemize} 
+\end{frame}
+
 \begin{frame}
   \frametitle{Pytest}
   Auf dieser Folie steht ein Fließtext, auch wenn man dies eigentlich
-  bei Folien lassen sollte.  Da hier aber ein Fließtext sthet, kann
-  ich die rechten und linken ränder so wie das umbruchverhalten begutachten.
+  bei Folien lassen sollte.  Da hier aber ein Fließtext steht, kann
+  ich die rechten und linken Ränder so wie das Umbruchverhalten begutachten. 
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
+  tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+  no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
+  consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+  et dolore magna
+\end{frame}
+
+\subsection{Gründe für Testing}
+
+\begin{frame}{Mathe in \texttt{Polynom}}
+  Mathe sieht super aus dank Serifen und fett gedruckten Lettern, hier ist ein Beispiel:
+  \[A = U\Sigma V^T\]
+  für jede Matrix \(A \in \mathbb{R}^{m\times n}\) mit \[\Sigma:=\mathrm{diag}(\sigma_1,\dots,\sigma_p) \in \mathbb{R}^{m\times n}, p = \min(m,n)\]
 \end{frame}
 
 % \begin{frame}{Warum Testing?}
@@ -92,17 +97,17 @@
 %   \end{itemize}
 % \end{frame}
 
-\begin{frame}{Frame title}
-  \begin{itemize}
-    \item First\alert{level}
-    \begin{itemize}
-      \item Second level
-      \begin{itemize}
-      \item Third level
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame}{Frame title}
+%   \begin{itemize}
+%     \item First level
+%     \begin{itemize}
+%       \item Second level
+%       \begin{itemize}
+%         \item Third level
+%       \end{itemize}
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
 \setbeamertemplate{final page}[projektion][Noch Fragen?]{Danke für
   eure Aufmerksamkeit!}

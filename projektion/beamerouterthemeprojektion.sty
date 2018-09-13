@@ -38,24 +38,19 @@
 \newlength\vertlinebase
 \makeatletter
 \defbeamertemplate*{frametitle}{projektion}
-{
-  \ifthenelse{\equals{\@framesubtitle}{}}
-    {\setlength{\vertlinebase}{1ex}}
-    {\setlength{\vertlinebase}{0pt}}
-  \usebeamercolor{title page bar}
-  \vskip1.5\titleheight
-  \hspace{-1em}
-  \tikz[baseline=\vertlinebase]{
-    \draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);
-  }
-  \hspace{8pt}
-  % \ifthenelse{\equals{\@framesubtitle}{}}
-  %   {\vskip 0pt}
-  %   {\vskip 18pt}
-  \vbox{
-    \fontsize{36pt}{0pt}\selectfont\insertframesubtitle\\
-    \fontsize{50pt}{40pt}\selectfont\insertframetitle
-  }
+{%
+  \ifx\insertframesubtitle\@empty\setlength{\vertlinebase}{0.75ex}\else\@empty\setlength{\vertlinebase}{0pt}\fi%
+  \usebeamercolor{title page bar}%
+  \vskip1.5\titleheight%
+  \hspace{-1em}%
+  \tikz[baseline=\vertlinebase]{\draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);}%
+  \hbox{%
+    \hspace{24pt}
+    \vbox{%
+      \fontsize{36pt}{0pt}\selectfont\insertframesubtitle\\%
+      \fontsize{50pt}{40pt}\selectfont\insertframetitle%
+    }%
+  }%
 }
 \makeatother
 
