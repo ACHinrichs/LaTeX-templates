@@ -1,21 +1,29 @@
 % This file provides an example Beamer presentation using the Polynom Theme
 % showcasing some of the more common options, similar to the Powerpoint version
-% 
 
 % For Polynom, beamer should be loaded with class option t (top)
 \documentclass[t]{beamer}
 %\usepackage[utf8]{inputenc}
-\RequirePackage{ifthen}
-
+\usepackage{ifthen}
 \usepackage{lmodern}
-% Use fontspec to get Arial font
 % Requires use of XeLaTeX
 \usepackage{fontspec}
-%\setmainfont{Product Sans}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CAUTION - Usage of Product Sans is not officially permitted!
+% A nice free substitution would be Karla, available from Google Fonts
+% or the very similar if not same Futura (available on Apple Devices,
+% proprietary licencing available on other OS)
+% Otherwise just use your favorite sans serif font with an impressive
+% boldface.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setsansfont[]{Product Sans}
+
+%%% Fira Mono is available for free from Mozilla
 \setmonofont[]{Fira Mono}
-% Also force Arial for math for a more consistent look
+%%% Force Serif font for beautiful math mode
 \usefonttheme[onlymath]{serif}
+%%% Make it bold, IGPM intensifies
 \boldmath{}
 % German style date formatting (footer)
 \usepackage[ddmmyyyy]{datetime}
@@ -27,7 +35,7 @@
 
 % Load the actual Polynom theme. Suggested is to load the full theme,
 % as it requires some specific dimensions
-\usetheme{projektion}
+\usetheme{polynom}
 
 % Setup presentation information
 \title{Testing: Gitlab-CI}
@@ -45,10 +53,6 @@
 
 \begin{frame}[plain]
   \titlepage{}
-\end{frame}
-
-\begin{frame}{Gliederung}
-  \tableofcontents[currentsubsubsection]
 \end{frame}
 
 \section{Pytest}
@@ -104,6 +108,17 @@
       \end{itemize}
     \end{itemize}
   \end{itemize}
+\end{frame}
+
+\subsubsection{Outro}
+
+\begin{frame}
+  \frametitle{Schlusswort}
+  \texttt{Polynom} wird fortlaufend weiterentwickelt und um die neuen Folienmaster aus dem PowerPoint-Template ergänzt, sodass 
+  in absehbarer Zeit sowohl \LaTeX{} als auch PowerPoint parallel mit ähnlichem (wenn auch nicht gleichem, s. fehlende Animation) Stil
+  benutzt werden können.
+  \vskip42pt
+  \textbf{Vielen Dank für deine Unterstützung!}
 \end{frame}
 
 \setbeamertemplate{banner page}[projektion][Fragen?]

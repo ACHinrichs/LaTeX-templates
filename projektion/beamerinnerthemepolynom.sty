@@ -58,12 +58,12 @@
   }
 }
 
-\defbeamertemplate*{background}{projektion}{}
+\defbeamertemplate*{background}{polynom}{}
 
 %%%
 % Title page 
 %%%
-\defbeamertemplate{title page}{projektion}[1][]{
+\defbeamertemplate{title page}{polynom}[1][]{
   \usebeamercolor{title page bar}
   \prjktn@titlepagebox{fg}{}
   \tikz[overlay, remember picture]{
@@ -92,13 +92,13 @@
 %%%
 % Section Titles page 
 %%%
-\defbeamertemplate{section title}{projektion}{
+\defbeamertemplate{section title}{polynom}{
   \usebeamercolor{palette primary}
   \prjktn@titlepagebox{bg}{}
   \tikz[overlay, remember picture]{
     % Insert title
     \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\insertsectionhead};
+    {\usebeamerfont{title}\insertsectionhead{}};
 
     % Paint Line
     \draw[line width=2pt,color=bg] ($(current page.south west)
@@ -110,7 +110,7 @@
 }
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
-  \setbeamertemplate{section title}[projektion]{}
+  \setbeamertemplate{section title}[polynom]{}
 \begin{frame}[plain]
   \usebeamertemplate{section title}
 \end{frame}
@@ -119,15 +119,15 @@
 \fi
 
 %%%
-% Section Titles page 
+% Subsection Titles page 
 %%%
-\defbeamertemplate{subsection title}{projektion}{
+\defbeamertemplate{subsection title}{polynom}{
   \usebeamercolor{palette secondary}
   \prjktn@titlepagebox{bg}{}
   \tikz[overlay, remember picture]{
     % Insert title
     \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\insertsubsectionhead};
+    {\usebeamerfont{title}\insertsubsectionhead{}};
 
     % Paint Line
     \draw[line width=2pt,color=bg] ($(current page.south west)
@@ -139,9 +139,38 @@
 }
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSubsection[]{
-  \setbeamertemplate{subsection title}[projektion]{}
+  \setbeamertemplate{subsection title}[polynom]{}
 \begin{frame}[plain]
   \usebeamertemplate{subsection title}
+\end{frame}
+}
+\else
+\fi
+
+%%%
+% Subsubsection Titles page 
+%%%
+\defbeamertemplate{subsubsection title}{polynom}{
+  \usebeamercolor{palette tertiary}
+  \prjktn@titlepagebox{bg}{}
+  \tikz[overlay, remember picture]{
+    % Insert title
+    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\insertsubsubsectionhead{}};
+
+    % Paint Line
+    \draw[line width=2pt,color=bg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+  }
+}
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\AtBeginSubsubsection[]{
+  \setbeamertemplate{subsubsection title}[polynom]{}
+\begin{frame}[plain]
+  \usebeamertemplate{subsubsection title}
 \end{frame}
 }
 \else
@@ -151,10 +180,10 @@
 %%%
 % Template for final slide
 %%%
-\defbeamertemplate{banner page}{projektion}[1][]{
+\defbeamertemplate{banner page}{polynom}[1][]{
   \usebeamercolor{banner page}
   \prjktn@fullpagebox{bg}
-  \tikz[text width=0.75\paperwidth,overlay, remember picture]{
+  \tikz[text width=0.75\paperwidth, text centered, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
 
@@ -166,10 +195,10 @@
 %%%
 % Template for final slide invert
 %%%
-\defbeamertemplate{banner page invert}{projektion}[1][]{
+\defbeamertemplate{banner page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
   \prjktn@fullpagebox{bg}
-  \tikz[text=fg, text width=0.75\paperwidth, overlay, remember picture]{
+  \tikz[text=fg, text centered, text width=0.75\paperwidth, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
   }

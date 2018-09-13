@@ -4,8 +4,8 @@
 \RequirePackage{graphicx}
 
 %%% TODO implement footer
-\defbeamertemplate*{footertext}{projektion}{}
-\defbeamertemplate*{footertextextra}{projektion}{}
+\defbeamertemplate*{footertext}{polynom}{}
+\defbeamertemplate*{footertextextra}{polynom}{}
 
 \setlength{\headsep}{0pt}
 
@@ -38,7 +38,7 @@
 %%%
 
 \newlength\vertlinebase%
-\defbeamertemplate*{frametitle}{projektion}
+\defbeamertemplate*{frametitle}{polynom}
 {%
   \if\insertframesubtitle\empty\setlength{\vertlinebase}{0.75ex}\else\empty\setlength{\vertlinebase}{0pt}\fi%
   \usebeamercolor{title page bar}%
@@ -51,7 +51,7 @@
 %%%
 % Footer
 %%%
-\defbeamertemplate*{footline}{projektion}{
+\defbeamertemplate*{footline}{polynom}{
   \usebeamercolor{title page bar}
   \tikz[overlay, remember picture]{
     \draw[color=fg,fill] (current page.south west) rectangle ($(current
@@ -60,11 +60,11 @@
   
 }
 
-\defbeamertemplate*{sidebar left}{projektion}{}
-\defbeamertemplate*{sidebar right}{projektion}{}
+\defbeamertemplate*{sidebar left}{polynom}{}
+\defbeamertemplate*{sidebar right}{polynom}{}
 \setbeamersize{sidebar width left=0pt}
 \setbeamersize{sidebar width right=0pt}
-\defbeamertemplate*{navigation symbols}{projektion}{}
+\defbeamertemplate*{navigation symbols}{polynom}{}
 
 \mode<all>
 
