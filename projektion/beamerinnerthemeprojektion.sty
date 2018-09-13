@@ -31,6 +31,12 @@
   }
 }
 
+\newcommand{\prjktn@fullpagebox}[1]{
+  \tikz[overlay, remember picture] {
+    \fill[color=#1] ($(current page.north west)$) rectangle
+    ($(current page.south east)$);
+  }
+}
 
 \newcommand{\prjktn@inversetitlepagebox}[2]{
   \tikz[overlay, remember picture] {
@@ -142,23 +148,32 @@
 \fi
 
 
-% %%%
-% % Template for final slide
-% %%%
-% \defbeamertemplate{final page}{projektion}[2][]{
-%   \usebeamercolor{title page bar}
-%   \prjktn@inversetitlepagebox{fg}{}
-%   \tikz[overlay, remember picture]{
-    
-%     % Insert title
-%     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,\titlebarheight)$)
-%     {\usebeamerfont{title}#1};
+%%%
+% Template for final slide
+%%%
+\defbeamertemplate{banner page}{projektion}[1][]{
+  \usebeamercolor{banner page}
+  \prjktn@fullpagebox{bg}
+  \tikz[text width=0.75\paperwidth,overlay, remember picture]{
+    \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
+    {\usebeamerfont{banner}#1};
 
-%     % Insert author
-%     \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
-%     {\usebeamerfont{title}#2};
-%   }
-% }
+    % % Insert author
+    % \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
+    % {\usebeamerfont{title}#2};
+  }
+}
+%%%
+% Template for final slide invert
+%%%
+\defbeamertemplate{banner page invert}{projektion}[1][]{
+  \usebeamercolor{banner page invert}
+  \prjktn@fullpagebox{bg}
+  \tikz[text=fg, text width=0.75\paperwidth, overlay, remember picture]{
+    \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
+    {\usebeamerfont{banner}#1};
+  }
+}
 
 %%%
 % Items
