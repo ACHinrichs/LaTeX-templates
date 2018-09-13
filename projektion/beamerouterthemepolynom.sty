@@ -1,0 +1,70 @@
+\mode<presentation>
+
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+
+%%% TODO implement footer
+\defbeamertemplate*{footertext}{polynom}{}
+\defbeamertemplate*{footertextextra}{polynom}{}
+
+\setlength{\headsep}{0pt}
+
+\makeatletter
+\newlength\leftmarrr
+\setlength{\leftmarrr}{\beamer@leftmargin}
+\makeatother
+
+\makeatletter
+\define@key{beamerframe}{t}[true]{% top
+  \beamer@frametopskip=\titleheight\relax%
+  \beamer@framebottomskip=0pt plus 1fill\relax%
+  \beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+  \beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+  \def\beamer@initfirstlineunskip{%
+    \def\beamer@firstlineitemizeunskip{%
+      \vskip-\partopsep\vskip-\topsep\vskip-\parskip%
+      \global\let\beamer@firstlineitemizeunskip=\relax}%
+    \everypar{\global\let\beamer@firstlineitemizeunskip=\relax}}
+}
+\makeatother
+
+%%%
+% Header
+%%%
+\defbeamertemplate*{headline}{polynom}{}
+
+%%%
+% Frame title
+%%%
+
+\newlength\vertlinebase%
+\defbeamertemplate*{frametitle}{polynom}
+{%
+  \if\insertframesubtitle\empty\setlength{\vertlinebase}{0.75ex}\else\empty\setlength{\vertlinebase}{0pt}\fi%
+  \usebeamercolor{title page bar}%
+  \vskip1.5\titleheight%
+  \hspace{-1em}\tikz[baseline=\vertlinebase]{\draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);}%
+  \hbox{\hspace{24pt}\vbox{\fontsize{36pt}{0pt}\selectfont\insertframesubtitle\\\fontsize{50pt}{40pt}\selectfont\insertframetitle}}%
+}
+
+
+%%%
+% Footer
+%%%
+\defbeamertemplate*{footline}{polynom}{
+  \usebeamercolor{title page bar}
+  \tikz[overlay, remember picture]{
+    \draw[color=fg,fill] (current page.south west) rectangle ($(current
+    page.south west)+(\insertframenumber * (\paperwidth/\inserttotalframenumber, .5mm)$)
+  }
+  
+}
+
+\defbeamertemplate*{sidebar left}{polynom}{}
+\defbeamertemplate*{sidebar right}{polynom}{}
+\setbeamersize{sidebar width left=0pt}
+\setbeamersize{sidebar width right=0pt}
+\defbeamertemplate*{navigation symbols}{polynom}{}
+
+\mode<all>
+
