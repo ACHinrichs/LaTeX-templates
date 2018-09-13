@@ -12,8 +12,6 @@
 \ExecuteOptionsBeamer{sectiontitles=t} % default value
 \ProcessOptionsBeamer
 % t= true, anything else disables them, t is default
-
-
 \providecommand\inserttitle{}
 \providecommand\insertsubtitle{}
 
@@ -62,25 +60,24 @@
   \usebeamercolor{title page bar}
   \prjktn@titlepagebox{fg}{}
   \tikz[overlay, remember picture]{
-    
+
     % Insert title
     % TODO text field should be bound on the left to prevent it 
     % (a) from overfilling the hbox and 
     % (b) extending the safe-space of the page itself
     \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\inserttitle{}};
-
+    {\usebeamerfont{title}\inserttitle};
     % Paint Line
     \draw[line width=1pt,color=fg] ($(current page.south west)
     + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
     --  ($(current page.south west)
     + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
     
-    \usebeamercolor{author}
-    % Insert author
-    \node[color=fg,anchor=west, text width=.2\paperwidth] (author) at ($(current page.south west)
+    \usebeamercolor{subtitle}
+    % Insert subtitle
+    \node[color=fg,anchor=west, text width=.2\paperwidth] (subtitle) at ($(current page.south west)
     + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{author}\insertauthor};
+    {\usebeamerfont{subtitle}\insertsubtitle};
   }
 }
 
@@ -137,9 +134,9 @@
 %%%
 % Items
 %%%
-\defbeamertemplate*{itemize item}{bullet}{•}
+\defbeamertemplate*{itemize item}{bullet}{\textbullet}
 \defbeamertemplate*{itemize subitem}{bar}{\textendash}
-\defbeamertemplate*{itemize subsubitem}{sq}{\fontsize{10pt}{16pt}\selectfont\blacksquare}
+\defbeamertemplate*{itemize subsubitem}{sq}{\fontsize{10pt}{16pt}\selectfont $\blacksquare$}
 
 \setbeamertemplate{enumerate item}{\arabic{enumi}.}
 \setbeamertemplate{enumerate subitem}{\roman{enumii}.}

@@ -18,7 +18,7 @@
 \setmonofont[]{Fira Mono}
 % Also force Arial for math for a more consistent look
 \usefonttheme[onlymath]{serif}
-\boldmath
+\boldmath{}
 % German style date formatting (footer)
 \usepackage[ddmmyyyy]{datetime}
 \renewcommand{\dateseparator}{.}
@@ -33,7 +33,8 @@
 
 % Setup presentation information
 \title{Testing: Gitlab-CI}
-\date[Polynom]{Maschinelle Übersetzung\enskip\enskip\today}
+\subtitle{Maschinelle\\Übersetzung}
+\date[Polynom]{\today}
 \author{Alexander Bartolomey}
 \institute[Polynom]{Polynom Aachen University}
 
@@ -57,43 +58,43 @@
   \titlepage{}
 \end{frame}
 
-\section{Pytest}
+% \begin{frame}[fragile]{}
+%   \framesubtitle{Test:}
+%   \frametitle{Inhalt}
+%   Damit die gestapelte Überschrift benutzt wird, muss \begin{itemize}
+%     \item die obere Zeile mit \verb|\framesubtitle{...}| und die
+%     \item untere Hauptzeile mit \verb|\frametitle{...}| angegeben werden.
+%   \end{itemize} 
+% \end{frame}
 
-\begin{frame}[fragile]
-  \framesubtitle{Test:}
-  \frametitle{Inhalt}
-  Damit die gestapelte Überschrift benutzt wird, muss \begin{itemize}
-    \item die obere Zeile mit \verb|\framesubtitle{...}| und die
-    \item untere Hauptzeile mit \verb|\frametitle{...}| angegeben werden.
-  \end{itemize} 
-\end{frame}
+% \section{Testing}
 
-\begin{frame}
-  \frametitle{Pytest}
-  Auf dieser Folie steht ein Fließtext, auch wenn man dies eigentlich
-  bei Folien lassen sollte.  Da hier aber ein Fließtext steht, kann
-  ich die rechten und linken Ränder so wie das Umbruchverhalten begutachten. 
-  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
-  tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-  At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-  no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
-  consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
-  et dolore magna
-\end{frame}
+% \begin{frame}{}
+%   \frametitle{Pytest}
+%   Auf dieser Folie steht ein Fließtext, auch wenn man dies eigentlich
+%   bei Folien lassen sollte.  Da hier aber ein Fließtext steht, kann
+%   ich die rechten und linken Ränder so wie das Umbruchverhalten begutachten. 
+%   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
+%   tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+%   At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
+%   no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
+%   consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+%   et dolore magna
+% \end{frame}
 
-\subsection{Gründe für Testing}
+\section{Gründe für Testing}
 
-\begin{frame}{Mathe in \texttt{Polynom}}
-  Mathe sieht super aus dank Serifen und fett gedruckten Lettern, hier ist ein Beispiel:
-  \[A = U\Sigma V^T\]
-  für jede Matrix \(A \in \mathbb{R}^{m\times n}\) mit \[\Sigma:=\mathrm{diag}(\sigma_1,\dots,\sigma_p) \in \mathbb{R}^{m\times n}, p = \min(m,n)\]
-\end{frame}
+% \begin{frame}{Mathe in \texttt{Polynom}}
+%   Mathe sieht super aus dank Serifen und fett gedruckten Lettern, hier ist ein Beispiel:
+%   \[A = U\Sigma V^T\]
+%   für jede Matrix \(A \in \mathbb{R}^{m\times n}\) mit \[\Sigma:=\mathrm{diag}(\sigma_1,\dots,\sigma_p) \in \mathbb{R}^{m\times n}, p = \min(m,n)\]
+% \end{frame}
 
 % \begin{frame}{Warum Testing?}
 %   \begin{itemize}
-%     \item \emph{Spontante Desintegration} der Ariane 5
-%     \item \emph{Spontante Desintegration} des Mars Climate Orbiters
-%     \item \emph{Spontante Desintegration} der Delta 3
+%     \item \textbf{Spontante Desintegration} der Ariane 5
+%     \item \textbf{Spontante Desintegration} des Mars Climate Orbiters
+%     \item \textbf{Spontante Desintegration} der Delta 3
 %   \end{itemize}
 % \end{frame}
 
@@ -109,10 +110,10 @@
 %   \end{itemize}
 % \end{frame}
 
-\setbeamertemplate{final page}[projektion][Noch Fragen?]{Danke für
-  eure Aufmerksamkeit!}
-\begin{frame}[plain]
-  \usebeamertemplate{final page}
-\end{frame}
+% \setbeamertemplate{final page}[projektion][Noch Fragen?]{Danke für
+%   eure Aufmerksamkeit!}
+% \begin{frame}[plain]
+%   \usebeamertemplate{final page}
+% \end{frame}
 
 \end{document}
