@@ -17,10 +17,10 @@
 % Otherwise just use your favorite sans serif font with an impressive
 % boldface.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setsansfont[]{Product Sans}
+\setsansfont{Product Sans}
 
 %%% Fira Mono is available for free from Mozilla
-\setmonofont[]{Fira Mono}
+\setmonofont{Fira Mono}
 %%% Force Serif font for beautiful math mode
 \usefonttheme[onlymath]{serif}
 %%% Make it bold, IGPM intensifies
@@ -36,7 +36,8 @@
 % Load the actual Polynom theme. Suggested is to load the full theme,
 % as it requires some specific dimensions
 \usetheme{polynom}
-
+\usepackage{tikz}
+\usetikzlibrary{graphs}
 % Setup presentation information
 \title{Testing: Gitlab-CI}
 \subtitle{Maschinelle\\Übersetzung}
@@ -61,8 +62,8 @@
   \framesubtitle{Test:}
   \frametitle{Inhalt}
   Damit die gestapelte Überschrift benutzt wird, muss \begin{itemize}
-    \item die obere Zeile mit \texttt{\textbackslash{}framesubtitle\{...\}} und die
-    \item untere Hauptzeile mit \texttt{\textbackslash{}frametitle\{...\}} angegeben werden.
+    \item die obere Zeile mit \texttt{\textbackslash{}framesubtitle\{\ldots \}} und die
+    \item untere Hauptzeile mit \texttt{\textbackslash{}frametitle\{\ldots \}} angegeben werden.
   \end{itemize} 
 \end{frame}
 
@@ -115,9 +116,9 @@
 \begin{frame}
   \frametitle{Schlusswort}
   \texttt{Polynom} wird fortlaufend weiterentwickelt und um die neuen Folienmaster aus dem PowerPoint-Template ergänzt, sodass 
-  in absehbarer Zeit sowohl \LaTeX{} als auch PowerPoint parallel mit ähnlichem (wenn auch nicht gleichem, s. fehlende Animation) Stil
+  in absehbarer Zeit sowohl \LaTeX{} als auch PowerPoint parallel mit ähnlichem (wenn auch nicht gleichem, s.\ fehlende Animation) Stil
   benutzt werden können.
-  \vskip42pt
+  \vspace{42pt}
   \textbf{Vielen Dank für deine Unterstützung!}
 \end{frame}
 
@@ -129,6 +130,26 @@
 \setbeamertemplate{banner page invert}[polynom][Antworten!]
 \begin{frame}
   \usebeamertemplate{banner page invert}
+\end{frame}
+
+\setbeamertemplate{empty page}[polynom][]
+\begin{frame}
+  \usebeamertemplate{empty page}
+  \vfill
+  \begin{figure}
+    \centering
+    \includegraphics{bracket.png}\label{fig:fallunterscheidung}
+    \caption{\fontsize{16pt}{24pt}\selectfont\centering Eine schematische Fallunterscheidung}
+  \end{figure}
+  \vfill
+\end{frame}
+
+\setbeamertemplate{empty page invert}[polynom][]
+\begin{frame}
+  \usebeamertemplate{empty page invert}
+  \begin{itemize}
+    \item Eine leere Seite lässt sich wunderbar mit viel Inhalt füllen
+  \end{itemize}
 \end{frame}
 
 \end{document}

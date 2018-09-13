@@ -178,7 +178,7 @@
 
 
 %%%
-% Template for final slide
+% Template for banner slide
 %%%
 \defbeamertemplate{banner page}{polynom}[1][]{
   \usebeamercolor{banner page}
@@ -186,14 +186,10 @@
   \tikz[text width=0.75\paperwidth, text centered, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
-
-    % % Insert author
-    % \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
-    % {\usebeamerfont{title}#2};
   }
 }
 %%%
-% Template for final slide invert
+% Template for banner slide invert
 %%%
 \defbeamertemplate{banner page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
@@ -203,6 +199,24 @@
     {\usebeamerfont{banner}#1};
   }
 }
+
+%%%
+% Template for empty slide invert
+%%%
+\defbeamertemplate{empty page}{polynom}[1][]{
+  \usebeamercolor{banner page}
+  \prjktn@fullpagebox{bg}
+}
+
+%%%
+% Template for empty slide invert
+%%%
+\defbeamertemplate{empty page invert}{polynom}[1][]{
+  \usebeamercolor{banner page invert}
+  \prjktn@fullpagebox{bg}
+}
+
+
 
 %%%
 % Items
