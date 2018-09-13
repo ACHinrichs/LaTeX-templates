@@ -3,6 +3,7 @@
 \RequirePackage{calc}
 \RequirePackage{graphicx}
 
+%%% TODO implement footer
 \defbeamertemplate*{footertext}{projektion}{}
 \defbeamertemplate*{footertextextra}{projektion}{}
 
@@ -36,9 +37,9 @@
 % Frame title
 %%%
 \makeatletter
+\newlength\vertlinebase%
 \defbeamertemplate*{frametitle}{projektion}
 {%
-  \newlength\vertlinebase%
   \ifx\insertframesubtitle\@empty\setlength{\vertlinebase}{0.75ex}\else\@empty\setlength{\vertlinebase}{0pt}\fi%
   \usebeamercolor{title page bar}%
   \vskip1.5\titleheight%
