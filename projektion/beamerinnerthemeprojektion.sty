@@ -12,6 +12,7 @@
 \ExecuteOptionsBeamer{sectiontitles=t} % default value
 \ProcessOptionsBeamer
 % t= true, anything else disables them, t is default
+
 \providecommand\inserttitle{}
 \providecommand\insertsubtitle{}
 
@@ -65,8 +66,8 @@
     % TODO text field should be bound on the left to prevent it 
     % (a) from overfilling the hbox and 
     % (b) extending the safe-space of the page itself
-    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\inserttitle};
+    \node[anchor=east, text width=.6\paperwidth, align=right] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\inserttitle{}};
     % Paint Line
     \draw[line width=1pt,color=fg] ($(current page.south west)
     + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
@@ -77,7 +78,7 @@
     % Insert subtitle
     \node[color=fg,anchor=west, text width=.2\paperwidth] (subtitle) at ($(current page.south west)
     + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{subtitle}\insertsubtitle};
+    {\usebeamerfont{subtitle}\insertsubtitle{}};
   }
 }
 
@@ -86,7 +87,7 @@
 % Section Titles page 
 %%%
 \defbeamertemplate{section title}{projektion}{
-  \usebeamercolor{palette secondary}
+  \usebeamercolor{palette primary}
   \prjktn@titlepagebox{bg}{}
   \tikz[overlay, remember picture]{
     % Insert title
@@ -94,14 +95,13 @@
     {\usebeamerfont{title}\insertsectionhead};
 
     % Paint Line
-    \draw[line width=1pt,color=bg] ($(current page.south west)
+    \draw[line width=2pt,color=bg] ($(current page.south west)
     + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
     --  ($(current page.south west)
     + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
     
   }
 }
-
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
   \setbeamertemplate{section title}[projektion]{}
@@ -113,30 +113,31 @@
 \fi
 
 
-%%%
-% Template for final slide
-%%%
-\defbeamertemplate{final page}{projektion}[2][]{
-  \usebeamercolor{title page bar}
-  \prjktn@inversetitlepagebox{fg}{}
-  \tikz[overlay, remember picture]{
-    
-    % Insert title
-    \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,\titlebarheight)$)
-    {\usebeamerfont{title}#1};
 
-    % Insert author
-    \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}#2};
-  }
-}
+% %%%
+% % Template for final slide
+% %%%
+% \defbeamertemplate{final page}{projektion}[2][]{
+%   \usebeamercolor{title page bar}
+%   \prjktn@inversetitlepagebox{fg}{}
+%   \tikz[overlay, remember picture]{
+    
+%     % Insert title
+%     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,\titlebarheight)$)
+%     {\usebeamerfont{title}#1};
+
+%     % Insert author
+%     \node[color=white] (finalTwo) at ($(current page.south) + (0,.5\paperheight-.5\titlebarheight)$)
+%     {\usebeamerfont{title}#2};
+%   }
+% }
 
 %%%
 % Items
 %%%
-\defbeamertemplate*{itemize item}{bullet}{\textbullet}
-\defbeamertemplate*{itemize subitem}{bar}{\textendash}
-\defbeamertemplate*{itemize subsubitem}{sq}{\fontsize{10pt}{16pt}\selectfont $\blacksquare$}
+\defbeamertemplate*{itemize item}{bullet}{•}
+\defbeamertemplate*{itemize subitem}{bullet}{•}
+\defbeamertemplate*{itemize subsubitem}{bullet}{•}
 
 \setbeamertemplate{enumerate item}{\arabic{enumi}.}
 \setbeamertemplate{enumerate subitem}{\roman{enumii}.}

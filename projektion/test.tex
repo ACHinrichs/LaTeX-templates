@@ -6,10 +6,8 @@
 \documentclass[t]{beamer}
 %\usepackage[utf8]{inputenc}
 \RequirePackage{ifthen}
-\usepackage{amath}
-\usepackage{bmath}
+
 \usepackage{lmodern}
-\usepackage{amsfonts}
 % Use fontspec to get Arial font
 % Requires use of XeLaTeX
 \usepackage{fontspec}
@@ -38,15 +36,6 @@
 \author{Alexander Bartolomey}
 \institute[Polynom]{Polynom Aachen University}
 
-% Set the logo to the file `logo`
-% It will be scaled automatically
-
-% Uncomment this if you want a TOC at every section start
-\AtBeginSection{\frame{
-   \frametitle{Content}
-   \tableofcontents[currentsection]
-}}
-
 \begin{document}
 
 % Note: Title pages should be created as plain
@@ -57,6 +46,12 @@
 \begin{frame}[plain]
   \titlepage{}
 \end{frame}
+
+\begin{frame}{Gliederung}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Pytest}
 
 \begin{frame}
   \framesubtitle{Test:}
