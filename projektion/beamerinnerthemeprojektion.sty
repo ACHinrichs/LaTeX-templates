@@ -112,6 +112,34 @@
 \else
 \fi
 
+%%%
+% Section Titles page 
+%%%
+\defbeamertemplate{subsection title}{projektion}{
+  \usebeamercolor{palette secondary}
+  \prjktn@titlepagebox{bg}{}
+  \tikz[overlay, remember picture]{
+    % Insert title
+    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}\insertsubsectionhead};
+
+    % Paint Line
+    \draw[line width=2pt,color=bg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+  }
+}
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\AtBeginSubsection[]{
+  \setbeamertemplate{subsection title}[projektion]{}
+\begin{frame}[plain]
+  \usebeamertemplate{subsection title}
+\end{frame}
+}
+\else
+\fi
 
 
 % %%%
