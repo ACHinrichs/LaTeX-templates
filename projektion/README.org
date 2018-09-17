@@ -1,0 +1,23 @@
+#+TITLE: Projektion/Polynom Beamer Theme
+
+A clean, simple and modern 16:9 (yes, that is possible) (Xe)LaTeX
+beamer theme.
+
+They are developed to match PowerPoint-Templates by Alexander
+Bartolomey Git[[https://git.rwth-aachen.de/occloxium][Lab]] / [[https://github.com/Occloxium][Hub]].
+
+* Fonts
+** Main Font
+I use them with a font matching the specs of Googles [[https://git.rwth-aachen.de/occloxium][Product Sans]], or
+[[https://www.1001fonts.com/gillius-adf-font.html][Gillius]], but any (preferably geometric) sans-serif font with a heavy
+bold-face should work nicely.
+
+** Code Font
+Any monospace font you like, we prefere [[https://mozilla.github.io/Fira/][Fira Mono]]. Please do not use
+[[https://github.com/tonsky/FiraCode][Fira Code]] or other fonts with programming ligatures for your
+presentations because viewers who do not know them can (and will!) get
+confused. 
+
+* Thanks
+Many thanks to Alexander Bartolomey for his PowerPoint-Templates and
+implementing /polynom/ 
