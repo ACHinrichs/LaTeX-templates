@@ -44,7 +44,8 @@
   \usebeamercolor{title page bar}%
   \vskip1.5\titleheight%
   \hspace{-1em}\tikz[baseline=\vertlinebase]{\draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);}%
-  \hbox{\hspace{24pt}\vbox{\fontsize{36pt}{0pt}\selectfont\insertframesubtitle\\\fontsize{50pt}{40pt}\selectfont\insertframetitle}}%
+  \hbox{\hspace{24pt}\vbox{\fontsize{36pt}{0pt}\selectfont\if\insertframesubtitle\empty\empty\else\insertframesubtitle\\\fi
+      \fontsize{50pt}{40pt}\selectfont\insertframetitle}}%
 }
 
 
