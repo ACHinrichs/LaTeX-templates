@@ -1,0 +1,70 @@
+\mode<presentation>
+
+\definecolor{polynom-blue-lighter}{RGB}{117 154 255}
+\definecolor{polynom-blue-light}{RGB}{106 141 238}
+\definecolor{polynom-blue}{RGB}{41 98 255}
+\definecolor{polynom-blue-dark}{RGB}{24 57 148}
+\definecolor{polynom-blue-darker}{RGB}{15 37 96}
+
+\definecolor{polynom-space-grey}{RGB}{51 51 51}
+\definecolor{polynom-white}{RGB}{255 255 255}
+
+\definecolor{polynom-red-lighter}{RGB}{255 126 101}
+\definecolor{polynom-red-light}{RGB}{238 115 91}
+\definecolor{polynom-red}{RGB}{255 62 25}
+\ðefinecolor{polynom-red-dark}{RGB}{148 36 15}
+\ðefinecolor{polynom-red-darker}{RGB}{96 23 9}
+
+\definecolor{polynom-green-lighter}{RGB}{163 204 81}
+\definecolor{polynom-green-light}{RGB}{149 187 20} % eins acht siböön!
+\definecolor{polynom-green}{RGB}{143 204 20}
+\definecolor{polynom-green-dark}{RGB}{68 97 10}
+\definecolor{polynom-green-darker}{RGB}{32 45 4}
+
+\definecolor{black}   {RGB}{  0   0   0}
+
+
+\setbeamercolor*{normal text}{fg=polynom-space-grey}
+
+\setbeamercolor*{structure}{fg=polynom-blue}
+
+\setbeamercolor{palette primary}{   use=structure,fg=structure.fg,bg=polynom-blue}
+\setbeamercolor{palette secondary}{ use=structure,fg=structure.fg,bg=polynom-blue-dark}
+\setbeamercolor{palette tertiary}{  use=structure,fg=structure.fg,bg=polynom-blue-darker}
+\setbeamercolor{palette quaternary}{use=structure,fg=structure.fg,bg=polynom-blue-darker}
+
+% Sidebar
+\setbeamercolor*{sidebar}{parent=palette primary}
+\setbeamercolor*{palette sidebar primary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar secondary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar quaternary}{use=normal text,fg=normal text.fg}
+
+% Outer structure
+\setbeamercolor{frametitle}{fg=polynom-space-grey}
+\setbeamercolor{title}{fg=polynom-space-grey}
+
+\setbeamercolor{subtitle}{fg=polynom-space-grey}
+\setbeamercolor{author}{fg=polynom-space-grey}
+
+\setbeamercolor{date}{fg=polynom-space-grey}
+\setbeamercolor{section}{fg=polynom-space-grey}
+\setbeamercolor{subsection}{fg=polynom-space-grey}
+\setbeamercolor{subsubsection}{fg=polynom-space-grey}
+% Blocks and special text
+\setbeamercolor*{block title}{fg=palette primary.fg, bg=polynom-white}
+\setbeamercolor{block body}{bg=polynom-white}
+
+\setbeamercolor*{example text}{fg=polynom-green-darker}
+\setbeamercolor{block title example}{bg=polynom-green}
+\setbeamercolor{block body example}{bg=polynom-green-light}
+
+\setbeamercolor*{alerted text}{fg=polynom-red-darker}
+\setbeamercolor{block title alerted}{bg=polynom-red}
+\setbeamercolor{block body alerted}{bg=polynom-red-light}
+
+% banner page 
+\setbeamercolor{banner page}{bg=polynom-white, fg=polynom-space-grey}
+\setbeamercolor{banner page invert}{bg=polynom-space-grey, fg=white}
+
+\mode<all>
