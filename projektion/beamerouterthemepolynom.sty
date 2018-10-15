@@ -43,7 +43,7 @@
   \if\insertframesubtitle\empty\setlength{\vertlinebase}{0.75ex}\else\empty\setlength{\vertlinebase}{0pt}\fi%
   \usebeamercolor{palette primary}%
   \vskip1.5\titleheight%
-  \hspace{-1em}\tikz[baseline=\vertlinebase]{\draw[line width=1pt,color=fg] (0,0)--(0,1.75\titleheight);}%
+  \hspace{-1em}\tikz[baseline=\vertlinebase]{\draw[line width=2pt,color=bg] (0,0)--(0,1.75\titleheight);}%
   \hbox{\hspace{24pt}\vbox{\fontsize{36pt}{0pt}\selectfont\if\insertframesubtitle\empty\empty\else\insertframesubtitle\\\fi
       \fontsize{50pt}{40pt}\selectfont\insertframetitle}}%
 }
@@ -53,7 +53,16 @@
 % Footer
 %%%
 \defbeamertemplate*{footline}{polynom}{
-
+  \usebeamerfont{footline}
+  \hspace{\leftmargin}
+  {\usebeamercolor{date in head/foot}\insertdate}
+  \hfill
+  {\usebeamercolor{author in head/foot}\insertauthor}
+  \hspace{1em}
+  \vspace{.5em}
+  \begin{beamercolorbox}[wd=5em,ht=2.5ex,dp=1.125ex,center]{framenumber}
+    \insertframenumber
+  \end{beamercolorbox}
 }
 
 \defbeamertemplate*{sidebar left}{polynom}{}
