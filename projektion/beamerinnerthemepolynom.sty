@@ -49,6 +49,32 @@
   }
 }
 
+% #1: Title
+% #2: Subtitle or Author
+\newcommand{\poly@titlepagetitle}[2]{
+  \tikz[overlay, remember picture]{
+
+    % Insert title
+    % TODO text field should be bound on the left to prevent it 
+    % (a) from overfilling the hbox and 
+    % (b) extending the safe-space of the page itself
+    \node[anchor=east, text width=.6\paperwidth, align=right] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{title}#1};
+    
+    % Paint Line
+    \draw[line width=2pt,color=bg] ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
+    --  ($(current page.south west)
+    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
+    
+    \usebeamercolor{subtitle}
+    % Insert subtitle
+    \node[color=fg,anchor=west, text width=.2\paperwidth] (subtitle) at ($(current page.south west)
+    + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    {\usebeamerfont{subtitle}#2};
+  }
+}
+
 \newcommand{\prjktn@debug@cross}{
   \tikz[overlay, remember picture] {
     \draw[color=red] (current page.north)
@@ -66,26 +92,7 @@
 \defbeamertemplate{title page}{polynom}[1][]{
   \usebeamercolor{palette primary}
   \prjktn@titlepagebox{bg}{}
-  \tikz[overlay, remember picture]{
-
-    % Insert title
-    % TODO text field should be bound on the left to prevent it 
-    % (a) from overfilling the hbox and 
-    % (b) extending the safe-space of the page itself
-    \node[anchor=east, text width=.6\paperwidth, align=right] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\inserttitle{}};
-    % Paint Line
-    \draw[line width=1pt,color=fg] ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
-    --  ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
-    
-    \usebeamercolor{subtitle}
-    % Insert subtitle
-    \node[color=fg,anchor=west, text width=.2\paperwidth] (subtitle) at ($(current page.south west)
-    + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{subtitle}\insertsubtitle{}};
-  }
+  \poly@titlepagetitle{\inserttitle}{\insertsubtitle}
 }
 
 
@@ -95,18 +102,7 @@
 \defbeamertemplate{section title}{polynom}{
   \usebeamercolor{palette primary}
   \prjktn@titlepagebox{bg}{}
-  \tikz[overlay, remember picture]{
-    % Insert title
-    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\insertsectionhead{}};
-
-    % Paint Line
-    \draw[line width=2pt,color=bg] ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
-    --  ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
-    
-  }
+  \poly@titlepagetitle{\insertsectionhead}{}
 }
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
@@ -124,18 +120,7 @@
 \defbeamertemplate{subsection title}{polynom}{
   \usebeamercolor{palette secondary}
   \prjktn@titlepagebox{bg}{}
-  \tikz[overlay, remember picture]{
-    % Insert title
-    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\insertsubsectionhead{}};
-
-    % Paint Line
-    \draw[line width=2pt,color=bg] ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
-    --  ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
-    
-  }
+  \poly@titlepagetitle{\insertsubsectionhead}{}
 }
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSubsection[]{
@@ -153,18 +138,7 @@
 \defbeamertemplate{subsubsection title}{polynom}{
   \usebeamercolor{palette tertiary}
   \prjktn@titlepagebox{bg}{}
-  \tikz[overlay, remember picture]{
-    % Insert title
-    \node[anchor=east] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{title}\insertsubsubsectionhead{}};
-
-    % Paint Line
-    \draw[line width=2pt,color=bg] ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight+.75\titleheight)$)
-    --  ($(current page.south west)
-    + (0.725\paperwidth,.5\paperheight-.5\titlebarheight-.75\titleheight)$);
-    
-  }
+  \poly@titlepagetitle{\insertsubsubsectionhead}{}
 }
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSubsubsection[]{
