@@ -55,15 +55,33 @@
 \defbeamertemplate*{footline}{polynom}{
   \usebeamerfont{footline}
   \hspace{\leftmargin}
-  {\usebeamercolor{date in head/foot}\insertdate}
-  \hfill
-  {\usebeamercolor{author in head/foot}\insertauthor}
+  {\usebeamercolor{footline} \color{fg}
+    \insertdate
+    \hfill
+    \insertauthor
+  }
   \hspace{1em}
   \vspace{.5em}
   \begin{beamercolorbox}[wd=5em,ht=2.5ex,dp=1.125ex,center]{framenumber}
     \insertframenumber
   \end{beamercolorbox}
 }
+
+\defbeamertemplate*{footline}{polynom invert}{
+  \usebeamerfont{footline}
+  \hspace{\leftmargin}
+  {\usebeamercolor{footline invert}\color{fg}
+  \insertdate
+  \hfill
+  \insertauthor}
+  \hspace{1em}
+  \vspace{.5em}
+  \begin{beamercolorbox}[wd=5em,ht=2.5ex,dp=1.125ex,center]{framenumber}
+    \insertframenumber
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}[polynom]
 
 \defbeamertemplate*{sidebar left}{polynom}{}
 \defbeamertemplate*{sidebar right}{polynom}{}
