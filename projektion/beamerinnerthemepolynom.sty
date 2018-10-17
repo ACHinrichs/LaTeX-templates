@@ -27,7 +27,7 @@
     \ifthenelse{\equal{#2}{}}{}{
       \node[inner sep=0pt] (picture) at ($(current page.north
       west)+(0.5\paperwidth,-.5\titlebarheight)$) {
-        \includegraphics[width=\paperwidth]{#2}};}  
+        \includegraphics[height=\titlebarheight]{#2}};}  
   }
 }
 
@@ -45,7 +45,7 @@
     \ifthenelse{\equal{#2}{}}{}{
       \node[inner sep=0pt] (picture) at ($(current page.north
       west)+(0.5\paperwidth,-.5\titlebarheight)$) {
-        \includegraphics[width=\paperwidth]{#2}};}  
+        \includegraphics[height=\titlebarheight]{#2}};}  
   }
 }
 
@@ -91,7 +91,7 @@
 %%%
 \defbeamertemplate{title page}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \prjktn@titlepagebox{bg}{}
+  \prjktn@titlepagebox{bg}{#1}
   \poly@titlepagetitle{\inserttitle}{\insertsubtitle}
   %\usebeamertemplate{footline}[polynom]
 }
@@ -100,14 +100,19 @@
 %%%
 % Section Titles page 
 %%%
+
+\newcommand\nextsectionimage[1]{\def\insertnextsectionimage{#1}}
+\def\insertnextsectionimage{}
+
 \defbeamertemplate{section title}{polynom}{
   \usebeamercolor{palette primary}
-  \prjktn@titlepagebox{bg}{}
+  \prjktn@titlepagebox{bg}{\insertnextsectionimage}
+  \def\insertnextsectionimage{}
   \poly@titlepagetitle{\insertsectionhead}{}
 }
+\setbeamertemplate{section title}[polynom]
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
-  \setbeamertemplate{section title}[polynom]{}
 \begin{frame}[plain,noframenumbering]
   \usebeamertemplate{section title}
 \end{frame}
