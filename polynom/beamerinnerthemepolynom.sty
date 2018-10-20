@@ -104,18 +104,18 @@
 \newcommand\nextsectionimage[1]{\def\insertnextsectionimage{#1}}
 \def\insertnextsectionimage{}
 
-\defbeamertemplate{section title}{polynom}{
+\defbeamertemplate{section title}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \prjktn@titlepagebox{bg}{\insertnextsectionimage}
-  \def\insertnextsectionimage{}
+  \prjktn@titlepagebox{bg}{#1}
   \poly@titlepagetitle{\insertsectionhead}{}
 }
-\setbeamertemplate{section title}[polynom]
 \if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
+\setbeamertemplate{section title}[polynom][\insertnextsectionimage]
 \begin{frame}[plain,noframenumbering]
   \usebeamertemplate{section title}
 \end{frame}
+\def\insertnextsectionimage{}
 }
 \else
 \fi
