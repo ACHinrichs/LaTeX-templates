@@ -265,14 +265,17 @@
 \newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 
 \DeclareDocumentCommand\newproblem{O{} g}{
+  \stepcounter{problem}% to reset the lower counters
+  \ifthenelse{\equal{#1}{}}{
+    % empty
+  }{
+    \setcounter{problem}{#1}
+  }
+
   \IfNoValueTF{#2}{
-    \newproblem*[#1]
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \IfNoValueF{#1}{
-      \stepcounter{problem}% to reset the lower counters
-      \setcounter{problem}{#1}
-    }
     \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
