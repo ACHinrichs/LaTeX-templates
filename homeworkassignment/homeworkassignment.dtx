@@ -182,8 +182,11 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
+
 \RequirePackage{gillius2}
+
 \RequirePackage{wasysym}
+\RequirePackage{adjustbox}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -890,9 +893,10 @@
 %   Outputs a table to fill in the reached Points.  Only shows Problems
 %   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
 %   according number of maximum points for each problem, if
-%   specified.\\Displayes the total number of maximum Problems, if
+%   specified.\\Displays the total number of maximum Problems, if
 %   given by Argument Like |\tableofcontent|, it needs a second run of
 %   \LaTeX, until all are added.\\
+%   It will never overflow the Line-Width, thanks to an |adjustbox|.
 %   \texttt{[\#1]}: \emph{Optional.} The total number of points
 %   reachable.
 %    \begin{macrocode}
@@ -900,10 +904,12 @@
   \begin{table}[hb]
     \centering
     \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
-    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
-    \endtabular
+    \begin{adjustbox}{max width=\linewidth}
+      \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+      \hwa@gradingtbl@lineOne  \(\Sigma\)       \\\hline\small
+      \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+      \endtabular
+    \end{adjustbox}
   \end{table}
   }
 %    \end{macrocode}
