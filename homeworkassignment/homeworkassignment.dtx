@@ -182,8 +182,8 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
+\RequirePackage{ifxetex}
 
-\RequirePackage{gillius2}
 
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
@@ -350,9 +350,9 @@
   headsep=14pt,hmarginratio={4:3}}
 \fi
 %    \end{macrocode}
-% \section{Page-Layout}
+% \section{Layout}
 % Initially, the homeworkassignment had a verry \emph{special}
-% appereance, which became much mor customizable with version 3.0, see
+% appereance, which became much more customizable with version 3.0, see
 % \ref{sec:OPTIONS} if you want to know how.
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
@@ -419,6 +419,19 @@
 \allowdisplaybreaks
 %    \end{macrocode}
 % \end{macro}
+% \subsection{fonts}
+% I fancy the Gillius-Font-Family, so that is the default Sans-Serif
+% font, when using XeTeX, The template does default to
+% \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
+% which is available for free, licensed under the GNU License.
+
+\ifthenelse{\boolean{xetex}}{
+  \RequirePackage{fontenc}
+  \setsansfont{Gillius ADF}
+}{
+  \RequirePackage{gillius2}
+}
+
 % \section{Commands}
 % \subsection{Constants}
 % Defines some constants
