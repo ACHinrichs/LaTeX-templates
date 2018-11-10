@@ -184,7 +184,7 @@
 \allowdisplaybreaks
 
 \ifthenelse{\boolean{xetex}}{
-  \RequirePackage{fontenc}
+  \RequirePackage{fontspec}
   \setsansfont{Gillius ADF}
 }{
   \RequirePackage{gillius2}
