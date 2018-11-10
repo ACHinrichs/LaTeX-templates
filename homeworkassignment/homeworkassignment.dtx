@@ -1,7 +1,5 @@
 % \iffalse meta-comment
 %
-% Copyright (c) 2016 by Adrian C. Hinrichs
-%
 % This File may be distributed and/or modified under the condition of the below
 % license.
 %
@@ -9,8 +7,7 @@
 % MIT License
 %
 %
-%
-% Copyright (c) 2017
+% Copyright (c) 2016-2018 by Adrian C. Hinrichs
 %
 %
 %
@@ -32,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.0}
-\def\filedate{2017/12/26}
+\def\fileversion{v3.1}
+\def\filedate{2018/11/10}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -70,6 +67,9 @@
 \DeclareMathOperator{\Sol}{Sol}
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\charakteristik}{char}
+\DeclareMathOperator{\fo}{fo}
+\DeclareMathOperator{\first}{fi}
+\DeclareMathOperator{\la}{la}
 
 \begin{document}
 \DocInput{homeworkassignment.dtx}
@@ -182,8 +182,11 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-\RequirePackage{gillius2}
+\RequirePackage{ifxetex}
+
+
 \RequirePackage{wasysym}
+\RequirePackage{adjustbox}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -347,9 +350,9 @@
   headsep=14pt,hmarginratio={4:3}}
 \fi
 %    \end{macrocode}
-% \section{Page-Layout}
+% \section{Layout}
 % Initially, the homeworkassignment had a verry \emph{special}
-% appereance, which became much mor customizable with version 3.0, see
+% appereance, which became much more customizable with version 3.0, see
 % \ref{sec:OPTIONS} if you want to know how.
 % \subsection{Headers \& Footers}
 % Sets the page-headers.\\
@@ -416,6 +419,20 @@
 \allowdisplaybreaks
 %    \end{macrocode}
 % \end{macro}
+% \subsection{fonts}
+% I fancy the Gillius-Font-Family, so that is the default Sans-Serif
+% font, when using XeTeX, The template does default to
+% \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
+% which is available for free, licensed under the GNU License.
+%    \begin{macrocode}
+
+\ifthenelse{\boolean{xetex}}{
+  \RequirePackage{fontspec}
+  \setsansfont{Gillius ADF}
+}{
+  \RequirePackage{gillius2}
+}
+%    \end{macrocode}
 % \section{Commands}
 % \subsection{Constants}
 % Defines some constants
@@ -592,14 +609,17 @@
 %    \end{macrocode}
 %    \begin{macrocode}
 \DeclareDocumentCommand\newproblem{O{} g}{
+  \stepcounter{problem}% to reset the lower counters
+  \ifthenelse{\equal{#1}{}}{
+    % empty
+  }{
+    \setcounter{problem}{#1}    
+  }
+  
   \IfNoValueTF{#2}{
-    \newproblem*[#1]
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \IfNoValueF{#1}{
-      \stepcounter{problem}% to reset the lower counters
-      \setcounter{problem}{#1}
-    }
     \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
@@ -745,6 +765,9 @@
 %   \DescribeMacro{\Sol}
 %   \DescribeMacro{\Bin}
 %   \DescribeMacro{\charakteristik}
+%   \DescribeMacro{\fo}
+%   \DescribeMacro{\first}
+%   \DescribeMacro{\la}
 %   \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 %   \DescribeMacro{\diff}
 %   \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
@@ -786,6 +809,9 @@
 %     |\divides| and |property| & Prints a vertical line\\
 %     |\dx|&$\dx$\\
 %     |\excup|&$\excup$\\
+%     |\fo|&\(\fo\)\\
+%     |\first|&\(\first\)\\
+%     |\la|&\(\la\)\\
 %     \caption{Common Functions}
 %     \label{tab:functions}
 %   \end{longtable}
@@ -807,6 +833,9 @@
 \DeclareMathOperator{\Sol}{Sol}
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\charakteristik}{char}
+\DeclareMathOperator{\fo}{fo}
+\DeclareMathOperator{\first}{fi}
+\DeclareMathOperator{\la}{la}
 
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
@@ -881,9 +910,10 @@
 %   Outputs a table to fill in the reached Points.  Only shows Problems
 %   created by \texttt{\textbackslash{}newproblem}.  \\Displays the
 %   according number of maximum points for each problem, if
-%   specified.\\Displayes the total number of maximum Problems, if
+%   specified.\\Displays the total number of maximum Problems, if
 %   given by Argument Like |\tableofcontent|, it needs a second run of
 %   \LaTeX, until all are added.\\
+%   It will never overflow the Line-Width, thanks to an |adjustbox|.
 %   \texttt{[\#1]}: \emph{Optional.} The total number of points
 %   reachable.
 %    \begin{macrocode}
@@ -891,10 +921,12 @@
   \begin{table}[hb]
     \centering
     \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
-    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
-    \endtabular
+    \begin{adjustbox}{max width=\linewidth}
+      \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+      \hwa@gradingtbl@lineOne  \(\Sigma\)       \\\hline\small
+      \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+      \endtabular
+    \end{adjustbox}
   \end{table}
   }
 %    \end{macrocode}
@@ -1119,7 +1151,12 @@
 %   \item Fix Subproblem-Counter not beeing reset
 %   \item Merry Christmas!
 %   \end{itemize}
-%   
+% \item[v3.2 - pending]
+%   \begin{itemize}
+%   \item Make XeLaTex-Compatible
+%   \item Fix |\newproblem| requiring a Problem-Number
+%   \end{itemize}
+% 
 % \end{description}
 % \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
 % applies:
