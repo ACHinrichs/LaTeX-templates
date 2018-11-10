@@ -29,7 +29,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.0}
+\def\fileversion{v3.1}
 \def\filedate{2018/11/10}
 % \iffalse
 %<*driver>
@@ -69,7 +69,7 @@
 \DeclareMathOperator{\charakteristik}{char}
 \DeclareMathOperator{\fo}{fo}
 \DeclareMathOperator{\first}{fi}
-\DeclareMathOperator{\fa}{fa}
+\DeclareMathOperator{\la}{la}
 
 \begin{document}
 \DocInput{homeworkassignment.dtx}
@@ -424,6 +424,7 @@
 % font, when using XeTeX, The template does default to
 % \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
 % which is available for free, licensed under the GNU License.
+%    \begin{macrocode}
 
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
@@ -431,7 +432,7 @@
 }{
   \RequirePackage{gillius2}
 }
-
+%    \end{macrocode}
 % \section{Commands}
 % \subsection{Constants}
 % Defines some constants
@@ -834,7 +835,7 @@
 \DeclareMathOperator{\charakteristik}{char}
 \DeclareMathOperator{\fo}{fo}
 \DeclareMathOperator{\first}{fi}
-\DeclareMathOperator{\fa}{fa}
+\DeclareMathOperator{\la}{la}
 
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
@@ -1150,7 +1151,12 @@
 %   \item Fix Subproblem-Counter not beeing reset
 %   \item Merry Christmas!
 %   \end{itemize}
-%   
+% \item[v3.2 - pending]
+%   \begin{itemize}
+%   \item Make XeLaTex-Compatible
+%   \item Fix |\newproblem| requiring a Problem-Number
+%   \end{itemize}
+% 
 % \end{description}
 % \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
 % applies:
