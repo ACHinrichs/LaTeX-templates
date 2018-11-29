@@ -563,6 +563,7 @@
 %
 % \DescribeMacro{\solution} \DescribeMacro{\proof}
 % \DescribeMacro{\given} \DescribeMacro{\toShow}
+% \DescribeMacro{\toDisprove}
 % \DescribeMacro{\assumption} \DescribeMacro{\supposeThat} They work like
 % |\keyword|, but take only an optional Argument print out
 % \enquote{Solution}, \enquote{Proof} \enquote{Given}, \enquote{To
@@ -575,6 +576,8 @@
 %    \begin{macrocode}
 \newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toDisprove}[1][]{
+  \keyword{\GetTranslation{zuWiderlegen}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
@@ -1155,6 +1158,7 @@
 %   \begin{itemize}
 %   \item Make XeLaTex-Compatible
 %   \item Fix |\newproblem| requiring a Problem-Number
+%   \item Add |\toDisprove| macro similar to the |\toShow| macro
 %   \end{itemize}
 % 
 % \end{description}
@@ -1197,6 +1201,7 @@
 \DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
+\DeclareTranslationFallback{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
 \DeclareTranslationFallback{falls}{falls}
 \DeclareTranslationFallback{Annahme}{Annahme}
@@ -1210,6 +1215,7 @@
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
+\DeclareTranslation{German}{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
 \DeclareTranslation{German}{falls}{falls}
 \DeclareTranslation{German}{Falls}{Falls}
@@ -1224,6 +1230,7 @@
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
+\DeclareTranslation{English}{zuWiderlegen}{To disprove}
 \DeclareTranslation{English}{gegeben}{Given}
 \DeclareTranslation{English}{falls}{if}
 \DeclareTranslation{English}{Falls}{If}

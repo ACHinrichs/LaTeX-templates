@@ -36,7 +36,7 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.0}
+\def\fileversion{v3.1}
 \def\filedate{2018/11/10}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
@@ -189,7 +189,6 @@
 }{
   \RequirePackage{gillius2}
 }
-
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
@@ -257,6 +256,8 @@
 }
 \newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toDisprove}[1][]{
+  \keyword{\GetTranslation{zuWiderlegen}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
@@ -350,7 +351,7 @@
 \DeclareMathOperator{\charakteristik}{char}
 \DeclareMathOperator{\fo}{fo}
 \DeclareMathOperator{\first}{fi}
-\DeclareMathOperator{\fa}{fa}
+\DeclareMathOperator{\la}{la}
 
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
@@ -469,6 +470,7 @@
 \DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
+\DeclareTranslationFallback{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
 \DeclareTranslationFallback{falls}{falls}
 \DeclareTranslationFallback{Annahme}{Annahme}
@@ -482,6 +484,7 @@
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
+\DeclareTranslation{German}{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
 \DeclareTranslation{German}{falls}{falls}
 \DeclareTranslation{German}{Falls}{Falls}
@@ -496,6 +499,7 @@
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
+\DeclareTranslation{English}{zuWiderlegen}{To disprove}
 \DeclareTranslation{English}{gegeben}{Given}
 \DeclareTranslation{English}{falls}{if}
 \DeclareTranslation{English}{Falls}{If}
