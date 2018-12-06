@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.1}
-\def\filedate{2018/11/10}
+\def\fileversion{v3.1a}
+\def\filedate{2018/11/29}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -249,6 +249,25 @@
 %    \begin{macrocode}
 \DeclareStringOption[all]{hlines}
 %    \end{macrocode}
+% \DescribeMacro{unicode-math} Loads the unicode-math–package and
+% overwrites the damn \texttt{\textbackslash QED}–Command unicode–math
+% introduces, that creates a filled out box and only works in
+% math–mode, but not telling you that it only works in math–mode or
+% overwrites an already existing command.  Because unicode–math does
+% this in \texttt{\AtBeginDocument}, we will also define our QED–macro
+% at Begin document, if this option is passed in \ref{imp:QED}
+% If XeTeX is used, the default option for this is
+% \texttt{true}, otherwise it is false.
+%    \begin{macrocode}
+\DeclareBoolOption[\boolean{xetex}]{unicode-math}
+\ifhwa@unicode-math
+\Requirepackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+%    \end{macrocode}
+%
 % Loads article and processes the options
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
@@ -669,10 +688,11 @@
 % respectively. |\qed| is not implemented, to keep compatibility to
 % several Math-packages, which define the later.
 %    \begin{macrocode}
-\newcommand{\QED}{\begin{flushright}
+\newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
 }
+\newcommand{\QED}{\hwa@QED}
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}

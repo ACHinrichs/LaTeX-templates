@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.1}
-\def\filedate{2018/11/10}
+\def\fileversion{v3.1a}
+\def\filedate{2018/11/29}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -68,6 +68,13 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareStringOption[all]{hlines}
+\DeclareBoolOption[\boolean{xetex}]{unicode-math}
+\ifhwa@unicode-math
+\Requirepackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
 \ProcessKeyvalOptions*
 \ifhwa@twoside
 \PassOptionsToClass{twoside}{article}
@@ -314,10 +321,11 @@
   }
 }
 
-\newcommand{\QED}{\begin{flushright}
+\newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
 }
+\newcommand{\QED}{\hwa@QED}
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}
