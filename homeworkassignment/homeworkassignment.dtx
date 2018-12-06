@@ -52,6 +52,8 @@
 \usepackage{todonotes}
 \usepackage[T1]{fontenc}
 \usepackage{framed}
+\usepackage{eso-pic}
+
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Var}{Var}
@@ -238,6 +240,12 @@
 %    \begin{macrocode}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+%    \end{macrocode}
+% \DescribeMacro{punchmark}
+% Adds a mark for an hole puncher. 
+% Standard Layout has no marking.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{punchmark}
 %    \end{macrocode}
 % \DescribeMacro{hlines=<1>}
 % KeyValue-option. Takes the level of hlines. Available are
@@ -736,7 +744,6 @@
 \newcommand{\qned}{\hfill\(\triangle\)}
 %    \end{macrocode}
 % \end{macro}
-% 
 % \subsubsection{Stolen Goods}
 % \label{ALLES_NUR_GEKLAUT_EO-EO}
 % \begin{center}
@@ -1036,6 +1043,9 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
+  \ifthenelse{\boolean{\hwa@punchmark}}{
+  \AddToShipoutPictureBG{\AtPageUpperLeft{
+    \put(\LenToUnit{1cm},\LenToUnit{-10cm}){\LARGE$\circ$}}}}{}
 }
 %    \end{macrocode}
 % \end{macro}

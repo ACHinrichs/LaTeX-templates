@@ -67,6 +67,7 @@
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
@@ -447,6 +448,9 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
+  \ifthenelse{\boolean{\hwa@punchmark}}{
+  \AddToShipoutPictureBG{\AtPageUpperLeft{
+    \put(\LenToUnit{1cm},\LenToUnit{-10cm}){\LARGE$\circ$}}}}{}
 }
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
