@@ -3,6 +3,7 @@
 \RequirePackage{tikz}
 \RequirePackage{calc}
 \RequirePackage{ifthen}
+\RequirePackage{ifxetex}
 
 % For conditionals
 \def\prjktn@inner@false{f}
@@ -201,9 +202,14 @@
 %%%
 % Items
 %%%
-\defbeamertemplate*{itemize item}{bullet}{•}
-\defbeamertemplate*{itemize subitem}{bullet}{•}
-\defbeamertemplate*{itemize subsubitem}{bullet}{•}
+\ifxetex
+\renewcommand{\textbullet}{•}
+\fi
+
+
+\defbeamertemplate*{itemize item}{bullet}{\textbullet}
+\defbeamertemplate*{itemize subitem}{bullet}{\textbullet}
+\defbeamertemplate*{itemize subsubitem}{bullet}{\textbullet}
 
 \setbeamertemplate{enumerate item}{\arabic{enumi}.}
 \setbeamertemplate{enumerate subitem}{\roman{enumii}.}
