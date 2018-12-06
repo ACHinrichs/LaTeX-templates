@@ -71,7 +71,6 @@
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
-
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
 \else
@@ -451,9 +450,21 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
-  \ifthenelse{\boolean{hwa@punchmark}}{
-  \AddToShipoutPictureBG{\AtPageUpperLeft{
-    \put(\LenToUnit{1cm},\LenToUnit{-10cm}){\LARGE$\circ$}}}}{}
+}
+\ifthenelse{\boolean{hwa@punchmark}}{
+  \newcommand{\hwa@punchmarkRad}{3mm}
+  \newcommand{\hwa@punchmarkDistanceX}{12mm}
+  \newcommand{\hwa@punchmarkDistanceY}{40mm}
+  \AtBeginDocument{
+  % Where will the punch be?
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight-\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight+\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}}}
+  % Punch-Positioningmark
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{5mm},\LenToUnit{-.5\paperheight}){\tikz{\draw (0,0) -- (5mm,0);}}}}
+  }
+}{
 }
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
