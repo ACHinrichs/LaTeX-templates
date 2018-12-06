@@ -1,0 +1,67 @@
+\mode<presentation>
+
+\RequirePackage{calc}
+\RequirePackage{graphicx}
+
+\defbeamertemplate*{footertext}{projektion}{}
+\defbeamertemplate*{footertextextra}{projektion}{}
+
+\setlength{\headsep}{0pt}
+
+\makeatletter
+\newlength\leftmarrr
+\setlength{\leftmarrr}{\beamer@leftmargin}
+\makeatother
+
+\makeatletter
+\define@key{beamerframe}{t}[true]{% top
+  \beamer@frametopskip=\titleheight\relax%
+  \beamer@framebottomskip=0pt plus 1fill\relax%
+  \beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+  \beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+  \def\beamer@initfirstlineunskip{%
+    \def\beamer@firstlineitemizeunskip{%
+      \vskip-\partopsep\vskip-\topsep\vskip-\parskip%
+      \global\let\beamer@firstlineitemizeunskip=\relax}%
+    \everypar{\global\let\beamer@firstlineitemizeunskip=\relax}}
+}
+\makeatother
+
+%%%
+% Header
+%%%
+\defbeamertemplate*{headline}{rwth}{}
+
+%%%
+% Frame title
+%%%
+\defbeamertemplate*{frametitle}{projektion}
+{
+  \usebeamercolor{title page bar}
+  \vskip\titleheight
+  \hspace{-1em}
+  \tikz[baseline=0.5ex]{
+    \draw[line width=2pt,color=fg] (0,0)--(0,1.25\titleheight);
+  }
+  \insertframetitle
+}
+
+%%%
+% Footer
+%%%
+\defbeamertemplate*{footline}{projektion}{
+  \usebeamercolor{title page bar}
+  \tikz[overlay, remember picture]{
+    \draw[color=fg,fill] (current page.south west) rectangle ($(current
+    page.south west)+(\insertframenumber * (\paperwidth/\inserttotalframenumber, .5mm)$)
+  }
+  
+}
+
+\defbeamertemplate*{sidebar left}{projektion}{}
+\defbeamertemplate*{sidebar right}{projektion}{}
+\setbeamersize{sidebar width left=0pt}
+\setbeamersize{sidebar width right=0pt}
+\defbeamertemplate*{navigation symbols}{projektion}{}
+
+\mode<all>

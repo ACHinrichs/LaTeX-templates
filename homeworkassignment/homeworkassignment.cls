@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.0}
-\def\filedate{2017/12/26}
+\def\fileversion{v3.2}
+\def\filedate{2018/12/06}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -50,8 +50,12 @@
 \RequirePackage{etoolbox}
 \RequirePackage{array}
 \RequirePackage{xparse}
-\RequirePackage{gillius2}
+\RequirePackage{ifxetex}
+
 \RequirePackage{wasysym}
+\RequirePackage{adjustbox}
+
+\RequirePackage{eso-pic}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -65,7 +69,13 @@
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
+\ifxetex
+\DeclareBoolOption[true]{unicodemath}
+\else
+\DeclareBoolOption[false]{unicodemath}
+\fi
 \ProcessKeyvalOptions*
 \ifhwa@twoside
 \PassOptionsToClass{twoside}{article}
@@ -180,6 +190,13 @@
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
+
+\ifthenelse{\boolean{xetex}}{
+  \RequirePackage{fontspec}
+  \setsansfont{Gillius ADF}
+}{
+  \RequirePackage{gillius2}
+}
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
 \newcommand{\subject}[1]{\renewcommand{\hwa@kurs}{#1}}
@@ -247,6 +264,8 @@
 }
 \newcommand{\solution}[1][]{\keyword{\GetTranslation{loesung}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\toShow}[1][]{\keyword{\GetTranslation{zuZeigen}\ifstrempty{#1}{}{~#1}:}}
+\newcommand{\toDisprove}[1][]{
+  \keyword{\GetTranslation{zuWiderlegen}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\given}[1][]{\keyword{\GetTranslation{gegeben}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\assumption}[1][]{\keyword{\GetTranslation{Annahme}\ifstrempty{#1}{}{~#1}:}}
 \newcommand{\supposeThat}[1][]{\keyword{\GetTranslation{Angenommen-dass}\ifstrempty{#1}{}{~#1}}}
@@ -255,14 +274,17 @@
 \newcounter{subsubproblem}[subproblem] \setcounter{subsubproblem}{0}
 
 \DeclareDocumentCommand\newproblem{O{} g}{
+  \stepcounter{problem}% to reset the lower counters
+  \ifthenelse{\equal{#1}{}}{
+    % empty
+  }{
+    \setcounter{problem}{#1}
+  }
+
   \IfNoValueTF{#2}{
-    \newproblem*[#1]
+    \problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \IfNoValueF{#1}{
-      \stepcounter{problem}% to reset the lower counters
-      \setcounter{problem}{#1}
-    }
     \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
@@ -300,10 +322,19 @@
   }
 }
 
-\newcommand{\QED}{\begin{flushright}
+\newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
 }
+\newcommand{\QED}{\hwa@QED}
+
+\ifhwa@unicodemath
+ \RequirePackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}
@@ -335,6 +366,9 @@
 \DeclareMathOperator{\Sol}{Sol}
 \DeclareMathOperator{\Bin}{Bin}
 \DeclareMathOperator{\charakteristik}{char}
+\DeclareMathOperator{\fo}{fo}
+\DeclareMathOperator{\first}{fi}
+\DeclareMathOperator{\la}{la}
 
 \newcommand{\diff}[1]{\ensuremath{\frac{d}{d#1}}}
 \newcommand{\partdiff}[1]{\ensuremath{\frac{\partial}{\partial#1}}}
@@ -371,10 +405,12 @@
   \begin{table}[hb]
     \centering
     \large
-    \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
-    \hwa@gradingtbl@lineOne  $\Sigma$       \\\hline\small
-    \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
-    \endtabular
+    \begin{adjustbox}{max width=\linewidth}
+      \expandafter\tabular\expandafter{\hwa@gradingtbl@defs ||p{\hwa@pointboxsize}|}\hline
+      \hwa@gradingtbl@lineOne  \(\Sigma\)       \\\hline\small
+      \hwa@gradingtbl@lineTwo  \IfNoValueTF{#1}{~}{\vfill\hfill/#1}\vspace{.15cm}\\\hline
+      \endtabular
+    \end{adjustbox}
   \end{table}
   }
 \edef\hwa@gradingtbl@aux@defs{}
@@ -415,6 +451,21 @@
     \hwa@hline@LTWO \normalsize
   \end{centering}
 }
+\ifthenelse{\boolean{hwa@punchmark}}{
+  \newcommand{\hwa@punchmarkRad}{3mm}
+  \newcommand{\hwa@punchmarkDistanceX}{12mm}
+  \newcommand{\hwa@punchmarkDistanceY}{40mm}
+  \AtBeginDocument{
+  % Where will the punch be?
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight-\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight+\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}}}
+  % Punch-Positioningmark
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{5mm},\LenToUnit{-.5\paperheight}){\tikz{\draw (0,0) -- (5mm,0);}}}}
+  }
+}{
+}
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}
 \newcommand{\hwa@subsubproblemno}{\roman{subsubproblem}}
@@ -451,6 +502,7 @@
 \DeclareTranslationFallback{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslationFallback{abgabe}{Abgabe}
 \DeclareTranslationFallback{zuZeigen}{Zu zeigen}
+\DeclareTranslationFallback{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslationFallback{gegeben}{Gegeben}
 \DeclareTranslationFallback{falls}{falls}
 \DeclareTranslationFallback{Annahme}{Annahme}
@@ -464,6 +516,7 @@
 \DeclareTranslation{German}{uebungsgruppe}{\"Ubungsgruppe}
 \DeclareTranslation{German}{abgabe}{Abgabe}
 \DeclareTranslation{German}{zuZeigen}{Zu zeigen}
+\DeclareTranslation{German}{zuWiderlegen}{Zu widerlegen}
 \DeclareTranslation{German}{gegeben}{Gegeben}
 \DeclareTranslation{German}{falls}{falls}
 \DeclareTranslation{German}{Falls}{Falls}
@@ -478,6 +531,7 @@
 \DeclareTranslation{English}{uebungsgruppe}{Tutorial}
 \DeclareTranslation{English}{abgabe}{Deadline}
 \DeclareTranslation{English}{zuZeigen}{To show}
+\DeclareTranslation{English}{zuWiderlegen}{To disprove}
 \DeclareTranslation{English}{gegeben}{Given}
 \DeclareTranslation{English}{falls}{if}
 \DeclareTranslation{English}{Falls}{If}
