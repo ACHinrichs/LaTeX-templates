@@ -42,6 +42,10 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+
+% ATTENTION, DO NOT USE THIS SECTION FOR INCLUSION OF PACKAGES TO THE
+% *CLASS*, THIS PLACE IS WHERE PACKAGES FOR THE *DOCUMENTATION* ARE LOADES
+
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
@@ -52,7 +56,6 @@
 \usepackage{todonotes}
 \usepackage[T1]{fontenc}
 \usepackage{framed}
-\usepackage{eso-pic}
 
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
@@ -188,6 +191,8 @@
 
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
+
+\RequirePackage{eso-pic}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -1043,7 +1048,7 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
-  \ifthenelse{\boolean{\hwa@punchmark}}{
+  \ifthenelse{\boolean{hwa@punchmark}}{
   \AddToShipoutPictureBG{\AtPageUpperLeft{
     \put(\LenToUnit{1cm},\LenToUnit{-10cm}){\LARGE$\circ$}}}}{}
 }

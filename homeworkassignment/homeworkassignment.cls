@@ -54,6 +54,8 @@
 
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
+
+\RequirePackage{eso-pic}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -69,6 +71,7 @@
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
+
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
 \else
@@ -448,7 +451,7 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
-  \ifthenelse{\boolean{\hwa@punchmark}}{
+  \ifthenelse{\boolean{hwa@punchmark}}{
   \AddToShipoutPictureBG{\AtPageUpperLeft{
     \put(\LenToUnit{1cm},\LenToUnit{-10cm}){\LARGE$\circ$}}}}{}
 }
