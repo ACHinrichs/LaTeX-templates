@@ -248,26 +248,34 @@
 %    \begin{macrocode}
 \DeclareStringOption[all]{hlines}
 %    \end{macrocode}
-% \DescribeMacro{unicode-math} Loads the unicode-math–package and
-% overwrites the damn \texttt{\textbackslash QED}–Command unicode–math
+% \DescribeMacro{unicode-math} Loads the unicode--math--package and
+% overwrites the damn \texttt{\textbackslash QED}--Command unicode--math
 % introduces, that creates a filled out box and only works in
-% math–mode, but not telling you that it only works in math–mode or
-% overwrites an already existing command.  Because unicode–math does
-% this in \texttt{\AtBeginDocument}, we will also define our QED–macro
-% at Begin document, if this option is passed in \ref{imp:QED}
+% math--mode, but not telling you that it only works in math--mode or
+% overwrites an already existing command.  For a reason, that
+% currently (06\textsuperscript{th} of December 2018) slips my mind
+% completly, \texttt{unicode-math} needs to be loaded after
+% \texttt{article}, because it needs \texttt{\normalsize} to be
+% defined\\
+%   \begin{framed}
+%     \textsf{ATTENTION: Please do never, never, never, never, never
+%     ever load unicode-math your self, because this breaks
+%     \textbf{everything}\footnote{not eveything, but at least \texttt{\textbackslash{}QED}}}
+%   \end{framed}
+% 
+% \texttt{\textbackslash{}end\{rant\}}\\
+%
 % If XeTeX is used, the default option for this is
 % \texttt{true}, otherwise it is false.
+%
+
+%
+% For the handling of the option, see \ref{QED}
 %    \begin{macrocode}
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
 \else
 \DeclareBoolOption[false]{unicodemath}
-\fi
-\ifhwa@unicodemath
-\RequirePackage{unicode-math}
-\AtBeginDocument{\let\QEDSymbol\QED
-  \renewcommand{\QED}{\hwa@QED}
-}
 \fi
 %    \end{macrocode}
 %
@@ -449,10 +457,10 @@
 %    \begin{macrocode}
 
 \ifthenelse{\boolean{xetex}}{
-  \usepackage{fontspec}
+  \RequirePackage{fontspec}
   \setsansfont{Gillius ADF}
 }{
-%  \RequirePackage{gillius2}
+  \RequirePackage{gillius2}
 }
 %    \end{macrocode}
 % \section{Commands}
@@ -685,7 +693,8 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Useful Macros}
-% \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
+% \subsubsection{\textsc{Quod Erat Demunstrandum}, End of Proof}
+% \label{QED}
 % \begin{macro}{\QED}~\\ \DescribeMacro{\EOP} \DescribeMacro{\eop}
 % Display a flushed-right \textit{QED}, \(\square\), or \(\blacksquare\),
 % respectively. |\qed| is not implemented, to keep compatibility to
@@ -696,6 +705,14 @@
   \end{flushright}
 }
 \newcommand{\QED}{\hwa@QED}
+
+\ifhwa@unicodemath
+ \RequirePackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}

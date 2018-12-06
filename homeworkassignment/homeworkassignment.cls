@@ -73,12 +73,6 @@
 \else
 \DeclareBoolOption[false]{unicodemath}
 \fi
-\ifhwa@unicodemath
-\RequirePackage{unicode-math}
-\AtBeginDocument{\let\QEDSymbol\QED
-  \renewcommand{\QED}{\hwa@QED}
-}
-\fi
 \ProcessKeyvalOptions*
 \ifhwa@twoside
 \PassOptionsToClass{twoside}{article}
@@ -195,9 +189,10 @@
 \allowdisplaybreaks
 
 \ifthenelse{\boolean{xetex}}{
-  \usepackage{fontspec}
+  \RequirePackage{fontspec}
   \setsansfont{Gillius ADF}
 }{
+  \RequirePackage{gillius2}
 }
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
@@ -329,6 +324,14 @@
   \end{flushright}
 }
 \newcommand{\QED}{\hwa@QED}
+
+\ifhwa@unicodemath
+ \RequirePackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}
