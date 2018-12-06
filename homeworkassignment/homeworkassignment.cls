@@ -68,7 +68,7 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareStringOption[all]{hlines}
-\DeclareBoolOption[\boolean{xetex}]{unicode-math}
+\DeclareBoolOption[true]{unicode-math}
 \ifhwa@unicode-math
 \Requirepackage{unicode-math}
 \AtBeginDocument{\let\QEDSymbol\QED
