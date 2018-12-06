@@ -195,6 +195,9 @@
   \mint{LaTeX}|\setbeamertemplate{banner page}[polynom][Bannerpagetext]|
   Now you have to use this on your next frame:
   \mint{LaTeX}|\usebeamertemplate{banner page}|
+
+  Alternatively, you can use the command
+  \mint{LaTeX}|\bannerpage{...}|
 \end{frame}
 
 \setbeamertemplate{banner page}[polynom][buzzword!]
@@ -204,14 +207,11 @@
 
 \begin{frame}
   If you replace \mintinline{LaTeX}|banner page| by
-  \mintinline{LaTeX}|banner page invert|, you get an...
+  \mintinline{LaTeX}|banner page invert|, or use \mint{LaTeX}|\bannerpageinvert{...}|
+  you get an...
 \end{frame}
 
-
-\setbeamertemplate{banner page invert}[polynom][inverted banner page!]
-\begin{frame}
-  \usebeamertemplate{banner page invert}
-\end{frame}
+\bannerpageinvert{inverted banner page!}
 
 
 \section{Postamble}

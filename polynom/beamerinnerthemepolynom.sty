@@ -169,6 +169,13 @@
     {\usebeamerfont{banner}#1};
   }
 }
+
+\newcommand{\bannerpage}[1]{
+  \setbeamertemplate{banner page}[polynom][#1]
+  \begin{frame}[plain,noframenumbering]
+    \usebeamertemplate{banner page}
+  \end{frame}
+}
 %%%
 % Template for banner slide invert
 %%%
@@ -181,6 +188,12 @@
   }
 }
 
+\newcommand{\bannerpageinvert}[1]{
+  \setbeamertemplate{banner page invert}[polynom][#1]
+  \begin{frame}[plain,noframenumbering]
+    \usebeamertemplate{banner page invert}
+  \end{frame}
+}
 %%%
 % Template for empty slide invert
 %%%
