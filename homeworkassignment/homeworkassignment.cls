@@ -68,9 +68,13 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareStringOption[all]{hlines}
-\DeclareBoolOption[true]{unicode-math}
-\ifhwa@unicode-math
-\Requirepackage{unicode-math}
+\ifxetex
+\DeclareBoolOption[true]{unicodemath}
+\else
+\DeclareBoolOption[false]{unicodemath}
+\fi
+\ifhwa@unicodemath
+\RequirePackage{unicode-math}
 \AtBeginDocument{\let\QEDSymbol\QED
   \renewcommand{\QED}{\hwa@QED}
 }
@@ -191,10 +195,9 @@
 \allowdisplaybreaks
 
 \ifthenelse{\boolean{xetex}}{
-  \RequirePackage{fontspec}
+  \usepackage{fontspec}
   \setsansfont{Gillius ADF}
 }{
-  \RequirePackage{gillius2}
 }
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value

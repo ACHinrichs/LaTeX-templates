@@ -184,7 +184,6 @@
 \RequirePackage{xparse}
 \RequirePackage{ifxetex}
 
-
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
 %    \end{macrocode}
@@ -259,9 +258,13 @@
 % If XeTeX is used, the default option for this is
 % \texttt{true}, otherwise it is false.
 %    \begin{macrocode}
-\DeclareBoolOption[true]{unicode-math}
-\ifhwa@unicode-math
-\Requirepackage{unicode-math}
+\ifxetex
+\DeclareBoolOption[true]{unicodemath}
+\else
+\DeclareBoolOption[false]{unicodemath}
+\fi
+\ifhwa@unicodemath
+\RequirePackage{unicode-math}
 \AtBeginDocument{\let\QEDSymbol\QED
   \renewcommand{\QED}{\hwa@QED}
 }
@@ -446,10 +449,10 @@
 %    \begin{macrocode}
 
 \ifthenelse{\boolean{xetex}}{
-  \RequirePackage{fontspec}
+  \usepackage{fontspec}
   \setsansfont{Gillius ADF}
 }{
-  \RequirePackage{gillius2}
+%  \RequirePackage{gillius2}
 }
 %    \end{macrocode}
 % \section{Commands}
