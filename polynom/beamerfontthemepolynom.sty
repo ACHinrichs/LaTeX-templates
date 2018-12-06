@@ -2,11 +2,14 @@
 
 % We want spacing of 1.5. This are the already calculated
 % sizes:
+% 14  21
 % {16pt}{24pt}
 % {18pt}{27pt}
 % {20pt}{30pt}
 % {22pt}{33pt}
-%
+% {24pt}{33pt}
+% {26}{39}
+% 
 % Note that we will not have headers or footers, so we will not set any
 % attributes for them
 
@@ -14,6 +17,26 @@
 \setbeamerfont{normal text}{size*={22pt}{33pt}}
 % Force normal font this way
 \AtBeginDocument{\fontsize{22}{33}\selectfont}
+
+
+% Set fontsizes for commands
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize{22}{33}%
+   \abovedisplayskip 10pt \@plus 2pt \@minus 5pt
+}
+
+\renewcommand\small{%
+   \@setfontsize\small{18}{27}%
+}
+\renewcommand\scriptsize{\@setfontsize\scriptsize{16}{24}}
+\renewcommand\footnotesize\scriptsize
+\renewcommand\tiny{\@setfontsize\tiny{14}{21}}
+\renewcommand\large{\@setfontsize\large{24}{33}}
+\renewcommand\Large{\@setfontsize\Large{26}{39}}
+\renewcommand\LARGE{\@setfontsize\LARGE{28}{30}}
+\renewcommand\huge{\@setfontsize\huge{50}{75}}
+\renewcommand\Huge{\@setfontsize\Huge{60}{90}}
+
 
 % Author is specific for our template!
 \setbeamerfont{author}{size*={18pt}{27.6pt}}
