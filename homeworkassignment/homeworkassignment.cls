@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.1}
-\def\filedate{2018/11/10}
+\def\fileversion{v3.1a}
+\def\filedate{2018/11/29}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -54,6 +54,8 @@
 
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
+
+\RequirePackage{eso-pic}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -67,7 +69,13 @@
 \DeclareComplementaryOption{oneside}{twoside}
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
+\DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
+\ifxetex
+\DeclareBoolOption[true]{unicodemath}
+\else
+\DeclareBoolOption[false]{unicodemath}
+\fi
 \ProcessKeyvalOptions*
 \ifhwa@twoside
 \PassOptionsToClass{twoside}{article}
@@ -314,10 +322,19 @@
   }
 }
 
-\newcommand{\QED}{\begin{flushright}
+\newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
 }
+\newcommand{\QED}{\hwa@QED}
+
+\ifhwa@unicodemath
+ \RequirePackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}
@@ -433,6 +450,21 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
+}
+\ifthenelse{\boolean{hwa@punchmark}}{
+  \newcommand{\hwa@punchmarkRad}{3mm}
+  \newcommand{\hwa@punchmarkDistanceX}{12mm}
+  \newcommand{\hwa@punchmarkDistanceY}{40mm}
+  \AtBeginDocument{
+  % Where will the punch be?
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight-\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight+\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}}}
+  % Punch-Positioningmark
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{5mm},\LenToUnit{-.5\paperheight}){\tikz{\draw (0,0) -- (5mm,0);}}}}
+  }
+}{
 }
 \newcommand{\hwa@problemno}{\arabic{problem}}
 \newcommand{\hwa@subproblemno}{\alph{subproblem}}

@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.1}
-\def\filedate{2018/11/10}
+\def\fileversion{v3.1a}
+\def\filedate{2018/11/29}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -42,6 +42,10 @@
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+
+% ATTENTION, DO NOT USE THIS SECTION FOR INCLUSION OF PACKAGES TO THE
+% *CLASS*, THIS PLACE IS WHERE PACKAGES FOR THE *DOCUMENTATION* ARE LOADES
+
 \usepackage[ngerman,english]{babel}
 \usepackage[autostyle,german=guillemets]{csquotes}
 \usepackage{hyperref}
@@ -52,6 +56,7 @@
 \usepackage{todonotes}
 \usepackage[T1]{fontenc}
 \usepackage{framed}
+
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Var}{Var}
@@ -184,9 +189,10 @@
 \RequirePackage{xparse}
 \RequirePackage{ifxetex}
 
-
 \RequirePackage{wasysym}
 \RequirePackage{adjustbox}
+
+\RequirePackage{eso-pic}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -240,6 +246,12 @@
 \DeclareBoolOption[true]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 %    \end{macrocode}
+% \DescribeMacro{punchmark}
+% Adds a mark for an hole puncher. 
+% Standard Layout has no marking.
+%    \begin{macrocode}
+\DeclareBoolOption[false]{punchmark}
+%    \end{macrocode}
 % \DescribeMacro{hlines=<1>}
 % KeyValue-option. Takes the level of hlines. Available are
 % \texttt{all},\texttt{decreased},\texttt{header}, \texttt{none}, with
@@ -249,6 +261,36 @@
 %    \begin{macrocode}
 \DeclareStringOption[all]{hlines}
 %    \end{macrocode}
+% \DescribeMacro{unicode-math} Loads the unicode--math--package and
+% overwrites the damn \texttt{\textbackslash QED}--Command unicode--math
+% introduces, that creates a filled out box and only works in
+% math--mode, but not telling you that it only works in math--mode or
+% overwrites an already existing command.  For a reason, that
+% currently (06\textsuperscript{th} of December 2018) slips my mind
+% completly, \texttt{unicode-math} needs to be loaded after
+% \texttt{article}, because it needs \texttt{\normalsize} to be
+% defined\\
+%   \begin{framed}
+%     \textsf{ATTENTION: Please do never, never, never, never, never
+%     ever load unicode-math your self, because this breaks
+%     \textbf{everything}\footnote{not eveything, but at least \texttt{\textbackslash{}QED}}}
+%   \end{framed}
+% 
+% \texttt{\textbackslash{}end\{rant\}}\\
+%
+% If XeTeX is used, the default option for this is
+% \texttt{true}, otherwise it is false.
+%
+%
+% For the handling of the option, see \ref{QED}
+%    \begin{macrocode}
+\ifxetex
+\DeclareBoolOption[true]{unicodemath}
+\else
+\DeclareBoolOption[false]{unicodemath}
+\fi
+%    \end{macrocode}
+%
 % Loads article and processes the options
 %    \begin{macrocode}
 \ProcessKeyvalOptions*
@@ -663,16 +705,26 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Useful Macros}
-% \subsubsection{\textsc{Quod Erat Demunstarndum}, End of Proof}
+% \subsubsection{\textsc{Quod Erat Demunstrandum}, End of Proof}
+% \label{QED}
 % \begin{macro}{\QED}~\\ \DescribeMacro{\EOP} \DescribeMacro{\eop}
 % Display a flushed-right \textit{QED}, \(\square\), or \(\blacksquare\),
 % respectively. |\qed| is not implemented, to keep compatibility to
 % several Math-packages, which define the later.
 %    \begin{macrocode}
-\newcommand{\QED}{\begin{flushright}
+\newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
 }
+\newcommand{\QED}{\hwa@QED}
+
+\ifhwa@unicodemath
+ \RequirePackage{unicode-math}
+\AtBeginDocument{\let\QEDSymbol\QED
+  \renewcommand{\QED}{\hwa@QED}
+}
+\fi
+
 \newcommand{\EOP}{\begin{flushright}
     \(\square\)
   \end{flushright}
@@ -696,7 +748,6 @@
 \newcommand{\qned}{\hfill\(\triangle\)}
 %    \end{macrocode}
 % \end{macro}
-% 
 % \subsubsection{Stolen Goods}
 % \label{ALLES_NUR_GEKLAUT_EO-EO}
 % \begin{center}
@@ -996,6 +1047,21 @@
     \normalsize{\@author}\\
     \hwa@hline@LTWO \normalsize
   \end{centering}
+}
+\ifthenelse{\boolean{hwa@punchmark}}{
+  \newcommand{\hwa@punchmarkRad}{3mm}
+  \newcommand{\hwa@punchmarkDistanceX}{12mm}
+  \newcommand{\hwa@punchmarkDistanceY}{40mm}
+  \AtBeginDocument{
+  % Where will the punch be?
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight-\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}
+      \put(\LenToUnit{\hwa@punchmarkDistanceX-\hwa@punchmarkRad*2},\LenToUnit{-.5\paperheight+\hwa@punchmarkDistanceY-\hwa@punchmarkRad}){\tikz{\draw (0,0) circle (\hwa@punchmarkRad);}}}}
+  % Punch-Positioningmark
+  \AddToShipoutPictureBG*{\AtPageUpperLeft{
+      \put(\LenToUnit{5mm},\LenToUnit{-.5\paperheight}){\tikz{\draw (0,0) -- (5mm,0);}}}}
+  }
+}{
 }
 %    \end{macrocode}
 % \end{macro}
