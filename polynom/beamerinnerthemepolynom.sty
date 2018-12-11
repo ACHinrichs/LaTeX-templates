@@ -6,10 +6,10 @@
 \RequirePackage{ifxetex}
 
 % For conditionals
-\def\polynom@inner@false{f}
-\def\polynom@inner@true{t}
+\def\prjktn@inner@false{f}
+\def\prjktn@inner@true{t}
 
-\DeclareOptionBeamer{sectiontitles}{\def\polynom@inner@sectiontitles{#1}}
+\DeclareOptionBeamer{sectiontitles}{\def\prjktn@inner@sectiontitles{#1}}
 \ExecuteOptionsBeamer{sectiontitles=t} % default value
 \ProcessOptionsBeamer
 % t= true, anything else disables them, t is default
@@ -21,7 +21,7 @@
 
 % #1: Color
 % #2: Image path (can be empty))
-\newcommand{\polynom@titlepagebox}[2]{
+\newcommand{\prjktn@titlepagebox}[2]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.north west)$) rectangle
     ($(current page.north east)+(0,-\titlebarheight)$);
@@ -32,14 +32,14 @@
   }
 }
 
-\newcommand{\polynom@fullpagebox}[1]{
+\newcommand{\prjktn@fullpagebox}[1]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.north west)$) rectangle
     ($(current page.south east)$);
   }
 }
 
-\newcommand{\polynom@inversetitlepagebox}[2]{
+\newcommand{\prjktn@inversetitlepagebox}[2]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.south west)$) rectangle
     ($(current page.north east)+(0,-\titlebarheight)$);
@@ -76,7 +76,7 @@
   }
 }
 
-\newcommand{\polynom@debug@cross}{
+\newcommand{\prjktn@debug@cross}{
   \tikz[overlay, remember picture] {
     \draw[color=red] (current page.north)
     -- (current page.south);
@@ -92,7 +92,7 @@
 %%%
 \defbeamertemplate{title page}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \polynom@titlepagebox{bg}{#1}
+  \prjktn@titlepagebox{bg}{#1}
   \poly@titlepagetitle{\inserttitle}{\insertsubtitle}
   %\usebeamertemplate{footline}[polynom]
 }
@@ -107,10 +107,10 @@
 
 \defbeamertemplate{section title}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \polynom@titlepagebox{bg}{#1}
+  \prjktn@titlepagebox{bg}{#1}
   \poly@titlepagetitle{\insertsectionhead}{}
 }
-\if\polynom@inner@sectiontitles\polynom@inner@true
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSection[]{
 \setbeamertemplate{section title}[polynom][\insertnextsectionimage]
 \begin{frame}[plain,noframenumbering]
@@ -126,10 +126,10 @@
 %%%
 \defbeamertemplate{subsection title}{polynom}{
   \usebeamercolor{palette secondary}
-  \polynom@titlepagebox{bg}{}
+  \prjktn@titlepagebox{bg}{}
   \poly@titlepagetitle{\insertsubsectionhead}{}
 }
-\if\polynom@inner@sectiontitles\polynom@inner@true
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSubsection[]{
   \setbeamertemplate{subsection title}[polynom]{}
 \begin{frame}[plain,noframenumbering]
@@ -144,10 +144,10 @@
 %%%
 \defbeamertemplate{subsubsection title}{polynom}{
   \usebeamercolor{palette tertiary}
-  \polynom@titlepagebox{bg}{}
+  \prjktn@titlepagebox{bg}{}
   \poly@titlepagetitle{\insertsubsubsectionhead}{}
 }
-\if\polynom@inner@sectiontitles\polynom@inner@true
+\if\prjktn@inner@sectiontitles\prjktn@inner@true
 \AtBeginSubsubsection[]{
   \setbeamertemplate{subsubsection title}[polynom]{}
 \begin{frame}[plain,noframenumbering]
@@ -163,7 +163,7 @@
 %%%
 \defbeamertemplate{banner page}{polynom}[1][]{
   \usebeamercolor{banner page}
-  \polynom@fullpagebox{bg}
+  \prjktn@fullpagebox{bg}
   \tikz[text width=0.75\paperwidth, text centered, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
@@ -181,7 +181,7 @@
 %%%
 \defbeamertemplate{banner page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
-  \polynom@fullpagebox{bg}
+  \prjktn@fullpagebox{bg}
   \tikz[text=fg, text centered, text width=0.75\paperwidth, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
@@ -199,7 +199,7 @@
 %%%
 \defbeamertemplate{empty page}{polynom}[1][]{
   \usebeamercolor{banner page}
-  \polynom@fullpagebox{bg}
+  \prjktn@fullpagebox{bg}
 }
 
 %%%
@@ -207,7 +207,7 @@
 %%%
 \defbeamertemplate{empty page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
-  \polynom@fullpagebox{bg}
+  \prjktn@fullpagebox{bg}
 }
 
 
