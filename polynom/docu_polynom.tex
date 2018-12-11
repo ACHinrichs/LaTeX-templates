@@ -4,12 +4,10 @@
 \usefonttheme[onlymath]{serif}
 \boldmath{}
 
-
 % Please refer to the manual of minted, if you want to compile this
 % documentation from source and have to install it!
 % https://github.com/gpoore/minted/blob/master/source/minted.pdf 
-
-\usepackage{minted}
+% \usepackage{minted}
 \usepackage{tgadventor}
 
 \title{Polynom}
@@ -32,7 +30,7 @@
 \section{Motivation}
 \begin{frame}
   This theme is developed to match PowerPoint-Templates by Alexander
-  Bartolomey GitLab / Hub.
+  Bartolomey GitLab / GitHub.
 
   It is developed because of the lack of clean LaTeX-Templates that
   are designed with 16:9 in mind.  (Also I did not want to use the
@@ -44,82 +42,79 @@
   font support are very beneficial for the creation of presentations.
 
   Nevertheless, we will try to keep the theme working on standard
-  \LaTeX, but the theme will propably be less tested on \LaTeX
+  \LaTeX, but the theme will probably be less tested on \LaTeX
 \end{frame}
 
 \section{Features}
-
-
-\begin{frame}
+\begin{frame}[fragile=singleslide]
   \framesubtitle{Clean and pleasing:}
   \frametitle{Framedesign}
-  To use stapled Headlines, you have to specify
+  To use stacked headlines, you have to specify
   \begin{itemize}
-  \item the upper line with \texttt{\textbackslash framesubtitle\{...\}}
-  \item the lowe (main) line with \texttt{\textbackslash frametitle\{...\}}
+  \item the upper line with \verb|\framesubtitle{...}|
+  \item the lowe (main) line with \verb|\frametitle{...}|
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Math in Polynom}
-  Looks verry nice, thanks to serifs and boldfaced letters
+  Looks very nice, thanks to serifs and boldfaced letters
    \[ A=U\Sigma V^T\]
    for every matrix \( A\in \mathbb{R}^{m\times n}\) with
    \[\Sigma:=\mathrm{diag}(\sigma_1,\dots,\sigma_p) \in \mathbb{R}^{m\times n}, p = \min(m,n)\]
 \end{frame}
 
 \subsection{Section Titles}
-\begin{frame}{Section Titles}
+\begin{frame}[fragile=singleslide]{Section Titles}
   \begin{itemize}
   \item Activated by default
     \begin{itemize}
-    \item deactivated by calling polynom with \texttt{\textbackslash usetheme[sectiontitles=f]\{polynom\}}
+    \item deactivated by calling polynom with \verb|\usetheme[sectiontitles=f]{polynom}|
     \end{itemize}
   \item For Sections, Subsections and Subsubsections
   \end{itemize}
 \end{frame}
 
-
-\begin{frame}
-  \frametitle{Images on Sectiontitles}
+\begin{frame}[fragile=singleslide]
+  \frametitle{Images on section titles}
   \framesubtitle{Special Feature}
   To add an image to the title of the next section, call
-  \mintinline{LaTeX}{\nextsectionimage{\#1}}, where
-  \mintinline{LaTeX}{\#1} is the image file, as you would specify it
-  for \mintinline{LaTeX}{\includegraphics}. Keep in mind, that the image height
+  \verb|\nextsectionimage{#1}|, where
+  \verb|#1| is the image file, as you would specify it
+  for \verb|\includegraphics|. Keep in mind, that the image height
   \alert{always} will be matched to the height of the bar, which has
   an aspect-ratio of 8:3.\\
 
-  See next slide for an example (Photo by \href{https://unsplash.com/photos/NRQV-hBF10M?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText}{Bailey Zindel} on \href{https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText}{Unsplash})
+  See next slide for an example (Photo by \href{https://unsplash.com/photos/NRQV-hBF10M}{Bailey Zindel} on \href{https://unsplash.com/}{Unsplash})
 \end{frame}
 
 \nextsectionimage{docu_landscape}
 \section{Font Selection}
-\begin{frame}{Main font}
-  As a main font, we to use a heavy bold-face geometric typeface.  We
-  might use Googles Product Sans, but since it is not available due to
-  licensing, there are several alternativs:  
+\begin{frame}[fragile=singleslide]{Main Font}
+  As a main font, we advise the usage of a heavy bold-face geometric typeface.  
+  We formerly used Googles Product Sans, but since it is not available for free
+  due to licensing, there are several alternatives:  
   \begin{itemize}
   \item \href{http://www.tug.dk/FontCatalogue/texgyreadventor/}{\TeX
       Gyre Adventor} (Free) (\LaTeX--Package, used in this document)
-  \item Futura PT Heacy
-  \item Helvetica LT
+  \item Futura PT Heavy
+  \item Helvetica, using \verb|\usepackage{helvet}|
   \item \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius
       ADF} (Free)
   \item \href{https://fonts.google.com/specimen/Karla}{Karla} (Free)
-  \item \href{https://fonts.google.com/specimen/Montserrat}{Montserrat} (Free)
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Mono Font}
-  Any monospace font you like, we prefere
+\begin{frame}{Monospaced Font}
+  Any monospaced font you like, we prefer
   \href{https://mozilla.github.io/Fira/}{Fira Mono}. Please do not use
-  \href{https://github.com/tonsky/FiraCode}{Fira Code} or other fonts with programming ligatures for your
-  presentations because viewers, who do not know them, can (and will!)
-  get confused by XeLaTeX ligature support, e.g. condensing !== to
-  three horizontal lines with one skewed vertical right through it.
+  \href{https://github.com/tonsky/FiraCode}{Fira Code} or other fonts with 
+  programming ligatures for your presentations because viewers who do not 
+  know them can (and will!) get confused by XeLaTeX ligature support, e.g.
+  condensing !== to three horizontal lines with one skewed vertical right 
+  through it.
 \end{frame}
  
-\section{Color-Palette}
+\section{Color Palette}
 
 \newcommand{\clrbx}[1]{
   \begin{beamercolorbox}[wd=5em,ht=5ex,dp=1.125ex,center]{#1}
@@ -132,54 +127,53 @@
   \clrbx{palette quaternary}}
 
 
-\begin{frame}{Default Color-Theme}
+\begin{frame}{Default Color Theme}
   The default palette consists of the following colors:\\
-  \paletteColors\\
+  \paletteColors
 \end{frame}
 
 \input{beamercolorthemepolynomseconddegree.sty}
 
-\begin{frame}{Color Theme polynomseconddegree}
-  Load it via
-  \mintinline{LaTeX}{\usebeamercolortheme{polynomseconddegree}}. The
-  main-palette consists of the following colors:\\
-  \paletteColors\\
+\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
+  Load it via \verb|\usebeamercolortheme{polynomseconddegree}|. 
+  The main palette consists of the following colors:\\
+  \paletteColors
   
-  \texttt{polynomseconddegree} provides additional colors-schemes,
+  \texttt{polynomseconddegree} provides additional colors schemes,
   which you can switch dynamically, the default one can be restored by by
-  \mintinline{LaTeX}{\setPaletteBlue} 
+  \verb|\setPaletteBlue|
 \end{frame}
 
 \setPaletteRed
-\begin{frame}{Color Theme polynomseconddegree}
+\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
   \framesubtitle{Red}
 
-  To use the red color-scheme, call \mintinline{LaTeX}{\setPaletteRed}
+  To use the red color scheme, call \verb|\setPaletteRed|
   before the first frame you want to use it on (also affects
-  section-titles etc.) \\
-  \paletteColors\\
+  section-titles etc.)\\
+  \paletteColors
   
 \end{frame}
 
 \setPaletteGreen
-\begin{frame}{Color Theme polynomseconddegree}
+\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
   \framesubtitle{Green}
 
-  To use the green color-scheme, call \mintinline{LaTeX}{\setPaletteGreen}
+  To use the green color scheme, call \verb|\setPaletteGreen|
   before the first frame you want to use it on (also affects
   section-titles etc.) \\
-  \paletteColors\\
+  \paletteColors
   
 \end{frame}
 \setPaletteBlue
 
 \section{Banner-Pages}
-\begin{frame}{Banner Pages}
-  To highlight important messages, you can create bannerpages with the
+\begin{frame}[fragile=singleslide]{Banner Pages}
+  To highlight important messages, you can create banner pages with the
   following code:
-  \mint{LaTeX}|\setbeamertemplate{banner page}[polynom][Bannerpagetext]|
+  \verb|\setbeamertemplate{banner page}[polynom][Bannerpagetext]|
   Now you have to use this on your next frame:
-  \mint{LaTeX}|\usebeamertemplate{banner page}|
+  \verb|\usebeamertemplate{banner page}|
 \end{frame}
 
 \setbeamertemplate{banner page}[polynom][buzzword!]
@@ -187,9 +181,9 @@
   \usebeamertemplate{banner page}
 \end{frame}
 
-\begin{frame}
-  If you replace \mintinline{LaTeX}|banner page| by
-  \mintinline{LaTeX}|banner page invert|, you get an...
+\begin{frame}[fragile=singleslide]
+  If you replace \verb|banner page| by
+  \verb|banner page invert|, you get an...
 \end{frame}
 
 
@@ -201,19 +195,19 @@
 
 \section{Postamble}
 \begin{frame}{Development}
-  This theme is under active development, to match the
-  powerpoint-template, so that the powerpoint and LaTeX--template will
-  be usable in a similar (even though not completly identical (eyes on
-  ligature--support and animations) way.
+  This theme is under active development to progressively match the
+  PowerPoint template so that the PowerPoint and LaTeX--template will
+  be usable in a similar (even though not completely identical (eyes on
+  ligature--support and animations) manner.
 
   The development takes place in
   \href{https://git.rwth-aachen.de/ACHinrichs/LaTeX-templates/}{\texttt{this}}
-  repo, please submit any bugreports or feature requests there.
+  repository, please submit any bug reports or feature requests there.
 \end{frame}
 
 \begin{frame}{Thanks}
-  Many thanks to \href{https://www.occloxium.com/}{Alexander Bartolomey} for the great Power-Point
-  Template and his work on the LaTeX-Implementation. 
+  Many thanks to \href{https://www.occloxium.com/}{Alexander Bartolomey} for 
+  the great PowerPoint template and his work on the LaTeX implementation. 
 \end{frame}
 \end{document}
 
