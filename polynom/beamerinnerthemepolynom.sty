@@ -3,6 +3,7 @@
 \RequirePackage{tikz}
 \RequirePackage{calc}
 \RequirePackage{ifthen}
+\RequirePackage{ifxetex}
 
 % For conditionals
 \def\prjktn@inner@false{f}
@@ -168,6 +169,13 @@
     {\usebeamerfont{banner}#1};
   }
 }
+
+\newcommand{\bannerpage}[1]{
+  \setbeamertemplate{banner page}[polynom][#1]
+  \begin{frame}[plain,noframenumbering]
+    \usebeamertemplate{banner page}
+  \end{frame}
+}
 %%%
 % Template for banner slide invert
 %%%
@@ -180,6 +188,12 @@
   }
 }
 
+\newcommand{\bannerpageinvert}[1]{
+  \setbeamertemplate{banner page invert}[polynom][#1]
+  \begin{frame}[plain,noframenumbering]
+    \usebeamertemplate{banner page invert}
+  \end{frame}
+}
 %%%
 % Template for empty slide invert
 %%%
@@ -201,9 +215,14 @@
 %%%
 % Items
 %%%
-\defbeamertemplate*{itemize item}{bullet}{•}
-\defbeamertemplate*{itemize subitem}{bullet}{•}
-\defbeamertemplate*{itemize subsubitem}{bullet}{•}
+\ifxetex
+\renewcommand{\textbullet}{•}
+\fi
+
+
+\defbeamertemplate*{itemize item}{bullet}{\textbullet}
+\defbeamertemplate*{itemize subitem}{bullet}{\textbullet}
+\defbeamertemplate*{itemize subsubitem}{bullet}{\textbullet}
 
 \setbeamertemplate{enumerate item}{\arabic{enumi}.}
 \setbeamertemplate{enumerate subitem}{\roman{enumii}.}
