@@ -6,11 +6,11 @@
 \definecolor{polynom-blue-dark}{RGB}   {24 57 148}
 \definecolor{polynom-blue-darker}{RGB} {15 37 96}
 
-\definecolor{polynom-space-grey}{RGB}{51 51 51}
+\definecolor{polynom-space-grey}{RGB}{21 21 21}
 \definecolor{polynom-white}{RGB}{255 255 255}
 
-\definecolor{polynom-red-lighter}{RGB}  {255 176 161}
-\definecolor{polynom-red-light}{RGB}{255 112 85}
+\definecolor{polynom-red-lighter}{RGB}{255 176 161}
+\definecolor{polynom-red-light}{RGB}  {255 112 85}
 \definecolor{polynom-red}{RGB}        {255 62 25}
 \definecolor{polynom-red-dark}{RGB}   {148 36 15}
 \definecolor{polynom-red-darker}{RGB} {96 23 9}
@@ -21,45 +21,40 @@
 \definecolor{polynom-green-dark}{RGB}   {68 97 10}
 \definecolor{polynom-green-darker}{RGB} {32 45 4}
 
-\definecolor{black}   {RGB}{  0   0   0}
-
+\definecolor{black}{RGB}{0 0 0}
 
 \setbeamercolor*{normal text}{fg=polynom-space-grey}
 
-
-
 \newcommand{\setPaletteBlue}{
 \setbeamercolor*{structure}{fg=polynom-blue}
-\setbeamercolor{palette primary}{   fg=polynom-white,bg=polynom-blue}
-\setbeamercolor{palette secondary}{ fg=polynom-white,bg=polynom-blue-dark}
-\setbeamercolor{palette tertiary}{  fg=polynom-white,bg=polynom-blue-darker}
-\setbeamercolor{palette
-  quaternary}{fg=polynom-white,bg=polynom-blue-darker}
+\setbeamercolor{palette primary}    {fg=polynom-white,bg=polynom-blue}
+\setbeamercolor{palette secondary}  {fg=polynom-white,bg=polynom-blue-dark}
+\setbeamercolor{palette tertiary}   {fg=polynom-white,bg=polynom-blue-darker}
+\setbeamercolor{palette quaternary} {fg=polynom-white,bg=polynom-blue-darker}
 }
 \newcommand{\setPaletteRed}{
 \setbeamercolor*{structure}{fg=polynom-red}
-\setbeamercolor{palette primary}{   fg=polynom-white,bg=polynom-red}
-\setbeamercolor{palette secondary}{ fg=polynom-white,bg=polynom-red-dark}
-\setbeamercolor{palette tertiary}{  fg=polynom-white,bg=polynom-red-darker}
-\setbeamercolor{palette
-  quaternary}{fg=polynom-white,bg=polynom-red-darker}
+\setbeamercolor{palette primary}    {fg=polynom-white,bg=polynom-red}
+\setbeamercolor{palette secondary}  {fg=polynom-white,bg=polynom-red-dark}
+\setbeamercolor{palette tertiary}   {fg=polynom-white,bg=polynom-red-darker}
+\setbeamercolor{palette quaternary} {fg=polynom-white,bg=polynom-red-darker}
 }
 
 \newcommand{\setPaletteGreen}{
 \setbeamercolor*{structure}{fg=polynom-green}
-\setbeamercolor{palette primary}{   fg=polynom-white,bg=polynom-green}
-\setbeamercolor{palette secondary}{ fg=polynom-white,bg=polynom-green-dark}
-\setbeamercolor{palette tertiary}{  fg=polynom-white,bg=polynom-green-darker}
-\setbeamercolor{palette
-  quaternary}{fg=polynom-white,bg=polynom-green-darker}
+\setbeamercolor{palette primary}    {fg=polynom-white,bg=polynom-green}
+\setbeamercolor{palette secondary}  {fg=polynom-white,bg=polynom-green-dark}
+\setbeamercolor{palette tertiary}   {fg=polynom-white,bg=polynom-green-darker}
+\setbeamercolor{palette quaternary} {fg=polynom-white,bg=polynom-green-darker}
 }
 \setPaletteBlue
 % Sidebar
 \setbeamercolor*{sidebar}{parent=palette primary}
-\setbeamercolor*{palette sidebar primary}{use=normal text,fg=normal text.fg}
-\setbeamercolor*{palette sidebar secondary}{use=normal text,fg=normal text.fg}
-\setbeamercolor*{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar primary}   {use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar secondary} {use=normal text,fg=normal text.fg}
+\setbeamercolor*{palette sidebar tertiary}  {use=normal text,fg=normal text.fg}
 \setbeamercolor*{palette sidebar quaternary}{use=normal text,fg=normal text.fg}
+
 
 % Outer structure
 \setbeamercolor{frametitle}{fg=polynom-space-grey}
