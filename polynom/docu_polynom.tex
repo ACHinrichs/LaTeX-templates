@@ -130,15 +130,21 @@
 
 \section{Color Palette}
 
-\newcommand{\clrbx}[1]{
-  \begin{beamercolorbox}[wd=5em,ht=5ex,dp=1.125ex,center]{#1}
-    \small#1
-  \end{beamercolorbox}}
-\newcommand{\paletteColors}{
-  \clrbx{palette primary}
-  \clrbx{palette secondary}
-  \clrbx{palette tertiary}
-  \clrbx{palette quaternary}}
+\newcommand{\clrbx}[1]{%
+  \parbox{5em}{%
+    \begin{beamercolorbox}[wd=5em,ht=5ex,dp=1.125ex,center]{#1}%
+      \small#1%
+    \end{beamercolorbox}%
+  }%
+}
+\newcommand{\paletteColors}{%
+  \begin{center}
+    \clrbx{palette primary} %
+    \clrbx{palette secondary}%
+    \clrbx{palette tertiary}%
+    \clrbx{palette quaternary}%
+  \end{center}
+}
 
 
 \begin{frame}{Default Color Theme}
@@ -148,7 +154,7 @@
 
 \input{beamercolorthemepolynomseconddegree.sty}
 
-\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
+\begin{frame}[fragile]{Color Theme \texttt{polynomseconddegree}}
   Load it via \verb|\usebeamercolortheme{polynomseconddegree}|. 
   The main palette consists of the following colors:\\
   \paletteColors
@@ -159,7 +165,7 @@
 \end{frame}
 
 \setPaletteRed
-\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
+\begin{frame}[fragile]{Color Theme \texttt{polynomseconddegree}}
   \framesubtitle{Red}
 
   To use the red color scheme, call \verb|\setPaletteRed|
@@ -170,7 +176,7 @@
 \end{frame}
 
 \setPaletteGreen
-\begin{frame}[fragile=singleslide]{Color Theme \texttt{polynomseconddegree}}
+\begin{frame}[fragile]{Color Theme \texttt{polynomseconddegree}}
   \framesubtitle{Green}
 
   To use the green color scheme, call \verb|\setPaletteGreen|
@@ -182,7 +188,7 @@
 \setPaletteBlue
 
 \section{Banner-Pages}
-\begin{frame}[fragile=singleslide]{Banner Pages}
+\begin{frame}[fragile]{Banner Pages}
   To highlight important messages, you can create banner pages with the
   following code:
   \verb|\setbeamertemplate{banner page}[polynom][Bannerpagetext]|
@@ -198,7 +204,7 @@
   \usebeamertemplate{banner page}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   If you replace \verb|banner page| by
   \verb|banner page invert|, or use \verb|\bannerpageinvert{...}|
   you get an...
