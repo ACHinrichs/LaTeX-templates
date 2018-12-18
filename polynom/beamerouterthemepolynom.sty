@@ -63,7 +63,7 @@
   \hspace{1em}
   \vspace{.5em}
   \begin{beamercolorbox}[wd=5em,ht=2.5ex,dp=1.125ex,center]{framenumber}
-    \insertframenumber
+    \textbf{\footnotesize\insertframenumber}
   \end{beamercolorbox}
 }
 
@@ -71,13 +71,14 @@
   \usebeamerfont{footline}
   \hspace{\leftmargin}
   {\usebeamercolor{footline invert}\color{fg}
-  \insertdate
-  \hfill
-  \insertauthor}
+    \insertdate
+    \hfill
+    \insertauthor
+  }
   \hspace{1em}
   \vspace{.5em}
   \begin{beamercolorbox}[wd=5em,ht=2.5ex,dp=1.125ex,center]{framenumber}
-    \insertframenumber
+    \textbf{\footnotesize\insertframenumber}
   \end{beamercolorbox}
 }
 \setbeamertemplate{footline}[polynom]
