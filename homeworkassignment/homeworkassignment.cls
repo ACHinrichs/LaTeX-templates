@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.1a}
-\def\filedate{2018/11/29}
+\def\fileversion{v3.2a}
+\def\filedate{2019/04/09}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -56,6 +56,8 @@
 \RequirePackage{adjustbox}
 
 \RequirePackage{eso-pic}
+
+\RequirePackage{xcolor}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -89,6 +91,7 @@
 \fi
 \LoadClass{article}
 
+\RequirePackage{hyperref}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -348,7 +351,7 @@
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Compl}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 \DeclareMathOperator{\GL}{GL}
@@ -391,6 +394,7 @@
 \renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
 \newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+\DeclareDocumentCommand\todo{G{}}{{\color{red}{\textbf{~TODO~}#1~}}}
 \DeclareDocumentCommand\addToGradingTable{m g}{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}

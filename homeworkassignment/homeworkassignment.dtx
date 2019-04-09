@@ -7,7 +7,7 @@
 % MIT License
 %
 %
-% Copyright (c) 2016-2018 by Adrian C. Hinrichs
+% Copyright (c) 2016-2019 by Adrian C. Hinrichs
 %
 %
 %
@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.1a}
-\def\filedate{2018/11/29}
+\def\fileversion{v3.2a}
+\def\filedate{2019/04/09}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -157,6 +157,10 @@
 % functionality.}
 % \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
 % Sans inspired font, used for all sans serifes fonts}
+% \dep{hyperref}{https://ctan.org/pkg/hyperref}{Sebastian Rahtz, Heiko
+% Oberdiek}{For hyperrefs, obviously}
+% \dep{xcolor}{Dr. Uwe Kern}{https://www.ctan.org/pkg/xcolor}{For
+% coloring of ToDos}
 % \end{description}
 % \subsection{Recommended Dependencies}
 % These are not loaded automatically, but require a switch as option
@@ -193,6 +197,8 @@
 \RequirePackage{adjustbox}
 
 \RequirePackage{eso-pic}
+
+\RequirePackage{xcolor}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -306,6 +312,10 @@
 \fi
 \LoadClass{article}
 
+%    \end{macrocode}
+% Load Hyperref (breaks if it is loaded before article
+%    \begin{macrocode}
+\RequirePackage{hyperref}
 %    \end{macrocode}
 % Loads listings, if wanted
 %    \begin{macrocode}
@@ -770,8 +780,8 @@
 %   \DescribeMacro{\R}
 %   \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 %   \DescribeMacro{\Q}
-%   \newcommand{\C}{\ensuremath{\mathbb{C}}}
-%   \DescribeMacro{\C}
+%   \newcommand{\Compl}{\ensuremath{\mathbb{C}}}
+%   \DescribeMacro{\Compl}
 %   \newcommand{\F}{\ensuremath{\mathbb{F}}}
 %   \DescribeMacro{\F}
 %   \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
@@ -784,7 +794,7 @@
 %     |\Z|&$\Z$&Whole Numbers\\
 %     |\Q|&$\Q$&Rational Numbers\\
 %     |\R|&$\R$&Real Numbers\\
-%     |\C|&$\C$&Complex Numbers\\
+%     |\Compl|&$\Compl$&Complex Numbers\\
 %     |\F_n|&$\F_n$&Prime Field to base $n$\\
 %     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
 %     \caption{Field-Commands}
@@ -798,7 +808,7 @@
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Compl}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % The last one is mine
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
@@ -944,7 +954,8 @@
 % \begin{macro}{\todo}
 % Creates a todo at the location of the command, highlighted in red.
 % The ToDos will be listed after maketitle, unless the option
-% |todos=nolist| or |todos=none| is specified.  
+% |todos=nolist| or |todos=none| is specified.
+\DeclareDocumentCommand\todo{G{}}{{\color{red}{\textbf{~TODO~}#1~}}}
 % \end{macro}
 % \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
@@ -1230,6 +1241,10 @@
 % \item[v3.2 - pending]
 %   \begin{itemize}
 %   \item Make XeLaTex-Compatible
+%     \begin{itemize}
+%     \item Rename |\C| to |\Compl|, because of a |unicode-math|
+%     incompatibility
+%     \end{itemize}
 %   \item Fix |\newproblem| requiring a Problem-Number
 %   \item Add |\toDisprove| macro similar to the |\toShow| macro
 %   \end{itemize}
