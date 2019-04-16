@@ -501,18 +501,26 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{fonts}
+% \subsection{Serife (Default)}
+% \subsubsection{San Serife}
 % I fancy the Gillius-Font-Family, so that is the default Sans-Serif
 % font, when using XeTeX, The template does default to
 % \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
 % which is available for free, licensed under the GNU License.
 %    \begin{macrocode}
-
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{Gillius ADF}
-}{
-  \RequirePackage{gillius2}
+  \setsansfont{TeX Gyre Adventor}
+  \setmainfont{TeX Gyre Pagella}
+  \setmonofont{Fira Mono}
+}{ 
+  \RequirePackage{tgadventor}
+  \RequirePackage{tgpagella}
+  \RequirePackage{FiraMono}
 }
+%    \end{macrocode}
+% \subsubsection{Monospace}
+%    \begin{macrocode}
 %    \end{macrocode}
 % \section{Commands}
 % \subsection{Constants}
@@ -1171,7 +1179,7 @@
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textbf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\

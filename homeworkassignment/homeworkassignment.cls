@@ -216,12 +216,15 @@
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
-
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{Gillius ADF}
+  \setsansfont{TeX Gyre Adventor}
+  \setmainfont{TeX Gyre Pagella}
+  \setmonofont{Fira Mono}
 }{
-  \RequirePackage{gillius2}
+  \RequirePackage{tgadventor}
+  \RequirePackage{tgpagella}
+  \RequirePackage{FiraMono}
 }
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
@@ -530,7 +533,7 @@
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textbf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\
