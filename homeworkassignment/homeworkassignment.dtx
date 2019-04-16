@@ -267,6 +267,13 @@
 %    \begin{macrocode}
 \DeclareStringOption[all]{hlines}
 %    \end{macrocode}
+% \DescribeMacro{todos=<1>}
+% KeyValue-option. Takes which ToDos shall be displayed.  Available are
+% \texttt{all} (default),\texttt{nolist},\texttt{none}.  See
+% \autoref{cmd:TODOs} for explanation of the levels.
+%    \begin{macrocode}
+\DeclareStringOption[all]{todos}
+%    \end{macrocode}
 % \DescribeMacro{unicode-math} Loads the unicode--math--package and
 % overwrites the damn \texttt{\textbackslash QED}--Command unicode--math
 % introduces, that creates a filled out box and only works in
@@ -312,6 +319,28 @@
 \fi
 \LoadClass{article}
 
+\newboolean{hwa@todos@inplace}
+\newboolean{hwa@todos@list}
+\setboolean{hwa@todos@inplace}{true}
+\setboolean{hwa@todos@list}{true}
+\ifthenelse{\equal{\hwa@todos}{all}}{
+}{
+  \ifthenelse{\equal{\hwa@todos}{nolist}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no list of TODO}
+      \setboolean{hwa@todos@list}{false}
+  }{
+    \ifthenelse{\equal{\hwa@todos}{none}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no TODOs printed in the final document}
+      \setboolean{hwa@todos@list}{false}
+      \setboolean{hwa@todos@inplace}{false}
+    }{
+      \ClassError{homeworkassignment}{\hwa@todos is not a valid value
+        for the option `todos`}
+    }
+  }
+}
 %    \end{macrocode}
 % Load Hyperref (breaks if it is loaded before article
 %    \begin{macrocode}
@@ -949,7 +978,7 @@
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 %    \end{macrocode}
 % \end{macro}
-% \subsubsection{ToDos}
+% \subsubsection{ToDos\label{cmd:TODOs}}
 % Utility for the Documentation of ToDos
 % \begin{macro}{\todo}
 % Creates a todo at the location of the command, highlighted in red.
@@ -957,11 +986,13 @@
 % |todos=nolist| or |todos=none| is specified.
 %    \begin{macrocode}
 \DeclareDocumentCommand\todo{G{}}{
-  {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
-  \xdef\hwa@todoList@aux{\hwa@todoList@aux
-    \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
-  }
-  \stepcounter{todoNum}
+  \ifthenelse{\boolean{hwa@todos@inplace}}{
+    {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+    \xdef\hwa@todoList@aux{\hwa@todoList@aux
+      \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+    }
+    \stepcounter{todoNum}
+  }{}
 }
 %    \end{macrocode}
 % Uses the internal |hwa@todo|-counter
@@ -973,14 +1004,16 @@
 %   Prints all ToDos
 %    \begin{macrocode}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
-  \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
-  }{
-    {\color{red}
-      \problem{Table of ToDos}
-      \begin{itemize}
-        \hwa@todoList
-      \end{itemize}}
-  }
+  \ifthenelse{\boolean{hwa@todos@list}}{
+    \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+    }{
+      {\color{red}
+        \problem{Table of ToDos}
+        \begin{itemize}
+          \hwa@todoList
+        \end{itemize}}
+    }
+  }{}
 }
 %    \end{macrocode}
 % \end{macro}

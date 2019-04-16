@@ -69,10 +69,11 @@
 \DeclareBoolOption[false]{listings}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
-\DeclareBoolOption[true]{twocolumn}
+\DeclareBoolOption[false]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
+\DeclareStringOption[all]{todos}
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
 \else
@@ -91,6 +92,28 @@
 \fi
 \LoadClass{article}
 
+\newboolean{hwa@todos@inplace}
+\newboolean{hwa@todos@list}
+\setboolean{hwa@todos@inplace}{true}
+\setboolean{hwa@todos@list}{true}
+\ifthenelse{\equal{\hwa@todos}{all}}{
+}{
+  \ifthenelse{\equal{\hwa@todos}{nolist}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no list of TODO}
+      \setboolean{hwa@todos@list}{false}
+  }{
+    \ifthenelse{\equal{\hwa@todos}{none}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no TODOs printed in the final document}
+      \setboolean{hwa@todos@list}{false}
+      \setboolean{hwa@todos@inplace}{false}
+    }{
+      \ClassError{homeworkassignment}{\hwa@todos is not a valid value
+        for the option `todos`}
+    }
+  }
+}
 \RequirePackage{hyperref}
 \ifhwa@listings
 \RequirePackage{listings}
@@ -395,22 +418,26 @@
 \newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 \DeclareDocumentCommand\todo{G{}}{
-  {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
-  \xdef\hwa@todoList@aux{\hwa@todoList@aux
-    \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
-  }
-  \stepcounter{todoNum}
+  \ifthenelse{\boolean{hwa@todos@inplace}}{
+    {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+    \xdef\hwa@todoList@aux{\hwa@todoList@aux
+      \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+    }
+    \stepcounter{todoNum}
+  }{}
 }
 \newcounter{todoNum} \setcounter{todoNum}{1}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
-  \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
-  }{
-    {\color{red}
-      \problem{Table of ToDos}
-      \begin{itemize}
-        \hwa@todoList
-      \end{itemize}}
-  }
+  \ifthenelse{\boolean{hwa@todos@list}}{
+    \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+    }{
+      {\color{red}
+        \problem{Table of ToDos}
+        \begin{itemize}
+          \hwa@todoList
+        \end{itemize}}
+    }
+  }{}
 }
 \DeclareDocumentCommand\addToGradingTable{m g}{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
