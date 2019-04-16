@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.2a}
-\def\filedate{2019/04/09}
+\def\fileversion{v3.2b}
+\def\filedate{2019/04/16}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -955,8 +955,36 @@
 % Creates a todo at the location of the command, highlighted in red.
 % The ToDos will be listed after maketitle, unless the option
 % |todos=nolist| or |todos=none| is specified.
-\DeclareDocumentCommand\todo{G{}}{{\color{red}{\textbf{~TODO~}#1~}}}
+%    \begin{macrocode}
+\DeclareDocumentCommand\todo{G{}}{
+  {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+  \xdef\hwa@todoList@aux{\hwa@todoList@aux
+    \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+  }
+  \stepcounter{todoNum}
+}
+%    \end{macrocode}
+% Uses the internal |hwa@todo|-counter
+%    \begin{macrocode}
+\newcounter{todoNum} \setcounter{todoNum}{1}
+%    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\hwa@tableOfTodos}
+%   Prints all ToDos
+%    \begin{macrocode}
+\DeclareDocumentCommand\hwa@tableOfTodos{}{
+  \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+  }{
+    {\color{red}
+      \problem{Table of ToDos}
+      \begin{itemize}
+        \hwa@todoList
+      \end{itemize}}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
@@ -1020,6 +1048,12 @@
 \newcommand{\hwa@gradingtbl@lineTwo}{}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\hwa@todoList@...}
+% See |\hwa@gradingtlb@...|.
+%    \begin{macrocode}
+\newcommand{\hwa@todoList}{}
+\newcommand\hwa@todoList@aux{}
+% \end{macro}
 % \begin{macro}{\write\@auxout}
 %   Write to aux
 %    \begin{macrocode}
@@ -1032,6 +1066,9 @@
   }
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@todoList{\hwa@todoList@aux}%
   }
 }
 %    \end{macrocode}
@@ -1049,6 +1086,7 @@
   }\else{
     \hwa@maketitletext
   }\fi
+  \hwa@tableOfTodos
 }
 %    \end{macrocode}
 % \end{macro}

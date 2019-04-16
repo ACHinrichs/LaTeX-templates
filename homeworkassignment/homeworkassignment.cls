@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.2a}
-\def\filedate{2019/04/09}
+\def\fileversion{v3.2b}
+\def\filedate{2019/04/16}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -394,7 +394,24 @@
 \renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
 \newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
-\DeclareDocumentCommand\todo{G{}}{{\color{red}{\textbf{~TODO~}#1~}}}
+\DeclareDocumentCommand\todo{G{}}{
+  {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+  \xdef\hwa@todoList@aux{\hwa@todoList@aux
+    \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+  }
+  \stepcounter{todoNum}
+}
+\newcounter{todoNum} \setcounter{todoNum}{1}
+\DeclareDocumentCommand\hwa@tableOfTodos{}{
+  \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+  }{
+    {\color{red}
+      \problem{Table of ToDos}
+      \begin{itemize}
+        \hwa@todoList
+      \end{itemize}}
+  }
+}
 \DeclareDocumentCommand\addToGradingTable{m g}{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
@@ -424,6 +441,8 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
+\newcommand{\hwa@todoList}{}
+\newcommand\hwa@todoList@aux{}
 \AtEndDocument{%
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
@@ -433,6 +452,9 @@
   }
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@todoList{\hwa@todoList@aux}%
   }
 }
 \renewcommand{\maketitle} {
@@ -444,6 +466,7 @@
   }\else{
     \hwa@maketitletext
   }\fi
+  \hwa@tableOfTodos
 }
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
