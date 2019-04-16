@@ -235,7 +235,7 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 \newcommand{\hwa@sheetTitle}{}
 \newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
-\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+\DeclareDocumentCommand\hwa@problem{m o}{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
@@ -251,7 +251,7 @@
   \addcontentsline{toc}{section}{#1}
 }
 
-\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+\DeclareDocumentCommand\hwa@subproblem{m o}{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
@@ -266,7 +266,7 @@
   \addcontentsline{toc}{subsection}{#1}
 }
 
-\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+\DeclareDocumentCommand\hwa@subsubproblem{m o}{\@startsection{subsubproblem}%Name
   {3}%Level
   {\z@}%indent
   {-.5em}%beforeskip
@@ -308,10 +308,10 @@
   }
 
   \IfNoValueTF{#2}{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }
@@ -320,7 +320,7 @@
   \ifthenelse{\equal{#1}{}} { } {
     \stepcounter{problem}% to reset the lower counters
     \setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+  \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
 }
 
 \DeclareDocumentCommand\newsubproblem{O{} g}{
@@ -328,11 +328,11 @@
   \ifthenelse{\equal{#1}{}} { } {
     \setcounter{subproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}
   }
   {
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}[#2]
   }
 }
@@ -341,13 +341,45 @@
   \stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subsubproblem{\hwa@subsubproblemno)}
+    \hwa@subsubproblem{\hwa@subsubproblemno)}
   }
   {
-    \subsubproblem{\hwa@subsubproblemno)}[#2]
+    \hwa@subsubproblem{\hwa@subsubproblemno)}[#2]
   }
 }
 
+\NewDocumentEnvironment{problem}{O{} g}{
+  \newproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{problem*}{O{} g}{
+  \newproblem*[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subproblem}{O{} g}{
+  \newsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subsubproblem}{O{} g}{
+  \newsubsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
 \newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
@@ -432,7 +464,7 @@
     \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
     }{
       {\color{red}
-        \problem{Table of ToDos}
+        \hwa@problem{Table of ToDos}
         \begin{itemize}
           \hwa@todoList
         \end{itemize}}
