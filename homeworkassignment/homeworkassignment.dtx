@@ -29,7 +29,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.2d}
+\def\fileversion{v4.0}
 \def\filedate{2019/04/17}
 % \iffalse
 %<*driver>
@@ -1361,14 +1361,22 @@
 % \item[v3.2 - 2018/12/06] Nikolaus Release
 %   \begin{itemize}
 %   \item Make XeLaTex-Compatible
-%     \begin{itemize}
-%     \item Rename |\C| to |\Compl|, because of a |unicode-math|
-%     incompatibility
-%     \end{itemize}
 %   \item Fix |\newproblem| requiring a Problem-Number
 %   \item Add |\toDisprove| macro similar to the |\toShow| macro
 %   \item Add option for punchmarks
 %   \item Add option to load unicode-math and work around a incompability
+%   \end{itemize}
+% \item[v4.0 - 2019/04/17] Pre-Easter Release
+%   \begin{itemize}
+%   \item Add option to use |unicode-math|
+%   \item Rename |\C| to |\Compl|, because of a |unicode-math|
+%     incompatibility
+%   \item Rework Fonts
+%   \item Make |onecolumn| the default
+%   \item Implement ToDos
+%   \item Replace |\problem|-commands by |problem| environments (which
+%     behave like |\newproblem|)
+%   \item Add Task-Command
 %   \end{itemize}
 % 
 % \end{description}
