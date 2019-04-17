@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.2}
-\def\filedate{2018/12/06}
+\def\fileversion{v3.2c}
+\def\filedate{2019/04/16}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -56,6 +56,8 @@
 \RequirePackage{adjustbox}
 
 \RequirePackage{eso-pic}
+
+\RequirePackage{xcolor}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{ family=hwa,
   prefix=hwa@ }
@@ -67,10 +69,11 @@
 \DeclareBoolOption[false]{listings}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
-\DeclareBoolOption[true]{twocolumn}
+\DeclareBoolOption[false]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 \DeclareBoolOption[false]{punchmark}
 \DeclareStringOption[all]{hlines}
+\DeclareStringOption[all]{todos}
 \ifxetex
 \DeclareBoolOption[true]{unicodemath}
 \else
@@ -89,6 +92,29 @@
 \fi
 \LoadClass{article}
 
+\newboolean{hwa@todos@inplace}
+\newboolean{hwa@todos@list}
+\setboolean{hwa@todos@inplace}{true}
+\setboolean{hwa@todos@list}{true}
+\ifthenelse{\equal{\hwa@todos}{all}}{
+}{
+  \ifthenelse{\equal{\hwa@todos}{nolist}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no list of TODO}
+      \setboolean{hwa@todos@list}{false}
+  }{
+    \ifthenelse{\equal{\hwa@todos}{none}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no TODOs printed in the final document}
+      \setboolean{hwa@todos@list}{false}
+      \setboolean{hwa@todos@inplace}{false}
+    }{
+      \ClassError{homeworkassignment}{\hwa@todos is not a valid value
+        for the option `todos`}
+    }
+  }
+}
+\RequirePackage{hyperref}
 \ifhwa@listings
 \RequirePackage{listings}
 \lstset{
@@ -190,12 +216,15 @@
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
-
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{Gillius ADF}
+  \setsansfont{TeX Gyre Adventor}
+  \setmainfont{TeX Gyre Pagella}
+  \setmonofont{Fira Mono}
 }{
-  \RequirePackage{gillius2}
+  \RequirePackage{tgadventor}
+  \RequirePackage{tgpagella}
+  \RequirePackage{FiraMono}
 }
 \newcommand{\hwa@pointboxsize}{3em}
 \newcommand{\hwa@kurs}{?\GetTranslation{subject}?} % To store the value
@@ -209,7 +238,7 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 \newcommand{\hwa@sheetTitle}{}
 \newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
-\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+\DeclareDocumentCommand\hwa@problem{m o}{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
@@ -225,7 +254,7 @@
   \addcontentsline{toc}{section}{#1}
 }
 
-\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+\DeclareDocumentCommand\hwa@subproblem{m o}{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
@@ -240,7 +269,7 @@
   \addcontentsline{toc}{subsection}{#1}
 }
 
-\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+\DeclareDocumentCommand\hwa@subsubproblem{m o}{\@startsection{subsubproblem}%Name
   {3}%Level
   {\z@}%indent
   {-.5em}%beforeskip
@@ -282,10 +311,10 @@
   }
 
   \IfNoValueTF{#2}{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }
@@ -294,7 +323,7 @@
   \ifthenelse{\equal{#1}{}} { } {
     \stepcounter{problem}% to reset the lower counters
     \setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+  \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
 }
 
 \DeclareDocumentCommand\newsubproblem{O{} g}{
@@ -302,11 +331,11 @@
   \ifthenelse{\equal{#1}{}} { } {
     \setcounter{subproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}
   }
   {
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}[#2]
   }
 }
@@ -315,13 +344,45 @@
   \stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subsubproblem{\hwa@subsubproblemno)}
+    \hwa@subsubproblem{\hwa@subsubproblemno)}
   }
   {
-    \subsubproblem{\hwa@subsubproblemno)}[#2]
+    \hwa@subsubproblem{\hwa@subsubproblemno)}[#2]
   }
 }
 
+\NewDocumentEnvironment{problem}{O{} g}{
+  \newproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{problem*}{O{} g}{
+  \newproblem*[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subproblem}{O{} g}{
+  \newsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subsubproblem}{O{} g}{
+  \newsubsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
 \newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
   \end{flushright}
@@ -348,7 +409,7 @@
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Compl}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
 \DeclareMathOperator{\GL}{GL}
@@ -391,6 +452,28 @@
 \renewcommand{\exists}{\ensuremath{\hskip 2pt \oexists \hskip 2pt}}
 \newcommand{\bigforall}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\forall$}}}
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
+\DeclareDocumentCommand\todo{G{}}{
+  \ifthenelse{\boolean{hwa@todos@inplace}}{
+    {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+    \xdef\hwa@todoList@aux{\hwa@todoList@aux
+      \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+    }
+    \stepcounter{todoNum}
+  }{}
+}
+\newcounter{todoNum} \setcounter{todoNum}{1}
+\DeclareDocumentCommand\hwa@tableOfTodos{}{
+  \ifthenelse{\boolean{hwa@todos@list}}{
+    \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+    }{
+      {\color{red}
+        \hwa@problem{Table of ToDos}
+        \begin{itemize}
+          \hwa@todoList
+        \end{itemize}}
+    }
+  }{}
+}
 \DeclareDocumentCommand\addToGradingTable{m g}{
   \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
   \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
@@ -420,6 +503,8 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
+\newcommand{\hwa@todoList}{}
+\newcommand\hwa@todoList@aux{}
 \AtEndDocument{%
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}
@@ -429,6 +514,9 @@
   }
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@todoList{\hwa@todoList@aux}%
   }
 }
 \renewcommand{\maketitle} {
@@ -440,11 +528,12 @@
   }\else{
     \hwa@maketitletext
   }\fi
+  \hwa@tableOfTodos
 }
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textbf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\
