@@ -7,7 +7,7 @@
 % MIT License
 %
 %
-% Copyright (c) 2016-2018 by Adrian C. Hinrichs
+% Copyright (c) 2016-2019 by Adrian C. Hinrichs
 %
 %
 %
@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.2}
-\def\filedate{2018/12/06}
+\def\fileversion{v4.0}
+\def\filedate{2019/04/17}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -157,6 +157,10 @@
 % functionality.}
 % \dep{gillius}{Bob Tennent}{https://ctan.org/pkg/gillius}{A Gillian
 % Sans inspired font, used for all sans serifes fonts}
+% \dep{hyperref}{https://ctan.org/pkg/hyperref}{Sebastian Rahtz, Heiko
+% Oberdiek}{For hyperrefs, obviously}
+% \dep{xcolor}{Dr. Uwe Kern}{https://www.ctan.org/pkg/xcolor}{For
+% coloring of ToDos}
 % \end{description}
 % \subsection{Recommended Dependencies}
 % These are not loaded automatically, but require a switch as option
@@ -193,6 +197,8 @@
 \RequirePackage{adjustbox}
 
 \RequirePackage{eso-pic}
+
+\RequirePackage{xcolor}
 %    \end{macrocode}
 % \section{Options\label{sec:Options}}
 % KV-Options is essential for this.
@@ -241,9 +247,9 @@
 % \DescribeMacro{onecolumn,twocolumn}
 % Changes layout. \textrm{onecolumn} is the complementary option to
 % \texttt{twocolumn}.\\
-% Standard Layout has two columns
+% Standard Layout has one columns
 %    \begin{macrocode}
-\DeclareBoolOption[true]{twocolumn}
+\DeclareBoolOption[false]{twocolumn}
 \DeclareComplementaryOption{onecolumn}{twocolumn}
 %    \end{macrocode}
 % \DescribeMacro{punchmark}
@@ -260,6 +266,13 @@
 % all displays all.
 %    \begin{macrocode}
 \DeclareStringOption[all]{hlines}
+%    \end{macrocode}
+% \DescribeMacro{todos=<1>}
+% KeyValue-option. Takes which ToDos shall be displayed.  Available are
+% \texttt{all} (default),\texttt{nolist},\texttt{none}.  See
+% \autoref{cmd:TODOs} for explanation of the levels.
+%    \begin{macrocode}
+\DeclareStringOption[all]{todos}
 %    \end{macrocode}
 % \DescribeMacro{unicode-math} Loads the unicode--math--package and
 % overwrites the damn \texttt{\textbackslash QED}--Command unicode--math
@@ -306,6 +319,32 @@
 \fi
 \LoadClass{article}
 
+\newboolean{hwa@todos@inplace}
+\newboolean{hwa@todos@list}
+\setboolean{hwa@todos@inplace}{true}
+\setboolean{hwa@todos@list}{true}
+\ifthenelse{\equal{\hwa@todos}{all}}{
+}{
+  \ifthenelse{\equal{\hwa@todos}{nolist}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no list of TODO}
+      \setboolean{hwa@todos@list}{false}
+  }{
+    \ifthenelse{\equal{\hwa@todos}{none}}{
+      \ClassWarning{homeworkassignment}{You specified todos=none,
+        there will be no TODOs printed in the final document}
+      \setboolean{hwa@todos@list}{false}
+      \setboolean{hwa@todos@inplace}{false}
+    }{
+      \ClassError{homeworkassignment}{\hwa@todos is not a valid value
+        for the option `todos`}
+    }
+  }
+}
+%    \end{macrocode}
+% Load Hyperref (breaks if it is loaded before article
+%    \begin{macrocode}
+\RequirePackage{hyperref}
 %    \end{macrocode}
 % Loads listings, if wanted
 %    \begin{macrocode}
@@ -462,18 +501,26 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{fonts}
+% \subsection{Serife (Default)}
+% \subsubsection{San Serife}
 % I fancy the Gillius-Font-Family, so that is the default Sans-Serif
 % font, when using XeTeX, The template does default to
 % \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
 % which is available for free, licensed under the GNU License.
 %    \begin{macrocode}
-
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{Gillius ADF}
-}{
-  \RequirePackage{gillius2}
+  \setsansfont{TeX Gyre Adventor}
+  \setmainfont{TeX Gyre Pagella}
+  \setmonofont{Fira Mono}
+}{ 
+  \RequirePackage{tgadventor}
+  \RequirePackage{tgpagella}
+  \RequirePackage{FiraMono}
 }
+%    \end{macrocode}
+% \subsubsection{Monospace}
+%    \begin{macrocode}
 %    \end{macrocode}
 % \section{Commands}
 % \subsection{Constants}
@@ -530,15 +577,17 @@
 % \subsection{Sectioning\label{SECTIONING_CMDS}}
 % Because the class is designed for Assignments, the
 % sectioning-commands are different from Article
-% \subsubsection{\enquote*{plain}
+% \subsubsection{internal
 % Sectioning\label{PLAIN_SECTIONING_CMDS}}
-% \begin{macro}{\problem}~\\ \DescribeMacro{\subproblem}
-% \DescribeMacro{\subsubproblem} These commands work like their
+% \begin{macro}{\hwa@problem}~\\ \DescribeMacro{\hwa@subproblem}
+% \DescribeMacro{\hwa@subsubproblem} These commands work like their
 % counterpart in article, except that there will be no number, nor
 % will they increase a counter.  Nevertheless, they will be shown
-% in the table of contents.\\
+% in the table of contents.  With version 4.0 they were made private,
+% because I figured that they are not usefull enough and I am now able
+% to introduce environments with the old names\\
 %    \begin{macrocode}
-\DeclareDocumentCommand\problem{m o}{\@startsection{problem}%Name
+\DeclareDocumentCommand\hwa@problem{m o}{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
   {-2em \@plus -1em \@minus -1em}%beforeskip
@@ -554,7 +603,7 @@
   \addcontentsline{toc}{section}{#1}
 }
 
-\DeclareDocumentCommand\subproblem{m o}{\@startsection{subproblem}%Name
+\DeclareDocumentCommand\hwa@subproblem{m o}{\@startsection{subproblem}%Name
   {2}%Level
   {\z@}%indent
   {-1em \@plus -.5em \@minus -.5em}%beforeskip
@@ -569,7 +618,7 @@
   \addcontentsline{toc}{subsection}{#1}
 }
 
-\DeclareDocumentCommand\subsubproblem{m o}{\@startsection{subsubproblem}%Name
+\DeclareDocumentCommand\hwa@subsubproblem{m o}{\@startsection{subsubproblem}%Name
   {3}%Level
   {\z@}%indent
   {-.5em}%beforeskip
@@ -662,10 +711,10 @@
   }
   
   \IfNoValueTF{#2}{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
     \addToGradingTable{\# \hwa@problemno}
   }{
-    \problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
+    \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}[#2]
     \addToGradingTable{\# \hwa@problemno}{/#2}
   }
 }
@@ -674,7 +723,7 @@
   \ifthenelse{\equal{#1}{}} { } {
     \stepcounter{problem}% to reset the lower counters
     \setcounter{problem}{#1}}
-  \problem{\GetTranslation{aufgabe} \hwa@problemno}
+  \hwa@problem{\GetTranslation{aufgabe} \hwa@problemno}
 }
 
 \DeclareDocumentCommand\newsubproblem{O{} g}{
@@ -682,11 +731,11 @@
   \ifthenelse{\equal{#1}{}} { } {
     \setcounter{subproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}
   }
   {
-    \subproblem{\GetTranslation{aufgabe}
+    \hwa@subproblem{\GetTranslation{aufgabe}
       \hwa@problemno{}.\hwa@subproblemno}[#2]
   }
 }
@@ -695,15 +744,54 @@
   \stepcounter{subsubproblem}
   \ifthenelse{\equal{#1}{}} { } {\setcounter{subsubproblem}{#1}}
   \IfNoValueTF{#2}{
-    \subsubproblem{\hwa@subsubproblemno)}
+    \hwa@subsubproblem{\hwa@subsubproblemno)}
   }
   {
-    \subsubproblem{\hwa@subsubproblemno)}[#2]
+    \hwa@subsubproblem{\hwa@subsubproblemno)}[#2]
   }
 }
 
 %    \end{macrocode}
 % \end{macro}
+% \subsubsection{Even Better Sectioning-Environments}
+% \begin{macro}
+%   hjk
+%    \begin{macrocode}
+\NewDocumentEnvironment{problem}{O{} g}{
+  \newproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{problem*}{O{} g}{
+  \newproblem*[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subproblem}{O{} g}{
+  \newsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+\NewDocumentEnvironment{subsubproblem}{O{} g}{
+  \newsubsubproblem[#1]{#2}
+  \newcommand{\task}[1]{
+    \begin{framed}
+      \keyword{Problem:} ##1
+    \end{framed}
+  }
+}{}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsection{Useful Macros}
 % \subsubsection{\textsc{Quod Erat Demunstrandum}, End of Proof}
 % \label{QED}
@@ -770,8 +858,8 @@
 %   \DescribeMacro{\R}
 %   \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 %   \DescribeMacro{\Q}
-%   \newcommand{\C}{\ensuremath{\mathbb{C}}}
-%   \DescribeMacro{\C}
+%   \newcommand{\Compl}{\ensuremath{\mathbb{C}}}
+%   \DescribeMacro{\Compl}
 %   \newcommand{\F}{\ensuremath{\mathbb{F}}}
 %   \DescribeMacro{\F}
 %   \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
@@ -784,7 +872,7 @@
 %     |\Z|&$\Z$&Whole Numbers\\
 %     |\Q|&$\Q$&Rational Numbers\\
 %     |\R|&$\R$&Real Numbers\\
-%     |\C|&$\C$&Complex Numbers\\
+%     |\Compl|&$\Compl$&Complex Numbers\\
 %     |\F_n|&$\F_n$&Prime Field to base $n$\\
 %     |\Primes|\footnotemark &$\Primes$ & Set of all Primes\\
 %     \caption{Field-Commands}
@@ -798,7 +886,7 @@
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\Compl}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 % The last one is mine
 \newcommand{\Primes}{\ensuremath{\mathbb{P}}}
@@ -939,6 +1027,46 @@
 \newcommand{\bigexists}{\mbox{\raisebox{-2pt}[\height][\depth]{\Large $\mathsurround4pt\exists$}}}
 %    \end{macrocode}
 % \end{macro}
+% \subsubsection{ToDos\label{cmd:TODOs}}
+% Utility for the Documentation of ToDos
+% \begin{macro}{\todo}
+% Creates a todo at the location of the command, highlighted in red.
+% The ToDos will be listed after maketitle, unless the option
+% |todos=nolist| or |todos=none| is specified.
+%    \begin{macrocode}
+\DeclareDocumentCommand\todo{G{}}{
+  \ifthenelse{\boolean{hwa@todos@inplace}}{
+    {\color{red}\textbf{~\label{TODO\alph{todoNum}}TODO~}#1~}
+    \xdef\hwa@todoList@aux{\hwa@todoList@aux
+      \string\item\string\hyperref[TODO\alph{todoNum}]{TODO #1}
+    }
+    \stepcounter{todoNum}
+  }{}
+}
+%    \end{macrocode}
+% Uses the internal |hwa@todo|-counter
+%    \begin{macrocode}
+\newcounter{todoNum} \setcounter{todoNum}{1}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\hwa@tableOfTodos}
+%   Prints all ToDos
+%    \begin{macrocode}
+\DeclareDocumentCommand\hwa@tableOfTodos{}{
+  \ifthenelse{\boolean{hwa@todos@list}}{
+    \ifthenelse{\equal{\hwa@todoList}{}}{%Nothing
+    }{
+      {\color{red}
+        \hwa@problem{Table of ToDos}
+        \begin{itemize}
+          \hwa@todoList
+        \end{itemize}}
+    }
+  }{}
+}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsection{Grading Table\label{GRADING-TABLE}}
 % This Document-Class is still mainly designed for Homework, so
 % it would be nice, if there was a table to write Grades into,
@@ -1002,6 +1130,12 @@
 \newcommand{\hwa@gradingtbl@lineTwo}{}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\hwa@todoList@...}
+% See |\hwa@gradingtlb@...|.
+%    \begin{macrocode}
+\newcommand{\hwa@todoList}{}
+\newcommand\hwa@todoList@aux{}
+% \end{macro}
 % \begin{macro}{\write\@auxout}
 %   Write to aux
 %    \begin{macrocode}
@@ -1014,6 +1148,9 @@
   }
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@lineTwo{\hwa@gradingtbl@aux@lineTwo}%
+  }
+  \immediate\write\@auxout{%
+    \gdef\string\hwa@todoList{\hwa@todoList@aux}%
   }
 }
 %    \end{macrocode}
@@ -1031,6 +1168,7 @@
   }\else{
     \hwa@maketitletext
   }\fi
+  \hwa@tableOfTodos
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1041,7 +1179,7 @@
 \newcommand{\hwa@maketitletext}{
   \begin{centering}
     \huge{\textsf{\textbf{\hwa@kurs}}}\hwa@hline@LONE \large
-    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textsf{\hwa@sheetTitle}\\}
+    \ifthenelse{\equal{\hwa@sheetTitle}{}}{}{\textbf{\hwa@sheetTitle}\\}
     \GetTranslation{abgabe}: \hwa@abgabe\\
     \hwa@hline@LTWO
     \normalsize{\@author}\\
@@ -1227,6 +1365,18 @@
 %   \item Add |\toDisprove| macro similar to the |\toShow| macro
 %   \item Add option for punchmarks
 %   \item Add option to load unicode-math and work around a incompability
+%   \end{itemize}
+% \item[v4.0 - 2019/04/17] Pre-Easter Release
+%   \begin{itemize}
+%   \item Add option to use |unicode-math|
+%   \item Rename |\C| to |\Compl|, because of a |unicode-math|
+%     incompatibility
+%   \item Rework Fonts
+%   \item Make |onecolumn| the default
+%   \item Implement ToDos
+%   \item Replace |\problem|-commands by |problem| environments (which
+%     behave like |\newproblem|)
+%   \item Add Task-Command
 %   \end{itemize}
 % 
 % \end{description}
