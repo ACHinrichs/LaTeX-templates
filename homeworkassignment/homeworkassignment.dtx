@@ -29,7 +29,7 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v4.1}
+\def\fileversion{v4.1a}
 \def\filedate{2019/04/23}
 % \iffalse
 %<*driver>
@@ -1054,7 +1054,7 @@
 %    \begin{macrocode}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\equal{\hwa@todoList}{}}{%Nothing
+    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}
@@ -1133,8 +1133,7 @@
 % \begin{macro}{\hwa@todoList@...}
 % See |\hwa@gradingtlb@...|.
 %    \begin{macrocode}
-\newcommand{\hwa@todoList}{}
-\newcommand\hwa@todoList@aux{}
+\newcommand{\hwa@todoList@aux}{}
 % \end{macro}
 % \begin{macro}{\write\@auxout}
 %   Write to aux

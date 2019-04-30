@@ -1,0 +1,178 @@
+\documentclass[listings, a4paper, 11pt]{homeworkassignment}
+%\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+% \usepackage[OT1]{fontenc}
+% \usepackage{lmodern}
+\usepackage{framed}
+\usepackage{csquotes}
+\usepackage{ stmaryrd }
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,shapes,snakes}
+
+\date{\today}
+\author{
+  Georg Dorndorf\\
+  Adrian Hinrichs}
+\subject{Berechenbarkeit und Komplexität}
+\tutorial{Übungsgruppe 1}
+
+\newcommand{\task}[1]{
+  \begin{framed}
+    \keyword{Problem:} #1
+  \end{framed}
+}
+\newcommand*\bitneg[1]{\overline{#1}}
+\newcommand*\card[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\sheetTitle{\"Ubung Nr. 02}
+\deadline{07.11.2018}
+
+\begin{document}
+\maketitle
+\makeGradingTable[14]
+
+% ╔══════════════════════════════════════════════════════════════════╗
+% ║                            Aufgabe 01                            ║
+% ╚══════════════════════════════════════════════════════════════════╝
+\newproblem[1]{5}
+\task{Sei \(s: \N \rightarrow \N\). Sei \(M= (Q,Σ,Γ,B,q_0,\overline{q},δ)\)
+eine TM, welche nur Bandzellen zwischen einschließlich Positionen 0
+und \(s(n)−1\) besucht. Zeigen Sie: Wenn \(M\) auf einer Eingabe \(w\)
+der Länge \(n\) hält, dann hält \(M\) auf \(w\) nach spätestens
+\(\card{Q}\cdot\card{\Gamma}^{s(n)}\cdot s(n)+1\) Schritten.} 
+\proof Sei eine Turingmaschine \(M\) wie oben gegeben.  Wir können mit
+sicherheit sagen, dass diese Turingmaschine nicht hält, wenn eine
+Konfiguration --- also die Kombination aus dem beschriebenen Band, dem
+aktiven Zustand des Steuerautomaten und der Position des
+Schreib--/Leselopf --- zwei mal erreicht wird, da ein
+deterministischer Automat in zwei identischen Situationen \emph{ipso
+  facto} keine unterschiedlichen Entscheidungen treffen kann.
+
+Da alle Bandzellen zweischen einschließlich den Postionen 0 und
+\(s(n)-1\) besucht werden, ist die Anzahl der besucheten Zellen
+\(s(n)\)\footnote{Zelle 0 wird auch besucht}. Die Menge der
+Konfigurationen ist nun gegeben durch:
+\begin{gather*}
+  Q\times(\Gamma^{s(n)})\times[0,s(n)-1]
+\end{gather*}
+Die mächtigkeit dieser Menge ist nun:
+\begin{gather*}
+  \card{Q\times(\Gamma^{s(n)})\times[0,s(n)-1]}\\
+  =\card{Q\times(\Gamma^{s(n)})}\cdot
+  s(n)\\
+  =\card{Q}\cdot\card{\Gamma^{s(n)}}\cdot
+  s(n)\\
+  = \card{Q} \cdot \card{\Gamma}^{s(n)} \cdot s(n)
+\end{gather*}
+
+Also kann eine Turingmaschine die auf einer Eingabe der länge \(n\)
+hält höchstens \(\card{Q} \cdot \card{\Gamma}^{s(n)} \cdot s(n)\)
+Schritte gehen, bevor sie den Ednzustand erreicht.  Sie terminiert
+alsi nach spätestens \(\card{Q} \cdot \card{\Gamma}^{s(n)} \cdot s(n)
++1\) Schritten.\QED
+% ╔══════════════════════════════════════════════════════════════════╗
+% ║                            Aufgabe 02                            ║
+% ╚══════════════════════════════════════════════════════════════════╝
+\newproblem[2]{4}
+\task{Sei \(L=\{w \# \bitneg{w} \vert w\in\{0, 1\}\}\) (über dem
+  Alphabet \(\Sigma = \{0,1,\#\}\)), wobei \(\bitneg{w}\) die bitweise
+  Negation von \(w\) ist (zB. \(\bitneg{\texttt{1011}} =
+  \texttt{0100}\)). Beschreiben Sie eine möglichst effiziente
+  2--Band--TM, die \(L\) entscheidet. Analysieren Sie den Zeit- und
+  den Speicherplatzbedarf der von Ihnen entworfenen Maschine.} 
+\solution
+Die 2--Band--Turingmaschine kann \(L\) Zeiteffizienter als eine
+1--Band--Turingmaschine entscheiden:
+\begin{enumerate}
+\item Terminiere mit \textsf{accept}, wenn ein Blank gelesen wird,
+  ansonsten führe 2 aus, ohne Kopfpositionenn oder Bandbelegungen zu
+  ändern.
+\item Wenn auf Band 1 \texttt{0} oder \texttt{1} gelesen wird,
+  schreibe dies auf Band 2; bewege beide Bänder nach rechts und bleibe in
+  diesem Zustand, Wenn auf Band 1 \texttt{\#} gelesen wird, bewege
+  Band 1 nach rechts, und auf Band 2 nach links, ändere beide
+  Bandbelegungen nicht und gehe in Zustand 2. Wenn ein Blank gelesen
+  wird, terminere mit \textsf{reject}
+\item Ändere Kopfpostion und Bandbelegung auf Band 1 nicht, gehe auf
+  Band 2 nach links, falls das auf Band 2 gelesene Zeichen \texttt{1}
+  oder \texttt{0} ist, verwerfe falls es \texttt{\#} ist\footnote{Kann
+    zwar nicht passieren, aber Vor-- ist ja besser als Nachsicht} und
+  gehe nach rechts und in Zustand 3, falls ein Blank auf Band 2
+  gelesen wird
+\item Terminiere mit \texttt{accept}, falls auf beiden Bändern ein
+  Blank gelesen wird. Gehe ohne zu Terminieren auf beiden Bändern nach
+  rechts, falls auf den Bändern 1 und 2 zusammen genau ein mal
+  \texttt{0} und \texttt{1} gelesen werden\footnote{Also die beiden
+    Köpfe auf zwei unterschiedliche Symbole aus \{0,1\}
+    stehen}. Terminere mit \textsf{reject} sonst.
+\end{enumerate}
+
+\keyword{Komplexitätsanalyse}
+Sei \(w_1,w_2,w\in {0,1,\#}^*\) mit \(w=w_1\#w_2\) wenn \(w\in L\)
+oder \(w=w_1w_2\) sonst. Seien
+ferner \(n,n_1,n_2\in \N_0\) mit \(\card{w}=n, \card{w_1=n_1}\) und
+  \(\card{w_2}=n_2\). 
+
+Wenn \(w\) ein Wort aus \(L\) ist, Läuft die Turingmaschine über die
+erste Hälfte des Eingabewortes (bis zum Doppelkreuz) und schreibt
+dabei das gelesene auf das andere Band, danach läuft sie diese Strecke
+auf Band 2 wieder zurück, ohne auf Band 1 die Postion zu
+ändern. Danach läuft sie auf beiden Bändern bis zum Ende (also nochmal
+\(\floor{\frac{n}{2}}\) schritte). Da in jedem Schritt eine Bewegung
+auf dem Band 2 gemacht wird, lässt sich aus der Tatsache, dass jede
+der \(\frac{n}{2}\) beschriebenen Zellen dieses Bandes genau 3 mal
+Besucht werden herleiten, dass sowohl Laufzeit- als auch
+Speicherkomplexität in diesem Fall in \(O(n)\) ist.
+
+Falls das Wort kein Doppelkreuz besitzt, kopiert die Turingmaschine
+alle \(n\) Zeichen von Band 1 auf Band 2, bevor sie mit \textsf{reject}
+Terminiert, die Laufzeit-- und Speicherkomplexität ist also wiederum
+jeweils \(O(n)\)
+
+
+Wenn das Wort zwar ein Doppelkreuz besitzt, aber aus anderen Gründen
+nicht in der Sprache ist, kopiert die TM wieder alle \(w_1\) Zeichen des
+ersten Teilwortes auf Band 2, bevor sie dort zurück zum Anfang läuft
+um anschließend auf beiden Bändern wieder nach rechts zu Laufen und
+Terminiert nach spätestens \(w_2\) Schritten mit
+\textsf{reject}. Die TM benötigt also \(w_1\cdot2+w_2\) Schritte; Laufzeit--
+und Speicherkomplexität liegen also wieder in \(O(n)\).
+% ╔══════════════════════════════════════════════════════════════════╗
+% ║                            Aufgabe 03                            ║
+% ╚══════════════════════════════════════════════════════════════════╝
+\newproblem[3]{5}
+\task{Eine TM mit einseitig unendlichem Band ist eine TM, die die
+  Positionen \(p < 0\) nie benutzt. Zeigen Sie, dass jede 1-Band-TM
+  (mit Akzeptieren oder Verwerfen als Ausgabe) durch eine 1-Band-TM
+  mit einseitig unendlichem Band simuliert werden kann. Geben Sie ein
+  möglichst effiziente Simulation. Wie groß ist der Zeitverlust Ihrer
+  Simulation?} 
+
+Sei \(M = (Q, Σ, Γ, B, q_0 , \bar q, δ)\) welche \(n \in
+\N_0\cup\{\infty\}\) beliebige Bandzellen besucht.
+Dann gibt es eine 1-Band-TM mit
+einseitig unendlichem Band, welche die Turingmaschine \(M\)
+simuliert. Diese TM markiert mit einem Zeichen, das nicht in
+\(Γ\) ist, die erste Zelle des Bandes. Wenn diese Zelle besucht
+und oder beschrieben werden soll verschiebt die TM das bisher auf dem
+Band vorhandene Wort um eine Stelle nach rechts. Dies kann bei einer
+TM mit endlichem Alphabet gemacht werden, indem die TM sich über
+verschiedene Zustände merkt, welches Zeichen auf der aktuellen
+Position ist und dieses mit dem der vorherigen ersetzt. Dann bewegt
+sich die TM einen schritt weiter nach rechts und wiederholt den
+Vorgang. Wenn der Bandinhalt um eine Stelle nach rechts verschoben
+wurde, kann die TM wieder zurück an die zweite Bandzelle gehen und
+dort normal weiterarbeiten oder noch das Zeichen einfügen und dann
+weiterarbeiten. Der Kontext der TM wird dabei nicht verletzt, da die
+Kopfposition relativ zu den anderen Informationen bestehen bleibt. Das
+verschieben des gesamten Bandinhalts und das zurückgehen auf die erste
+Zelle dauert für \(m \in \N\) beschriebene Zellen \(2m\). Bei einer
+TM, die insgesamt \(p\in\N\) Zellen besucht können im Worst-Case alle
+Zellen links des Bandbegins liegen, es ergibt sich also im Worst-Case
+eine Verlangsamung der Laufzeit der Simulation um \(n!\) Schritte. 
+\end{document}
