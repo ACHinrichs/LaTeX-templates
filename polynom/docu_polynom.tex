@@ -1,8 +1,11 @@
-\documentclass[fragile=singleslide]{beamer}
+\documentclass[fragile]{beamer}
 
 \usetheme{polynom}
 \usefonttheme[onlymath]{serif}
 \boldmath{}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
 
 \usepackage{tgadventor}
 
@@ -18,7 +21,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Table of Contents}
+\begin{frame}[fragile]{Table of Contents}
   \tableofcontents
 \end{frame}
 
@@ -42,13 +45,14 @@
 \end{frame}
 
 \section{Features}
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
   \framesubtitle{Clean and pleasing:}
   \frametitle{Framedesign}
   To use stacked headlines, you have to specify
   \begin{itemize}
-  \item the upper line with \verb|\framesubtitle{...}|
-  \item the lowe (main) line with \verb|\frametitle{...}|
+    \item a
+    \item the upper line with \lstinline|\framesubtitle{...}|
+    \item the lowe (main) line with \lstinline|\frametitle{...}|
   \end{itemize}
 \end{frame}
 
@@ -208,6 +212,16 @@
 
 \bannerpageinvert{inverted banner page!}
 
+\section{Sourcecode-Listings}
+\begin{frame}[fragile]{Lisitngs}
+  \begin{lstlisting}[language=Python]
+def speed(swallow):
+    if swallow is african:
+        return 42
+    if swalllow is european:
+        return 24
+  \end{lstlisting}
+\end{frame}
 
 \section{Postamble}
 \begin{frame}{Development}
