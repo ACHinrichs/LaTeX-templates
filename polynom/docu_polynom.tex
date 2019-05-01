@@ -5,7 +5,13 @@
 \boldmath{}
 
 \usepackage{listings}
-\lstset{basicstyle=\ttfamily}
+
+\usepackage[scaled=0.85]{FiraMono}
+\lstset{basicstyle=\color{fg}\ttfamily,
+  keywordstyle=\color{polynom-blue}\bfseries,
+  commentstyle=\color{polynom-green},
+  stringstyle=\color{polynom-red}
+}
 
 \usepackage{tgadventor}
 
@@ -213,14 +219,20 @@
 \bannerpageinvert{inverted banner page!}
 
 \section{Sourcecode-Listings}
-\begin{frame}[fragile]{Lisitngs}
+\begin{frame}[fragile]{Example Listing}
   \begin{lstlisting}[language=Python]
+# This method Answers an important question
 def speed(swallow):
-    if swallow is african:
+    if swallow == "african":
         return 42
-    if swalllow is european:
+    if swalllow == "european":
         return 24
   \end{lstlisting}
+\end{frame}
+
+\setbeamertemplate{empty page inver}[polynom]{}
+\begin{frame}{How?}
+  Make the frame \lstinline{fragile}!
 \end{frame}
 
 \section{Postamble}
