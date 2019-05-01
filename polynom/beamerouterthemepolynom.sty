@@ -2,6 +2,7 @@
 
 \RequirePackage{calc}
 \RequirePackage{graphicx}
+\RequirePackage{ifthen}
 
 %%% TODO implement footer
 \defbeamertemplate*{footertext}{polynom}{}
@@ -36,14 +37,18 @@
 %%%
 % Frame title
 %%%
-
-\newlength\vertlinebase%
+\newlength{\polyVertlinebase}
 \defbeamertemplate*{frametitle}{polynom}
 {%
-  \if\insertframesubtitle\empty\setlength{\vertlinebase}{0.75ex}\else\empty\setlength{\vertlinebase}{0pt}\fi%
-  \usebeamercolor{palette primary}%
+  \ifthenelse{\equal{\insertframesubtitle}{}}{
+    \setlength{\polyVertlinebase}{.75ex}
+  }{
+    \setlength{\polyVertlinebase}{.0ex}
+  }
+  %\if\insertframesubtitle\empty\def\polyVertlinebase{1ex}\else\def\polyVertlinebase{0pt}\fi%
+  \usebeamercolor{palette primary}% 
   \vskip1.5\titleheight%
-  \hspace{-1em}\tikz[baseline=\vertlinebase]{\draw[line width=2pt,color=bg] (0,0)--(0,1.75\titleheight);}%
+  \hspace{-1em}\tikz[baseline=\polyVertlinebase]{\draw[line width=2pt,color=bg] (0,0)--(0,1.75\titleheight);}%
   \hbox{\hspace{24pt}\vbox{\fontsize{36pt}{0pt}\selectfont\if\insertframesubtitle\empty\empty\else\insertframesubtitle\\\fi
       \fontsize{50pt}{40pt}\selectfont\insertframetitle}}%
 }
