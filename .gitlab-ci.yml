@@ -27,5 +27,15 @@ build testing:
     - docker
   script:
     - echo "$CI_JOB_TOKEN" | docker login registry.git.rwth-aachen.de --username gitlab-ci-token --password-stdin
-    - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:testing .
+    - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:testing ./docker/testing/
     - docker push registry.git.rwth-aachen.de/achinrichs/latex-templates:testing
+
+build latest:
+  image: docker:stable-dind
+  stage: build
+  only:
+    - master
+  script:
+    - echo "$CI_JOB_TOKEN" | docker login registry.git.rwth-aachen.de --username gitlab-ci-token --password-stdin
+    - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:latest ./docker/latest/
+    - docker push registry.git.rwth-aachen.de/achinrichs/latex-templates:latest
