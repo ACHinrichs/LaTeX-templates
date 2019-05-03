@@ -5,7 +5,7 @@
 %% The original source files were:
 %%
 %% homeworkassignment.dtx  (with options: `class')
-%% Copyright (c) 2017 by Adrian C. Hinrichs
+%% Copyright (c) 2016-2019 by Adrian C. Hinrichs
 %% 
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
@@ -15,7 +15,7 @@
 %% 
 %% 
 %% 
-%% Copyright (c) 2017
+%% Copyright (c) 2016-2019
 %% 
 %% 
 %% 
@@ -216,14 +216,25 @@
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
+\DeclareBoolOption[false]{helvet}
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{TeX Gyre Adventor}
-  \setmainfont{TeX Gyre Pagella}
+  \ifhwa@helvet
+    \setsansfont{TeX Gyre Heros}
+    \setmainfont{TeX Gyre Pagella}
+  \else
+    \setsansfont{TeX Gyre Adventor}
+    \setmainfont{TeX Gyre Pagella}
+  \fi
   \setmonofont{Fira Mono}
 }{
-  \RequirePackage{tgadventor}
-  \RequirePackage{tgpagella}
+  \ifhwa@helvet
+    \RequirePackage{mathpazo}
+    \RequirePackage{helvet}
+  \else
+    \RequirePackage{tgadventor}
+    \RequirePackage{tgpagella}
+  \fi
   \RequirePackage{FiraMono}
 }
 \newcommand{\hwa@pointboxsize}{3em}
