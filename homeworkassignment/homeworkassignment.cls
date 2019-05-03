@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v3.2c}
-\def\filedate{2019/04/16}
+\def\fileversion{v4.1a}
+\def\filedate{2019/04/23}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -454,7 +454,7 @@
 \newcounter{todoNum} \setcounter{todoNum}{1}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}
@@ -465,12 +465,12 @@
   }{}
 }
 \DeclareDocumentCommand\addToGradingTable{m g}{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \xdef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \xdef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
   \IfNoValueTF{#2}{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+    \xdef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
   }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+    \xdef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
       {\string\small #2} &}
   }
 }
@@ -493,8 +493,7 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
-\newcommand{\hwa@todoList}{}
-\newcommand\hwa@todoList@aux{}
+\newcommand{\hwa@todoList@aux}{}
 \AtEndDocument{%
   \immediate\write\@auxout{%
     \gdef\string\hwa@gradingtbl@defs{\hwa@gradingtbl@aux@defs}

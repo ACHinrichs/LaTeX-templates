@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v3.2c}
-\def\filedate{2019/04/16}
+\def\fileversion{v4.1a}
+\def\filedate{2019/04/23}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -1044,7 +1044,7 @@
 %    \begin{macrocode}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\equal{\hwa@tableOfTodos}{}}{%Nothing
+    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}
@@ -1067,12 +1067,12 @@
 % |\newproblem| are added automatically.
 %    \begin{macrocode}
 \DeclareDocumentCommand\addToGradingTable{m g}{
-  \edef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
-  \edef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
+  \xdef\hwa@gradingtbl@aux@defs{\hwa@gradingtbl@aux@defs|p{\hwa@pointboxsize}}
+  \xdef\hwa@gradingtbl@aux@lineOne{\hwa@gradingtbl@aux@lineOne{#1} &}
   \IfNoValueTF{#2}{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
+    \xdef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo &}
   }{
-    \edef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
+    \xdef\hwa@gradingtbl@aux@lineTwo{\hwa@gradingtbl@aux@lineTwo\vfill\hfill
       {\string\small #2} &}
   }
 }
@@ -1123,8 +1123,7 @@
 % \begin{macro}{\hwa@todoList@...}
 % See |\hwa@gradingtlb@...|.
 %    \begin{macrocode}
-\newcommand{\hwa@todoList}{}
-\newcommand\hwa@todoList@aux{}
+\newcommand{\hwa@todoList@aux}{}
 % \end{macro}
 % \begin{macro}{\write\@auxout}
 %   Write to aux
@@ -1348,15 +1347,25 @@
 %   \item Fix Subproblem-Counter not beeing reset
 %   \item Merry Christmas!
 %   \end{itemize}
-% \item[v3.2 - pending]
+% \item[v3.2 - 2018/12/06] Nikolaus Release
 %   \begin{itemize}
 %   \item Make XeLaTex-Compatible
-%     \begin{itemize}
-%     \item Rename |\C| to |\Compl|, because of a |unicode-math|
-%     incompatibility
-%     \end{itemize}
 %   \item Fix |\newproblem| requiring a Problem-Number
 %   \item Add |\toDisprove| macro similar to the |\toShow| macro
+%   \item Add option for punchmarks
+%   \item Add option to load unicode-math and work around a incompability
+%   \end{itemize}
+% \item[v4.0 - 2019/04/17] Pre-Easter Release
+%   \begin{itemize}
+%   \item Add option to use |unicode-math|
+%   \item Rename |\C| to |\Compl|, because of a |unicode-math|
+%     incompatibility
+%   \item Rework Fonts
+%   \item Make |onecolumn| the default
+%   \item Implement ToDos
+%   \item Replace |\problem|-commands by |problem| environments (which
+%     behave like |\newproblem|)
+%   \item Add Task-Command
 %   \end{itemize}
 % 
 % \end{description}
