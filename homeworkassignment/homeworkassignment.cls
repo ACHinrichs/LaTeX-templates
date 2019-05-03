@@ -502,6 +502,7 @@
 \edef\hwa@gradingtbl@defs{}
 \newcommand{\hwa@gradingtbl@lineOne}{}
 \newcommand{\hwa@gradingtbl@lineTwo}{}
+\newcommand{\hwa@todoList}{}
 \newcommand{\hwa@todoList@aux}{}
 \AtEndDocument{%
   \immediate\write\@auxout{%
