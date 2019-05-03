@@ -23,8 +23,7 @@ pdflatex) on the =.ins=-File. This will generate a new =.sty= or
 
 **** Generate Documentation
 If the documentation in this repository does not correspond to the latest
-version of the corresponding package or class, just run (pdf)LaTeX on
-the =.dtx=-file.
+version of the corresponding package or class, run the build script.
 
 
 * homeworkassignment (LaTeX)
