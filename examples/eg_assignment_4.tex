@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside,subproblemsty=arabic,subsubproblemsty=alph, listings]{HomeworkAssignment}[2017/05/13 v2]
+\documentclass[a4paper,twoside,subproblemsty=arabic,subsubproblemsty=alph, listings]{homeworkassignment}
 
 \usepackage[latin1]{inputenc}
 \usepackage[english]{babel}
@@ -80,9 +80,9 @@ Aus \texttt{man fortune}:
 \end{lstlisting}
 
 \newsubsubproblem
-Der Befehl \texttt{cut -d ´ ´ -f 1 d*} gibt jeweils aus allen
+Der Befehl \texttt{cut -d ï¿½ ï¿½ -f 1 d*} gibt jeweils aus allen
 Dateien im aktuellen Ordner, die mit \texttt{d} beginnen den beginn
-jeder Zeile bis zum ersten Leerzeichen aus. \texttt{-d ´ ´} setzt das
+jeder Zeile bis zum ersten Leerzeichen aus. \texttt{-d ï¿½ ï¿½} setzt das
 Trennzeichen auf ein Leerzeichen. \texttt{-f 1} legt fest, dass nur
 das erste Feld was mit diesem Trennzeichen gefunden wurde ausgegeben
 wird. Durch \texttt{d*} wird der Befehl auf alle Dateien angewendet,
@@ -125,18 +125,18 @@ Durch den Befehl
   $ grep "road" -i -v -c wotw.txt
   6330
 \end{lstlisting}%$
-erfährt man, dass exakt 6330 Zeilen des Dokumentes das Wort ``road''
-nicht enthält. Das flag \texttt{-i} sorgt dafür, dass \texttt{grep} die
-Groß-/Kleinschreibung ignoriert, \texttt{-v} sorgt dafür, dass nur
+erfï¿½hrt man, dass exakt 6330 Zeilen des Dokumentes das Wort ``road''
+nicht enthï¿½lt. Das flag \texttt{-i} sorgt dafï¿½r, dass \texttt{grep} die
+Groï¿½-/Kleinschreibung ignoriert, \texttt{-v} sorgt dafï¿½r, dass nur
 Zeilen ohne Match ausgegeben werden, \texttt{-c} Z\"ahlt die von
 \texttt{grep} ausgegebenen Zeilen.
 \newsubsubproblem
-Der \texttt{grep} Befehl wandelt zunächst die Datei in eine Liste
-ihrer Wörter um. Danach werden die Wörter mit \texttt{sort} gruppiert
-damit sie mit \texttt{uniq -c} zusammengefasst werden können und die
-Anzahl ihrer Vorkommnisse bestimmt werden kann. Um die häufigsten 10
+Der \texttt{grep} Befehl wandelt zunï¿½chst die Datei in eine Liste
+ihrer Wï¿½rter um. Danach werden die Wï¿½rter mit \texttt{sort} gruppiert
+damit sie mit \texttt{uniq -c} zusammengefasst werden kï¿½nnen und die
+Anzahl ihrer Vorkommnisse bestimmt werden kann. Um die hï¿½ufigsten 10
 zu ermitteln wird dann mit \texttt{sort -n -r} nach den von
-\texttt{uniq} hinzugefügten Anzahlen absteigend sotiert und
+\texttt{uniq} hinzugefï¿½gten Anzahlen absteigend sotiert und
 schlussendlich werden mit \texttt{head -n 10} nur die ersten 10 ausgegeben.
 \begin{lstlisting}[language=bash]
   grep -o '\<[[:alpha:]]*\>' wotw.txt | sort | uniq -c  | sort -n -r | head -n 10
@@ -165,7 +165,7 @@ schlussendlich werden mit \texttt{head -n 10} nur die ersten 10 ausgegeben.
 \begin{lstlisting}[language=bash]
   $ git diff
 \end{lstlisting}
-Gibt die alle änderungen seit dem letzten commit aus. 
+Gibt die alle ï¿½nderungen seit dem letzten commit aus. 
 \begin{lstlisting}[language=bash]
   $ git diff $FILE
 \end{lstlisting}
