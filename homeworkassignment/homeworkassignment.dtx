@@ -53,10 +53,10 @@
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{soul}
+\usepackage{mathpazo}
 \usepackage{todonotes}
 \usepackage[T1]{fontenc}
 \usepackage{framed}
-
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Var}{Var}
@@ -104,8 +104,8 @@
 % \textsf{HomeworkAssignment} prior to v3.0} class\thanks{This document
 % corresponds to \textsf{homeworkassignment}~\fileversion, dated~
 % \filedate.}}
-% \author{Adrian C Hinrichs \\
-% \texttt{adrian.hinrichs@rwth-aachen.de}}
+% \author{Adrian C. Hinrichs \\
+% \texttt{adrian.hinrichs@rwth-aachen.de} \and Alexander Bartolomey \\ \texttt{alexander.bartolomey@rwth-aachen.de}}
 %
 % \maketitle
 % \tableofcontents
@@ -224,15 +224,19 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 %    \end{macrocode}
-% \DescribeMacro{tikz} Loads TikZ-Package and a couple of Styles,
-% usefull for Papers in Computer-Science and mathematics. See
+% \DescribeMacro{tikz} Loads TikZ-Package and a couple of styles,
+% useful for papers in computer science and mathematics. See
 % \ref{imp:tikz} for more informations
 %    \begin{macrocode}
 \DeclareBoolOption[false]{tikz}
 %    \end{macrocode}
-%
-% \DescribeMacro{listings} Loads Listings Package and sets
-% listing-layout to use a small fontsize. Adds indication for linebreaks.
+% \DescribeMacro{helvet} Helvet replaces the standard TeX Gyre sans serif font
+% with a Helvetica clone. See \ref{sec:fonts}
+%    \begin{macrocode}
+\DeclareBoolOption[false]{helvet}
+%    \end{macrocode}
+% \DescribeMacro{listings} Loads listings package and sets
+% listing layout to use a small fontsize. Adds indication for linebreaks.
 %    \begin{macrocode}
 \DeclareBoolOption[false]{listings}
 %    \end{macrocode}
@@ -401,7 +405,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \label{imp:tikz}
-% If tikz is Wanted, load Usefull Styles
+% If TikZ is wanted, load useful styles
 %    \begin{macrocode}
 \ifhwa@tikz
 \RequirePackage{tikz}
@@ -486,8 +490,8 @@
 }
 \pagestyle{followingpage}
 %    \end{macrocode}
-% \subsection{Enhance Mathenvironments}
-% A couple of thigns, to make math-environments more beautifull and compact.
+% \subsection{Enhance Math Environments}
+% A couple of things to make math environments more beautiful and compact.
 % \begin{macro}{\theequation}
 %   Displays equation-numbers as upper-case roman numbers.
 %    \begin{macrocode}
@@ -495,26 +499,36 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\allowdisplaybreaks}
-%   Allow pagebreaks in Mathmode
+%   Allow pagebreaks in mathmode
 %    \begin{macrocode}
 \allowdisplaybreaks
 %    \end{macrocode}
 % \end{macro}
-% \subsection{fonts}
+% \subsection{Fonts}
+% \label{sec:fonts}
 % \subsection{Serife (Default)}
-% \subsubsection{San Serife}
-% I fancy the Gillius-Font-Family, so that is the default Sans-Serif
-% font, when using XeTeX, The template does default to
-% \href{https://www.1001fonts.com/gillius-adf-font.html}{Gillius ADF},
-% which is available for free, licensed under the GNU License.
+% The default font for text in HWA is the TeX Gyre clone of Palatino, Pagella. 
+% \subsection{Sans Serif}
+% The default sans serif font is TeX Gyre Adventor.
+% \DescribeMacro{helvet}
+% Including \texttt{helvet} in the class options will replace the default sans serif font
+% Aventor with the Helvetica equivalent of TeX Gyre, Heros, for a more metric appereance.
 %    \begin{macrocode}
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{TeX Gyre Adventor}
+  \ifhwa@helvet
+    \setsansfont{TeX Gyre Heros}
+  \else
+    \setsansfont{TeX Gyre Adventor}
+  \fi
   \setmainfont{TeX Gyre Pagella}
   \setmonofont{Fira Mono}
 }{ 
-  \RequirePackage{tgadventor}
+  \ifhwa@helvet
+    \RequirePackage{tgheros}
+  \else
+    \RequirePackage{tgadventor}
+  \fi
   \RequirePackage{tgpagella}
   \RequirePackage{FiraMono}
 }
@@ -826,11 +840,11 @@
 % 
 % \subsubsection{\textsc{Quod Non Erat Demunstarndum at iucundum est}}
 % \begin{macro}{\QNED}~\\ \DescribeMacro{\qned}
-%   Display a flushed-right \(triangle\). |\QNED| displays it in a new
+%   Display a right-flushed \(triangle\). |\QNED| displays it in a new
 %   line, |\qned| at the end of the same line.\\ In Mathematical proofs this
 %   symbol is used to mark things, which we did not intend to proof,
 %   but are interesting anyway or things wich are not proofed
-%   mathematically, but are explained in a ay, whcih lets no doubt on
+%   mathematically, but are explained in a way which lets no doubt on
 %   their correctness.
 %    \begin{macrocode}
 \newcommand{\QNED}{\begin{flushright} \(\triangle\)
@@ -931,8 +945,8 @@
 %   \DescribeMacro{\excup}
 %   \newcommand{\falls}{\text{\ \GetTranslation{falls}}\ }
 %   \DescribeMacro{\falls}
-%   Output usefull Plaintext-Operators and Functions.
-%   See table \ref{tab:functions}. Require Mathmode\\
+%   Output useful plaintext operators and functions.
+%   See table \ref{tab:functions}. Require mathmode\\
 %   \begin{longtable}[h]{rl}
 %     Command & Output \\
 %     |\GL| & $\GL$\\
@@ -996,7 +1010,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsubsection{Rounding}
-% Require Mathmode
+% Require mathmode
 % \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 % \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 % \newcommand{\roundHU}[1]{\ensuremath{\left\lceil #1 \right\rfloor}}
@@ -1381,7 +1395,11 @@
 %     behave like |\newproblem|)
 %   \item Add Task-Command
 %   \end{itemize}
-% 
+% \item[v4.1 - 2019/05/03] Experimental Font Support
+%   \begin{itemize}
+%     \item Included \texttt{helvet} binary option for a more metric font support 
+%     \item Language and grammar fixes
+%   \end{itemize}
 % \end{description}
 % \subsection{Version--Scheme}Since Version 2.0 the following version--scheme
 % applies:

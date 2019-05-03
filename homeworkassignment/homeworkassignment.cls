@@ -5,7 +5,7 @@
 %% The original source files were:
 %%
 %% homeworkassignment.dtx  (with options: `class')
-%% Copyright (c) 2017 by Adrian C. Hinrichs
+%% Copyright (c) 2016-2019 by Adrian C. Hinrichs
 %% 
 %% This File may be distributed and/or modified under the condition of the below
 %% license.
@@ -15,7 +15,7 @@
 %% 
 %% 
 %% 
-%% Copyright (c) 2017
+%% Copyright (c) 2016-2019
 %% 
 %% 
 %% 
@@ -66,6 +66,7 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{tikz}
+\DeclareBoolOption[false]{helvet}
 \DeclareBoolOption[false]{listings}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -218,11 +219,19 @@
 \allowdisplaybreaks
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
-  \setsansfont{TeX Gyre Adventor}
+  \ifhwa@helvet
+    \setsansfont{TeX Gyre Heros}
+  \else
+    \setsansfont{TeX Gyre Adventor}
+  \fi
   \setmainfont{TeX Gyre Pagella}
   \setmonofont{Fira Mono}
 }{
-  \RequirePackage{tgadventor}
+  \ifhwa@helvet
+    \RequirePackage{tgheros}
+  \else
+    \RequirePackage{tgadventor}
+  \fi
   \RequirePackage{tgpagella}
   \RequirePackage{FiraMono}
 }

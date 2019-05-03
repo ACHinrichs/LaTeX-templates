@@ -1,8 +1,17 @@
-\documentclass[fragile=singleslide]{beamer}
+\documentclass[fragile]{beamer}
 
 \usetheme{polynom}
 \usefonttheme[onlymath]{serif}
 \boldmath{}
+
+\usepackage{listings}
+
+\usepackage[scaled=0.85]{FiraMono}
+\lstset{basicstyle=\color{fg}\ttfamily,
+  keywordstyle=\color{polynom-blue}\bfseries,
+  commentstyle=\color{polynom-green},
+  stringstyle=\color{polynom-red}
+}
 
 \usepackage{tgadventor}
 
@@ -18,7 +27,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Table of Contents}
+\begin{frame}[fragile]{Table of Contents}
   \tableofcontents
 \end{frame}
 
@@ -28,7 +37,7 @@
   This theme is developed to match PowerPoint-Templates by Alexander
   Bartolomey GitLab / GitHub.
 
-  It is developed because of the lack of clean LaTeX-Templates that
+  It is developed because of the lack of clean \LaTeX-Templates that
   are designed with 16:9 in mind.  (Also I did not want to use the
   theme provided by my university)
 \end{frame}
@@ -42,13 +51,14 @@
 \end{frame}
 
 \section{Features}
-\begin{frame}[fragile=singleslide]
+\begin{frame}[fragile]
   \framesubtitle{Clean and pleasing:}
   \frametitle{Framedesign}
   To use stacked headlines, you have to specify
   \begin{itemize}
-  \item the upper line with \verb|\framesubtitle{...}|
-  \item the lowe (main) line with \verb|\frametitle{...}|
+    \item a
+    \item the upper line with \lstinline|\framesubtitle{...}|
+    \item the lowe (main) line with \lstinline|\frametitle{...}|
   \end{itemize}
 \end{frame}
 
@@ -208,6 +218,22 @@
 
 \bannerpageinvert{inverted banner page!}
 
+\section{Sourcecode-Listings}
+\begin{frame}[fragile]{Example Listing}
+  \begin{lstlisting}[language=Python]
+# This method Answers an important question
+def speed(swallow):
+    if swallow == "african":
+        return 42
+    if swalllow == "european":
+        return 24
+  \end{lstlisting}
+\end{frame}
+
+\setbeamertemplate{empty page inver}[polynom]{}
+\begin{frame}{How?}
+  Make the frame \lstinline{fragile}!
+\end{frame}
 
 \section{Postamble}
 \begin{frame}{Development}
