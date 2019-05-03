@@ -366,13 +366,12 @@
       \keyword{Problem:} ##1
     \end{framed}
   }
-}{}
-\NewDocumentEnvironment{subproblem}{O{} g}{
-  \newsubproblem[#1]{#2}
-}{}
-\NewDocumentEnvironment{subsubproblem}{O{} g}{
-  \newsubsubproblem[#1]{#2}
-  }
+  \NewDocumentEnvironment{subproblem}{O{} g}{
+    \newsubproblem[#1]{#2}
+    \NewDocumentEnvironment{subsubproblem}{O{} g}{
+      \newsubsubproblem[#1]{#2}
+    }{}
+  }{}
 }{}
 \newcommand{\hwa@QED}{\begin{flushright}
     \textsc{Qed}
