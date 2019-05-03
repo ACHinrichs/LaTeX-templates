@@ -6,10 +6,10 @@
 \RequirePackage{ifxetex}
 
 % For conditionals
-\def\prjktn@inner@false{f}
-\def\prjktn@inner@true{t}
+\def\polynom@inner@false{f}
+\def\polynom@inner@true{t}
 
-\DeclareOptionBeamer{sectiontitles}{\def\prjktn@inner@sectiontitles{#1}}
+\DeclareOptionBeamer{sectiontitles}{\def\polynom@inner@sectiontitles{#1}}
 \ExecuteOptionsBeamer{sectiontitles=t} % default value
 \ProcessOptionsBeamer
 % t= true, anything else disables them, t is default
@@ -21,7 +21,7 @@
 
 % #1: Color
 % #2: Image path (can be empty))
-\newcommand{\prjktn@titlepagebox}[2]{
+\newcommand{\polynom@titlepagebox}[2]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.north west)$) rectangle
     ($(current page.north east)+(0,-\titlebarheight)$);
@@ -32,14 +32,14 @@
   }
 }
 
-\newcommand{\prjktn@fullpagebox}[1]{
+\newcommand{\polynom@fullpagebox}[1]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.north west)$) rectangle
     ($(current page.south east)$);
   }
 }
 
-\newcommand{\prjktn@inversetitlepagebox}[2]{
+\newcommand{\polynom@inversetitlepagebox}[2]{
   \tikz[overlay, remember picture] {
     \fill[color=#1] ($(current page.south west)$) rectangle
     ($(current page.north east)+(0,-\titlebarheight)$);
@@ -52,14 +52,9 @@
 
 % #1: Title
 % #2: Subtitle or Author
-\newcommand{\poly@titlepagetitle}[2]{
+\newcommand{\polynom@titlepagetitle}[2]{
   \tikz[overlay, remember picture]{
-
-    % Insert title
-    % TODO text field should be bound on the left to prevent it 
-    % (a) from overfilling the hbox and 
-    % (b) extending the safe-space of the page itself
-    \node[anchor=east, text width=.6\paperwidth, align=right] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
+    \node[anchor=east, text width=.7\paperwidth, align=right] (title) at ($(current page.south west)+(0.7\paperwidth,.5\paperheight-.5\titlebarheight)$)
     {\usebeamerfont{title}#1};
     
     % Paint Line
@@ -70,13 +65,13 @@
     
     \usebeamercolor{subtitle}
     % Insert subtitle
-    \node[color=fg,anchor=west, text width=.2\paperwidth] (subtitle) at ($(current page.south west)
+    \node[color=fg,anchor=west, text width=.25\paperwidth] (subtitle) at ($(current page.south west)
     + (0.75\paperwidth,.5\paperheight-.5\titlebarheight)$)
-    {\usebeamerfont{subtitle}#2};
+    {\usebeamerfont{subtitle}\baselineskip=24pt#2\par};
   }
 }
 
-\newcommand{\prjktn@debug@cross}{
+\newcommand{\polynom@debug@cross}{
   \tikz[overlay, remember picture] {
     \draw[color=red] (current page.north)
     -- (current page.south);
@@ -92,8 +87,8 @@
 %%%
 \defbeamertemplate{title page}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \prjktn@titlepagebox{bg}{#1}
-  \poly@titlepagetitle{\inserttitle}{\insertsubtitle}
+  \polynom@titlepagebox{bg}{#1}
+  \polynom@titlepagetitle{\inserttitle}{\insertsubtitle}
   %\usebeamertemplate{footline}[polynom]
 }
 
@@ -107,10 +102,10 @@
 
 \defbeamertemplate{section title}{polynom}[1][]{
   \usebeamercolor{palette primary}
-  \prjktn@titlepagebox{bg}{#1}
-  \poly@titlepagetitle{\insertsectionhead}{}
+  \polynom@titlepagebox{bg}{#1}
+  \polynom@titlepagetitle{\insertsectionhead}{}
 }
-\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\if\polynom@inner@sectiontitles\polynom@inner@true
 \AtBeginSection[]{
 \setbeamertemplate{section title}[polynom][\insertnextsectionimage]
 \begin{frame}[plain,noframenumbering]
@@ -126,10 +121,10 @@
 %%%
 \defbeamertemplate{subsection title}{polynom}{
   \usebeamercolor{palette secondary}
-  \prjktn@titlepagebox{bg}{}
-  \poly@titlepagetitle{\insertsubsectionhead}{}
+  \polynom@titlepagebox{bg}{}
+  \polynom@titlepagetitle{\insertsubsectionhead}{}
 }
-\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\if\polynom@inner@sectiontitles\polynom@inner@true
 \AtBeginSubsection[]{
   \setbeamertemplate{subsection title}[polynom]{}
 \begin{frame}[plain,noframenumbering]
@@ -144,10 +139,10 @@
 %%%
 \defbeamertemplate{subsubsection title}{polynom}{
   \usebeamercolor{palette tertiary}
-  \prjktn@titlepagebox{bg}{}
-  \poly@titlepagetitle{\insertsubsubsectionhead}{}
+  \polynom@titlepagebox{bg}{}
+  \polynom@titlepagetitle{\insertsubsubsectionhead}{}
 }
-\if\prjktn@inner@sectiontitles\prjktn@inner@true
+\if\polynom@inner@sectiontitles\polynom@inner@true
 \AtBeginSubsubsection[]{
   \setbeamertemplate{subsubsection title}[polynom]{}
 \begin{frame}[plain,noframenumbering]
@@ -163,7 +158,7 @@
 %%%
 \defbeamertemplate{banner page}{polynom}[1][]{
   \usebeamercolor{banner page}
-  \prjktn@fullpagebox{bg}
+  \polynom@fullpagebox{bg}
   \tikz[text width=0.75\paperwidth, text centered, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
@@ -181,7 +176,7 @@
 %%%
 \defbeamertemplate{banner page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
-  \prjktn@fullpagebox{bg}
+  \polynom@fullpagebox{bg}
   \tikz[text=fg, text centered, text width=0.75\paperwidth, overlay, remember picture]{
     \node (finalOne) at ($(current page.south west)+(0.5\paperwidth,0.5\paperheight)$)
     {\usebeamerfont{banner}#1};
@@ -199,7 +194,7 @@
 %%%
 \defbeamertemplate{empty page}{polynom}[1][]{
   \usebeamercolor{banner page}
-  \prjktn@fullpagebox{bg}
+  \polynom@fullpagebox{bg}
 }
 
 %%%
@@ -207,16 +202,21 @@
 %%%
 \defbeamertemplate{empty page invert}{polynom}[1][]{
   \usebeamercolor{banner page invert}
-  \prjktn@fullpagebox{bg}
+  \polynom@fullpagebox{bg}
 }
 
 
 
 %%%
 % Items
+% this is new, since polynom evolved to be alot
+% more geometric, a square seemed to be more fitting
+% than the default circle.
+% But as always, do as you like
 %%%
 \ifxetex
-\renewcommand{\textbullet}{•}
+\renewcommand{\textbullet}{■}
+%\renewcommand{\textbullet}{•}
 \fi
 
 
