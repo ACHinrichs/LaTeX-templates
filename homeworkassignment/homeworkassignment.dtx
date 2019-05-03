@@ -576,7 +576,20 @@
 % \DescribeMacro{\date} Sets the date of the document.\\
 % \subsection{Sectioning\label{SECTIONING_CMDS}}
 % Because the class is designed for Assignments, the
-% sectioning-commands are different from Article
+% sectioning-commands are different from Article, as layed out in the
+% following.
+% \subsubsection{Obsoledation of \texttt{\textbackslash{}section etc.}}
+%    \begin{macrocode}
+\renewcommand{\section}[1]{\ClassError{homeworkassignment}{The
+    Section-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
+\renewcommand{\subsection}[1]{\ClassError{homeworkassignment}{The
+    Subsection-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
+\renewcommand{\subsubsection}[1]{\ClassError{homeworkassignment}{The
+    Subsubsection-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
+%    \end{macrocode}
 % \subsubsection{internal
 % Sectioning\label{PLAIN_SECTIONING_CMDS}}
 % \begin{macro}{\hwa@problem}~\\ \DescribeMacro{\hwa@subproblem}

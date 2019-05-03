@@ -238,6 +238,15 @@
 \newcommand{\abgabe}[1]{\deadline{#1}}
 \newcommand{\hwa@sheetTitle}{}
 \newcommand{\sheetTitle}[1]{\def\hwa@sheetTitle{#1}}
+\renewcommand{\section}[1]{\ClassError{homeworkassignment}{The
+    Section-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
+\renewcommand{\subsection}[1]{\ClassError{homeworkassignment}{The
+    Subsection-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
+\renewcommand{\subsubsection}[1]{\ClassError{homeworkassignment}{The
+    Subsubsection-Command is disabled by homeworkassignment, please use one
+  of the improved mechanisms for new Exercises}}
 \DeclareDocumentCommand\hwa@problem{m o}{\@startsection{problem}%Name
   {1}%Level
   {\z@}%indent
