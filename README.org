@@ -6,25 +6,16 @@ or use frequently. If I am not the author, this will be noted.
 * Installation
 ** Classes and Styles
 *** From source (recomended)
-If the class is not uploaded to CTAN (I want to upload and updatese
+If the class is not uploaded to CTAN (I want to upload and update
 them all to CTAN, but I it may take some time), clone the repository
 into a directory searched by LaTeX. (Using TexLive under Linux this
-directory could be `~/texmf/tex/latex`, using MikTech under Windows,
-this is configurable) and index them (TexLive+Linux `$ texhash`,
-MikTech+Windows Refresh teh osurces via the MikTech-Settings as
+directory could be `~/texmf/tex/latex`, using MikTeX under Windows,
+this is configurable) and index them (TexLive+Linux: `$ texhash`,
+MikTeX+Windows: Refresh the sources via the MikTeX settings as
 Admin).
-**** Special notes on developtment versions:
-I am not always updating the =.cls=-files when developing new features,
-so when you want to use developtment-versions (why would you want to do
-that?) Proceed as above when installing from source, but after you
-checked out th branch =dev= for the class you want to use, run LaTeX (not
-pdflatex) on the =.ins=-File. This will generate a new =.sty= or
-=.cls= file. Then just proceed as above.
-
-**** Generate Documentation
-If the documentation in this repository does not correspond to the latest
-version of the corresponding package or class, run the build script.
-
+**** Special notes on development versions:
+Pulling a development version might not include a built version of the cls/sty
+files. Run the build script available to build the cls file as well as fresh documentation.
 
 * homeworkassignment (LaTeX)
 This class provides a relatively simple document–type for homework,
