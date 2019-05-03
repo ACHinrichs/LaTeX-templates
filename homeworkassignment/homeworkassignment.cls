@@ -369,18 +369,9 @@
 }{}
 \NewDocumentEnvironment{subproblem}{O{} g}{
   \newsubproblem[#1]{#2}
-  \newcommand{\task}[1]{
-    \begin{framed}
-      \keyword{Problem:} ##1
-    \end{framed}
-  }
 }{}
 \NewDocumentEnvironment{subsubproblem}{O{} g}{
   \newsubsubproblem[#1]{#2}
-  \newcommand{\task}[1]{
-    \begin{framed}
-      \keyword{Problem:} ##1
-    \end{framed}
   }
 }{}
 \newcommand{\hwa@QED}{\begin{flushright}
