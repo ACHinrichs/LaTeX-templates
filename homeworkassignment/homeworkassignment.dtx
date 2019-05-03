@@ -230,7 +230,11 @@
 %    \begin{macrocode}
 \DeclareBoolOption[false]{tikz}
 %    \end{macrocode}
-%
+% \DescribeMacro{helvet} Helvet replaces the standard TeX Gyre sans serif font
+% with a Helvetica clone. See \ref{sec:fonts}
+%    \begin{macrocode}
+\DeclareBoolOption[false]{helvet}
+%    \end{macrocode}
 % \DescribeMacro{listings} Loads listings package and sets
 % listing layout to use a small fontsize. Adds indication for linebreaks.
 %    \begin{macrocode}
@@ -501,13 +505,11 @@
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Fonts}
+% \label{sec:fonts}
 % \subsection{Serife (Default)}
 % The default font for text in HWA is the TeX Gyre clone of Palatino, Pagella. 
 % \subection{Sans Serif}
 % The default sans serif font is TeX Gyre Adventor.
-%    \begin{macrocode}
-\DeclareBoolOption[false]{helvet}
-%    \end{macrocode}
 % \DescribeMacro{helvet}
 % Including \texttt{helvet} in the class options will replace the default sans serif font
 % Aventor with the Helvetica equivalent of TeX Gyre, Heros, for a more metric appereance.
@@ -516,20 +518,18 @@
   \RequirePackage{fontspec}
   \ifhwa@helvet
     \setsansfont{TeX Gyre Heros}
-    \setmainfont{TeX Gyre Pagella}
   \else
     \setsansfont{TeX Gyre Adventor}
-    \setmainfont{TeX Gyre Pagella}
   \fi
+  \setmainfont{TeX Gyre Pagella}
   \setmonofont{Fira Mono}
 }{ 
   \ifhwa@helvet
-    \RequirePackage{mathpazo}
-    \RequirePackage{helvet}
+    \RequirePackage{tgheros}
   \else
     \RequirePackage{tgadventor}
-    \RequirePackage{tgpagella}
   \fi
+  \RequirePackage{tgpagella}
   \RequirePackage{FiraMono}
 }
 %    \end{macrocode}

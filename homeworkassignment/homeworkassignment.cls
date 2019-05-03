@@ -66,6 +66,7 @@
 \DeclareStringOption[alph]{subproblemsty}
 \DeclareStringOption[roman]{subsubproblemsty}
 \DeclareBoolOption[false]{tikz}
+\DeclareBoolOption[false]{helvet}
 \DeclareBoolOption[false]{listings}
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -216,25 +217,22 @@
 \pagestyle{followingpage}
 \renewcommand{\theequation}{\Roman{equation}}
 \allowdisplaybreaks
-\DeclareBoolOption[false]{helvet}
 \ifthenelse{\boolean{xetex}}{
   \RequirePackage{fontspec}
   \ifhwa@helvet
     \setsansfont{TeX Gyre Heros}
-    \setmainfont{TeX Gyre Pagella}
   \else
     \setsansfont{TeX Gyre Adventor}
-    \setmainfont{TeX Gyre Pagella}
   \fi
+  \setmainfont{TeX Gyre Pagella}
   \setmonofont{Fira Mono}
 }{
   \ifhwa@helvet
-    \RequirePackage{mathpazo}
-    \RequirePackage{helvet}
+    \RequirePackage{tgheros}
   \else
     \RequirePackage{tgadventor}
-    \RequirePackage{tgpagella}
   \fi
+  \RequirePackage{tgpagella}
   \RequirePackage{FiraMono}
 }
 \newcommand{\hwa@pointboxsize}{3em}
