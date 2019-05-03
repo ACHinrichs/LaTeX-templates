@@ -1,0 +1,193 @@
+\documentclass[a4paper,twoside,subproblemsty=arabic,subsubproblemsty=alph,listings,helvet]{homeworkassignment}
+\author{Max Mustermann Matr.Nr. 1701 \\ Autor Zwei Matr.Nr. 4711 \\ Dritter Kollaborateur Matr.Nr. 4242 }
+\date{\today}
+\abgabe{04.05.2017}
+\tutorium{Übungsgruppe 8}
+\kurs{Betriebssysteme und Softwaretechnik}
+\sheetTitle{Sample Sheet}
+\author{Adrian C. Hinrichs, Matr. 74656}
+\tutorium{Übungsgruppe 42}
+\kurs{Analysis für Informatiker}
+\date{\today}
+\begin{document}
+\maketitle
+\makeGradingTable
+\newproblem[1]
+\newproblem*[3]
+\newproblem[2]
+
+\newsubproblem[1]
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ uname -a
+   Linux BuS1337 4.9.16-gentoo #1 SMP Fri Apr 28 16:18:12
+   CEST 2017 x86_64 Intel(R) Core(TM) i7-6600U CPU @ 2.60GHz
+   GenuineIntel GNU/Linux  
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash]
+  $ cat /etc/issue
+
+  This is \n.\O (\s \m \r) \t
+\end{lstlisting}
+\begin{lstlisting}[language=bash]
+  $ gcc --version
+   gcc (Gentoo Hardened 5.4.0-r3 p1.3, pie-0.6.5) 5.4.0
+   Copyright (C) 2015 Free Software Foundation, Inc.
+   This is free software; see the source for copying
+   conditions. There is NO warranty; not even for
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash]
+  $ w
+   21:53:q25 up  3:36,  4 users,  load average: 0.00, 0.02, 0.09
+   USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT
+   root     tty2      18:45   11:57   0.31s  0.31s -bash
+   root     tty1      18:25    2:31m  0.60s  0.33s links
+   georg    pts/0     19:29    1:59m  0.03s  0.03s -bash
+   georg    pts/1     20:01    1.00s  0.07s  0.00s w
+\end{lstlisting}
+\newsubsubproblem
+
+Aus \texttt{man man}:
+\begin{lstlisting}[language=bash]
+  man -k printf
+           Search the short descriptions and manual page names for the
+           keyword printf  as  regular expression.  Print out any
+           matches. Equivalent to apropos printf.
+\end{lstlisting}
+
+Aus \texttt{man grep}:
+\begin{lstlisting}[language=bash]
+  -n, --line-number
+            Prefix each line of output with the 1-based line number
+            within its input file.
+\end{lstlisting}
+
+Aus \texttt{man fortune}:
+\begin{lstlisting}[language=bash]
+  HISTORY
+       This  version of fortune is based on the NetBSD fortune 1.4,
+       but with a number of bug fixes and enhancements.
+\end{lstlisting}
+
+\newsubproblem[2]
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+   echo "Bus 2016: Abgabe der 1. Uebung am 6.5." | sed s/6/7/
+  Bus 2017: Abgabe der 1. Uebung am 6.5.
+\end{lstlisting}
+
+\newsubsubproblem
+Der Befehl \texttt{cut -d � � -f 1 d*} gibt jeweils aus allen
+Dateien im aktuellen Ordner, die mit \texttt{d} beginnen den beginn
+jeder Zeile bis zum ersten Leerzeichen aus. \texttt{-d � �} setzt das
+Trennzeichen auf ein Leerzeichen. \texttt{-f 1} legt fest, dass nur
+das erste Feld was mit diesem Trennzeichen gefunden wurde ausgegeben
+wird. Durch \texttt{d*} wird der Befehl auf alle Dateien angewendet,
+deren Namen mit d beginnt.
+
+\newsubsubproblem
+\begin{lstlisting}
+  $ grep -B 19 -ne '^[0-9]\{5\}\ [a-zA-Z]\{1,\} [a-zA-Z]\{1,\}$' emails
+  19017-Message-ID: <32509bccc5b1a43c@posteo.de>
+  19018-Date: Tue, 26 Oct 2010 15:26:51 +0200
+  19019-From: Arthur Dent <realArthurDent@posteo.de>
+  ...
+  19022-To: Emily Saunders <emily.saunders@mostlyharmless.com>
+  ...
+  19034-Arthur Dent
+  19035-Galaxy 7
+  19036:74369 Third Orbit
+\end{lstlisting}
+Die durch ``...'' markierten Teile der Ausgabe wurde aufgrund
+von fehlender Relevanz f\"ur die Aufgabenstellung ausgelassen
+
+
+
+\newsubproblem[3] %AUFGABE 3 =======================================
+\newsubsubproblem
+
+Der erste aufruf von \texttt{tr} im Befehl
+\begin{lstlisting}
+  $ tr -d '"?.!:;,+&'"'" < wotw.txt | tr -s " "
+\end{lstlisting}%$
+entfernt alle der spezifizierten Sonderzeichen aus der eingabe, welche
+aus der Datei \texttt{wotw.txt} gepiped wird. Die Ausgabe des Befehles
+wird in den zweiten \texttt{tr} aufruf gepiped, in welchen (durch das
+flag \texttt{-s}) jedes doppelte Leerzeichen entfernt wird.
+%\lstinputlisting{a3-1.txt}
+
+\newsubsubproblem
+Durch den Befehl
+\begin{lstlisting}[language=bash]
+  $ grep "road" -i -v -c wotw.txt
+  6330
+\end{lstlisting}%$
+erf�hrt man, dass exakt 6330 Zeilen des Dokumentes das Wort ``road''
+nicht enth�lt. Das flag \texttt{-i} sorgt daf�r, dass \texttt{grep} die
+Gro�-/Kleinschreibung ignoriert, \texttt{-v} sorgt daf�r, dass nur
+Zeilen ohne Match ausgegeben werden, \texttt{-c} Z\"ahlt die von
+\texttt{grep} ausgegebenen Zeilen.
+\newsubsubproblem
+Der \texttt{grep} Befehl wandelt zun�chst die Datei in eine Liste
+ihrer W�rter um. Danach werden die W�rter mit \texttt{sort} gruppiert
+damit sie mit \texttt{uniq -c} zusammengefasst werden k�nnen und die
+Anzahl ihrer Vorkommnisse bestimmt werden kann. Um die h�ufigsten 10
+zu ermitteln wird dann mit \texttt{sort -n -r} nach den von
+\texttt{uniq} hinzugef�gten Anzahlen absteigend sotiert und
+schlussendlich werden mit \texttt{head -n 10} nur die ersten 10 ausgegeben.
+\begin{lstlisting}[language=bash]
+  grep -o '\<[[:alpha:]]*\>' wotw.txt | sort | uniq -c  | sort -n -r | head -n 10
+  4417 the
+  2373 and
+  2284 of
+  1554 a
+  1300 I
+  1160 to
+  924 in
+  853 was
+  754 that
+  568 had
+\end{lstlisting}
+\newsubproblem[4]
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ git init
+\end{lstlisting}
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ git add A.txt B.txt C.txt
+  $ git commit -m "Initial"
+\end{lstlisting}
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ git diff
+\end{lstlisting}
+Gibt die alle �nderungen seit dem letzten commit aus. 
+\begin{lstlisting}[language=bash]
+  $ git diff $FILE
+\end{lstlisting}
+Vergleicht die Datei \texttt{\${}FILE} mit der Version aus dem letzen
+Commit, und gibt alle Unterschiede aus.
+
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ git commit -m "Change files"      # commit
+  $ git log                           # Anzeigen der Commits
+\end{lstlisting}
+
+\newsubproblem
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ convert B.png C.jpg BC.pdf && pdfunite A.pdf BC.pdf ABC.pdf
+\end{lstlisting}
+
+\newsubsubproblem
+\begin{lstlisting}[language=bash]
+  $ pdftk A.pdf cat 5-9 23 240-242 output Relevant.pdf
+\end{lstlisting}
+
+
+\end{document}
