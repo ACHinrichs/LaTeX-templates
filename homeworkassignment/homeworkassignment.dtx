@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v4.1a}
-\def\filedate{2019/04/23}
+\def\fileversion{v4.1b}
+\def\filedate{2019/05/03}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -771,23 +771,13 @@
     \begin{framed}
       \keyword{Problem:} ##1
     \end{framed}
-  }
-}{}
-\NewDocumentEnvironment{subproblem}{O{} g}{
-  \newsubproblem[#1]{#2}
-  \newcommand{\task}[1]{
-    \begin{framed}
-      \keyword{Problem:} ##1
-    \end{framed}
-  }
-}{}
-\NewDocumentEnvironment{subsubproblem}{O{} g}{
-  \newsubsubproblem[#1]{#2}
-  \newcommand{\task}[1]{
-    \begin{framed}
-      \keyword{Problem:} ##1
-    \end{framed}
-  }
+  } 
+  \NewDocumentEnvironment{subproblem}{O{} g}{
+    \newsubproblem[#1]{#2}
+    \NewDocumentEnvironment{subsubproblem}{O{} g}{
+      \newsubsubproblem[#1]{#2}
+    }{}
+  }{}
 }{}
 %    \end{macrocode}
 % \end{macro}
@@ -1054,7 +1044,7 @@
 %    \begin{macrocode}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
+    \ifthenelse{\equal{\hwa@todoList }{\empty}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}
