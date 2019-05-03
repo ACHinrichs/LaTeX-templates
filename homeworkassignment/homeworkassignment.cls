@@ -36,8 +36,8 @@
 %% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 %% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 %% SOFTWARE.
-\def\fileversion{v4.1a}
-\def\filedate{2019/04/23}
+\def\fileversion{v4.1b}
+\def\filedate{2019/05/03}
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesClass{homeworkassignment}[\filedate\space\fileversion]
 \RequirePackage{suffix}
@@ -454,7 +454,7 @@
 \newcounter{todoNum} \setcounter{todoNum}{1}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
+    \ifthenelse{\equal{\hwa@todoList }{\empty}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}

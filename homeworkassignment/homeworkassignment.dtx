@@ -29,8 +29,8 @@
 % OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 % SOFTWARE.
 % \fi
-\def\fileversion{v4.1a}
-\def\filedate{2019/04/23}
+\def\fileversion{v4.1b}
+\def\filedate{2019/05/03}
 % \iffalse
 %<*driver>
 \ProvidesFile{homeworkassignment.dtx}
@@ -1044,7 +1044,7 @@
 %    \begin{macrocode}
 \DeclareDocumentCommand\hwa@tableOfTodos{}{
   \ifthenelse{\boolean{hwa@todos@list}}{
-    \ifthenelse{\isundefined{\hwa@todoList}{}}{%Nothing
+    \ifthenelse{\equal{\hwa@todoList }{\empty}}{%Nothing
     }{
       {\color{red}
         \hwa@problem{Table of ToDos}
