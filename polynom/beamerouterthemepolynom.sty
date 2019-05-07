@@ -63,7 +63,14 @@
   {\usebeamercolor{footline} \color{fg}
     \insertdate
     \hfill
-    \insertauthor~-~\insertshortinstitute
+    \insertauthor
+    \ifthenelse{\equal{\insertshortinstitute}{\empty}}{
+      ~-~\insertshortinstitute
+    }{
+      \ifthenelse{\equal{\insertinstitute}{\empty}}{
+        ~-~\insertinstitute
+      }{}
+    }
   }
   \hspace{1em}
   \vspace{.5em}
@@ -78,7 +85,14 @@
   {\usebeamercolor{footline invert}\color{fg}
     \insertdate
     \hfill
-    \insertauthor~-~\insertshortinstitute
+    \insertauthor
+    \ifthenelse{\equal{\insertshortinstitute}{\empty}}{
+      ~-~\insertshortinstitute
+    }{
+      \ifthenelse{\equal{\insertinstitute}{\empty}}{
+        ~-~\insertinstitute
+      }{}
+    }
   }
   \hspace{1em}
   \vspace{.5em}
