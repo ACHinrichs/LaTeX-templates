@@ -57,6 +57,7 @@
 %%%
 % Footer
 %%%
+\makeatletter
 \defbeamertemplate*{footline}{polynom}{
   \usebeamerfont{footline}
   \hspace{\leftmargin}
@@ -64,12 +65,9 @@
     \insertdate
     \hfill
     \insertauthor
-    \ifthenelse{\equal{\insertshortinstitute}{\empty}}{
-      ~-~\insertshortinstitute
+    \ifthenelse{\equal{\beamer@shortinstitute}{}}{
     }{
-      \ifthenelse{\equal{\insertinstitute}{\empty}}{
-        ~-~\insertinstitute
-      }{}
+      ~-~\insertshortinstitute
     }
   }
   \hspace{1em}
@@ -78,6 +76,7 @@
     \textbf{\footnotesize\insertframenumber}
   \end{beamercolorbox}
 }
+\makeatother
 
 \defbeamertemplate{footline}{polynom invert}{
   \usebeamerfont{footline}
@@ -86,12 +85,9 @@
     \insertdate
     \hfill
     \insertauthor
-    \ifthenelse{\equal{\insertshortinstitute}{\empty}}{
-      ~-~\insertshortinstitute
+    \ifthenelse{\equal{\beamer@shortinstitute}{}}{
     }{
-      \ifthenelse{\equal{\insertinstitute}{\empty}}{
-        ~-~\insertinstitute
-      }{}
+      ~-~\insertshortinstitute
     }
   }
   \hspace{1em}
