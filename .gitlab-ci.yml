@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 variables:
   # When using dind service we need to instruct docker, to talk with the
   # daemon started inside of the service. The daemon is available with
@@ -39,3 +40,13 @@ build latest:
     - echo "$CI_JOB_TOKEN" | docker login registry.git.rwth-aachen.de --username gitlab-ci-token --password-stdin
     - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:latest ./docker/latest/
     - docker push registry.git.rwth-aachen.de/achinrichs/latex-templates:latest
+
+deploy:
+  image: registry.git.rwth-aachen.de/achinrichs/latex-templates:latest
+  stage: deploy
+  script:
+    - make zips
+  artifacts:
+    - cheatsheet.zip
+    - homeworkassignment.zip
+    - polynom.zip
