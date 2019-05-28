@@ -47,6 +47,7 @@ deploy:
   script:
     - make zips
   artifacts:
-    - cheatsheet.zip
-    - homeworkassignment.zip
-    - polynom.zip
+    paths:
+      - cheatsheet.zip
+      - homeworkassignment.zip
+      - polynom.zip
