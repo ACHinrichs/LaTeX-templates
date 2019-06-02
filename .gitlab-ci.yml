@@ -26,6 +26,8 @@ build testing:
   only:
     - dev
     - docker
+  tags: 
+    - pontifexemacsimus-dind
   script:
     - echo "$CI_JOB_TOKEN" | docker login registry.git.rwth-aachen.de --username gitlab-ci-token --password-stdin
     - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:testing ./docker/testing/
@@ -36,6 +38,8 @@ build latest:
   stage: build
   only:
     - master
+  tags: 
+    - pontifexemacsimus-dind
   script:
     - echo "$CI_JOB_TOKEN" | docker login registry.git.rwth-aachen.de --username gitlab-ci-token --password-stdin
     - docker build -t registry.git.rwth-aachen.de/achinrichs/latex-templates:latest ./docker/latest/
@@ -46,6 +50,8 @@ deploy:
   stage: deploy
   script:
     - make zips
+  tags: 
+    - cluster
   artifacts:
     paths:
       - cheatsheet.zip
