@@ -6,18 +6,21 @@ or use frequently. If I am not the author, this will be noted.
 * Installation
 ** Classes and Styles
 *** From source (recomended)
-If the class is not uploaded to CTAN (I want to upload and updatese
-them all to CTAN, but I it may take some time), clone the repository
-into a directory searched by LaTeX. (Using TexLive under Linux this
-directory could be `~/texmf/tex/latex`, using MikTech under Windows,
-this is configurable) and index them (TexLive+Linux `$ texhash`,
-MikTech+Windows Refresh teh osurces via the MikTech-Settings as
+If the class is not uploaded to CTAN (I want to upload and update
+them all to CTAN, but it may take some time), clone the repository
+into a directory searched by LaTeX. (Using TeX Live under Linux this
+directory could be `~/texmf/tex/latex`, using MiKTeX under Windows,
+this is configurable) and index them (TeX Live + Linux: `$ texhash`,
+MiKTeX + Windows: Refresh the sources via the MiKTeX-Settings as
 Admin).
-**** Special notes on developtment versions:
+
+*Note*: If you are using TeX Live, it may be necessary to init the usertree prior to Installation.
+
+**** Special notes regarding development versions:
 I am not always updating the =.cls=-files when developing new features,
-so when you want to use developtment-versions (why would you want to do
-that?) Proceed as above when installing from source, but after you
-checked out th branch =dev= for the class you want to use, run LaTeX (not
+so when you want to use development-versions (why would you want to do
+that?) Proceed as above when installing from source, but after you have
+checked out the branch =dev= for the class you want to use, run LaTeX (not
 pdflatex) on the =.ins=-File. This will generate a new =.sty= or
 =.cls= file. Then just proceed as above.
 
@@ -42,7 +45,7 @@ hughe pile of badly documented code, which is basically identical for
 all CheatSheets, so I bundeled it in a class. Just load
 =\documentclass{cheatsheet}= and you are ready to go.
 
-Available on CTAN
+Available as [[https://ctan.org/pkg/cheatsheet][CTAN Package]].
 
 * beamer themes =projektion= and =polynom= (XeLaTeX)
 Clean, simple and modern 16:9 (yes, that is possible) (Xe)LaTeX
