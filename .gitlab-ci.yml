@@ -16,6 +16,7 @@ variables:
   # When using dind, it's wise to use the overlayfs driver for
   # improved performance.
   DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
 
 services:
   - docker:dind
