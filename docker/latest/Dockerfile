@@ -1,4 +1,4 @@
-FROM registry.git.rwth-aachen.de/zoomoid/docker-latexmk
+FROM thomasweise/texlive
 RUN apt-get update && \
     apt-get -y install unzip
 RUN wget http://www.gust.org.pl/projects/e-foundry/tex-gyre/adventor/qag2_501bas.zip && \
