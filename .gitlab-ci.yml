@@ -42,8 +42,6 @@ deploy:
   stage: deploy
   script:
     - make zips
-  tags: 
-    - cluster
   artifacts:
     paths:
       - cheatsheet.zip
